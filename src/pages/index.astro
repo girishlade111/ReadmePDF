@@ -1,0 +1,105 @@
+---
+import '../styles/app.css';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f172a'/%3E%3Ctext x='16' y='23' font-size='17' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'%3ER%3C/text%3E%3C/svg%3E"
+    />
+    <meta
+      name="description"
+      content="ReadmePDF — free, no-login tool to convert a GitHub README or Markdown into a polished PDF. Paste a repo URL, preview, print to PDF."
+    />
+    <title>ReadmePDF — GitHub README to PDF (free, no login)</title>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">ReadmePDF <small>by LadeStack · free · no login · client-side</small></div>
+      <nav>
+        <a href="#converter">Converter</a>
+        <a href="#privacy">Privacy</a>
+      </nav>
+    </header>
+
+    <div class="layout" id="converter">
+      <section class="controls" aria-label="Input and options">
+        <h2>1 · GitHub repo URL</h2>
+        <div class="row">
+          <input
+            id="gh-url"
+            type="url"
+            inputmode="url"
+            aria-label="GitHub repository URL"
+            placeholder="https://github.com/owner/repo"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <button id="fetch-btn" class="primary" type="button">Fetch</button>
+        </div>
+        <p class="hint">We pull the README (tries main/master + case variants), resolve relative images/badges, and render below. Private repos aren't supported in MVP.</p>
+
+        <h2>2 · …or paste / upload Markdown</h2>
+        <div class="row">
+          <input id="file-input" type="file" accept=".md,.markdown,.mdown,.txt,text/markdown" aria-label="Upload Markdown file" />
+        </div>
+        <p style="height:8px"></p>
+        <textarea
+          id="md-input"
+          aria-label="Markdown input"
+          placeholder="# Paste Markdown here, or fetch a repo above…"
+          spellcheck="false"
+        ></textarea>
+        <div class="row" style="margin-top:8px">
+          <button id="sample-btn" type="button">Load sample</button>
+          <button id="clear-btn" type="button">Clear</button>
+        </div>
+
+        <h2>3 · Theme</h2>
+        <div class="theme-grid" role="radiogroup" aria-label="PDF theme">
+          <label><input type="radio" name="theme" value="clean" checked />Clean</label>
+          <label><input type="radio" name="theme" value="business" />Business</label>
+          <label><input type="radio" name="theme" value="academic" />Academic</label>
+          <label><input type="radio" name="theme" value="dark" />Dark</label>
+        </div>
+        <p class="warn" id="dark-warn" hidden>
+          Dark looks great on screen but prints poorly — we auto-lighten it for print/PDF.
+        </p>
+
+        <h2>4 · Options</h2>
+        <label class="check"><input id="toc-toggle" type="checkbox" checked /> Auto table of contents (docs with 3+ headings)</label>
+
+        <p class="status" id="status" role="status" aria-live="polite"></p>
+        <p class="meta" id="meta"></p>
+      </section>
+
+      <section class="preview-wrap" aria-label="Live preview">
+        <div class="preview-head">
+          <strong>Live preview</strong>
+          <div class="row">
+            <button id="print-btn" class="primary" type="button">Download / Print PDF</button>
+          </div>
+        </div>
+        <p class="hint no-print" style="margin-top:0">
+          Export uses your browser's print-to-PDF (100% client-side). Choose “Save as PDF” in the print dialog.
+        </p>
+        <article id="sheet" class="sheet theme-clean">
+          <div id="preview-doc" class="doc"></div>
+        </article>
+      </section>
+    </div>
+
+    <footer class="footer" id="privacy">
+      Privacy: Markdown/PDF processing happens in your browser. The only network call is fetching the public
+      README from GitHub. No uploads, no login, files under 2 MB on the free tier.
+    </footer>
+
+    <script>
+      import { initConverter } from '../scripts/converter.js';
+      initConverter();
+    </script>
+  </body>
+</html>

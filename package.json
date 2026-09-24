@@ -1,0 +1,22 @@
+{
+  "name": "readmepdf",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "ReadmePDF — free, no-login, client-side GitHub README to PDF converter (LadeStack)",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "test": "node --test test/github.test.js test/markdown.test.js test/integration.test.js test/features.test.js"
+  },
+  "dependencies": {
+    "astro": "^5.13.7",
+    "dompurify": "^3.4.15",
+    "markdown-it": "^15.0.2",
+    "markdown-it-task-lists": "^2.1.1"
+  },
+  "devDependencies": {
+    "jsdom": "^30.1.0"
+  }
+}

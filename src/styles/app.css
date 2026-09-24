@@ -1,0 +1,143 @@
+/* ReadmePDF — app layout + PDF themes + print CSS (print = PDF export). */
+:root {
+  --bg: #f6f7f9;
+  --panel: #ffffff;
+  --ink: #1a1d21;
+  --muted: #5b6470;
+  --line: #e3e7ec;
+  --accent: #2563eb;
+  --radius: 10px;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 15px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 20px; background: #0f172a; color: #fff;
+}
+.topbar .brand { font-weight: 700; }
+.topbar .brand small { font-weight: 400; opacity: .7; margin-left: 8px; }
+.topbar nav a { color: #cbd5e1; text-decoration: none; font-size: 13px; margin-left: 14px; }
+.layout {
+  display: grid; grid-template-columns: 380px 1fr; gap: 16px;
+  padding: 16px 20px 40px; max-width: 1280px; margin: 0 auto;
+  align-items: start;
+}
+@media (max-width: 960px) { .layout { grid-template-columns: 1fr; } }
+.controls, .preview-wrap {
+  background: var(--panel); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 16px;
+}
+.controls h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 18px 0 8px; }
+.controls h2:first-child { margin-top: 0; }
+.row { display: flex; gap: 8px; }
+input[type="url"], input[type="text"] {
+  flex: 1; padding: 9px 10px; border: 1px solid var(--line);
+  border-radius: 8px; font: inherit; min-width: 0;
+}
+textarea {
+  width: 100%; min-height: 220px; resize: vertical;
+  padding: 10px; border: 1px solid var(--line); border-radius: 8px;
+  font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+button {
+  padding: 9px 14px; border-radius: 8px; border: 1px solid var(--line);
+  background: #fff; cursor: pointer; font: inherit;
+}
+button.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+button:disabled { opacity: .55; cursor: wait; }
+.hint { font-size: 12.5px; color: var(--muted); }
+.status { font-size: 13px; min-height: 20px; margin: 8px 0 0; }
+.status.error { color: #b91c1c; }
+.status.ok { color: #15803d; }
+.meta { font-size: 12px; color: var(--muted); word-break: break-all; }
+.theme-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.theme-grid label {
+  border: 1px solid var(--line); border-radius: 8px; padding: 8px;
+  font-size: 12.5px; text-align: center; cursor: pointer;
+}
+.theme-grid input { margin-right: 4px; }
+.check { font-size: 13.5px; display: flex; gap: 8px; align-items: center; }
+.warn { font-size: 12.5px; color: #92600a; background: #fef3c7; border: 1px solid #f5d67b; border-radius: 8px; padding: 8px 10px; }
+.preview-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+.sheet {
+  border: 1px solid var(--line); border-radius: 6px; padding: 32px 36px;
+  min-height: 480px; background: #fff;
+}
+.sheet img { max-width: 100%; }
+.sheet img.broken { opacity: .45; outline: 1px dashed #b91c1c; outline-offset: 2px; }
+.footer { text-align: center; color: var(--muted); font-size: 12.5px; padding: 18px; }
+
+/* ---- Rendered markdown base ---- */
+.doc { overflow-wrap: anywhere; }
+.doc h1, .doc h2 { padding-bottom: .3em; border-bottom: 1px solid var(--line); }
+.doc table { border-collapse: collapse; width: 100%; margin: 1em 0; display: block; overflow-x: auto; }
+.doc th, .doc td { border: 1px solid var(--line); padding: 6px 12px; text-align: left; }
+.doc pre { padding: 14px; border-radius: 8px; overflow-x: auto; }
+.doc code { font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.doc :not(pre) > code { padding: 1px 5px; border-radius: 5px; }
+.doc blockquote { margin: 1em 0; padding: 2px 14px; border-left: 4px solid var(--line); color: var(--muted); }
+.doc ul.contains-task-list { list-style: none; padding-left: 4px; }
+.toc { border: 1px solid var(--line); border-radius: 8px; padding: 10px 16px; margin-bottom: 20px; }
+.toc-title { font-weight: 700; margin: 0 0 6px; }
+.toc ul { margin: 0; padding-left: 18px; }
+.toc-l2 { margin-left: 0; } .toc-l3 { margin-left: 12px; } .toc-l4 { margin-left: 24px; }
+
+/* ---- Themes (applied as .theme-<name> on .sheet) ---- */
+.theme-clean { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: #1a1d21; }
+.theme-clean .doc pre { background: #f3f4f6; }
+.theme-clean .doc :not(pre) > code { background: #eef1f4; }
+.theme-clean .doc a { color: #2563eb; }
+
+.theme-business { font-family: Georgia, "Times New Roman", serif; color: #17202b; }
+.theme-business .doc h1, .theme-business .doc h2 { color: #1e3a5f; border-bottom: 2px solid #1e3a5f; }
+.theme-business .doc a { color: #1d4ed8; }
+.theme-business .doc th { background: #eaf0f8; }
+.theme-business .doc pre { background: #101c30; color: #e8eef7; }
+
+.theme-academic { font-family: Georgia, "Times New Roman", serif; color: #111; text-align: justify; }
+.theme-academic .doc h1, .theme-academic .doc h2, .theme-academic .doc h3 { text-align: left; }
+.theme-academic .doc pre { background: #f7f5ef; border: 1px solid #ddd6c3; text-align: left; }
+.theme-academic .doc :not(pre) > code { background: #f1ecdd; }
+.theme-academic .doc a { color: #111; }
+
+.theme-dark { background: #151a23; color: #e6ebf2; border-color: #2b3444; }
+.theme-dark .doc h1, .theme-dark .doc h2 { border-bottom-color: #2b3444; }
+.theme-dark .doc a { color: #8ab4ff; }
+.theme-dark .doc th, .theme-dark .doc td { border-color: #2b3444; }
+.theme-dark .doc th { background: #1e2634; }
+.theme-dark .doc pre { background: #0b0f16; color: #dbe6f5; }
+.theme-dark .doc :not(pre) > code { background: #232c3d; }
+.theme-dark .doc blockquote { border-left-color: #2b3444; color: #9aa7bb; }
+.theme-dark .toc { border-color: #2b3444; }
+
+/* ---- Print = PDF export ---- */
+@page { margin: 14mm 13mm; }
+@media print {
+  body { background: #fff; }
+  .topbar, .controls, .preview-head, .footer, .no-print { display: none !important; }
+  .layout { display: block; padding: 0; margin: 0; max-width: none; }
+  .preview-wrap { border: none; padding: 0; }
+  .sheet { border: none; border-radius: 0; padding: 0; min-height: auto; }
+  /* Dark theme prints poorly — force light ink on white for print. */
+  .theme-dark { background: #fff !important; color: #000 !important; }
+  .theme-dark .doc a { color: #000 !important; }
+  .theme-dark .doc pre { background: #f3f4f6 !important; color: #000 !important; border: 1px solid #ccc; }
+  .theme-dark .doc th { background: #eee !important; }
+  .doc pre, .doc blockquote, .doc table, .doc img { break-inside: avoid; }
+  .doc h1, .doc h2, .doc h3 { break-after: avoid; }
+}
+
+/* ---- Accessibility & small screens ---- */
+button:focus-visible, input:focus-visible, textarea:focus-visible, a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+@media (max-width: 560px) {
+  .theme-grid { grid-template-columns: repeat(2, 1fr); }
+  .sheet { padding: 20px; }
+}
