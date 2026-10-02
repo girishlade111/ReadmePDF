@@ -262,3 +262,9 @@ Every fetch has a **15-second timeout** so the UI never hangs silently.
 ## License
 
 MIT © LadeStack
+
+## 🙏 Credits
+
+**Built by Girish Lade** — [ladestack.in](https://ladestack.in)
+
+Solo founder of LadeStack, building free tools for everyone.
