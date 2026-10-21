@@ -1,0 +1,32 @@
+[
+  {
+    "name": "sample render (headings/TOC/table/tasks/code/unique ids)",
+    "status": "PASS",
+    "detail": "{\"h1\":1,\"h2\":4,\"h3\":1,\"h4\":1,\"tocLinks\":7,\"tocTitle\":\"Contents\",\"tableRows\":2,\"taskChecked\":2,\"codeBlocks\":1,\"status\":\"Sample loaded. Paste a repo URL to try the real flow.\",\"headingIds\":[\"readmepdf-sample-readme\",\"features\",\"table-demo\",\"code-demo\",\"links-images\",\"a-fourth-level-heading-exists-so-toc-shows-nesting\",\"detail-heading\"]}"
+  },
+  {
+    "name": "TOC toggle off removes TOC and keeps document",
+    "status": "PASS",
+    "detail": "{\"toc\":0,\"headings\":4}"
+  },
+  {
+    "name": "paste/edit re-renders preview",
+    "status": "PASS",
+    "detail": "{\"h1\":\"Edited title\",\"body\":\"Body changed by test.\",\"meta\":\"Local mode — everything stays in your browser.\"}"
+  },
+  {
+    "name": "file upload via File API",
+    "status": "PASS",
+    "detail": "{\"h1\":\"Uploaded file\",\"status\":\"Loaded uploaded.md. Note: relative image paths can't resolve without a repo URL.\",\"inputCleared\":true}"
+  },
+  {
+    "name": "2 MB upload limit rejects oversized file",
+    "status": "PASS",
+    "detail": "{\"status\":\"File is over the 2 MB free-tier limit. Try a smaller file.\",\"h1\":\"Uploaded file\"}"
+  },
+  {
+    "name": "converter scenario aborted",
+    "status": "FAIL",
+    "detail": "Error: fetched README empty\n    at assert (file:///C:/Users/Girish%20Lade/OneDrive/Desktop/ReadmePDF/verify-cdp.mjs:184:25)\n    at file:///C:/Users/Girish%20Lade/OneDrive/Desktop/ReadmePDF/verify-browser-converter.mjs:114:3"
+  }
+]
