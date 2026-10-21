@@ -33,7 +33,10 @@ export function validateResolvedPath(path) {
 }
 
 function candidateLabel(candidate) {
-  return candidate.path ? `${candidate.ref}/${candidate.path}` : candidate.ref;
+  // The ref is the part that failed to resolve; the path is checked after a
+  // match. Listing only refs also avoids duplicate labels for ambiguous splits
+  // such as `feature/docs` + `README.md` vs `feature` + `docs/README.md`.
+  return candidate.ref;
 }
 
 /**

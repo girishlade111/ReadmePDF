@@ -44,6 +44,8 @@ function makeBook(overrides = {}) {
         markdown: [
           '# Setup',
           '',
+          '## Install',
+          '',
           'Back to [start](../README.md#setup).',
           '',
           '![diagram](../assets/diagram.png)',
@@ -202,7 +204,7 @@ describe('assembleBook', () => {
       result.documents.map((document) => document.headings.map((heading) => heading.slug)),
       [
         ['doc-1-setup', 'doc-1-install'],
-        ['doc-2-setup'],
+        ['doc-2-setup', 'doc-2-install'],
       ],
     );
 

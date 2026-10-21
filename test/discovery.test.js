@@ -39,7 +39,7 @@ function resolved(overrides = {}) {
 }
 
 const byPath = (a, b) =>
-  a.path.localeCompare(b.path, undefined, { numeric: true, sensitivity: 'base' });
+  a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' });
 
 describe('isMarkdownPath', () => {
   it('accepts Markdown extensions and exact extensionless README only', () => {

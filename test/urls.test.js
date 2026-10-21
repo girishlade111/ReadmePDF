@@ -51,10 +51,13 @@ describe('parseGitHubSource', () => {
       'https://github.com/o/r/blob/v1.2.3/docs/My%20File.md',
     );
     assert.equal(tag.kind, 'blob');
-    assert.deepEqual(tag.refCandidates[0], { ref: 'v1.2.3', path: 'docs/My File.md' });
+    assert.deepEqual(tag.refCandidates[0], {
+      ref: 'v1.2.3/docs',
+      path: 'My File.md',
+    });
     assert.ok(
       tag.refCandidates.some(
-        (candidate) => candidate.ref === 'v1.2.3/docs' && candidate.path === 'My File.md',
+        (candidate) => candidate.ref === 'v1.2.3' && candidate.path === 'docs/My File.md',
       ),
       'the encoded path is decoded before splitting',
     );
@@ -122,7 +125,7 @@ describe('repository path resolution and encoding', () => {
   it('decodes path escapes exactly once and clamps traversal', () => {
     assert.equal(resolveRepoPath('docs/My%20File.md', ''), 'docs/My File.md');
     assert.equal(
-      resolveRepoPath('../assets/logo%20one.png', 'docs/guide'),
+      resolveRepoPath('../../assets/logo%20one.png', 'docs/guide'),
       'assets/logo one.png',
     );
     assert.equal(resolveRepoPath('/img/%E2%9C%93.png', 'docs'), 'img/✓.png');
