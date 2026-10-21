@@ -2,7 +2,7 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { JSDOM } from 'jsdom';
 import { fetchReadme } from '../src/lib/github.js';
-import { friendlyError } from '../src/scripts/converter.js';
+import { friendlyError, repoMetaLabel } from '../src/scripts/converter.js';
 import { extractHeadings, injectHeadingIds } from '../src/lib/markdown.js';
 
 describe('friendlyError (all failure codes)', () => {
@@ -20,6 +20,28 @@ describe('friendlyError (all failure codes)', () => {
   it('falls back for unknown errors', () => {
     assert.match(friendlyError(new Error('boom')), /boom/);
     assert.match(friendlyError(null), /Fetch failed/);
+  });
+});
+
+describe('repoMetaLabel (live README context)', () => {
+  it('uses fetchReadme\'s path field when readmePath is absent', () => {
+    assert.equal(
+      repoMetaLabel({ owner: 'octocat', repo: 'Hello-World', branch: 'master', path: 'README' }),
+      'octocat/Hello-World @ master — README',
+    );
+  });
+  it('prefers the stored readmePath and tolerates a missing context', () => {
+    assert.equal(
+      repoMetaLabel({
+        owner: 'o',
+        repo: 'r',
+        branch: 'main',
+        readmePath: 'docs/README.md',
+        path: 'ignored',
+      }),
+      'o/r @ main — docs/README.md',
+    );
+    assert.equal(repoMetaLabel(null), '');
   });
 });
 

@@ -45,6 +45,17 @@ An absolute badge like ![build](https://img.shields.io/badge/build-passing-brigh
 #### Detail heading
 `;
 
+/**
+ * Repo context line shown under the URL field.
+ * `fetchReadme` reports the README path as `path`; stored contexts use
+ * `readmePath`. Accept either so a live fetch never shows a blank path.
+ */
+export function repoMetaLabel(context) {
+  if (!context) return '';
+  const path = context.readmePath ?? context.path ?? '';
+  return `${context.owner}/${context.repo} @ ${context.branch} — ${path}`;
+}
+
 export function initConverter() {
   if (typeof document === 'undefined' || document.body.dataset.readmepdfInit) return;
   document.body.dataset.readmepdfInit = '1';
@@ -212,7 +223,7 @@ export function initConverter() {
     }
     const c = res ?? repoCtx;
     metaEl.textContent = '';
-    metaEl.append(`${c.owner}/${c.repo} @ ${c.branch} — ${c.readmePath ?? ''}`);
+    metaEl.append(repoMetaLabel(c));
     if (res?.rawUrl) {
       metaEl.append(' · ');
       const a = document.createElement('a');
