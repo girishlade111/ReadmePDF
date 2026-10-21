@@ -1,0 +1,367 @@
+{
+  "results": [
+    {
+      "name": "live fetch meta shows owner/repo @ branch — README path",
+      "status": "FAIL",
+      "error": "Error: Unexpected meta label: \"octocat/Hello-World @ master — README · raw source\"\n    at assert (file:///C:/Users/Girish%20Lade/OneDrive/Desktop/ReadmePDF/verify-browser-final.mjs:27:25)\n    at file:///C:/Users/Girish%20Lade/OneDrive/Desktop/ReadmePDF/verify-browser-final.mjs:79:5\n    at async step (file:///C:/Users/Girish%20Lade/OneDrive/Desktop/ReadmePDF/verify-browser-final.mjs:17:20)\n    at async file:///C:/Users/Girish%20Lade/OneDrive/Desktop/ReadmePDF/verify-browser-final.mjs:63:3"
+    },
+    {
+      "name": "scan + build one-chapter book for print switching",
+      "status": "PASS",
+      "detail": {
+        "scanStatus": "Found 1 Markdown file at master. The list is complete.",
+        "meta": "octocat/Hello-World · @ master · commit 7fd1a60b · 1 Markdown file · complete listing",
+        "selected": 1,
+        "chapters": 1,
+        "buildStatus": "Book ready — 1 chapter, 13 B. Review it, then print or save as PDF.",
+        "printDisabled": false,
+        "headingIds": [
+          "book-toc-title"
+        ]
+      }
+    },
+    {
+      "name": "print single isolates the book sheet",
+      "status": "FAIL",
+      "error": "Error: One of the sheets has no content\n    at assert (file:///C:/Users/Girish%20Lade/OneDrive/Desktop/ReadmePDF/verify-browser-final.mjs:27:25)\n    at file:///C:/Users/Girish%20Lade/OneDrive/Desktop/ReadmePDF/verify-browser-final.mjs:159:5\n    at async step (file:///C:/Users/Girish%20Lade/OneDrive/Desktop/ReadmePDF/verify-browser-final.mjs:17:20)\n    at async file:///C:/Users/Girish%20Lade/OneDrive/Desktop/ReadmePDF/verify-browser-final.mjs:133:3"
+    },
+    {
+      "name": "print book isolates the converter sheet",
+      "status": "FAIL",
+      "error": "Error: One of the sheets has no content\n    at assert (file:///C:/Users/Girish%20Lade/OneDrive/Desktop/ReadmePDF/verify-browser-final.mjs:27:25)\n    at file:///C:/Users/Girish%20Lade/OneDrive/Desktop/ReadmePDF/verify-browser-final.mjs:185:5\n    at async step (file:///C:/Users/Girish%20Lade/OneDrive/Desktop/ReadmePDF/verify-browser-final.mjs:17:20)\n    at async file:///C:/Users/Girish%20Lade/OneDrive/Desktop/ReadmePDF/verify-browser-final.mjs:164:3"
+    },
+    {
+      "name": "print switching back to single still isolates correctly",
+      "status": "PASS",
+      "detail": {
+        "mode": "single",
+        "printCalls": [
+          "single",
+          "book",
+          "single"
+        ],
+        "converter": "block",
+        "book": "none",
+        "restored": null
+      }
+    },
+    {
+      "name": "responsive layout at 360px",
+      "status": "PASS",
+      "detail": {
+        "width": 360,
+        "scrollWidth": 345,
+        "bodyScrollWidth": 345,
+        "controls": {
+          "gh-url": {
+            "visible": true,
+            "left": 42,
+            "right": 222,
+            "width": 180
+          },
+          "fetch-btn": {
+            "visible": true,
+            "left": 232,
+            "right": 303,
+            "width": 71
+          },
+          "sample-btn": {
+            "visible": true,
+            "left": 42,
+            "right": 161,
+            "width": 119
+          },
+          "print-btn": {
+            "visible": true,
+            "left": 151,
+            "right": 303,
+            "width": 152
+          },
+          "book-url": {
+            "visible": true,
+            "left": 42,
+            "right": 153,
+            "width": 111
+          },
+          "book-scan-btn": {
+            "visible": true,
+            "left": 163,
+            "right": 303,
+            "width": 140
+          },
+          "book-build-btn": {
+            "visible": true,
+            "left": 42,
+            "right": 146,
+            "width": 104
+          },
+          "book-print-btn": {
+            "visible": true,
+            "left": 147,
+            "right": 303,
+            "width": 156
+          }
+        }
+      }
+    },
+    {
+      "name": "responsive layout at 390px",
+      "status": "PASS",
+      "detail": {
+        "width": 390,
+        "scrollWidth": 375,
+        "bodyScrollWidth": 375,
+        "controls": {
+          "gh-url": {
+            "visible": true,
+            "left": 42,
+            "right": 252,
+            "width": 210
+          },
+          "fetch-btn": {
+            "visible": true,
+            "left": 262,
+            "right": 333,
+            "width": 71
+          },
+          "sample-btn": {
+            "visible": true,
+            "left": 42,
+            "right": 161,
+            "width": 119
+          },
+          "print-btn": {
+            "visible": true,
+            "left": 164,
+            "right": 333,
+            "width": 169
+          },
+          "book-url": {
+            "visible": true,
+            "left": 42,
+            "right": 183,
+            "width": 141
+          },
+          "book-scan-btn": {
+            "visible": true,
+            "left": 193,
+            "right": 333,
+            "width": 140
+          },
+          "book-build-btn": {
+            "visible": true,
+            "left": 42,
+            "right": 146,
+            "width": 104
+          },
+          "book-print-btn": {
+            "visible": true,
+            "left": 160,
+            "right": 333,
+            "width": 173
+          }
+        }
+      }
+    },
+    {
+      "name": "responsive layout at 768px",
+      "status": "PASS",
+      "detail": {
+        "width": 768,
+        "scrollWidth": 753,
+        "bodyScrollWidth": 753,
+        "controls": {
+          "gh-url": {
+            "visible": true,
+            "left": 48,
+            "right": 624,
+            "width": 576
+          },
+          "fetch-btn": {
+            "visible": true,
+            "left": 634,
+            "right": 705,
+            "width": 71
+          },
+          "sample-btn": {
+            "visible": true,
+            "left": 48,
+            "right": 167,
+            "width": 119
+          },
+          "print-btn": {
+            "visible": true,
+            "left": 529,
+            "right": 705,
+            "width": 176
+          },
+          "book-url": {
+            "visible": true,
+            "left": 48,
+            "right": 555,
+            "width": 507
+          },
+          "book-scan-btn": {
+            "visible": true,
+            "left": 565,
+            "right": 705,
+            "width": 140
+          },
+          "book-build-btn": {
+            "visible": true,
+            "left": 48,
+            "right": 152,
+            "width": 104
+          },
+          "book-print-btn": {
+            "visible": true,
+            "left": 507,
+            "right": 705,
+            "width": 198
+          }
+        }
+      }
+    },
+    {
+      "name": "responsive layout at 1024px",
+      "status": "PASS",
+      "detail": {
+        "width": 1024,
+        "scrollWidth": 1009,
+        "bodyScrollWidth": 1009,
+        "controls": {
+          "gh-url": {
+            "visible": true,
+            "left": 56,
+            "right": 267,
+            "width": 211
+          },
+          "fetch-btn": {
+            "visible": true,
+            "left": 277,
+            "right": 348,
+            "width": 71
+          },
+          "sample-btn": {
+            "visible": true,
+            "left": 56,
+            "right": 175,
+            "width": 119
+          },
+          "print-btn": {
+            "visible": true,
+            "left": 777,
+            "right": 953,
+            "width": 176
+          },
+          "book-url": {
+            "visible": true,
+            "left": 56,
+            "right": 218,
+            "width": 162
+          },
+          "book-scan-btn": {
+            "visible": true,
+            "left": 228,
+            "right": 368,
+            "width": 140
+          },
+          "book-build-btn": {
+            "visible": true,
+            "left": 448,
+            "right": 552,
+            "width": 104
+          },
+          "book-print-btn": {
+            "visible": true,
+            "left": 755,
+            "right": 953,
+            "width": 198
+          }
+        }
+      }
+    },
+    {
+      "name": "responsive layout at 1440px",
+      "status": "PASS",
+      "detail": {
+        "width": 1440,
+        "scrollWidth": 1425,
+        "bodyScrollWidth": 1425,
+        "controls": {
+          "gh-url": {
+            "visible": true,
+            "left": 96,
+            "right": 367,
+            "width": 271
+          },
+          "fetch-btn": {
+            "visible": true,
+            "left": 377,
+            "right": 448,
+            "width": 71
+          },
+          "sample-btn": {
+            "visible": true,
+            "left": 96,
+            "right": 215,
+            "width": 119
+          },
+          "print-btn": {
+            "visible": true,
+            "left": 1153,
+            "right": 1329,
+            "width": 176
+          },
+          "book-url": {
+            "visible": true,
+            "left": 96,
+            "right": 338,
+            "width": 242
+          },
+          "book-scan-btn": {
+            "visible": true,
+            "left": 348,
+            "right": 488,
+            "width": 140
+          },
+          "book-build-btn": {
+            "visible": true,
+            "left": 568,
+            "right": 672,
+            "width": 104
+          },
+          "book-print-btn": {
+            "visible": true,
+            "left": 1131,
+            "right": 1329,
+            "width": 198
+          }
+        }
+      }
+    },
+    {
+      "name": "keyboard activation (Enter on sample, Space on TOC) and names",
+      "status": "FAIL",
+      "error": "Error: Timed out waiting for: document.querySelector('#preview-doc h1')?.textContent === 'ReadmePDF — Sample README' (last=false)\n    at Object.waitFor (file:///C:/Users/Girish%20Lade/OneDrive/Desktop/ReadmePDF/verify-cdp.mjs:89:11)\n    at async file:///C:/Users/Girish%20Lade/OneDrive/Desktop/ReadmePDF/verify-browser-final.mjs:239:5\n    at async step (file:///C:/Users/Girish%20Lade/OneDrive/Desktop/ReadmePDF/verify-browser-final.mjs:17:20)\n    at async file:///C:/Users/Girish%20Lade/OneDrive/Desktop/ReadmePDF/verify-browser-final.mjs:230:3"
+    },
+    {
+      "name": "final-run console health",
+      "status": "FAIL",
+      "detail": {
+        "benign404": 6,
+        "unexpected": [
+          "network: Failed to load resource: the server responded with a status of 422 ()",
+          "network: Failed to load resource: the server responded with a status of 422 ()",
+          "network: Failed to load resource: the server responded with a status of 422 ()",
+          "javascript: Access to fetch at 'https://raw.githubusercontent.com/goldbergyoni/nodebestpractices/dc3d60c29d5483d9ea99cf261bbd6203516a2ba7/.operations/CONTRIBUTING.md' from origin 'http://127.0.0.1:4322' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+          "network: Failed to load resource: net::ERR_FAILED",
+          "javascript: Access to fetch at 'https://raw.githubusercontent.com/goldbergyoni/nodebestpractices/dc3d60c29d5483d9ea99cf261bbd6203516a2ba7/.operations/CONTRIBUTING.md' from origin 'http://127.0.0.1:4322' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+          "network: Failed to load resource: net::ERR_FAILED",
+          "network: Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+        ],
+        "exceptions": []
+      }
+    }
+  ]
+}

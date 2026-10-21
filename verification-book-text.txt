@@ -1,0 +1,187 @@
+﻿--- PAGE 1 ---
+ReadmePDF Verification Book
+READMEPDF DOCUMENTATION BOOK
+Real browser build from goldbergyoni/nodebestpractices/.operations
+goldbergyoni/nodebestpractices master ┬╖ commit dc3d60c2 3 chapters
+--- PAGE 2 ---
+Contents ┬╖ ReadmePDF Verification Book
+.operations/operations-manual.md
+Operations Manual - Organizing and Maximizing Our Work
+Handling issues and PRs
+Monthly maintenance
+Routing by areas of expertise
+Routing of languages under translation
+.operations/CONTRIBUTING.md
+Contribution guidelines
+Lovely & friendly atmosphere
+Handling issues and PRs
+Assets to be aware of
+Precommit
+Contribution model
+Steering committee ≡ƒÅå
+Collaborators ≡ƒæì
+.operations/common-answers.md
+--- PAGE 3 ---
+Operations Manual - Organizing and
+Maximizing Our Work
+Building knowledge and a community by efficiently handling issues
+Handling issues and PRs
+In a nutshell, every issue and PR should get tagged by one of our core team and
+routed to the person who specializes in the related topic. This person then, will
+warmly welcome the contributor and then kick off the discussion (hopefully within
+48 hours). The goal of each issue/PR is to learn new thing that might improve our
+repo and try to include the contributor in our army.
+There is no specific person on call who assigns inquiries rather we count on our
+core team to visit almost everyday and assign issues/PR - this way, the workflow
+is not depend upon any specific person rather on our entire team.
+Any new content should conform to our writing guidelines
+Monthly maintenance
+Each month, a maintainer on call will open an issue for a maintenance work
+checklist and write down all the actions to perform by the end of the month (e.g.
+assign flower to a contributor). At the end of the month, that maintainer will
+perform the tasks on the checklist.
+Maintainer on call: @someone
+Updates
+ Update top badges with best practices item count, last update
+--- PAGE 4 ---
+ Update 'thank you' stars & flowers
+ Notify and thanks the contributors of the month
+Flowers
+@someone2
+@someone1
+Stars
+@someone1
+Core Team
+@someone1
+--
+Month Maintainer on call
+10/2019 Yoni
+12/2019 Bruno
+02/2020 Kyle
+04/2020 Yoni
+06/2020 Bruno
+08/2020 Kyle
+10/2020 Yoni
+12/2020 Bruno
+--- PAGE 5 ---
+Routing by areas of expertise
+Topic Examples Assignee
+Code standards
+and fixes
+Code typos, code standards,
+examples refinements Bruno
+Translations Adding new language, merging
+language PRs
+Monthly rotation
+October - Yoni
+General Writing
+quality Typos, text clarify Bruno
+Javascript
+runtime JS runtime, syntax correctness Sagir
+Devops Monitoring, hardening a
+production site, deployment Kyle
+Architetecture Project structure, microservices Yoni
+Testing CI, linting, testing Yoni
+Performance Efficient code, inspecting
+processes on fire Sagir
+Security Security packages, secured code Kyle
+General inquires Ideas, requests to contribute, etc Monthly rotation
+October - Bruno
+Error handling ... Yoni
+--- PAGE 6 ---
+Routing of languages under translation
+Language Assignee
+Brazilian Portuguese Bruno
+Portuguese Kyke
+Hebrew Yoni
+German Bruno
+Italian Kyle
+Turkish Bruno
+French Yoni
+Russian Yoni
+Korean Yoni
+Spanish Kevyn
+Chinese Yoni
+Korean Kyle
+Egyptian Yoni
+Ukrainian Bruno
+Polish Kevyn
+Thai Kevyn
+--- PAGE 7 ---
+Contribution guidelines
+Lovely & friendly atmosphere
+Our code of conduct is 5 words long: we are all friends here
+We recognize that being professional and kind are the same thing and strive to
+maximize our professionalism
+Handling issues and PRs
+In a nutshell, every issue is an opprtunity to gain new knowledge and attract new
+contributor. Therefore we aim for vast response and welcoming words ≡ƒÆÜ
+When merging a new PR, add the contributor to our credits list using the all-
+contributors bot. Just include this text as a PR comment:
+@all-contributors please add @username for content
+The specific PR/issue resolustion depends on its kind:
+A. New best practice or fundamental changes to existing content - In that case,
+involve at least 1 other members to solicit enough feedback for this change. Start
+by greeting the contributor, ensure the formalities are fine, ensure it conforms to
+our writing guidelines, ensure enough information was provided and then get at
+least 1 more collaborators and allow at least a week for comments
+B. Plain text change (e.g. Grammar correctness) - When super-simple wording
+edits are proposed (i.e. not new content rather language correctness), one can
+just greet, a
+--- PAGE 8 ---
+for feedback. The translators name can be found in the home page under
+"Translations"
+D. Dicussions and ideas - When a technical discussion or just general
+conversation is brought into a new issue, apply your own judgements whether to
+tag other collaborators
+Assets to be aware of
+Our content writing guidelines can be found here
+Common questions and answers to issues/PRs can be found here
+Precommit
+Before pushing, verify your Markdown passes the linter :
+npm run lint
+For example fix basic errors :
+npm run lint --fix
+Contribution model
+Steering committee ≡ƒÅå
+Members of the steering committee work together to provide guidance and future
+direction to the project. Each committee member has a particular expertise which
+they share their knowledge on, and work to lead further improvements to the
+project in that area. The steering committee members are responsible for
+approving new best practices, and ensuring current best practices remain
+relevant.
+--- PAGE 9 ---
+Collaborators ≡ƒæì
+Collaborators are members who are contributing to the repository on a regular
+basis, through suggesting new best practices, triaging issues, reviewing pull
+requests and more. Along with the steering committee, each collaborator leads a
+project tracked under our Github projects.
+The role is in place to help the steering committee ensure that the content
+provided is of high standard, up-to-date with the industry, and available in many
+languages. Members who frequently participate in these activities will be invited
+to become a collaborator, based on the quality of their contributions.
+The steering committee periodically reviews the collaborator list to identify
+inactive collaborators. Inactive collaborators can choose to either continue in or
+step down from their role, in which case they are acknowledged as a past
+collaborator. They may later request that the steering committee restore them to
+active status.
+--- PAGE 10 ---
+Welcoming new translators
+@name - Welcome aboard, it's great to have you here! ≡ƒÄå
+Having A Slovak translation could be awesome! At the end, we can Tweet about
+this, put in our news section, include your name at the top of the translated
+language and also at the main home page contributors list.
+Let's go for this? Few basic guideliness:
+Work on your own fork - Fork this repo, create a branch for yourself, translate
+& collaborate with other translators, then finally when ready create a PR.
+Focus on translation, not content editing - The focus is on translation, should
+you want to modify the content or the graphics - let's PR first in English and
+then translate to other languages. Also the format of the text should remain
+intact (same design).
+Duplicate the readme and the inner pages - The content should be translated
+over a page duplication. readme.md became readme.{translated-language}.md
+(e.g. readme.french.md), all other files should be duplicated similarly. So the
+number of English & translated pages should be the same. You may see
+examples in currently translated languages.
+Collaborate - once you do the basic setup (branch, duplicate pages), we can
+announce the work on a new lang
