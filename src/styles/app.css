@@ -136,6 +136,11 @@ img {
   height: auto;
 }
 
+/* The hidden attribute must beat component display rules (.btn, .row, …). */
+[hidden] {
+  display: none !important;
+}
+
 /* Sticky sub-navigation offset for in-page anchors. */
 [id] {
   scroll-margin-top: calc(var(--subnav-h) + 24px);
