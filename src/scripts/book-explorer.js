@@ -18,7 +18,6 @@ import {
   isReadmeName,
   parseGitHubSource,
   resolveRepositorySource,
-  sanitizeHtml,
 } from '../lib/github.js';
 import {
   applyFolderSelection,
@@ -32,10 +31,10 @@ import {
   moveChapter,
   removeChapter,
   selectionCounts,
-  toggleChapter,
 } from '../lib/selection.js';
 import { assembleBook, renderDocumentPreview } from '../lib/pdf/assembly.js';
 import { printDocument } from '../lib/print.js';
+import { sanitizeHtml } from '../lib/sanitize.js';
 
 export const MAX_BOOK_FILES = BOOK_FETCH_LIMITS.maxFiles;
 
@@ -225,16 +224,16 @@ export function initBookExplorer() {
   dropFailuresBtn?.addEventListener('click', dropFailedFiles);
   printBtn?.addEventListener('click', onPrintBook);
   previewBack?.addEventListener('click', closePreview);
-  titleInput?.addEventListener('input', markStale);
+  titleInput?.addEventListener('input', () => {
+    titleInput.dataset.auto = '0';
+    markStale();
+  });
   subtitleInput?.addEventListener('input', markStale);
   coverToggle?.addEventListener('change', markStale);
   tocToggle?.addEventListener('change', markStale);
-  themeInputs.forEach((input) =>
-    input.addEventListener('change', () => {
-      applyTheme();
-      markStale();
-    }),
-  );
+  // A theme is a stylesheet on the existing sheet, not book content, so it
+  // never invalidates an assembled preview.
+  themeInputs.forEach((input) => input.addEventListener('change', applyTheme));
 
   // Broken images must never fail a build; thumbnails in chapters degrade in
   // the same way as the single-document preview.
@@ -321,6 +320,9 @@ export function initBookExplorer() {
       }
       setStatus(bookErrorMessage(error), 'error');
       renderMeta(null);
+      treeEmpty.hidden = false;
+      treeEmpty.textContent = 'Scan failed. Fix the URL above and try again.';
+      resetOutput('The repository could not be scanned. Check the URL and retry.');
     } finally {
       if (token === scanToken) {
         scanController = null;
@@ -552,9 +554,6 @@ export function initBookExplorer() {
     }
     if (clearBtn) clearBtn.disabled = !counts.selected;
     if (buildBtn) buildBtn.disabled = !discovery || !chapters.length;
-    if (titleInput && titleInput.value && titleInput.dataset.auto !== '0') {
-      titleInput.dataset.auto = '1';
-    }
   }
 
   function renderChapters(focus = null) {
@@ -580,20 +579,20 @@ export function initBookExplorer() {
       const remove = chapterButton('×', `Remove ${path} from the book`, 'remove', false);
       up.addEventListener('click', () => {
         chapters = moveChapter(chapters, index, -1);
-        renderChapters({ path, action: 'up' });
+        renderChapters({ path, action: 'up', index: index - 1 });
         markStale();
       });
       down.addEventListener('click', () => {
         chapters = moveChapter(chapters, index, 1);
-        renderChapters({ path, action: 'down' });
+        renderChapters({ path, action: 'down', index: index + 1 });
         markStale();
       });
       remove.addEventListener('click', () => {
         chapters = removeChapter(chapters, path);
-        selected.delete(path);
+        selected = new Set([...selected].filter((item) => item !== path));
         syncTreeState();
         updateSelectionUi();
-        renderChapters({ path, action: 'remove' });
+        renderChapters({ path, action: 'remove', index });
         markStale();
       });
       controls.append(up, down, remove);
@@ -602,13 +601,17 @@ export function initBookExplorer() {
     });
 
     if (focus) {
-      const row = [...chaptersEl.querySelectorAll('[data-chapter-path]')].find(
-        (node) => node.dataset.chapterPath === focus.path,
-      );
-      const target =
+      const rows = [...chaptersEl.querySelectorAll('[data-chapter-path]')];
+      const row =
         focus.action === 'remove'
-          ? chaptersEl.querySelector('[data-chapter-path] button')
-          : row?.querySelector(`button[data-action="${focus.action}"]`);
+          ? rows[Math.min(focus.index, rows.length - 1)]
+          : rows.find((node) => node.dataset.chapterPath === focus.path);
+      const preferred = row?.querySelector(`button[data-action="${focus.action}"]`);
+      const target =
+        preferred && !preferred.disabled
+          ? preferred
+          : row?.querySelector('button:not([disabled])') ??
+            chaptersEl.querySelector('button:not([disabled])');
       target?.focus();
     }
   }
@@ -621,14 +624,6 @@ export function initBookExplorer() {
     button.title = label;
     button.disabled = disabled;
     return button;
-  }
-
-  function activateChapter(path) {
-    if (!selected.has(path)) {
-      const next = new Set(selected);
-      next.add(path);
-      setSelection(next);
-    }
   }
 
   async function onPreview(path) {
@@ -648,6 +643,9 @@ export function initBookExplorer() {
     previewLabel.textContent = `Preview · ${path}`;
     previewEl.textContent = '';
     previewEl.append(element('p', 'hint', 'Loading file preview…'));
+    // A preview replaces the built book on screen; printing that book now
+    // would not match what the reader sees.
+    printBtn.disabled = true;
 
     try {
       const api = createGitHubApi({ signal: controller.signal, maxRequests: 5 });
@@ -680,7 +678,6 @@ export function initBookExplorer() {
         anchor.target = '_blank';
         anchor.rel = 'noopener noreferrer';
       });
-      activateChapter(path);
       preview.scrollIntoView?.({ behavior: 'smooth', block: 'start' });
     } catch (error) {
       if (token !== previewToken) return;
@@ -708,6 +705,7 @@ export function initBookExplorer() {
     previewBar.hidden = true;
     bookOutput.hidden = false;
     previewLabel.textContent = '';
+    printBtn.disabled = !builtBook;
   }
 
   function markStale() {
@@ -910,11 +908,13 @@ export function initBookExplorer() {
     syncTreeState();
     updateSelectionUi();
     renderChapters();
+    // markStale() writes its own "previous book is out of date" status, so it
+    // must run before the specific confirmation message.
+    markStale();
     setBuildStatus(
       `Removed ${plural(failed.size, 'failed file')}. Build again to create a complete book.`,
       '',
     );
-    markStale();
   }
 
   function applyTheme() {
@@ -926,6 +926,10 @@ export function initBookExplorer() {
   }
 
   function onPrintBook() {
+    if (!previewEl.hidden) {
+      setBuildStatus('Close the file preview before printing the book.', 'error');
+      return;
+    }
     if (!builtBook) {
       setBuildStatus('Build a complete book before printing.', 'error');
       return;
