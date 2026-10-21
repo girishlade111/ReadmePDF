@@ -2077,6 +2077,30 @@ textarea.field {
     background: #eee !important;
   }
 
+  /* Book pagination: cover and contents each own a page, and every chapter
+     begins on a fresh page. The first chapter must not create a blank leaf. */
+  .book-cover {
+    break-after: page;
+  }
+  .book-toc {
+    break-after: page;
+    background: #fff !important;
+    border-color: #ccc !important;
+  }
+  .book-chapter {
+    break-before: page;
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+  }
+  .book-chapters > .book-chapter:first-child {
+    break-before: auto;
+  }
+  .theme-dark .book-chapter,
+  .theme-dark .book-chapter__head {
+    border-color: #ccc !important;
+  }
+
   .doc pre,
   .doc blockquote,
   .doc table,
@@ -2103,6 +2127,9 @@ textarea.field {
 @media (max-width: 1100px) {
   .tool {
     grid-template-columns: 340px minmax(0, 1fr);
+  }
+  .book-tool {
+    grid-template-columns: 360px minmax(0, 1fr);
   }
   .theme-cards {
     grid-template-columns: repeat(2, minmax(0, 1fr));
