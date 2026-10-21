@@ -284,3 +284,11 @@ export function friendlyError(e) {
   if (code === 'RATE_LIMITED') return 'GitHub rate limit hit (unauthenticated API). Wait ~1 min and retry.';
   return `Fetch failed: ${e?.message ?? e}. You can still paste Markdown manually.`;
 }
+
+/** User-facing message for print failures. Pure function. */
+export function friendlyPrintError(e) {
+  if (e?.code === 'PRINT_UNAVAILABLE') {
+    return e.message || 'This browser could not open the print dialog. Use your browser menu to print instead.';
+  }
+  return `Could not open the print dialog: ${e?.message ?? e}. Use your browser menu to print instead.`;
+}
