@@ -1,0 +1,26 @@
+---
+import { formatDate, isoDate, readingTime } from '../lib/blog.js';
+
+const { post, headingLevel = 'h3' } = Astro.props;
+const Heading = headingLevel;
+---
+
+<article class="blog-card">
+  <div class="blog-tags" aria-label="Tags">
+    {post.data.tags.map((tag) => <span class="blog-tag">{tag}</span>)}
+  </div>
+  <Heading class="blog-card__title">
+    <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+  </Heading>
+  <p class="blog-card__desc">{post.data.description}</p>
+  <div class="blog-card__footer">
+    <div class="blog-meta">
+      <time datetime={isoDate(post.data.pubDate)}>{formatDate(post.data.pubDate)}</time>
+      <span aria-hidden="true">·</span>
+      <span>{readingTime(post.body)} min read</span>
+    </div>
+    <a class="blog-card__read" href={`/blog/${post.id}/`}>
+      Read the guide <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</article>

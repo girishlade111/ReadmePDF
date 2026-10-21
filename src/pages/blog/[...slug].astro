@@ -1,0 +1,138 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import { getCollection, render } from 'astro:content';
+import { formatDate, isoDate, readingTime } from '../../lib/blog.js';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content, headings } = await render(post);
+const toc = headings.filter((heading) => heading.depth <= 3);
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const related = allPosts
+  .filter((entry) => entry.id !== post.id)
+  .map((entry) => ({
+    entry,
+    sharedTags: entry.data.tags.filter((tag) => post.data.tags.includes(tag)).length,
+  }))
+  .sort(
+    (a, b) =>
+      b.sharedTags - a.sharedTags ||
+      b.entry.data.pubDate.valueOf() - a.entry.data.pubDate.valueOf(),
+  )
+  .slice(0, 2)
+  .map(({ entry }) => entry);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.pubDate.toISOString(),
+  dateModified: (post.data.updatedDate ?? post.data.pubDate).toISOString(),
+  author: { '@type': 'Person', name: post.data.author },
+  publisher: { '@type': 'Organization', name: 'LadeStack' },
+  keywords: post.data.tags.join(', '),
+  inLanguage: 'en',
+};
+---
+
+<BlogLayout title={post.data.title} description={post.data.description} article={true}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+
+  <header class="post-hero">
+    <div class="container post-hero__inner">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">/</span>
+        <a href="/blog/">Blog</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">{post.data.title}</span>
+      </nav>
+
+      <div class="blog-tags" aria-label="Tags">
+        {post.data.tags.map((tag) => <span class="blog-tag">{tag}</span>)}
+      </div>
+
+      <h1 class="display-xl">{post.data.title}</h1>
+      <p class="lead">{post.data.description}</p>
+
+      <div class="blog-meta post-meta">
+        <span>{post.data.author}</span>
+        <span aria-hidden="true">·</span>
+        <time datetime={isoDate(post.data.pubDate)}>{formatDate(post.data.pubDate)}</time>
+        <span aria-hidden="true">·</span>
+        <span>{readingTime(post.body)} min read</span>
+        {post.data.updatedDate && (
+          <>
+            <span aria-hidden="true">·</span>
+            <span>Updated {formatDate(post.data.updatedDate)}</span>
+          </>
+        )}
+      </div>
+    </div>
+  </header>
+
+  <main class="post-main">
+    <div class="container">
+      <div class:list={['post-layout', !toc.length && 'post-layout--single']}>
+        {toc.length > 0 && (
+          <aside class="post-aside" aria-label="On this page">
+            <h2>On this page</h2>
+            <nav aria-label="Table of contents">
+              <ol class="post-toc">
+                {toc.map((heading) => (
+                  <li class:list={['post-toc__item', `post-toc__item--${heading.depth}`]}>
+                    <a href={`#${heading.slug}`}>{heading.text}</a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+          </aside>
+        )}
+
+        <article class="post-prose">
+          <Content />
+
+          <div class="post-footer">
+            <a class="link-inline" href="/blog/">← All guides</a>
+          </div>
+
+          <div class="post-cta">
+            <div>
+              <h2 class="heading-lg">Make your own README PDF</h2>
+              <p class="body-loose">Free, no login, and entirely client-side.</p>
+            </div>
+            <a class="btn btn--primary" href="/#converter">Open the converter</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </main>
+
+  {related.length > 0 && (
+    <section class="related">
+      <div class="container">
+        <div class="blog-section-head">
+          <div>
+            <p class="blog-kicker">Keep reading</p>
+            <h2 class="display-lg">Related guides</h2>
+          </div>
+        </div>
+        <div class="blog-grid">
+          {related.map((entry) => <BlogCard post={entry} />)}
+        </div>
+      </div>
+    </section>
+  )}
+</BlogLayout>

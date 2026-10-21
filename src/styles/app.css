@@ -459,7 +459,8 @@ a {
   text-decoration: underline;
 }
 
-.subnav a[aria-current='true']::after {
+.subnav a[aria-current='true']::after,
+.subnav a[aria-current='page']::after {
   content: '';
   position: absolute;
   left: 50%;

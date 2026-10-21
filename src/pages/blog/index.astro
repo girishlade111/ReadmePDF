@@ -1,0 +1,104 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import { getCollection } from 'astro:content';
+import { byNewest, formatDate, isoDate, readingTime } from '../../lib/blog.js';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(byNewest);
+const featured = posts.find((post) => post.data.featured) ?? posts[0];
+const rest = posts.filter((post) => post.id !== featured?.id);
+---
+
+<BlogLayout
+  title="The ReadmePDF Journal"
+  description="Practical guides for converting GitHub READMEs and Markdown into clean, print-ready PDFs — themes, workflows, and real use cases."
+>
+  <section class="blog-hero">
+    <div class="container blog-hero__inner">
+      <p class="blog-kicker">The ReadmePDF Journal</p>
+      <h1 class="display-xl">Make documentation travel well.</h1>
+      <span class="rule" aria-hidden="true"></span>
+      <p class="lead">
+        Practical guides for turning READMEs into documents people can print, sign, archive, and
+        pass around — without an account or an upload.
+      </p>
+    </div>
+  </section>
+
+  <main>
+    {featured ? (
+      <section class="band band--white">
+        <div class="container">
+          <article class="blog-featured">
+            <div class="blog-featured__body">
+              <p class="blog-kicker">Featured guide</p>
+              <h2>
+                <a href={`/blog/${featured.id}/`}>{featured.data.title}</a>
+              </h2>
+              <p class="blog-featured__desc">{featured.data.description}</p>
+              <div class="blog-meta">
+                <span>{featured.data.author}</span>
+                <span aria-hidden="true">·</span>
+                <time datetime={isoDate(featured.data.pubDate)}>{formatDate(featured.data.pubDate)}</time>
+                <span aria-hidden="true">·</span>
+                <span>{readingTime(featured.body)} min read</span>
+              </div>
+              <div class="blog-tags" aria-label="Tags">
+                {featured.data.tags.map((tag) => <span class="blog-tag">{tag}</span>)}
+              </div>
+              <div class="blog-featured__action">
+                <a class="btn btn--primary" href={`/blog/${featured.id}/`}>Read the guide</a>
+              </div>
+            </div>
+            <aside class="blog-featured__aside" aria-label="Guide overview">
+              <p class="blog-featured__aside-label">In this guide</p>
+              <ul class="blog-featured__list">
+                <li>Fetch and resolve a public GitHub README</li>
+                <li>Choose a print theme and table of contents</li>
+                <li>Export a PDF that survives review</li>
+              </ul>
+            </aside>
+          </article>
+        </div>
+      </section>
+    ) : (
+      <section class="band band--white">
+        <div class="container">
+          <p class="lead">New guides are on the way.</p>
+        </div>
+      </section>
+    )}
+
+    <section class="band band--soft">
+      <div class="container">
+        <div class="blog-section-head">
+          <div>
+            <p class="blog-kicker">All guides</p>
+            <h2 class="display-lg">More from the journal</h2>
+          </div>
+          <p class="blog-section-head__note">
+            {posts.length} {posts.length === 1 ? 'guide' : 'guides'} · practical, tested, no fluff
+          </p>
+        </div>
+
+        {rest.length ? (
+          <div class="blog-grid">
+            {rest.map((post) => <BlogCard post={post} />)}
+          </div>
+        ) : (
+          <p class="body-loose">The next guide is being written.</p>
+        )}
+      </div>
+    </section>
+
+    <section class="band band--teal">
+      <div class="container blog-cta__inner">
+        <div>
+          <h2 class="display-md">Turn a README into a PDF.</h2>
+          <p class="body-loose">Free, no login, and entirely client-side.</p>
+        </div>
+        <a class="btn btn--primary" href="/#converter">Open the converter</a>
+      </div>
+    </section>
+  </main>
+</BlogLayout>
