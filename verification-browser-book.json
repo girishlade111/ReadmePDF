@@ -1,0 +1,288 @@
+{
+  "results": [
+    {
+      "name": "real scan: rust-lang/book/src lists >30 Markdown files",
+      "status": "PASS",
+      "ms": 0,
+      "detail": {
+        "status": "Found 112 Markdown files at main. The list is complete.",
+        "meta": "rust-lang/book · @ main · commit 1500248d · 112 Markdown files · complete listing",
+        "files": 112,
+        "chapters": 30
+      }
+    },
+    {
+      "name": "folder expand/collapse updates aria-expanded and child visibility",
+      "status": "PASS",
+      "ms": 38,
+      "detail": {
+        "before": {
+          "expanded": "true",
+          "hidden": false
+        },
+        "collapsed": {
+          "expanded": "false",
+          "hidden": true
+        },
+        "reopened": {
+          "expanded": "true",
+          "hidden": false
+        }
+      }
+    },
+    {
+      "name": "select-all is capped at the 30-file book limit and explains why",
+      "status": "PASS",
+      "ms": 54,
+      "detail": {
+        "checked": 30,
+        "status": "A book holds at most 30 files, so the first 30 were selected. Narrow the URL to a folder for a different set."
+      }
+    },
+    {
+      "name": "clear selection empties chapters, disables build, leaves print disabled",
+      "status": "PASS",
+      "ms": 9,
+      "detail": "0 of 112 selected · 0 chapters · max 30"
+    },
+    {
+      "name": "file selection updates summary and chapter list",
+      "status": "PASS",
+      "ms": 20,
+      "detail": {
+        "chapters": [
+          "src/title-page.md"
+        ],
+        "summary": "1 of 112 selected · 1 chapter · max 30"
+      }
+    },
+    {
+      "name": "search filters the tree and clearing restores it",
+      "status": "PASS",
+      "ms": 715,
+      "detail": {
+        "matches": 8,
+        "sample": [
+          "src/appendix-00.md",
+          "src/appendix-01-keywords.md",
+          "src/appendix-02-operators.md"
+        ],
+        "restored": 112
+      }
+    },
+    {
+      "name": "file preview loads Markdown, then Back restores the builder",
+      "status": "PASS",
+      "ms": 609,
+      "detail": {
+        "label": "Preview · src/title-page.md",
+        "headings": 1,
+        "links": [
+          "https://github.com/rust-lang/book/blob/1500248d8f230566e4ec9f27fcbb8fe9e2898ab1/src/ch01-01-installation.html",
+          "https://github.com/rust-lang/book/blob/1500248d8f230566e4ec9f27fcbb8fe9e2898ab1/src/appendix-05-editions.html",
+          "https://doc.rust-lang.org/stable/book/"
+        ],
+        "printDisabled": true,
+        "outputHidden": true
+      }
+    },
+    {
+      "name": "real scan: Unicode paths display and filter correctly",
+      "status": "PASS",
+      "ms": 714,
+      "detail": {
+        "files": 20,
+        "unicodePath": "Day01-20/01.初识Python.md",
+        "searchMatches": 4,
+        "status": "Found 20 Markdown files at master. The list is complete."
+      }
+    },
+    {
+      "name": "folder tri-state and select-all/clear with a <=30 folder",
+      "status": "FAIL",
+      "ms": 2,
+      "error": "Expected 14 files, got 11"
+    },
+    {
+      "name": "chapter up/down controls reorder the print list",
+      "status": "PASS",
+      "ms": 47,
+      "detail": {
+        "original": [
+          ".operations/common-answers.md",
+          ".operations/CONTRIBUTING.md",
+          ".operations/operations-manual.md"
+        ],
+        "afterDown": [
+          ".operations/CONTRIBUTING.md",
+          ".operations/common-answers.md",
+          ".operations/operations-manual.md"
+        ],
+        "restored": [
+          ".operations/common-answers.md",
+          ".operations/CONTRIBUTING.md",
+          ".operations/operations-manual.md"
+        ]
+      }
+    },
+    {
+      "name": "remove chapter unticks its file and keeps the rest",
+      "status": "PASS",
+      "ms": 21,
+      "detail": {
+        "before": [
+          ".operations/common-answers.md",
+          ".operations/CONTRIBUTING.md",
+          ".operations/operations-manual.md"
+        ],
+        "after": [
+          ".operations/common-answers.md",
+          ".operations/operations-manual.md",
+          ".operations/CONTRIBUTING.md"
+        ]
+      }
+    },
+    {
+      "name": "build assembles cover, TOC, ordered chapters and unique heading ids",
+      "status": "PASS",
+      "ms": 767,
+      "detail": {
+        "buildStatus": "Book ready — 3 chapters, 9.3 KB. Review it, then print or save as PDF.",
+        "order": [
+          ".operations/operations-manual.md",
+          ".operations/CONTRIBUTING.md",
+          ".operations/common-answers.md"
+        ],
+        "ids": {
+          "total": 17,
+          "unique": 17,
+          "duplicates": []
+        },
+        "links": {
+          "total": 22,
+          "raw": 0,
+          "blob": 3,
+          "internal": 18,
+          "pinned": 0,
+          "images": []
+        }
+      }
+    },
+    {
+      "name": "title edit invalidates the built preview and disables print",
+      "status": "PASS",
+      "ms": 7,
+      "detail": {
+        "buildStatus": "The previous book is out of date. Build again before printing.",
+        "output": "Selection or options changed. Build the book again to refresh the preview."
+      }
+    },
+    {
+      "name": "cover/TOC toggles rebuild without stale content",
+      "status": "PASS",
+      "ms": 484,
+      "detail": {
+        "coverOff": 0,
+        "tocOff": 0,
+        "restored": {
+          "cover": 1,
+          "toc": 1
+        }
+      }
+    },
+    {
+      "name": "book print exports a real PDF with book-only print media",
+      "status": "PASS",
+      "ms": 2507,
+      "detail": {
+        "calls": [
+          "book"
+        ],
+        "mode": "book",
+        "isolation": {
+          "converter": "none",
+          "book": "block",
+          "controls": "none",
+          "sheet": "block"
+        },
+        "bytes": 482670,
+        "status": "Print dialog opened. Choose “Save as PDF” for a file.",
+        "restored": null
+      }
+    },
+    {
+      "name": "failed chapter blocks printing, lists the failure and offers retry",
+      "status": "PASS",
+      "ms": 249,
+      "detail": {
+        "target": ".operations/CONTRIBUTING.md",
+        "status": "Book incomplete — 1 file failed. Nothing will print until every chapter loads.",
+        "failures": [
+          ".operations/CONTRIBUTING.mdNetwork error contacting GitHub: Failed to fetch"
+        ],
+        "printDisabled": true
+      }
+    },
+    {
+      "name": "retry succeeds after the network recovers",
+      "status": "PASS",
+      "ms": 218,
+      "detail": {
+        "status": "Book ready — 3 chapters, 9.3 KB. Review it, then print or save as PDF.",
+        "chapters": 3
+      }
+    },
+    {
+      "name": "remove failed files drops exactly the failed chapter and rebuild works",
+      "status": "PASS",
+      "ms": 470,
+      "detail": {
+        "chapters": [
+          ".operations/operations-manual.md",
+          ".operations/common-answers.md"
+        ],
+        "status": "Book ready — 2 chapters, 5.6 KB. Review it, then print or save as PDF."
+      }
+    },
+    {
+      "name": "cancel aborts an in-flight build without rendering or enabling print",
+      "status": "PASS",
+      "ms": 23,
+      "detail": {
+        "status": "Build cancelled. Nothing was printed.",
+        "output": "Build cancelled. Nothing was printed.",
+        "printDisabled": true
+      }
+    }
+  ],
+  "console": {
+    "consoleErrors": [
+      "network: Failed to load resource: the server responded with a status of 422 ()",
+      "network: Failed to load resource: the server responded with a status of 422 ()",
+      "network: Failed to load resource: the server responded with a status of 422 ()",
+      "javascript: Access to fetch at 'https://raw.githubusercontent.com/goldbergyoni/nodebestpractices/dc3d60c29d5483d9ea99cf261bbd6203516a2ba7/.operations/CONTRIBUTING.md' from origin 'http://127.0.0.1:4322' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+      "network: Failed to load resource: net::ERR_FAILED",
+      "javascript: Access to fetch at 'https://raw.githubusercontent.com/goldbergyoni/nodebestpractices/dc3d60c29d5483d9ea99cf261bbd6203516a2ba7/.operations/CONTRIBUTING.md' from origin 'http://127.0.0.1:4322' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+      "network: Failed to load resource: net::ERR_FAILED"
+    ],
+    "exceptions": [],
+    "failedRequests": [
+      "net::ERR_FAILED Fetch",
+      "net::ERR_FAILED Fetch"
+    ],
+    "httpErrors": [
+      {
+        "status": 422,
+        "url": "https://api.github.com/repos/rust-lang/book/commits/main/src"
+      },
+      {
+        "status": 422,
+        "url": "https://api.github.com/repos/jackfrued/Python-100-Days/commits/master/Day01-20"
+      },
+      {
+        "status": 422,
+        "url": "https://api.github.com/repos/goldbergyoni/nodebestpractices/commits/master/.operations"
+      }
+    ]
+  }
+}
