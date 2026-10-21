@@ -2140,7 +2140,8 @@ textarea.field {
 }
 
 @media (max-width: 970px) {
-  .tool {
+  .tool,
+  .book-tool {
     grid-template-columns: minmax(0, 1fr);
   }
   .channels {
@@ -2196,6 +2197,12 @@ textarea.field {
   }
   .band__head {
     margin-bottom: var(--sp-xxl);
+  }
+  #book-tree {
+    max-height: 340px;
+  }
+  .book-cover__title {
+    font-size: 34px;
   }
 }
 
