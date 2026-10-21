@@ -80,11 +80,11 @@ export function initConverter() {
   fileInput.addEventListener('change', onFile);
   mdInput.addEventListener('input', scheduleRender);
   tocToggle.addEventListener('change', scheduleRender);
-  printBtn.addEventListener('click', () => window.print());
+  printBtn.addEventListener('click', () => printSingle());
   printTriggers.forEach((el) =>
     el.addEventListener('click', (e) => {
       e.preventDefault();
-      window.print();
+      printSingle();
     }),
   );
   initSubnav();
@@ -227,6 +227,16 @@ export function initConverter() {
   function setStatus(msg, kind) {
     statusEl.textContent = msg;
     statusEl.className = `status${kind ? ' ' + kind : ''}`;
+  }
+
+  /** Print only the single-document sheet, never the documentation book. */
+  function printSingle() {
+    try {
+      printDocument({ mode: 'single' });
+      setStatus('Print dialog opened. Choose “Save as PDF” for a file.', '');
+    } catch (error) {
+      setStatus(friendlyPrintError(error), 'error');
+    }
   }
 
 }
