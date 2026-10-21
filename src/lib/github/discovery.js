@@ -138,6 +138,7 @@ async function boundedTreeScan({
           if (files.size >= limits.maxFiles) break;
         }
       } else if (entry.type === 'tree') {
+        if (EXCLUDED_DIRS.has(name)) continue;
         if (entry.sha && isRelevantForBase(fullPath, basePath)) {
           queue.push({ sha: entry.sha, prefix: fullPath, depth: dir.depth + 1 });
         }
