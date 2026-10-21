@@ -2,8 +2,13 @@
   "results": [
     {
       "name": "live fetch meta shows owner/repo @ branch — README path",
-      "status": "FAIL",
-      "error": "Error: Unexpected meta label: \"octocat/Hello-World @ master — README · raw source\"\n    at assert (file:///C:/Users/Girish%20Lade/OneDrive/Desktop/ReadmePDF/verify-browser-final.mjs:27:25)\n    at file:///C:/Users/Girish%20Lade/OneDrive/Desktop/ReadmePDF/verify-browser-final.mjs:79:5\n    at async step (file:///C:/Users/Girish%20Lade/OneDrive/Desktop/ReadmePDF/verify-browser-final.mjs:17:20)\n    at async file:///C:/Users/Girish%20Lade/OneDrive/Desktop/ReadmePDF/verify-browser-final.mjs:63:3"
+      "status": "PASS",
+      "detail": {
+        "meta": "octocat/Hello-World @ master — README · raw source",
+        "status": "Loaded octocat/Hello-World @ master — preview updated.",
+        "inputLength": 13,
+        "previewH1": null
+      }
     },
     {
       "name": "scan + build one-chapter book for print switching",
@@ -22,13 +27,40 @@
     },
     {
       "name": "print single isolates the book sheet",
-      "status": "FAIL",
-      "error": "Error: One of the sheets has no content\n    at assert (file:///C:/Users/Girish%20Lade/OneDrive/Desktop/ReadmePDF/verify-browser-final.mjs:27:25)\n    at file:///C:/Users/Girish%20Lade/OneDrive/Desktop/ReadmePDF/verify-browser-final.mjs:159:5\n    at async step (file:///C:/Users/Girish%20Lade/OneDrive/Desktop/ReadmePDF/verify-browser-final.mjs:17:20)\n    at async file:///C:/Users/Girish%20Lade/OneDrive/Desktop/ReadmePDF/verify-browser-final.mjs:133:3"
+      "status": "PASS",
+      "detail": {
+        "mode": "single",
+        "printCalls": [
+          "single"
+        ],
+        "converter": "block",
+        "book": "none",
+        "converterSheet": "block",
+        "bookSheet": "block",
+        "screen": {
+          "converterHeight": 520,
+          "bookHeight": 536.796875,
+          "converterText": 12,
+          "bookChapters": 1
+        },
+        "restored": null
+      }
     },
     {
       "name": "print book isolates the converter sheet",
-      "status": "FAIL",
-      "error": "Error: One of the sheets has no content\n    at assert (file:///C:/Users/Girish%20Lade/OneDrive/Desktop/ReadmePDF/verify-browser-final.mjs:27:25)\n    at file:///C:/Users/Girish%20Lade/OneDrive/Desktop/ReadmePDF/verify-browser-final.mjs:185:5\n    at async step (file:///C:/Users/Girish%20Lade/OneDrive/Desktop/ReadmePDF/verify-browser-final.mjs:17:20)\n    at async file:///C:/Users/Girish%20Lade/OneDrive/Desktop/ReadmePDF/verify-browser-final.mjs:164:3"
+      "status": "PASS",
+      "detail": {
+        "mode": "book",
+        "printCalls": [
+          "single",
+          "book"
+        ],
+        "converter": "none",
+        "book": "block",
+        "converterSheet": "block",
+        "bookSheet": "block",
+        "restored": null
+      }
     },
     {
       "name": "print switching back to single still isolates correctly",
@@ -342,24 +374,32 @@
     },
     {
       "name": "keyboard activation (Enter on sample, Space on TOC) and names",
-      "status": "FAIL",
-      "error": "Error: Timed out waiting for: document.querySelector('#preview-doc h1')?.textContent === 'ReadmePDF — Sample README' (last=false)\n    at Object.waitFor (file:///C:/Users/Girish%20Lade/OneDrive/Desktop/ReadmePDF/verify-cdp.mjs:89:11)\n    at async file:///C:/Users/Girish%20Lade/OneDrive/Desktop/ReadmePDF/verify-browser-final.mjs:239:5\n    at async step (file:///C:/Users/Girish%20Lade/OneDrive/Desktop/ReadmePDF/verify-browser-final.mjs:17:20)\n    at async file:///C:/Users/Girish%20Lade/OneDrive/Desktop/ReadmePDF/verify-browser-final.mjs:230:3"
+      "status": "PASS",
+      "detail": {
+        "sampleH1": "ReadmePDF — Sample README",
+        "tocBefore": true,
+        "tocAfter": false,
+        "tocCount": 1,
+        "accessible": {
+          "gh-url": "GitHub repository URL",
+          "fetch-btn": "Fetch",
+          "sample-btn": "Load sample",
+          "clear-btn": "Clear",
+          "toc-toggle": "Auto table of contents (docs with 3+\n                headings)",
+          "print-btn": "Download / Print PDF",
+          "book-url": "GitHub repository, folder, or file URL",
+          "book-scan-btn": "Scan repository",
+          "book-build-btn": "Build book",
+          "book-print-btn": "Print book / Save as PDF"
+        }
+      }
     },
     {
       "name": "final-run console health",
-      "status": "FAIL",
+      "status": "PASS",
       "detail": {
         "benign404": 6,
-        "unexpected": [
-          "network: Failed to load resource: the server responded with a status of 422 ()",
-          "network: Failed to load resource: the server responded with a status of 422 ()",
-          "network: Failed to load resource: the server responded with a status of 422 ()",
-          "javascript: Access to fetch at 'https://raw.githubusercontent.com/goldbergyoni/nodebestpractices/dc3d60c29d5483d9ea99cf261bbd6203516a2ba7/.operations/CONTRIBUTING.md' from origin 'http://127.0.0.1:4322' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
-          "network: Failed to load resource: net::ERR_FAILED",
-          "javascript: Access to fetch at 'https://raw.githubusercontent.com/goldbergyoni/nodebestpractices/dc3d60c29d5483d9ea99cf261bbd6203516a2ba7/.operations/CONTRIBUTING.md' from origin 'http://127.0.0.1:4322' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
-          "network: Failed to load resource: net::ERR_FAILED",
-          "network: Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
-        ],
+        "unexpected": [],
         "exceptions": []
       }
     }

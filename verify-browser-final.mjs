@@ -9,7 +9,7 @@
 import { writeFile } from 'node:fs/promises';
 import { connectCdp, click, setValue, sleep } from './verify-cdp.mjs';
 
-const page = await connectCdp({ port: 9333 });
+const page = await connectCdp({ port: 9334 });
 const results = [];
 
 async function step(name, fn) {
@@ -77,10 +77,11 @@ try {
       previewH1: document.querySelector('#preview-doc h1')?.textContent ?? null,
     }))()`);
     assert(
-      detail.meta === 'octocat/Hello-World @ master — README',
+      detail.meta.startsWith('octocat/Hello-World @ master — README'),
       `Unexpected meta label: ${JSON.stringify(detail.meta)}`,
     );
     assert(!detail.meta.endsWith('— '), 'Meta label ends with an empty path');
+    assert(!detail.meta.includes('@ master —  '), 'Meta label has a blank runtime path');
     assert(detail.inputLength > 0, 'Fetched README is empty');
     return detail;
   });
@@ -131,6 +132,14 @@ try {
 
   // --- 3. Print isolation while both sheets have content -------------------
   await step('print single isolates the book sheet', async () => {
+    const screen = await page.evaluate(`(() => ({
+      converterHeight: document.getElementById('sheet').getBoundingClientRect().height,
+      bookHeight: document.getElementById('book-sheet').getBoundingClientRect().height,
+      converterText: document.getElementById('preview-doc').textContent.trim().length,
+      bookChapters: document.querySelectorAll('#book-output [data-doc-path]').length,
+    }))()`);
+    assert(screen.converterHeight > 0 && screen.bookHeight > 0, 'Sheets are not both laid out on screen');
+    assert(screen.converterText > 0 && screen.bookChapters >= 1, 'One of the sheets has no content');
     await page.evaluate(`(() => {
       window.__printCalls = [];
       window.print = () => { window.__printCalls.push(document.body.dataset.printMode ?? 'none'); };
@@ -146,8 +155,6 @@ try {
       book: getComputedStyle(document.getElementById('book')).display,
       converterSheet: getComputedStyle(document.getElementById('sheet')).display,
       bookSheet: getComputedStyle(document.getElementById('book-sheet')).display,
-      converterHeight: document.getElementById('sheet').getBoundingClientRect().height,
-      bookHeight: document.getElementById('book-sheet').getBoundingClientRect().height,
     }))()`);
     await setPrintMedia('screen');
     await page.evaluate(`window.dispatchEvent(new Event('afterprint'))`);
@@ -156,9 +163,8 @@ try {
     assert(detail.printCalls.length === 1 && detail.printCalls[0] === 'single', 'print() did not see single');
     assert(detail.converter !== 'none', 'Converter hidden in single print');
     assert(detail.book === 'none', 'Book visible in single print');
-    assert(detail.converterHeight > 0 && detail.bookHeight > 0, 'One of the sheets has no content');
     assert(restored === null, 'afterprint did not clear single mode');
-    return { ...detail, restored };
+    return { ...detail, screen, restored };
   });
 
   await step('print book isolates the converter sheet', async () => {
@@ -172,8 +178,6 @@ try {
       book: getComputedStyle(document.getElementById('book')).display,
       converterSheet: getComputedStyle(document.getElementById('sheet')).display,
       bookSheet: getComputedStyle(document.getElementById('book-sheet')).display,
-      converterHeight: document.getElementById('sheet').getBoundingClientRect().height,
-      bookHeight: document.getElementById('book-sheet').getBoundingClientRect().height,
     }))()`);
     await setPrintMedia('screen');
     await page.evaluate(`window.dispatchEvent(new Event('afterprint'))`);
@@ -182,7 +186,6 @@ try {
     assert(detail.printCalls.join(',') === 'single,book', 'print() call sequence wrong');
     assert(detail.book !== 'none', 'Book hidden in book print');
     assert(detail.converter === 'none', 'Converter visible in book print');
-    assert(detail.converterHeight > 0 && detail.bookHeight > 0, 'One of the sheets has no content');
     assert(restored === null, 'afterprint did not clear book mode');
     return { ...detail, restored };
   });
@@ -231,19 +234,22 @@ try {
     await setPrintMedia('screen');
     await page.evaluate(`document.getElementById('sample-btn').focus()`);
     await page.send('Input.dispatchKeyEvent', {
-      type: 'keyDown', key: 'Enter', code: 'Enter', windowsVirtualKeyCode: 13,
+      type: 'rawKeyDown', key: 'Enter', code: 'Enter', windowsVirtualKeyCode: 13, nativeVirtualKeyCode: 13,
     });
     await page.send('Input.dispatchKeyEvent', {
-      type: 'keyUp', key: 'Enter', code: 'Enter', windowsVirtualKeyCode: 13,
+      type: 'char', key: 'Enter', code: 'Enter', text: '\r', windowsVirtualKeyCode: 13,
+    });
+    await page.send('Input.dispatchKeyEvent', {
+      type: 'keyUp', key: 'Enter', code: 'Enter', windowsVirtualKeyCode: 13, nativeVirtualKeyCode: 13,
     });
     await page.waitFor(`document.querySelector('#preview-doc h1')?.textContent === 'ReadmePDF — Sample README'`);
     const before = await page.evaluate(`document.getElementById('toc-toggle').checked`);
     await page.evaluate(`document.getElementById('toc-toggle').focus()`);
     await page.send('Input.dispatchKeyEvent', {
-      type: 'keyDown', key: ' ', code: 'Space', windowsVirtualKeyCode: 32,
+      type: 'rawKeyDown', key: ' ', code: 'Space', windowsVirtualKeyCode: 32, nativeVirtualKeyCode: 32,
     });
     await page.send('Input.dispatchKeyEvent', {
-      type: 'keyUp', key: ' ', code: 'Space', windowsVirtualKeyCode: 32,
+      type: 'keyUp', key: ' ', code: 'Space', windowsVirtualKeyCode: 32, nativeVirtualKeyCode: 32,
     });
     await sleep(150);
     const detail = await page.evaluate(`(() => {
