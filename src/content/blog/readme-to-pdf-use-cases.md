@@ -41,12 +41,12 @@ Documentation that lives only in a repository changes under the reader's feet. W
 - Theme: **Clean**.
 - Table of contents: on.
 - File name: include the repository, release tag or commit, and date, for example `acme-api-v2.4.0-readme-2026-10-02.pdf`.
-- Source: fetch the repository at the release commit if possible, then export.
+- Source: fetch the public repository, then confirm you are exporting the README you intend. The app reads the default branch, so use the paste path if you need a pinned tag or commit.
 
 **Preparation that matters:**
 
 - Record the source somewhere in the document or the file name. A PDF without a version is just another undated attachment.
-- Check links before archiving. A blob link will keep pointing at the current default branch unless the README was fetched from a branch-specific URL. For a true snapshot, note the commit hash in a footer line or in the accompanying release record.
+- Check links before archiving. A blob link keeps pointing at the repository's default branch. If you need a true snapshot of a tag or commit, paste that version of the README instead of using the fetch flow, and note the commit hash in a footer line or the accompanying release record.
 - Disable browser headers and footers if they include a local file path or an internal hostname. You want the archive to be self-contained, not to leak the machine that produced it.
 - Keep the Markdown source alongside the PDF if the archive needs to be reproducible. The PDF is the artifact; the Markdown is the recipe.
 

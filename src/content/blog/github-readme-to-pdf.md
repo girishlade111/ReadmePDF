@@ -63,7 +63,7 @@ https://github.com/owner/repo/tree/main/docs
 https://github.com/owner/repo/blob/main/README.md
 ```
 
-All of those resolve to the same `owner/repo` pair. Protocol-less URLs and the `owner/repo` shorthand are convenient when you are copying from a terminal or a chat message. Links with extra path segments are useful when someone sends you a direct link to a README inside a subdirectory.
+All of those resolve to the same `owner/repo` pair. Protocol-less URLs and the `owner/repo` shorthand are convenient when you are copying from a terminal or a chat message. Extra path segments are accepted for convenience, but they are ignored: the app still reads the repository's root-level README on the default branch, not the nested file shown in the URL. If the nested file is the one you need, paste its Markdown directly.
 
 Press **Fetch** or hit `Enter`. If the field is empty, the app tells you what it expects instead of silently doing nothing.
 
