@@ -25,8 +25,48 @@
     "detail": "{\"status\":\"File is over the 2 MB free-tier limit. Try a smaller file.\",\"h1\":\"Uploaded file\"}"
   },
   {
-    "name": "converter scenario aborted",
-    "status": "FAIL",
-    "detail": "Error: fetched README empty\n    at assert (file:///C:/Users/Girish%20Lade/OneDrive/Desktop/ReadmePDF/verify-cdp.mjs:184:25)\n    at file:///C:/Users/Girish%20Lade/OneDrive/Desktop/ReadmePDF/verify-browser-converter.mjs:114:3"
+    "name": "live GitHub README fetch (octocat/Hello-World)",
+    "status": "PASS",
+    "detail": "{\"status\":\"Loaded octocat/Hello-World @ master — preview updated.\",\"meta\":\"octocat/Hello-World @ master —  · raw source\",\"h1\":null,\"textLength\":13,\"linkTargets\":true}"
+  },
+  {
+    "name": "invalid URL error path",
+    "status": "PASS",
+    "detail": "{\"status\":\"Only github.com repository URLs are supported. Public github.com and raw.githubusercontent.com links work.\",\"meta\":\"Local mode — everything stays in your browser.\"}"
+  },
+  {
+    "name": "four print themes + dark warning",
+    "status": "PASS",
+    "detail": "{\"business\":{\"sheetClass\":\"sheet theme-business\",\"darkWarnHidden\":true},\"academic\":{\"sheetClass\":\"sheet theme-academic\",\"darkWarnHidden\":true},\"dark\":{\"sheetClass\":\"sheet theme-dark\",\"darkWarnHidden\":false},\"clean\":{\"sheetClass\":\"sheet theme-clean\",\"darkWarnHidden\":true}}"
+  },
+  {
+    "name": "print single sets data-print-mode=single",
+    "status": "PASS",
+    "detail": "{\"calls\":[\"single\"],\"mode\":\"single\",\"status\":\"Print dialog opened. Choose “Save as PDF” for a file.\"}"
+  },
+  {
+    "name": "afterprint restores screen layout",
+    "status": "PASS",
+    "detail": "no data-print-mode"
+  },
+  {
+    "name": "clear resets document and repo context",
+    "status": "PASS",
+    "detail": "{\"meta\":\"Local mode — everything stays in your browser.\",\"status\":\"\",\"input\":\"\"}"
+  },
+  {
+    "name": "expected README-candidate probe 404s",
+    "status": "PASS",
+    "detail": "12 benign 404s during fallback probing"
+  },
+  {
+    "name": "unexpected console errors",
+    "status": "PASS",
+    "detail": "[]"
+  },
+  {
+    "name": "converter uncaught exceptions",
+    "status": "PASS",
+    "detail": "[]"
   }
 ]
