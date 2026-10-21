@@ -103,7 +103,10 @@ export async function resolveRepositorySource(source, api, { signal } = {}) {
         { path },
       );
     }
-    if (source.kind === 'blob' && (Array.isArray(entry) || !['file', 'symlink'].includes(entry.type))) {
+    if (
+      (source.kind === 'blob' || source.kind === 'raw') &&
+      (Array.isArray(entry) || !['file', 'symlink'].includes(entry.type))
+    ) {
       throw githubError('PATH_NOT_FILE', `"${path}" is not a file.`, { path });
     }
   }

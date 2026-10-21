@@ -165,8 +165,8 @@ export async function discoverMarkdownFiles(resolved, api, options = {}) {
 
   if (signal?.aborted) throw githubError('CANCELLED', 'Discovery cancelled.');
 
-  // A /blob/ URL describes exactly one file, not a repository to explore.
-  if (resolved.kind === 'blob') {
+  // A /blob/ or raw URL describes exactly one file, not a repository to explore.
+  if (resolved.kind === 'blob' || resolved.kind === 'raw') {
     if (!isMarkdownPath(basePath)) {
       throw githubError(
         'NO_MARKDOWN',

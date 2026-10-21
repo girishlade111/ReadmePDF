@@ -167,6 +167,12 @@ export function parseGitHubSource(input) {
     if (!rest.length) {
       throw githubError('INVALID_URL', `The /${action}/ URL is missing a branch, tag, or commit.`);
     }
+    if ((action === 'blob' || action === 'raw') && rest.length < 2) {
+      throw githubError(
+        'INVALID_URL',
+        `The /${action}/ URL needs a branch, tag, or commit and a file path.`,
+      );
+    }
     refCandidates = splitRefCandidates(rest, {
       requirePath: action === 'blob' || action === 'raw',
     });
