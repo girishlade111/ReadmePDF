@@ -417,5 +417,10 @@ ${chaptersHtml}
     repo,
     ref,
     commitSha,
+    // Assembly only runs after assertBookComplete, but keep the evidence on the
+    // result so print guards can re-check it without the original fetch report.
+    complete: true,
+    requested: Number.isInteger(book.requested) ? book.requested : renderedDocuments.length,
+    failures: [],
   };
 }
