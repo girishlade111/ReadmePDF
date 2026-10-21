@@ -277,10 +277,7 @@ a {
   letter-spacing: 0;
 }
 
-.link-inline:hover {
-  text-decoration: underline;
-}
-
+/* Inline links are set without an underline — the colour carries the affordance. */
 .link-inline--inverse {
   color: var(--on-primary);
 }
@@ -344,7 +341,7 @@ a {
 }
 
 .band__head .lead {
-  margin-top: var(--sp-md);
+  margin-top: var(--sp-lg);
   color: var(--ink);
 }
 
@@ -482,10 +479,11 @@ a {
 .subnav a[aria-current='true']::after {
   content: '';
   position: absolute;
-  left: 0;
-  right: 0;
+  left: 50%;
   bottom: 0;
+  width: 67px;
   height: 5px;
+  transform: translateX(-50%);
   background: var(--accent-gold-soft);
 }
 
@@ -630,7 +628,7 @@ a {
 }
 
 .controls h3 {
-  margin-bottom: var(--sp-md);
+  margin-bottom: var(--sp-lg);
 }
 
 .controls h3:not(:first-child) {
@@ -876,7 +874,7 @@ textarea.field {
 }
 
 .channel h3 {
-  margin-bottom: var(--sp-sm);
+  margin-bottom: var(--sp-lg);
 }
 
 .channel p {
@@ -902,7 +900,7 @@ textarea.field {
 }
 
 .feature h3 {
-  margin-bottom: var(--sp-xs);
+  margin-bottom: var(--sp-lg);
 }
 
 .feature ul {
@@ -980,7 +978,7 @@ textarea.field {
 }
 
 .theme-card h3 {
-  margin-bottom: var(--sp-xs);
+  margin-bottom: var(--sp-lg);
 }
 
 .theme-card p {
@@ -1065,7 +1063,7 @@ textarea.field {
 
 .link-columns h3 {
   color: var(--on-primary);
-  margin-bottom: var(--sp-md);
+  margin-bottom: var(--sp-lg);
 }
 
 .link-columns ul {

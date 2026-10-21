@@ -11,6 +11,7 @@ Paste a repository URL, preview the rendered Markdown, and export a polished PDF
 
 - [Overview](#overview)
 - [Features](#features)
+- [Design system](#design-system)
 - [How It Works](#how-it-works)
 - [Tech Stack](#tech-stack)
 - [Project Structure](#project-structure)
@@ -73,6 +74,35 @@ Most README-to-PDF tools upload your content to a backend. ReadmePDF does the op
 
 ---
 
+## Design system
+
+The interface follows the spec in [`design.md`](./design.md) — a warm-neutral, shadow-free system
+borrowed from Oracle's web properties. The rules that shape the page:
+
+- **A six-rung neutral ladder.** `canvas` → `canvas-soft` → `canvas-tint` → `canvas-warm` →
+  `hairline` → `ink-deep`. Sections are told apart by *which rung they sit on*, not by cards, rules
+  or shadows. Full-bleed, square-cornered, `48px 0` padding on every band.
+- **No shadows, anywhere.** Depth comes from position on the ladder. A white card on a warm band
+  reads as raised because it is lighter.
+- **One red.** `#c74634` appears on the ReadmePDF wordmark and nowhere else. Chromatic colour is
+  deployed only at whole-band scale — the teal statement strip and the deep-green privacy band.
+- **One action colour.** Every button is the warm charcoal `#312d2a` at a 4px radius with
+  `10px 16px` padding. Polarity flips on dark bands instead of changing hue.
+- **Two registers.** Georgia for display (h1/h2), Inter for everything else — running copy at
+  350/400, section headings at 800. Hierarchy is carried by the weight jump, not by size.
+- **One ornament.** A 40 × 4px gold rule under the hero headline. Nothing else is decorated.
+- **Focus ring declared once** (`#227e9e`), applied identically on light and dark surfaces.
+
+**Fonts are self-hosted.** `Inter` ships as a variable `woff2` in `src/fonts/` (latin + latin-ext),
+so the page makes no third-party requests and the "nothing leaves your browser" promise holds
+literally. Georgia and Consolas use system stacks.
+
+**Template note.** ReadmePDF is a *product* template, so it uses Georgia display type and 8px
+card radii throughout — the 15px radii in the spec belong to the corporate-index template and are
+deliberately not mixed in.
+
+---
+
 ## How It Works
 
 ```
@@ -102,6 +132,7 @@ No uploads. No backend. No cookies.
 | Framework | [Astro 5](https://astro.build) (`output: 'static'`) | Zero-JS static pages, ships only what runs |
 | Markdown | `markdown-it` + `markdown-it-task-lists` | GFM coverage, extensible, fast |
 | Sanitization | `dompurify` | Industry-standard XSS defense for HTML-in-Markdown |
+| Typography | Self-hosted Inter (variable) + system Georgia | Full 350/800 weight axis, no third-party requests |
 | Testing | Node built-in `node:test` + `jsdom` | Zero-config runner, DOM support for widget tests |
 | PDF | Browser Print → Save as PDF | 100% client-side, no rendering service |
 
@@ -112,18 +143,20 @@ No uploads. No backend. No cookies.
 ```
 ReadmePDF/
 ├── astro.config.mjs          # Astro config (static output)
+├── design.md                 # Design system spec the UI implements
 ├── package.json
 ├── .gitignore                # node_modules/, dist/, .astro/
 ├── src/
+│   ├── fonts/                # Self-hosted Inter variable (latin, latin-ext)
 │   ├── lib/
 │   │   ├── github.js         # URL parsing, README fetch, relative-URL rewriting
 │   │   └── markdown.js       # GFM render, sanitization, TOC, heading slugs
 │   ├── pages/
-│   │   └── index.astro       # Single-page UI (controls + live preview)
+│   │   └── index.astro       # Single-page UI (bands + converter + live preview)
 │   ├── scripts/
 │   │   └── converter.js      # Client controller wiring inputs → render → print
 │   └── styles/
-│       └── app.css           # Layout, themes, print styles
+│       └── app.css           # Design tokens, bands, components, print styles
 └── test/
     ├── github.test.js        # URL parsing, path resolution, fetch resilience
     ├── markdown.test.js      # GFM rendering, TOC extraction
