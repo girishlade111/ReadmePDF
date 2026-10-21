@@ -9,6 +9,7 @@ import {
   buildTocHtml,
   injectHeadingIds,
 } from '../lib/markdown.js';
+import { printDocument } from '../lib/print.js';
 
 const SAMPLE = `# ReadmePDF — Sample README
 
