@@ -8,93 +8,415 @@ import '../styles/app.css';
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
       rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f172a'/%3E%3Ctext x='16' y='23' font-size='17' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'%3ER%3C/text%3E%3C/svg%3E"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23211e1c'/%3E%3Ctext x='16' y='23' font-size='17' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'%3ER%3C/text%3E%3C/svg%3E"
     />
     <meta
       name="description"
       content="ReadmePDF — free, no-login tool to convert a GitHub README or Markdown into a polished PDF. Paste a repo URL, preview, print to PDF."
     />
+    <meta name="theme-color" content="#f1efed" />
     <title>ReadmePDF — GitHub README to PDF (free, no login)</title>
   </head>
   <body>
-    <header class="topbar">
-      <div class="brand">ReadmePDF <small>by LadeStack · free · no login · client-side</small></div>
-      <nav>
-        <a href="#converter">Converter</a>
-        <a href="#privacy">Privacy</a>
-      </nav>
+    <header class="masthead">
+      <div class="container masthead__inner">
+        <a class="wordmark" href="#top">ReadmePDF</a>
+        <span class="masthead__tag caption">by LadeStack · free · no login · client-side</span>
+        <nav class="masthead__nav" aria-label="Primary">
+          <a href="#converter">Converter</a>
+          <a href="#how">How it works</a>
+          <a href="#themes">Themes</a>
+          <a href="#privacy">Privacy</a>
+        </nav>
+        <div class="masthead__utils">
+          <a
+            class="icon-link"
+            href="https://github.com/girishlade111/ReadmePDF"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="ReadmePDF on GitHub"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+            </svg>
+          </a>
+          <button class="btn btn--primary" type="button" data-print>Export PDF</button>
+        </div>
+      </div>
     </header>
 
-    <div class="layout" id="converter">
-      <section class="controls" aria-label="Input and options">
-        <h2>1 · GitHub repo URL</h2>
-        <div class="row">
-          <input
-            id="gh-url"
-            type="url"
-            inputmode="url"
-            aria-label="GitHub repository URL"
-            placeholder="https://github.com/owner/repo"
-            autocomplete="off"
-            spellcheck="false"
-          />
-          <button id="fetch-btn" class="primary" type="button">Fetch</button>
-        </div>
-        <p class="hint">We pull the README (tries main/master + case variants), resolve relative images/badges, and render below. Private repos aren't supported in MVP.</p>
+    <nav class="subnav" aria-label="Section">
+      <div class="container subnav__inner">
+        <a href="#converter">Converter</a>
+        <a href="#how">How it works</a>
+        <a href="#themes">Themes</a>
+        <a href="#privacy">Privacy</a>
+        <span class="subnav__cta">
+          <button class="btn btn--primary-inverse" type="button" data-print>Download / Print PDF</button>
+        </span>
+      </div>
+    </nav>
 
-        <h2>2 · …or paste / upload Markdown</h2>
-        <div class="row">
-          <input id="file-input" type="file" accept=".md,.markdown,.mdown,.txt,text/markdown" aria-label="Upload Markdown file" />
-        </div>
-        <p style="height:8px"></p>
-        <textarea
-          id="md-input"
-          aria-label="Markdown input"
-          placeholder="# Paste Markdown here, or fetch a repo above…"
-          spellcheck="false"
-        ></textarea>
-        <div class="row" style="margin-top:8px">
-          <button id="sample-btn" type="button">Load sample</button>
-          <button id="clear-btn" type="button">Clear</button>
-        </div>
-
-        <h2>3 · Theme</h2>
-        <div class="theme-grid" role="radiogroup" aria-label="PDF theme">
-          <label><input type="radio" name="theme" value="clean" checked />Clean</label>
-          <label><input type="radio" name="theme" value="business" />Business</label>
-          <label><input type="radio" name="theme" value="academic" />Academic</label>
-          <label><input type="radio" name="theme" value="dark" />Dark</label>
-        </div>
-        <p class="warn" id="dark-warn" hidden>
-          Dark looks great on screen but prints poorly — we auto-lighten it for print/PDF.
-        </p>
-
-        <h2>4 · Options</h2>
-        <label class="check"><input id="toc-toggle" type="checkbox" checked /> Auto table of contents (docs with 3+ headings)</label>
-
-        <p class="status" id="status" role="status" aria-live="polite"></p>
-        <p class="meta" id="meta"></p>
-      </section>
-
-      <section class="preview-wrap" aria-label="Live preview">
-        <div class="preview-head">
-          <strong>Live preview</strong>
-          <div class="row">
-            <button id="print-btn" class="primary" type="button">Download / Print PDF</button>
+    <main id="top">
+      <!-- ------------------------------------------------------------------ -->
+      <section class="hero">
+        <svg class="hero__pattern" viewBox="0 0 1440 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+          <g fill="none" stroke="currentColor" stroke-width="1">
+            <path d="M-40 90 C 220 30 340 170 560 118 S 900 40 1480 120" />
+            <path d="M-40 140 C 220 80 340 220 560 168 S 900 90 1480 170" />
+            <path d="M-40 190 C 220 130 340 270 560 218 S 900 140 1480 220" />
+            <path d="M-40 240 C 220 180 340 320 560 268 S 900 190 1480 270" />
+            <path d="M-40 300 C 240 230 320 380 580 320 S 940 230 1480 330" />
+            <path d="M-40 350 C 240 280 320 430 580 370 S 940 280 1480 380" />
+            <path d="M-40 410 C 240 340 320 490 580 430 S 940 340 1480 440" />
+            <path d="M-40 470 C 240 400 320 550 580 490 S 940 400 1480 500" />
+          </g>
+        </svg>
+        <div class="container">
+          <div class="hero__inner">
+            <p class="hero__kicker">Free · No login · Nothing uploaded</p>
+            <h1 class="display-xl">Any GitHub README,<br />as a print-ready PDF.</h1>
+            <span class="rule" aria-hidden="true"></span>
+            <p class="lead">
+              Paste a repository URL and ReadmePDF fetches the README, resolves its images and
+              badges, and lays the whole thing out for paper — all inside your browser.
+            </p>
+            <div class="btn-row">
+              <a class="btn btn--primary" href="#converter">Start converting</a>
+              <a class="btn btn--secondary" href="#how">How it works</a>
+            </div>
           </div>
         </div>
-        <p class="hint no-print" style="margin-top:0">
-          Export uses your browser's print-to-PDF (100% client-side). Choose “Save as PDF” in the print dialog.
-        </p>
-        <article id="sheet" class="sheet theme-clean">
-          <div id="preview-doc" class="doc"></div>
-        </article>
       </section>
-    </div>
 
-    <footer class="footer" id="privacy">
-      Privacy: Markdown/PDF processing happens in your browser. The only network call is fetching the public
-      README from GitHub. No uploads, no login, files under 2 MB on the free tier.
+      <!-- ------------------------------------------------------------------ -->
+      <section class="band band--white" id="converter">
+        <div class="container">
+          <div class="band__head">
+            <h2 class="display-lg">Converter</h2>
+            <p class="lead">
+              Three ways in — a repository URL, a Markdown file, or the keyboard. The preview is
+              the document.
+            </p>
+          </div>
+
+          <div class="tool">
+            <section class="panel controls" aria-label="Input and options">
+              <h3 class="heading-md">1 · GitHub repo URL</h3>
+              <div class="row">
+                <input
+                  id="gh-url"
+                  class="field field--search"
+                  type="url"
+                  inputmode="url"
+                  aria-label="GitHub repository URL"
+                  placeholder="https://github.com/owner/repo"
+                  autocomplete="off"
+                  spellcheck="false"
+                />
+                <button id="fetch-btn" class="btn btn--primary" type="button">Fetch</button>
+              </div>
+              <p class="hint">
+                Pulls the README (tries main/master plus case variants), resolves relative images
+                and badges, and renders below. Private repos aren't supported.
+              </p>
+
+              <h3 class="heading-md">2 · …or paste / upload Markdown</h3>
+              <div class="row">
+                <input
+                  id="file-input"
+                  class="field-file"
+                  type="file"
+                  accept=".md,.markdown,.mdown,.txt,text/markdown"
+                  aria-label="Upload Markdown file"
+                />
+              </div>
+              <textarea
+                id="md-input"
+                class="field"
+                aria-label="Markdown input"
+                placeholder="# Paste Markdown here, or fetch a repo above…"
+                spellcheck="false"
+              ></textarea>
+              <div class="row" style="margin-top: var(--sp-sm)">
+                <button id="sample-btn" class="btn btn--secondary" type="button">Load sample</button>
+                <button id="clear-btn" class="btn btn--tertiary" type="button">Clear</button>
+              </div>
+
+              <h3 class="heading-md">3 · Print theme</h3>
+              <div class="theme-grid" role="radiogroup" aria-label="PDF theme">
+                <label class="theme-tile"><input type="radio" name="theme" value="clean" checked />Clean</label>
+                <label class="theme-tile"><input type="radio" name="theme" value="business" />Business</label>
+                <label class="theme-tile"><input type="radio" name="theme" value="academic" />Academic</label>
+                <label class="theme-tile"><input type="radio" name="theme" value="dark" />Dark</label>
+              </div>
+              <p class="warn" id="dark-warn" hidden>
+                Dark reads well on screen but prints poorly — we auto-lighten it for print and PDF.
+              </p>
+
+              <h3 class="heading-md">4 · Options</h3>
+              <label class="check">
+                <input id="toc-toggle" type="checkbox" checked /> Auto table of contents (docs with 3+
+                headings)
+              </label>
+
+              <p class="status" id="status" role="status" aria-live="polite"></p>
+              <p class="meta" id="meta"></p>
+            </section>
+
+            <section class="panel preview-wrap" aria-label="Live preview">
+              <div class="preview-head">
+                <span class="preview-head__title">Live preview</span>
+                <button id="print-btn" class="btn btn--primary" type="button">Download / Print PDF</button>
+              </div>
+              <p class="hint no-print" style="margin-top: 0">
+                Export uses your browser's print-to-PDF (100% client-side). Choose “Save as PDF” in
+                the print dialog.
+              </p>
+              <article id="sheet" class="sheet theme-clean">
+                <div id="preview-doc" class="doc"></div>
+              </article>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <!-- ------------------------------------------------------------------ -->
+      <section class="band band--teal">
+        <div class="container">
+          <p class="statement">
+            <span class="statement__lead">Zero uploads. Zero accounts.</span>
+            <span class="statement__body">
+              The only network call the tool makes is an anonymous read of the public README you
+              asked for. Everything else — rendering, sanitising, printing — happens on your
+              machine.
+            </span>
+          </p>
+        </div>
+      </section>
+
+      <!-- ------------------------------------------------------------------ -->
+      <section class="band band--soft" id="how">
+        <div class="container">
+          <div class="band__head">
+            <h2 class="display-lg">How it works</h2>
+            <p class="lead">Three steps, no account, no server-side renderer.</p>
+          </div>
+          <div class="channels">
+            <article class="channel">
+              <span class="channel__icon" aria-hidden="true">
+                <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="4.5" y="7.5" width="23" height="18" rx="2" />
+                  <path d="M4.5 12.5h23" />
+                  <circle cx="9" cy="10" r="0.9" fill="currentColor" stroke="none" />
+                  <path d="M13 18h11M13 21.5h7" />
+                </svg>
+              </span>
+              <span class="channel__step">Step 01</span>
+              <h3 class="heading-lg">Give it a repository</h3>
+              <p class="body-loose">
+                A full URL, a bare <code>owner/repo</code>, or a link with extra path segments —
+                all three resolve to the same repo.
+              </p>
+              <a class="link-inline" href="#converter">Open the converter</a>
+            </article>
+
+            <article class="channel">
+              <span class="channel__icon" aria-hidden="true">
+                <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M6 6h14l6 6v14H6z" />
+                  <path d="M20 6v6h6" />
+                  <path d="M10.5 17.5h11M10.5 21.5h7" />
+                </svg>
+              </span>
+              <span class="channel__step">Step 02</span>
+              <h3 class="heading-lg">Watch it render</h3>
+              <p class="body-loose">
+                Markdown becomes HTML in the browser, sanitised by DOMPurify, with a table of
+                contents when the document warrants one.
+              </p>
+              <a class="link-inline" href="#themes">Compare the themes</a>
+            </article>
+
+            <article class="channel">
+              <span class="channel__icon" aria-hidden="true">
+                <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9 9.5V4.5h14v5" />
+                  <rect x="4.5" y="9.5" width="23" height="10" rx="2" />
+                  <path d="M9 19.5h14v8H9z" />
+                  <path d="M22.5 14h1" />
+                </svg>
+              </span>
+              <span class="channel__step">Step 03</span>
+              <h3 class="heading-lg">Print to PDF</h3>
+              <p class="body-loose">
+                Hit export, choose “Save as PDF”, and you have a clean, paginated document — no
+                watermark, no upload.
+              </p>
+              <a class="link-inline" href="#privacy">Read the privacy note</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ------------------------------------------------------------------ -->
+      <section class="band band--tint" id="themes">
+        <div class="container">
+          <div class="band__head">
+            <h2 class="display-lg">Four print themes</h2>
+            <p class="lead">
+              Each theme is a print stylesheet, not a colour swap — pick the register your
+              document wants.
+            </p>
+          </div>
+          <div class="theme-cards">
+            <article class="theme-card">
+              <h3 class="heading-sm">Clean</h3>
+              <p class="body-loose">Neutral sans, the default for specs and READMEs.</p>
+              <div class="swatch swatch--clean" aria-hidden="true">
+                <div class="swatch__title">README</div>
+                <div class="swatch__line"></div>
+                <div class="swatch__line swatch__line--short"></div>
+                <div class="swatch__code"></div>
+              </div>
+            </article>
+            <article class="theme-card">
+              <h3 class="heading-sm">Business</h3>
+              <p class="body-loose">Serif headings and a dark code block for reports.</p>
+              <div class="swatch swatch--business" aria-hidden="true">
+                <div class="swatch__title">README</div>
+                <div class="swatch__line"></div>
+                <div class="swatch__line swatch__line--short"></div>
+                <div class="swatch__code"></div>
+              </div>
+            </article>
+            <article class="theme-card">
+              <h3 class="heading-sm">Academic</h3>
+              <p class="body-loose">Justified serif pages for long-form prose.</p>
+              <div class="swatch swatch--academic" aria-hidden="true">
+                <div class="swatch__title">README</div>
+                <div class="swatch__line"></div>
+                <div class="swatch__line swatch__line--short"></div>
+                <div class="swatch__code"></div>
+              </div>
+            </article>
+            <article class="theme-card">
+              <h3 class="heading-sm">Dark</h3>
+              <p class="body-loose">Screen-first; auto-lightens for print so nothing is lost.</p>
+              <div class="swatch swatch--dark" aria-hidden="true">
+                <div class="swatch__title">README</div>
+                <div class="swatch__line"></div>
+                <div class="swatch__line swatch__line--short"></div>
+                <div class="swatch__code"></div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ------------------------------------------------------------------ -->
+      <section class="band band--warm">
+        <div class="container">
+          <div class="band__head">
+            <h2 class="display-lg">What it handles</h2>
+            <p class="lead">The unglamorous details that make a README printable.</p>
+          </div>
+          <div class="feature-grid">
+            <article class="feature">
+              <h3 class="heading-lg">Fetching</h3>
+              <ul>
+                <li><strong>Ten filename candidates.</strong> README.md, readme.md, README.MD and the rest, including <code>.github/</code>.</li>
+                <li><strong>Branch discovery.</strong> The default branch is read from the API, with <code>main</code> and <code>master</code> as fallbacks.</li>
+                <li><strong>Graceful degradation.</strong> A rate-limited API still lets the raw fetch continue.</li>
+                <li><strong>Every URL form.</strong> <code>owner/repo</code>, <code>.git</code> suffixes, and links that point at a file or folder.</li>
+              </ul>
+            </article>
+            <article class="feature">
+              <h3 class="heading-lg">Resolving &amp; rendering</h3>
+              <ul>
+                <li><strong>Relative paths.</strong> Images point at raw content, document links point at the blob view, and traversal is clamped at the repo root.</li>
+                <li><strong>Code stays intact.</strong> Fenced blocks and inline spans are never rewritten.</li>
+                <li><strong>GitHub-flavoured Markdown.</strong> Tables, task lists, strikethrough and fenced code all render.</li>
+                <li><strong>Sanitised output.</strong> Scripts, styles, frames and forms are stripped before anything reaches the page.</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ------------------------------------------------------------------ -->
+      <section class="band band--forest" id="privacy">
+        <div class="container">
+          <div class="band__head">
+            <h2 class="display-md">Private by construction</h2>
+            <p class="lead">
+              There is no backend to upload to. Your Markdown is read, rendered and printed on
+              your own device — the only bytes that leave are the public README files you asked
+              for.
+            </p>
+          </div>
+          <div class="link-columns">
+            <div>
+              <h3 class="heading-md">Product</h3>
+              <ul>
+                <li><a href="#converter">Converter</a></li>
+                <li><a href="#themes">Print themes</a></li>
+                <li><a href="#how">How it works</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="heading-md">Project</h3>
+              <ul>
+                <li><a href="https://github.com/girishlade111/ReadmePDF" target="_blank" rel="noopener noreferrer">Source on GitHub</a></li>
+                <li><a href="https://github.com/girishlade111/ReadmePDF/issues" target="_blank" rel="noopener noreferrer">Report an issue</a></li>
+                <li><a href="https://github.com/girishlade111/ReadmePDF/blob/main/README.md" target="_blank" rel="noopener noreferrer">Documentation</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="heading-md">Maker</h3>
+              <ul>
+                <li><a href="https://ladestack.in" target="_blank" rel="noopener noreferrer">LadeStack</a></li>
+                <li><a href="https://ladestack.in" target="_blank" rel="noopener noreferrer">More free tools</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="heading-md">Fine print</h3>
+              <ul>
+                <li><a href="https://github.com/girishlade111/ReadmePDF/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT licence</a></li>
+                <li><a href="#top">Back to top</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <nav class="footer__links" aria-label="Footer">
+          <a href="#converter">Converter</a>
+          <a href="#how">How it works</a>
+          <a href="#themes">Themes</a>
+          <a href="#privacy">Privacy</a>
+          <a href="https://github.com/girishlade111/ReadmePDF" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </nav>
+        <div class="footer__social">
+          <a href="https://github.com/girishlade111/ReadmePDF" target="_blank" rel="noopener noreferrer" aria-label="ReadmePDF on GitHub">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+            </svg>
+          </a>
+          <a href="https://ladestack.in" target="_blank" rel="noopener noreferrer" aria-label="LadeStack">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M3.5 9.5 12 3.5l8.5 6v9a1.5 1.5 0 0 1-1.5 1.5h-14A1.5 1.5 0 0 1 3.5 18.5z" />
+              <path d="M9.5 20v-6h5v6" />
+            </svg>
+          </a>
+        </div>
+        <p class="footer__credit caption">
+          © 2026 LadeStack · ReadmePDF is free, MIT licensed, and built by Girish Lade.
+        </p>
+      </div>
     </footer>
 
     <script>
