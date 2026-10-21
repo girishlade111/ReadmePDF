@@ -80,6 +80,13 @@ export function initConverter() {
   mdInput.addEventListener('input', scheduleRender);
   tocToggle.addEventListener('change', scheduleRender);
   printBtn.addEventListener('click', () => window.print());
+  printTriggers.forEach((el) =>
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.print();
+    }),
+  );
+  initSubnav();
   clearBtn.addEventListener('click', () => {
     mdInput.value = '';
     repoCtx = null;
@@ -221,6 +228,38 @@ export function initConverter() {
     statusEl.className = `status${kind ? ' ' + kind : ''}`;
   }
 
+}
+
+/**
+ * Marks the sub-navigation item for the section currently in view.
+ * The gold tab is a ::after on the active link, so toggling aria-current
+ * is all the state this needs.
+ */
+function initSubnav() {
+  const links = [...document.querySelectorAll('.subnav a[href^="#"]')];
+  if (!links.length || typeof IntersectionObserver === 'undefined') return;
+  const sections = links
+    .map((a) => document.querySelector(a.getAttribute('href')))
+    .filter(Boolean);
+  if (!sections.length) return;
+
+  const setActive = (id) => {
+    links.forEach((a) =>
+      a.setAttribute('aria-current', a.getAttribute('href') === `#${id}` ? 'true' : 'false'),
+    );
+  };
+
+  const visible = new Map();
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => visible.set(entry.target.id, entry.isIntersecting));
+      const active = sections.find((s) => visible.get(s.id));
+      if (active) setActive(active.id);
+    },
+    { rootMargin: '-40% 0px -55% 0px', threshold: 0 },
+  );
+  sections.forEach((s) => observer.observe(s));
+  setActive(sections[0].id);
 }
 
 /** User-facing message for fetch failures. Pure function — covered by tests. */
