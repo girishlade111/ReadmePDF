@@ -62,6 +62,7 @@ export function initConverter() {
   const sampleBtn = $('sample-btn');
   const darkWarn = $('dark-warn');
   const themeInputs = [...document.querySelectorAll('input[name="theme"]')];
+  const printTriggers = [...document.querySelectorAll('[data-print]')];
 
   /** Repo context for relative-path resolution; null = paste/upload mode. */
   let repoCtx = null;
