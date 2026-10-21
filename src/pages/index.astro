@@ -174,6 +174,186 @@ import '../styles/app.css';
       </section>
 
       <!-- ------------------------------------------------------------------ -->
+      <section class="band band--white" id="book">
+        <div class="container">
+          <div class="band__head">
+            <h2 class="display-lg">Documentation book</h2>
+            <p class="lead">
+              Point at a repository, choose the Markdown files that belong together, and print one
+              paginated book — cover, master contents, and every chapter in the order you set.
+            </p>
+          </div>
+
+          <div class="book-tool">
+            <section class="panel book-controls" aria-label="Book source and files">
+              <h3 class="heading-md">1 · Repository</h3>
+              <div class="row">
+                <input
+                  id="book-url"
+                  class="field"
+                  type="url"
+                  inputmode="url"
+                  aria-label="GitHub repository, folder, or file URL"
+                  placeholder="https://github.com/owner/repo"
+                  autocomplete="off"
+                  spellcheck="false"
+                />
+                <button id="book-scan-btn" class="btn btn--primary" type="button">Scan repository</button>
+              </div>
+              <div class="row book-row-actions">
+                <button id="book-cancel-scan-btn" class="btn btn--tertiary" type="button" hidden>
+                  Cancel scan
+                </button>
+              </div>
+              <p class="hint">
+                Finds README, <code>.md</code>, <code>.markdown</code>, and <code>.mdown</code>
+                files, including folders. A book holds at most 30 files; public repositories only.
+              </p>
+              <p class="status" id="book-status" role="status" aria-live="polite"></p>
+              <p class="meta" id="book-meta"></p>
+
+              <div class="book-warnings" id="book-warnings" hidden>
+                <p class="book-warnings__title">Listing notice</p>
+                <ul id="book-warning-list"></ul>
+              </div>
+
+              <div class="book-workspace" id="book-workspace">
+                <div class="book-workspace__head">
+                  <h3 class="heading-md">2 · Markdown files</h3>
+                  <span class="caption" id="book-file-summary">No files selected.</span>
+                </div>
+                <div class="row book-toolbar">
+                  <button id="book-select-all" class="btn btn--tertiary" type="button">
+                    Select all files
+                  </button>
+                  <button id="book-clear-selection" class="btn btn--tertiary" type="button">
+                    Clear
+                  </button>
+                </div>
+                <input
+                  id="book-search"
+                  class="field book-search"
+                  type="search"
+                  aria-label="Filter repository files"
+                  placeholder="Filter by path…"
+                  autocomplete="off"
+                  spellcheck="false"
+                />
+                <div class="book-tree-wrap">
+                  <div id="book-tree" class="book-tree"></div>
+                  <p class="hint book-empty" id="book-tree-empty">No repository scanned yet.</p>
+                </div>
+              </div>
+            </section>
+
+            <section class="panel book-builder" aria-label="Book options and chapters">
+              <h3 class="heading-md">3 · Book details</h3>
+              <label class="book-field">
+                <span class="label">Title</span>
+                <input
+                  id="book-title"
+                  class="field"
+                  type="text"
+                  placeholder="owner/repo documentation"
+                  autocomplete="off"
+                />
+              </label>
+              <label class="book-field">
+                <span class="label">Subtitle <span class="book-optional">(optional)</span></span>
+                <input
+                  id="book-subtitle"
+                  class="field"
+                  type="text"
+                  placeholder="A short description for the cover"
+                  autocomplete="off"
+                />
+              </label>
+              <div class="book-checks">
+                <label class="check">
+                  <input id="book-cover-toggle" type="checkbox" checked /> Cover page
+                </label>
+                <label class="check">
+                  <input id="book-toc-toggle" type="checkbox" checked /> Master table of contents
+                </label>
+              </div>
+
+              <h3 class="heading-md">4 · Print theme</h3>
+              <div class="theme-grid" role="radiogroup" aria-label="Book print theme">
+                <label class="theme-tile"
+                  ><input type="radio" name="book-theme" value="clean" checked />Clean</label
+                >
+                <label class="theme-tile"
+                  ><input type="radio" name="book-theme" value="business" />Business</label
+                >
+                <label class="theme-tile"
+                  ><input type="radio" name="book-theme" value="academic" />Academic</label
+                >
+                <label class="theme-tile"
+                  ><input type="radio" name="book-theme" value="dark" />Dark</label
+                >
+              </div>
+
+              <h3 class="heading-md">5 · Chapters</h3>
+              <p class="hint book-chapters-hint">
+                Print order follows this list. Use the arrow buttons to move a chapter, or × to
+                remove it.
+              </p>
+              <ol class="book-chapters" id="book-chapters"></ol>
+              <p class="hint book-empty" id="book-chapters-empty">
+                Chapters appear here after a scan.
+              </p>
+
+              <div class="row book-build-row">
+                <button id="book-build-btn" class="btn btn--primary" type="button" disabled>
+                  Build book
+                </button>
+                <button id="book-build-cancel-btn" class="btn btn--tertiary" type="button" hidden>
+                  Cancel build
+                </button>
+              </div>
+              <p class="status" id="book-build-status" role="status" aria-live="polite"></p>
+
+              <div class="book-failures" id="book-failures" hidden>
+                <p class="book-failures__title">Some files could not be loaded</p>
+                <ul id="book-failure-list"></ul>
+                <div class="row">
+                  <button id="book-retry-btn" class="btn btn--secondary" type="button" hidden>
+                    Retry failed files
+                  </button>
+                  <button id="book-drop-failures-btn" class="btn btn--tertiary" type="button" hidden>
+                    Remove failed files
+                  </button>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <section class="panel book-preview-panel" aria-label="Book preview">
+            <div class="preview-head">
+              <span class="preview-head__title">Book preview</span>
+              <button id="book-print-btn" class="btn btn--primary" type="button" disabled>
+                Print book / Save as PDF
+              </button>
+            </div>
+            <p class="hint no-print" style="margin-top: 0">
+              A book prints only when every selected chapter has loaded. Export uses your browser's
+              print-to-PDF — choose “Save as PDF” in the dialog.
+            </p>
+            <div class="book-preview-bar" id="book-preview-bar" hidden>
+              <span class="book-preview-bar__label" id="book-preview-label"></span>
+              <button id="book-preview-back" class="btn btn--tertiary" type="button">
+                Back to book
+              </button>
+            </div>
+            <article id="book-sheet" class="sheet book-sheet theme-clean">
+              <div id="book-output" class="doc book-output"></div>
+              <article id="book-preview" class="doc book-preview" hidden></article>
+            </article>
+          </section>
+        </div>
+      </section>
+
+      <!-- ------------------------------------------------------------------ -->
       <section class="band band--teal">
         <div class="container">
           <p class="statement">
