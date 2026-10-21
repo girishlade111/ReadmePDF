@@ -75,9 +75,15 @@ describe('parseGitHubSource', () => {
       'https://github.com/o/r/blob/main/%E6%97%A5%E6%9C%AC%E8%AA%9E/%E8%AA%AC%E6%98%8E.md',
     );
     assert.deepEqual(unicode.refCandidates[0], {
-      ref: 'main',
-      path: '日本語/説明.md',
+      ref: 'main/日本語',
+      path: '説明.md',
     });
+    assert.ok(
+      unicode.refCandidates.some(
+        (candidate) => candidate.ref === 'main' && candidate.path === '日本語/説明.md',
+      ),
+      'the decoded Unicode path is available as a candidate',
+    );
   });
 
   it('rejects malformed and unsupported URLs clearly', () => {

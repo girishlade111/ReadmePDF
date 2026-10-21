@@ -71,7 +71,7 @@ describe('discoverMarkdownFiles', () => {
 
     assert.deepEqual(
       result.files.map((file) => file.path).sort(byPath),
-      ['README.md', 'docs/Guide.MD', 'docs/README', 'docs/legacy.mdown', 'docs/notes.markdown'],
+      ['docs/Guide.MD', 'docs/legacy.mdown', 'docs/notes.markdown', 'docs/README', 'README.md'],
     );
     assert.equal(result.complete, true);
     assert.equal(result.truncated, false);
@@ -191,8 +191,8 @@ describe('discoverMarkdownFiles', () => {
     const result = await discoverMarkdownFiles(resolved(), api);
 
     assert.deepEqual(result.files.map((file) => file.path).sort(byPath), [
-      'README.md',
       'docs/install.md',
+      'README.md',
     ]);
     assert.equal(result.complete, true);
     assert.equal(result.truncated, false);
