@@ -341,6 +341,11 @@ export function initBookExplorer() {
   }
 
   function resetState() {
+    // A new scan replaces the repository the in-flight build was reading from.
+    // Abort it before clearing state so its completion can never render into
+    // the new scan's workspace.
+    cancelBuild({ silent: true });
+    setBuildStatus('', '');
     discovery = null;
     tree = null;
     selected = new Set();
@@ -709,6 +714,16 @@ export function initBookExplorer() {
   }
 
   function markStale() {
+    // Changing the selection or book options while chapters are still being
+    // fetched invalidates the snapshot that build started with. Cancel it;
+    // otherwise it would finish later and render a book that no longer
+    // matches the controls (and enable printing it).
+    if (buildController) {
+      cancelBuild({ silent: true });
+      resetOutput('Selection or options changed. The in-flight build was cancelled; build again to refresh the preview.');
+      setBuildStatus('Build cancelled because the selection or options changed. Build again before printing.', 'error');
+      return;
+    }
     if (!builtBook) return;
     builtBook = null;
     printBtn.disabled = true;

@@ -1,0 +1,11 @@
+﻿const H={'User-Agent':'ReadmePDF-verification','Accept':'application/vnd.github+json'};
+const repo='goldbergyoni/nodebestpractices';
+const c=await fetch(`https://api.github.com/repos/${repo}/commits/master`,{headers:H}); const cd=await c.json(); console.log('commit',c.status,cd.sha);
+const t=await fetch(`https://api.github.com/repos/${repo}/git/trees/${cd.commit.tree.sha}?recursive=1`,{headers:H}); const td=await t.json();
+console.log('tree',t.status,'entries',td.tree?.length,'truncated',td.truncated,'remaining',t.headers.get('x-ratelimit-remaining'));
+const mds=(td.tree||[]).filter(e=>e.type==='blob'&&/\.(md|markdown|mdown)$/i.test(e.path));
+console.log('md count',mds.length);
+console.log('sample',mds.slice(0,15).map(x=>x.path));
+console.log('spaces',mds.filter(x=>x.path.includes(' ')).slice(0,10).map(x=>x.path));
+console.log('unicode',mds.filter(x=>/[^\x00-\x7F]/.test(x.path)).slice(0,10).map(x=>x.path));
+const tags=await fetch(`https://api.github.com/repos/${repo}/tags?per_page=10`,{headers:H}); console.log('tags',tags.status,(await tags.json()).map(x=>x.name));
