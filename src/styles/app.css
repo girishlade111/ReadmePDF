@@ -470,11 +470,6 @@ a {
   background: var(--accent-gold-soft);
 }
 
-.subnav__cta {
-  margin-left: auto;
-  align-self: center;
-}
-
 /* ---- Buttons --------------------------------------------------------------- */
 .btn {
   display: inline-flex;
