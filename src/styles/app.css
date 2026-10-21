@@ -1466,6 +1466,14 @@ textarea.field {
 }
 
 @media (max-width: 600px) {
+  .subnav__inner {
+    gap: 14px;
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+  .subnav a {
+    font-size: 14px;
+  }
   .theme-cards {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -1484,6 +1492,16 @@ textarea.field {
 }
 
 @media (max-width: 450px) {
+  .subnav__inner {
+    gap: 12px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .subnav a {
+    font-size: 13px;
+    line-height: 20px;
+    padding: 0 1px;
+  }
   .theme-grid {
     grid-template-columns: minmax(0, 1fr);
   }
