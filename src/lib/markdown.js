@@ -20,10 +20,13 @@ function getMd() {
     // means the id is attached to the actual heading element, not guessed
     // later from the source text.
     _md.renderer.rules.heading_open = (tokens, idx, options, env, self) => {
-      const ids = env?.rpdfHeadingIds;
-      if (Array.isArray(ids) && ids.length) {
-        const id = ids.shift();
-        if (id) tokens[idx].attrSet('id', id);
+      const level = Number(String(tokens[idx]?.tag ?? '').slice(1));
+      if (Number.isInteger(level) && level >= 1 && level <= 4) {
+        const ids = env?.rpdfHeadingIds;
+        if (Array.isArray(ids) && ids.length) {
+          const id = ids.shift();
+          if (id) tokens[idx].attrSet('id', id);
+        }
       }
       return self.renderToken(tokens, idx, options);
     };
@@ -47,6 +50,11 @@ function slugify(text, used) {
   while (used.has(uniq)) uniq = `${slug}-${i++}`;
   used.add(uniq);
   return uniq;
+}
+
+/** Slug the way heading ids are minted, without duplicate tracking. */
+export function slugifyHeading(text) {
+  return slugify(text, new Set());
 }
 
 function stripMdInline(text) {

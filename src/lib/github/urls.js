@@ -213,16 +213,36 @@ export function dirOf(repoPath) {
 }
 
 /**
+ * Decode percent-escaped path segments without touching `/` separators.
+ * Markdown links routinely contain `%20` (spaces) and Unicode escapes; the
+ * repository layer, the API, and raw URLs all expect a decoded path that is
+ * re-encoded exactly once at the boundary.
+ */
+function decodePathSegments(path) {
+  return String(path)
+    .split('/')
+    .map((segment) => {
+      try {
+        return decodeURIComponent(segment);
+      } catch {
+        return segment;
+      }
+    })
+    .join('/');
+}
+
+/**
  * Resolve a relative path found in a README to a repo-root-relative path.
  * Traversal is clamped at the repository root.
  */
 export function resolveRepoPath(relativePath, readmeDir = '') {
   const { path, suffix } = splitPathSuffix(String(relativePath ?? '').trim());
+  const decodedPath = decodePathSegments(path);
   let combined;
-  if (path.startsWith('/')) {
-    combined = path.slice(1);
+  if (decodedPath.startsWith('/')) {
+    combined = decodedPath.slice(1);
   } else {
-    combined = readmeDir ? `${readmeDir}/${path}` : path;
+    combined = readmeDir ? `${readmeDir}/${decodedPath}` : decodedPath;
   }
   const segments = [];
   for (const seg of combined.split('/')) {
