@@ -1349,6 +1349,11 @@ textarea.field {
     padding: 0;
   }
 
+  /* Only the document itself belongs in the exported PDF. */
+  #converter .band__head {
+    display: none !important;
+  }
+
   .container {
     max-width: none;
     padding: 0;
