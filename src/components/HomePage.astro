@@ -327,6 +327,45 @@ const jsonLd = homeJsonLd({
                   </button>
                 </div>
               </div>
+
+              <div class="book-export" id="book-export" aria-labelledby="book-export-title">
+                <h3 class="heading-md" id="book-export-title">{t('home.book.exportTitle')}</h3>
+                <p class="hint">{t('home.book.exportLead')}</p>
+                <p class="hint book-export__limit">{t('home.book.exportLimit')}</p>
+                <div class="row book-export__actions">
+                  <button id="book-export-btn" class="btn btn--secondary" type="button" disabled>
+                    {t('home.book.exportButton')}
+                  </button>
+                  <button id="book-export-cancel-btn" class="btn btn--tertiary" type="button" hidden>
+                    {t('home.book.exportCancel')}
+                  </button>
+                  <a id="book-export-download" class="btn btn--primary" href="#" download hidden>
+                    {t('home.book.exportDownload')}
+                  </a>
+                  <button id="book-export-retry-btn" class="btn btn--secondary" type="button" hidden>
+                    {t('home.book.exportRetry')}
+                  </button>
+                  <button id="book-export-close-btn" class="btn btn--tertiary" type="button" hidden>
+                    {t('home.book.exportClose')}
+                  </button>
+                </div>
+                <div class="book-export__progress" id="book-export-progress-wrap" hidden>
+                  <progress id="book-export-progress" max="100" value="0"></progress>
+                  <span class="book-export__progress-label" id="book-export-progress-label"></span>
+                </div>
+                <p class="status" id="book-export-status" role="status" aria-live="polite"></p>
+                <p class="hint book-export__warning" id="book-export-warning" hidden>
+                  {t('home.book.exportWarning')}
+                </p>
+                <p class="hint" id="book-export-ready-hint" hidden>
+                  {t('home.book.exportReadyHint')}
+                </p>
+                <div class="book-failures" id="book-export-failures" hidden>
+                  <p class="book-failures__title">{t('home.book.exportFailuresTitle')}</p>
+                  <ul id="book-export-failure-list"></ul>
+                </div>
+                <p class="hint book-export__single">{t('home.book.exportSingle')}</p>
+              </div>
             </section>
           </div>
 
