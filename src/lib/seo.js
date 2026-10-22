@@ -15,7 +15,7 @@
  * endpoint returns 404 and the build is marked SEO-production-BLOCKED in the
  * implementation report.
  */
-import { LOCALES, localeHref, stripLocalePrefix } from '../i18n/config.js';
+import { LOCALES, localeHref, localeMeta, stripLocalePrefix } from '../i18n/config.js';
 import { absoluteUrl } from './site.js';
 
 /**
@@ -184,7 +184,9 @@ function organization() {
  */
 export function homeJsonLd({ locale, description, site, path }) {
   const url = absoluteUrl(site, canonicalPath(path));
-  const inLanguage = hreflangFor(locale);
+  // JSON-LD `inLanguage` is content language, not a search-engine hreflang
+  // grouping: Chinese must stay `zh-Hans` and Portuguese `pt-BR`.
+  const inLanguage = localeMeta(locale).htmlLang;
   return {
     '@context': 'https://schema.org',
     '@graph': [
@@ -233,7 +235,7 @@ export function blogIndexJsonLd({ locale, description, site, path, posts }) {
     name: 'The ReadmePDF Journal',
     url,
     description,
-    inLanguage: hreflangFor(locale),
+    inLanguage: localeMeta(locale).htmlLang,
     isPartOf: { '@type': 'WebSite', name: 'ReadmePDF', url: home },
     mainEntity: {
       '@type': 'ItemList',
@@ -261,7 +263,7 @@ export function blogIndexJsonLd({ locale, description, site, path, posts }) {
 export function articleJsonLd({ post, locale, path, site }) {
   const data = post?.data ?? post;
   const url = absoluteUrl(site, canonicalPath(path));
-  const language = hreflangFor(locale);
+  const language = localeMeta(locale).htmlLang;
   return {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',

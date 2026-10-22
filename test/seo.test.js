@@ -214,6 +214,39 @@ describe('JSON-LD builders', () => {
     assert.equal(json.publisher.name, 'LadeStack');
     assert.equal(json.url, `${ORIGIN}/ru/blog/${post.data.translationKey}/`);
   });
+
+  it('uses the accurate content language in JSON-LD, not the hreflang grouping', () => {
+    const home = homeJsonLd({
+      locale: 'zh',
+      description: '说明',
+      site: SITE,
+      path: '/zh/',
+    });
+    assert.equal(home['@graph'][0].inLanguage, 'zh-Hans');
+    assert.equal(home['@graph'][1].inLanguage, 'zh-Hans');
+
+    const blog = blogIndexJsonLd({
+      locale: 'zh',
+      description: '说明',
+      site: SITE,
+      path: '/zh/blog/',
+      posts: [],
+    });
+    assert.equal(blog.inLanguage, 'zh-Hans');
+
+    const post = mockPosts().find(
+      (entry) => entry.data.locale === 'zh' && entry.data.translationKey === 'alpha',
+    );
+    const article = articleJsonLd({
+      post,
+      locale: 'zh',
+      path: '/zh/blog/alpha/',
+      site: SITE,
+    });
+    assert.equal(article.inLanguage, 'zh-Hans');
+    // Search engines still receive the official `zh` grouping.
+    assert.equal(hreflangFor('zh'), 'zh');
+  });
 });
 
 describe('multilingual sitemap and robots', () => {

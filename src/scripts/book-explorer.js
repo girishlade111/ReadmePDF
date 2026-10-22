@@ -192,6 +192,20 @@ export function initBookExplorer() {
   const bookSheet = $('book-sheet');
   const bookOutput = $('book-output');
   const previewEl = $('book-preview');
+  const exportPanel = $('book-export');
+  const exportBtn = $('book-export-btn');
+  const exportCancelBtn = $('book-export-cancel-btn');
+  const exportDownload = $('book-export-download');
+  const exportRetryBtn = $('book-export-retry-btn');
+  const exportCloseBtn = $('book-export-close-btn');
+  const exportProgressWrap = $('book-export-progress-wrap');
+  const exportProgress = $('book-export-progress');
+  const exportProgressLabel = $('book-export-progress-label');
+  const exportStatus = $('book-export-status');
+  const exportWarning = $('book-export-warning');
+  const exportReadyHint = $('book-export-ready-hint');
+  const exportFailuresEl = $('book-export-failures');
+  const exportFailureList = $('book-export-failure-list');
 
   if (!urlInput || !scanBtn || !treeEl || !bookOutput) return null;
   document.body.dataset.bookInit = '1';
@@ -212,6 +226,9 @@ export function initBookExplorer() {
   let buildToken = 0;
   let builtBook = null;
   let lastFailures = [];
+  let exportController = null;
+  let exportToken = 0;
+  let exportObjectUrl = null;
 
   resetOutput(t('book.initialOutput'));
   updateSelectionUi();
@@ -235,6 +252,10 @@ export function initBookExplorer() {
   cancelBuildBtn?.addEventListener('click', cancelBuild);
   retryBtn?.addEventListener('click', () => onBuild());
   dropFailuresBtn?.addEventListener('click', dropFailedFiles);
+  exportBtn?.addEventListener('click', onExport);
+  exportCancelBtn?.addEventListener('click', () => cancelExport());
+  exportRetryBtn?.addEventListener('click', onExport);
+  exportCloseBtn?.addEventListener('click', closeExportResult);
   printBtn?.addEventListener('click', onPrintBook);
   previewBack?.addEventListener('click', closePreview);
   titleInput?.addEventListener('input', () => {
@@ -264,6 +285,10 @@ export function initBookExplorer() {
     },
     true,
   );
+
+  // A downloadable Blob URL lives only as long as this document. Revoke it on
+  // navigation so a long export session cannot pin the archive in memory.
+  window.addEventListener('pagehide', revokeExportObjectUrl);
 
   async function onScan() {
     const url = urlInput.value.trim();
@@ -369,6 +394,7 @@ export function initBookExplorer() {
     // Abort it before clearing state so its completion can never render into
     // the new scan's workspace.
     cancelBuild({ silent: true });
+    invalidateExport({ silent: true });
     setBuildStatus('', '');
     discovery = null;
     tree = null;
@@ -388,6 +414,7 @@ export function initBookExplorer() {
     dropFailuresBtn.hidden = true;
     printBtn.disabled = true;
     buildBtn.disabled = true;
+    syncExportButton();
     closePreview();
     updateSelectionUi();
     renderChapters();
@@ -747,12 +774,19 @@ export function initBookExplorer() {
     // matches the controls (and enable printing it).
     if (buildController) {
       cancelBuild({ silent: true });
+      invalidateExport({ silent: true });
       resetOutput(t('book.stale.changed'));
       setBuildStatus(t('book.stale.cancelledStatus'), 'error');
+      syncExportButton();
       return;
     }
-    if (!builtBook) return;
+    if (!builtBook) {
+      syncExportButton();
+      return;
+    }
     builtBook = null;
+    invalidateExport({ silent: true });
+    setExportStatus(t('home.book.exportStale'), '');
     printBtn.disabled = true;
     resetOutput(t('book.stale.outdated'));
     setBuildStatus(t('book.stale.outdatedStatus'), '');
@@ -812,6 +846,7 @@ export function initBookExplorer() {
 
     cancelBuild({ silent: true });
     cancelPreview();
+    invalidateExport({ silent: true });
     const token = ++buildToken;
     const controller = new AbortController();
     buildController = controller;
@@ -890,6 +925,7 @@ export function initBookExplorer() {
       });
       printBtn.disabled = false;
       failuresEl.hidden = true;
+      syncExportButton();
       setBuildStatus(
         t('book.build.ready', {
           chapters: tn('common.chapters', book.chapterCount),
@@ -914,6 +950,7 @@ export function initBookExplorer() {
         buildController = null;
         setBuildBusy(false);
         updateSelectionUi();
+        syncExportButton();
       }
     }
   }
@@ -926,6 +963,7 @@ export function initBookExplorer() {
     setBuildBusy(false);
     builtBook = null;
     printBtn.disabled = true;
+    syncExportButton();
     if (!silent) {
       setBuildStatus(t('book.build.cancelled'), '');
       resetOutput(t('book.build.cancelled'));
@@ -976,10 +1014,241 @@ export function initBookExplorer() {
     );
   }
 
+  function selectedTheme() {
+    const checked = document.querySelector('input[name="book-theme"]:checked');
+    return checked?.value ?? 'clean';
+  }
+
+  function syncExportButton() {
+    if (!exportBtn) return;
+    exportBtn.disabled = !builtBook || Boolean(buildController) || Boolean(exportController);
+  }
+
+  function setExportStatus(message, kind = '') {
+    if (!exportStatus) return;
+    exportStatus.textContent = message ?? '';
+    exportStatus.className = `status${kind ? ` ${kind}` : ''}`;
+  }
+
+  /**
+   * `value === null` renders an indeterminate bar, which is the honest state
+   * while the font files are downloading because their count is not tied to
+   * the number of documents.
+   */
+  function setExportProgress(value, label = '') {
+    if (exportProgressWrap) exportProgressWrap.hidden = !label;
+    if (exportProgress) {
+      if (value == null) exportProgress.removeAttribute('value');
+      else exportProgress.value = String(Math.max(0, Math.min(100, Math.round(value))));
+    }
+    if (exportProgressLabel) exportProgressLabel.textContent = label;
+  }
+
+  function revokeExportObjectUrl() {
+    if (!exportObjectUrl) return;
+    try {
+      URL.revokeObjectURL(exportObjectUrl);
+    } catch {
+      // Nothing else can be done if the browser refuses to revoke it.
+    }
+    exportObjectUrl = null;
+  }
+
+  function clearExportResult() {
+    revokeExportObjectUrl();
+    if (exportDownload) {
+      exportDownload.hidden = true;
+      exportDownload.removeAttribute('href');
+      exportDownload.removeAttribute('download');
+    }
+    if (exportFailuresEl) exportFailuresEl.hidden = true;
+    if (exportFailureList) exportFailureList.textContent = '';
+    if (exportWarning) exportWarning.hidden = true;
+    if (exportReadyHint) exportReadyHint.hidden = true;
+    setExportProgress(0, '');
+  }
+
+  function cancelExport({ silent = false } = {}) {
+    if (!exportController) return;
+    exportController.abort();
+    exportController = null;
+    exportToken += 1;
+    if (exportCancelBtn) exportCancelBtn.hidden = true;
+    exportPanel?.removeAttribute('aria-busy');
+    setExportProgress(0, '');
+    if (!silent) {
+      setExportStatus(t('home.book.exportCancelled'), '');
+      if (exportRetryBtn) exportRetryBtn.hidden = false;
+      if (exportCloseBtn) exportCloseBtn.hidden = false;
+    }
+    syncExportButton();
+  }
+
+  /** Drop an in-flight export and any finished download. */
+  function invalidateExport({ silent = false } = {}) {
+    cancelExport({ silent: true });
+    clearExportResult();
+    if (exportRetryBtn) exportRetryBtn.hidden = true;
+    if (exportCloseBtn) exportCloseBtn.hidden = true;
+    if (!silent) setExportStatus(t('home.book.exportCancelled'), '');
+    syncExportButton();
+  }
+
+  function closeExportResult() {
+    invalidateExport({ silent: true });
+    setExportStatus('', '');
+  }
+
+  function renderExportFailures(failures) {
+    if (!exportFailuresEl || !exportFailureList) return;
+    const list = Array.isArray(failures) ? failures : [];
+    exportFailureList.textContent = '';
+    for (const failure of list) {
+      const item = element('li', 'book-failures__item');
+      item.append(
+        element(
+          'span',
+          'book-failures__path',
+          failure?.path || t('book.failure.unknownFile'),
+        ),
+      );
+      exportFailureList.append(item);
+    }
+    exportFailuresEl.hidden = !list.length;
+  }
+
+  function showExportProgress(event) {
+    const phase = event?.phase;
+    const done = Number(event?.done) || 0;
+    const total = Number(event?.total) || 0;
+    if (phase === 'fonts') {
+      setExportProgress(null, t('home.book.exportFonts'));
+      return;
+    }
+    if (phase === 'document') {
+      setExportProgress(
+        total ? (done / total) * 100 : 0,
+        t('home.book.exportProgress', {
+          done: Math.min(done + 1, total || done + 1),
+          total,
+        }),
+      );
+      return;
+    }
+    if (phase === 'document-done' || phase === 'document-failed') {
+      setExportProgress(
+        total ? (done / total) * 100 : 0,
+        t('home.book.exportProgress', { done, total }),
+      );
+      return;
+    }
+    if (phase === 'packing') setExportProgress(100, t('home.book.exportPacking'));
+  }
+
+  async function onExport() {
+    if (exportController) return;
+    if (!builtBook) {
+      setExportStatus(t('home.book.exportBuildFirst'), 'error');
+      return;
+    }
+
+    const snapshot = builtBook;
+    const token = ++exportToken;
+    const controller = new AbortController();
+    exportController = controller;
+    clearExportResult();
+    setExportStatus(t('home.book.exportPreparing'), '');
+    setExportProgress(null, t('home.book.exportFonts'));
+    exportPanel?.setAttribute('aria-busy', 'true');
+    if (exportBtn) exportBtn.disabled = true;
+    if (exportCancelBtn) exportCancelBtn.hidden = false;
+    if (exportRetryBtn) exportRetryBtn.hidden = true;
+    if (exportCloseBtn) exportCloseBtn.hidden = true;
+    if (exportFailuresEl) exportFailuresEl.hidden = true;
+
+    try {
+      // pdf-lib, fontkit, and JSZip are intentionally absent from the initial
+      // page bundle. A reader who never exports pays nothing for them.
+      const { exportBookToZip } = await import('../lib/pdf/export.js');
+      if (token !== exportToken) return;
+
+      const result = await exportBookToZip(snapshot, {
+        sanitize: sanitizeHtml,
+        labels: clientBookLabels(),
+        locale: clientLocale(),
+        theme: selectedTheme(),
+        signal: controller.signal,
+        onProgress: (event) => {
+          if (token === exportToken) showExportProgress(event);
+        },
+      });
+      if (token !== exportToken) return;
+
+      const blob = new Blob([result.zipBytes], { type: 'application/zip' });
+      exportObjectUrl = URL.createObjectURL(blob);
+      if (exportDownload) {
+        exportDownload.href = exportObjectUrl;
+        exportDownload.download = result.zipName;
+        exportDownload.hidden = false;
+      }
+      if (exportReadyHint) exportReadyHint.hidden = false;
+      if (exportCancelBtn) exportCancelBtn.hidden = true;
+      if (exportCloseBtn) exportCloseBtn.hidden = false;
+      if (exportRetryBtn) exportRetryBtn.hidden = true;
+      setExportProgress(100, '100%');
+
+      const summary = t('home.book.exportDone', {
+        files: tn('common.files', result.files.length),
+        size: formatBytes(result.totalBytes),
+      });
+      if (result.failures.length) {
+        setExportStatus(
+          `${summary} ${t('home.book.exportPartial', {
+            files: tn('common.failedFiles', result.failures.length),
+          })}`,
+          'error',
+        );
+        renderExportFailures(result.failures);
+      } else {
+        setExportStatus(summary, '');
+      }
+      if (result.files.some((file) => Number(file.warnings) > 0) && exportWarning) {
+        exportWarning.hidden = false;
+      }
+    } catch (error) {
+      if (token !== exportToken) return;
+      if (error?.code === 'CANCELLED' || controller.signal.aborted) {
+        setExportStatus(t('home.book.exportCancelled'), '');
+      } else if (error?.code === 'EXPORT_FONTS') {
+        setExportStatus(t('home.book.exportFontsFailed'), 'error');
+      } else if (
+        error?.code === 'EXPORT_TOO_LARGE' ||
+        error?.code === 'EXPORT_PDF_TOO_LARGE' ||
+        error?.code === 'EXPORT_TOO_MANY'
+      ) {
+        setExportStatus(t('home.book.exportTooLarge'), 'error');
+      } else {
+        setExportStatus(t('home.book.exportFailed'), 'error');
+        if (Array.isArray(error?.failures) && error.failures.length) {
+          renderExportFailures(error.failures);
+        }
+      }
+      setExportProgress(0, '');
+      if (exportRetryBtn) exportRetryBtn.hidden = false;
+      if (exportCloseBtn) exportCloseBtn.hidden = false;
+    } finally {
+      if (token === exportToken) {
+        exportController = null;
+        exportPanel?.removeAttribute('aria-busy');
+        if (exportCancelBtn) exportCancelBtn.hidden = true;
+        syncExportButton();
+      }
+    }
+  }
+
   function applyTheme() {
     if (!bookSheet) return;
-    const checked = document.querySelector('input[name="book-theme"]:checked');
-    const theme = checked?.value ?? 'clean';
+    const theme = selectedTheme();
     bookSheet.classList.remove('theme-clean', 'theme-business', 'theme-academic', 'theme-dark');
     bookSheet.classList.add(`theme-${theme}`);
   }
