@@ -773,34 +773,33 @@ class PdfRenderer {
     }
     if (opts.generatedAt) meta.push(addDays(opts.generatedAt).toISOString().slice(0, 10));
     for (const item of meta) {
-      this.addText(item, {
+      this.addAutoText(item, {}, {
         x: PAGE_MARGIN + 10,
         top,
         size: 10.5,
-        role: 'regular',
         color: palette.muted,
       });
       top += 17;
     }
-    this.addText('Generated locally by ReadmePDF. No file was uploaded.', {
+    this.addAutoText('Generated locally by ReadmePDF. No file was uploaded.', {}, {
       x: PAGE_MARGIN + 10,
       top: PAGE_HEIGHT - PAGE_MARGIN - 16,
       size: 8,
-      role: 'regular',
       color: palette.muted,
     });
   }
 
   drawTitleBlock() {
     const opts = this.options;
-    this.addText(cleanText(opts.title, 'Document'), {
-      x: PAGE_MARGIN,
-      top: this.y,
+    const titleLines = wrapRuns([{ text: cleanText(opts.title, 'Document'), bold: true }], {
+      picker: this.picker,
+      width: CONTENT_WIDTH,
       size: 22,
-      role: 'bold',
-      color: this.palette.heading,
-    });
-    this.y += 30;
+    }).slice(0, 4);
+    for (const line of titleLines) {
+      this.drawLine(line, PAGE_MARGIN, this.y, { color: this.palette.heading });
+      this.y += 30;
+    }
     if (opts.subtitle) {
       const lines = wrapRuns([{ text: cleanText(opts.subtitle), italic: true }], {
         picker: this.picker,
