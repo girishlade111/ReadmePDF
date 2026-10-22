@@ -1,0 +1,142 @@
+---
+import { getCollection, render } from 'astro:content';
+import BlogLayout from '../layouts/BlogLayout.astro';
+import BlogCard from './BlogCard.astro';
+import { localeHref, localeMeta } from '../i18n/config.js';
+import { translator } from '../i18n/index.js';
+import {
+  formatDate,
+  isoDate,
+  postHref,
+  readingTime,
+  relatedPosts,
+  tagLabel,
+} from '../lib/blog.js';
+
+const { post, locale = 'en', path = '/' } = Astro.props;
+const t = translator(locale);
+const meta = localeMeta(locale);
+const { Content, headings } = await render(post);
+const toc = headings.filter((heading) => heading.depth <= 3);
+
+const allPosts = await getCollection('blog');
+const related = relatedPosts(allPosts, post, locale);
+
+const homeHref = localeHref(locale, '/');
+const blogHref = localeHref(locale, '/blog/');
+const converterHref = `${homeHref}#converter`;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.pubDate.toISOString(),
+  dateModified: (post.data.updatedDate ?? post.data.pubDate).toISOString(),
+  author: { '@type': 'Person', name: post.data.author },
+  publisher: { '@type': 'Organization', name: 'LadeStack' },
+  keywords: post.data.tags.join(', '),
+  inLanguage: meta.htmlLang,
+  mainEntityOfPage: postHref(post, locale),
+};
+---
+
+<BlogLayout
+  title={post.data.title}
+  description={post.data.description}
+  article={true}
+  locale={locale}
+  path={path}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+
+  <header class="post-hero">
+    <div class="container post-hero__inner">
+      <nav class="breadcrumbs" aria-label={t('a11y.breadcrumb')}>
+        <a href={homeHref}>{t('blog.home')}</a>
+        <span aria-hidden="true">/</span>
+        <a href={blogHref}>{t('nav.blog')}</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">{post.data.title}</span>
+      </nav>
+
+      <div class="blog-tags" aria-label={t('a11y.tags')}>
+        {post.data.tags.map((tag) => <span class="blog-tag">{tagLabel(tag, t)}</span>)}
+      </div>
+
+      <h1 class="display-xl">{post.data.title}</h1>
+      <p class="lead">{post.data.description}</p>
+
+      <div class="blog-meta post-meta">
+        <span>{post.data.author}</span>
+        <span aria-hidden="true">·</span>
+        <time datetime={isoDate(post.data.pubDate)}>{formatDate(post.data.pubDate, locale)}</time>
+        <span aria-hidden="true">·</span>
+        <span>{t('blog.readingTime', { minutes: readingTime(post.body, locale) })}</span>
+        {post.data.updatedDate && (
+          <>
+            <span aria-hidden="true">·</span>
+            <span>{t('blog.updated', { date: formatDate(post.data.updatedDate, locale) })}</span>
+          </>
+        )}
+      </div>
+    </div>
+  </header>
+
+  <main class="post-main">
+    <div class="container">
+      <div class:list={['post-layout', !toc.length && 'post-layout--single']}>
+        {toc.length > 0 && (
+          <aside class="post-aside" aria-label={t('a11y.onThisPage')}>
+            <h2>{t('a11y.onThisPage')}</h2>
+            <nav aria-label={t('a11y.toc')}>
+              <ol class="post-toc">
+                {toc.map((heading) => (
+                  <li class:list={['post-toc__item', `post-toc__item--${heading.depth}`]}>
+                    <a href={`#${heading.slug}`}>{heading.text}</a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+          </aside>
+        )}
+
+        <article class="post-prose">
+          <div class="prose">
+            <Content />
+          </div>
+
+          <div class="post-footer">
+            <a class="link-inline" href={blogHref}>{t('blog.allGuidesLink')}</a>
+          </div>
+
+          <div class="post-cta">
+            <div>
+              <h2 class="heading-lg">{t('blog.ownTitle')}</h2>
+              <p class="body-loose">{t('blog.ownBody')}</p>
+            </div>
+            <a class="btn btn--primary" href={converterHref}>{t('blog.openConverter')}</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </main>
+
+  {related.length > 0 && (
+    <section class="related">
+      <div class="container">
+        <div class="blog-section-head">
+          <div>
+            <p class="blog-kicker">{t('blog.keepReading')}</p>
+            <h2 class="display-lg">{t('blog.related')}</h2>
+          </div>
+        </div>
+        <div class="blog-grid">
+          {related.map((entry) => <BlogCard post={entry} locale={locale} />)}
+        </div>
+      </div>
+    </section>
+  )}
+</BlogLayout>

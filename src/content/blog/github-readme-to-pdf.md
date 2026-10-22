@@ -6,6 +6,8 @@ updatedDate: 2026-10-21
 author: "Girish Lade"
 tags: ["GitHub", "README", "PDF", "Tutorial"]
 featured: true
+locale: "en"
+translationKey: "github-readme-to-pdf"
 ---
 
 A README is written for a browser: it scrolls, it links out, and it assumes the reader can click around the repository. The moment you need to send documentation to a client, attach it to an assignment, archive a release, or hand it to someone who will not clone the repo, a PDF is the format that travels.

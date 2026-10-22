@@ -40,6 +40,15 @@ function isRelevantForBase(path, basePath) {
   return underBase(path, basePath) || basePath.startsWith(`${path}/`);
 }
 
+/**
+ * Emit a warning in the active locale when a translator is supplied, otherwise
+ * keep the historical English diagnostic. Library callers and tests therefore
+ * see stable English; the browser sees localized copy.
+ */
+function pushWarning(warnings, translate, key, fallback, vars) {
+  warnings.push(translate ? translate(`book.warnings.${key}`, vars) : fallback);
+}
+
 function toFile(entry) {
   const path = String(entry.path);
   const slash = path.lastIndexOf('/');
@@ -70,6 +79,7 @@ async function boundedTreeScan({
   deadline,
   seedFiles,
   warnings,
+  translate,
 }) {
   const files = new Map(seedFiles.map((file) => [file.path, file]));
   const queue = [{ sha: rootTreeSha, prefix: '', depth: 0 }];
@@ -81,29 +91,45 @@ async function boundedTreeScan({
   while (queue.length) {
     if (signal?.aborted) throw githubError('CANCELLED', 'Discovery cancelled.');
     if (files.size >= limits.maxFiles) {
-      warnings.push(
+      pushWarning(
+        warnings,
+        translate,
+        'fileLimit',
         `Discovery stopped after the ${limits.maxFiles}-file safety limit. The list may be incomplete.`,
+        { max: limits.maxFiles },
       );
       complete = false;
       break;
     }
     if (dirsFetched >= limits.maxDirs) {
-      warnings.push(
+      pushWarning(
+        warnings,
+        translate,
+        'dirLimit',
         `Discovery stopped after scanning ${limits.maxDirs} folders. The list may be incomplete.`,
+        { max: limits.maxDirs },
       );
       complete = false;
       break;
     }
     if (treeRequests >= limits.maxTreeRequests) {
-      warnings.push(
+      pushWarning(
+        warnings,
+        translate,
+        'requestLimit',
         `Discovery stopped after ${limits.maxTreeRequests} tree requests. The list may be incomplete.`,
+        { max: limits.maxTreeRequests },
       );
       complete = false;
       break;
     }
     if (Date.now() > deadline) {
-      warnings.push(
+      pushWarning(
+        warnings,
+        translate,
+        'timeout',
         `Discovery timed out after ${Math.round(limits.timeoutMs / 1000)}s. The list may be incomplete.`,
+        { seconds: Math.round(limits.timeoutMs / 1000) },
       );
       complete = false;
       break;
@@ -116,14 +142,24 @@ async function boundedTreeScan({
 
     const data = await api.getTree(owner, repo, dir.sha, { recursive: false, signal });
     if (!data || !Array.isArray(data.tree)) {
-      warnings.push(`Could not read the folder "${dir.prefix || '/'}". Some files may be missing.`);
+      pushWarning(
+        warnings,
+        translate,
+        'folderUnreadable',
+        `Could not read the folder "${dir.prefix || '/'}". Some files may be missing.`,
+        { path: dir.prefix || '/' },
+      );
       complete = false;
       continue;
     }
     dirsFetched += 1;
     if (data.truncated) {
-      warnings.push(
+      pushWarning(
+        warnings,
+        translate,
+        'folderTruncated',
         `GitHub truncated the listing for "${dir.prefix || '/'}". Some files may be missing.`,
+        { path: dir.prefix || '/' },
       );
       complete = false;
     }
@@ -159,6 +195,7 @@ export async function discoverMarkdownFiles(resolved, api, options = {}) {
   }
   const limits = { ...DISCOVERY_LIMITS, ...(options.limits || {}) };
   const signal = options.signal;
+  const translate = typeof options.translate === 'function' ? options.translate : null;
   const deadline = Date.now() + limits.timeoutMs;
   const warnings = [];
   const basePath = String(resolved.path ?? '');
@@ -217,8 +254,12 @@ export async function discoverMarkdownFiles(resolved, api, options = {}) {
   let truncated = Boolean(treeData.truncated);
   if (entries.length > limits.maxTreeEntries) {
     truncated = true;
-    warnings.push(
+    pushWarning(
+      warnings,
+      translate,
+      'treeEntries',
       `GitHub returned more than ${limits.maxTreeEntries} tree entries. A bounded folder-by-folder scan was used instead.`,
+      { max: limits.maxTreeEntries },
     );
   }
 
@@ -232,8 +273,12 @@ export async function discoverMarkdownFiles(resolved, api, options = {}) {
     found.set(path, toFile(entry));
     if (found.size >= limits.maxFiles) {
       truncated = true;
-      warnings.push(
+      pushWarning(
+        warnings,
+        translate,
+        'fileLimit',
         `Discovery stopped after the ${limits.maxFiles}-file safety limit. The list may be incomplete.`,
+        { max: limits.maxFiles },
       );
       break;
     }
@@ -243,7 +288,10 @@ export async function discoverMarkdownFiles(resolved, api, options = {}) {
 
   if (truncated) {
     if (!warnings.length) {
-      warnings.push(
+      pushWarning(
+        warnings,
+        translate,
+        'treeTruncated',
         'GitHub truncated the recursive tree listing. A bounded folder-by-folder scan was used to fill the gaps.',
       );
     }
@@ -258,6 +306,7 @@ export async function discoverMarkdownFiles(resolved, api, options = {}) {
       deadline,
       seedFiles: [...found.values()],
       warnings,
+      translate,
     });
     for (const file of fallback.files) found.set(file.path, file);
     complete = fallback.complete;
@@ -267,8 +316,12 @@ export async function discoverMarkdownFiles(resolved, api, options = {}) {
   if (files.length > limits.maxFiles) {
     files.length = limits.maxFiles;
     complete = false;
-    warnings.push(
+    pushWarning(
+      warnings,
+      translate,
+      'firstFiles',
       `Only the first ${limits.maxFiles} Markdown files are listed. Narrow the URL to a folder for a complete list.`,
+      { max: limits.maxFiles },
     );
   }
 

@@ -4,6 +4,8 @@ description: "A practical comparison of ReadmePDF's four print themes — typogr
 pubDate: 2026-10-14
 author: "Girish Lade"
 tags: ["Themes", "Design", "PDF"]
+locale: "en"
+translationKey: "readme-pdf-print-themes"
 ---
 
 The theme picker in ReadmePDF looks like a small choice: four radio buttons above the export button. In practice, it changes how the document reads before anyone gets to the content. A specification printed in Academic looks like a paper. A client proposal printed in Clean looks like a repository dump. The right theme is the one that matches the reader's expectations.

@@ -35,6 +35,7 @@ import {
 import { assembleBook, renderDocumentPreview } from '../lib/pdf/assembly.js';
 import { printDocument } from '../lib/print.js';
 import { sanitizeHtml } from '../lib/sanitize.js';
+import { initClientI18n, t, tn, clientBookLabels } from '../i18n/client.js';
 
 export const MAX_BOOK_FILES = BOOK_FETCH_LIMITS.maxFiles;
 
@@ -55,62 +56,77 @@ export function formatBytes(bytes) {
 
 /**
  * Actionable, non-technical copy for every failure the explorer can surface.
- * Pure function — covered by tests.
+ * Pure function — covered by tests. The optional translator lets the browser
+ * use the active locale while library callers keep English defaults.
+ *
+ * @param {any} error
+ * @param {(key: string, vars?: Record<string, unknown>) => string} [translate]
  */
-export function bookErrorMessage(error) {
+export function bookErrorMessage(error, translate) {
   const code = error?.code;
   const message = typeof error?.message === 'string' ? error.message : '';
+  const tr = translate ?? t;
+  // With a translator, always render localized first-party copy. Raw library
+  // messages are English diagnostics and must never replace UI text on a
+  // localized page. The only exception is REF_NOT_FOUND, whose localized
+  // sentence embeds the technical detail.
+  const localized = typeof translate === 'function';
+  const detail = (key, vars) => (localized ? tr(key, vars) : message || tr(key, vars));
   switch (code) {
     case 'INVALID_URL':
-      return message || 'That is not a GitHub repository URL. Paste one like https://github.com/owner/repo';
+      return detail('book.errors.invalidUrl');
     case 'PRIVATE_OR_NOT_FOUND':
-      return 'Repository not found, or it is private. ReadmePDF reads public repositories only — paste Markdown in the converter instead.';
+      return tr('book.errors.privateOrNotFound');
     case 'REF_NOT_FOUND':
-      return `${message || 'Could not resolve that branch, tag, or commit.'} Branch names containing slashes are supported when GitHub can resolve them.`;
+      return tr('book.errors.refNotFound', {
+        message: message || tr('book.errors.refNotFoundFallback'),
+      });
     case 'PATH_NOT_FOUND':
-      return message || 'That folder or file does not exist at the selected branch.';
+      return detail('book.errors.pathNotFound');
     case 'PATH_NOT_FOLDER':
-      return message || 'That URL points at a file. Use a /blob/ link for a single file or the repository URL to browse.';
+      return detail('book.errors.pathNotFolder');
     case 'PATH_NOT_FILE':
-      return message || 'That URL points at a folder. Open the repository or a /tree/ URL to browse its files.';
+      return detail('book.errors.pathNotFile');
     case 'INVALID_PATH':
     case 'PATH_ESCAPE':
-      return message || 'That repository path is not valid.';
+      return detail('book.errors.invalidPath');
     case 'NO_MARKDOWN':
-      return `${message || 'No Markdown file was found at that URL.'} The explorer lists README, .md, .markdown, and .mdown files.`;
+      return detail('book.errors.noMarkdown');
     case 'TREE_UNAVAILABLE':
-      return `${message || 'GitHub did not return a file tree.'} Try a /tree/<branch>/<folder> URL to narrow the scan, then retry.`;
+      return detail('book.errors.treeUnavailable');
     case 'RATE_LIMITED':
-      return `GitHub's anonymous rate limit was reached. Wait about a minute and retry.${error?.resetAt ? ` The limit resets at ${error.resetAt}.` : ''}`;
+      return error?.resetAt
+        ? tr('book.errors.rateLimitedReset', { resetAt: error.resetAt })
+        : tr('book.errors.rateLimited');
     case 'REQUEST_LIMIT':
-      return message || 'This scan reached its request safety limit. Narrow the URL to a folder and try again.';
+      return detail('book.errors.requestLimit');
     case 'TOO_MANY_FILES':
-      return message || `A book can contain at most ${MAX_BOOK_FILES} files. Remove some chapters and rebuild.`;
+      return detail('book.errors.tooManyFiles', { max: MAX_BOOK_FILES });
     case 'EMPTY_BOOK':
-      return message || 'Select at least one Markdown file to build a book.';
+      return detail('book.errors.emptyBook');
     case 'BOOK_INCOMPLETE':
-      return message || 'The book is incomplete, so it was not printed. Reload the failed files and rebuild.';
+      return detail('book.errors.incomplete');
     case 'FILE_TOO_LARGE':
     case 'BOOK_TOO_LARGE':
     case 'SKIPPED_BY_LIMIT':
-      return message || 'The selection exceeds the safe book size. Remove some files and rebuild.';
+      return detail('book.errors.tooLarge');
     case 'CANCELLED':
-      return 'Cancelled. Nothing was printed.';
+      return tr('book.errors.cancelled');
     case 'SANITIZE_UNAVAILABLE':
-      return `${message || 'The HTML safety filter could not load.'} The book was not rendered. Reload the page and try again.`;
+      return detail('book.errors.sanitizeUnavailable');
     case 'PRINT_UNAVAILABLE':
-      return message || 'This browser could not open the print dialog. Use your browser menu to print instead.';
+      return detail('book.errors.printUnavailable');
     case 'TIMEOUT':
-      return `${message || 'GitHub did not answer in time.'} Check your connection and retry.`;
+      return detail('book.errors.timeout');
     case 'NETWORK_ERROR':
-      return `${message || 'GitHub could not be reached.'} Check your connection and retry.`;
+      return detail('book.errors.network');
     case 'AUTH_REQUIRED':
     case 'FORBIDDEN':
-      return message || 'GitHub refused the request. Private repositories and authenticated access are not supported.';
+      return detail('book.errors.forbidden');
     case 'GITHUB_UNAVAILABLE':
-      return message || 'GitHub is temporarily unavailable. Retry in a moment.';
+      return detail('book.errors.unavailable');
     default:
-      return message || 'Something went wrong. Check the URL and try again.';
+      return localized ? tr('book.errors.unknown') : message || tr('book.errors.unknown');
   }
 }
 
@@ -136,13 +152,10 @@ function element(tag, className, text) {
   return node;
 }
 
-function plural(count, one, many = `${one}s`) {
-  return `${count} ${count === 1 ? one : many}`;
-}
-
 export function initBookExplorer() {
   if (typeof document === 'undefined') return null;
   if (document.body.dataset.bookInit) return null;
+  initClientI18n();
 
   const $ = (id) => document.getElementById(id);
   const urlInput = $('book-url');
@@ -200,7 +213,7 @@ export function initBookExplorer() {
   let builtBook = null;
   let lastFailures = [];
 
-  resetOutput('Scan a repository above to find its Markdown files.');
+  resetOutput(t('book.initialOutput'));
   updateSelectionUi();
   renderChapters();
 
@@ -243,8 +256,10 @@ export function initBookExplorer() {
       const target = event.target;
       if (target && target.tagName === 'IMG') {
         target.classList.add('broken');
-        target.title = 'Image failed to load (missing or private). Export continues.';
-        target.alt = `${target.alt || 'image'} [unavailable]`;
+        target.title = t('converter.image.failedTitle');
+        target.alt = t('converter.image.unavailable', {
+          alt: target.alt || t('converter.image.altFallback'),
+        });
       }
     },
     true,
@@ -253,7 +268,7 @@ export function initBookExplorer() {
   async function onScan() {
     const url = urlInput.value.trim();
     if (!url) {
-      setStatus('Paste a GitHub repository URL first, e.g. https://github.com/owner/repo', 'error');
+      setStatus(t('book.status.emptyUrl'), 'error');
       urlInput.focus();
       return;
     }
@@ -265,7 +280,7 @@ export function initBookExplorer() {
     scanController = controller;
     resetState();
     setScanBusy(true);
-    setStatus('Resolving repository, branch, and commit…', '');
+    setStatus(t('book.status.resolving'), '');
 
     try {
       const source = parseGitHubSource(url);
@@ -273,8 +288,11 @@ export function initBookExplorer() {
       const resolved = await resolveRepositorySource(source, api, { signal: controller.signal });
       if (token !== scanToken) return;
 
-      setStatus('Finding Markdown files…', '');
-      const result = await discoverMarkdownFiles(resolved, api, { signal: controller.signal });
+      setStatus(t('book.status.finding'), '');
+      const result = await discoverMarkdownFiles(resolved, api, {
+        signal: controller.signal,
+        translate: t,
+      });
       if (token !== scanToken) return;
 
       discovery = result;
@@ -284,7 +302,9 @@ export function initBookExplorer() {
       chapters = collectFilePaths(tree).filter((path) => selected.has(path));
 
       if (titleInput && titleInput.dataset.auto !== '0') {
-        titleInput.value = `${result.owner}/${result.repo} documentation`;
+        titleInput.value = t('book.defaultTitle', {
+          repo: `${result.owner}/${result.repo}`,
+        });
         titleInput.dataset.auto = '1';
       }
 
@@ -295,8 +315,8 @@ export function initBookExplorer() {
       renderChapters();
       resetOutput(
         result.files.length
-          ? 'Select chapters, then build the book to preview and print it.'
-          : 'No Markdown files were found. Try a folder URL or the single-document converter.',
+          ? t('book.status.selectAndBuild')
+          : t('book.status.noMarkdown'),
       );
       setBuildStatus('', '');
       failuresEl.hidden = true;
@@ -304,25 +324,29 @@ export function initBookExplorer() {
 
       if (result.files.length) {
         setStatus(
-          `Found ${plural(result.files.length, 'Markdown file')} at ${result.ref}. ${
-            result.complete ? 'The list is complete.' : 'The list may be incomplete — see the notice below.'
-          }`,
+          t('book.status.found', {
+            files: tn('common.markdownFiles', result.files.length),
+            ref: result.ref,
+            completeness: result.complete
+              ? t('book.status.complete')
+              : t('book.status.incomplete'),
+          }),
           result.complete ? '' : 'error',
         );
       } else {
-        setStatus('No Markdown files found at that URL. Try narrowing to a folder.', 'error');
+        setStatus(t('book.status.noFilesFound'), 'error');
       }
     } catch (error) {
       if (token !== scanToken) return;
       if (error?.code === 'CANCELLED') {
-        setStatus('Scan cancelled.', '');
+        setStatus(t('book.status.scanCancelled'), '');
         return;
       }
-      setStatus(bookErrorMessage(error), 'error');
+      setStatus(bookErrorMessage(error, t), 'error');
       renderMeta(null);
       treeEmpty.hidden = false;
-      treeEmpty.textContent = 'Scan failed. Fix the URL above and try again.';
-      resetOutput('The repository could not be scanned. Check the URL and retry.');
+      treeEmpty.textContent = t('book.status.scanFailedTree');
+      resetOutput(t('book.status.scanFailedOutput'));
     } finally {
       if (token === scanToken) {
         scanController = null;
@@ -337,7 +361,7 @@ export function initBookExplorer() {
     scanController = null;
     scanToken += 1;
     setScanBusy(false);
-    if (!silent) setStatus('Scan cancelled.', '');
+    if (!silent) setStatus(t('book.status.scanCancelled'), '');
   }
 
   function resetState() {
@@ -355,7 +379,7 @@ export function initBookExplorer() {
     lastFailures = [];
     treeEl.textContent = '';
     treeEmpty.hidden = false;
-    treeEmpty.textContent = 'Scanning…';
+    treeEmpty.textContent = t('book.tree.scanning');
     warningsEl.hidden = true;
     warningList.textContent = '';
     failuresEl.hidden = true;
@@ -377,9 +401,9 @@ export function initBookExplorer() {
     const bits = [
       `${result.owner}/${result.repo}`,
       `@ ${result.ref}`,
-      shortSha ? `commit ${shortSha}` : '',
-      plural(result.files.length, 'Markdown file'),
-      result.complete ? 'complete listing' : 'possibly incomplete listing',
+      shortSha ? t('book.meta.commit', { sha: shortSha }) : '',
+      tn('common.markdownFiles', result.files.length),
+      result.complete ? t('book.meta.complete') : t('book.meta.incomplete'),
     ].filter(Boolean);
     metaEl.textContent = bits.join(' · ');
   }
@@ -400,14 +424,14 @@ export function initBookExplorer() {
     treeEl.textContent = '';
     if (!tree || !tree.children.length) {
       treeEmpty.hidden = false;
-      treeEmpty.textContent = discovery ? 'No Markdown files found.' : 'No repository scanned yet.';
+      treeEmpty.textContent = discovery ? t('book.tree.empty') : t('book.tree.noScan');
       return;
     }
     const query = searchInput?.value ?? '';
     const filtered = filterTree(tree, query);
     if (!filtered.children.length) {
       treeEmpty.hidden = false;
-      treeEmpty.textContent = 'No files match that search.';
+      treeEmpty.textContent = t('book.tree.noMatch');
       return;
     }
     treeEmpty.hidden = true;
@@ -430,7 +454,7 @@ export function initBookExplorer() {
       const checkbox = element('input', 'book-tree__checkbox');
       checkbox.type = 'checkbox';
       checkbox.dataset.folder = folder.path;
-      checkbox.setAttribute('aria-label', `Select every file in ${folder.path}`);
+      checkbox.setAttribute('aria-label', t('book.a11y.selectFolder', { path: folder.path }));
       const state = folderSelectionState(folder, selected);
       checkbox.checked = state === 'all';
       checkbox.indeterminate = state === 'some';
@@ -466,14 +490,14 @@ export function initBookExplorer() {
       const checkbox = element('input', 'book-tree__checkbox');
       checkbox.type = 'checkbox';
       checkbox.dataset.file = file.path;
-      checkbox.setAttribute('aria-label', `Include ${file.path} in the book`);
+      checkbox.setAttribute('aria-label', t('book.a11y.includeFile', { path: file.path }));
       checkbox.checked = selected.has(file.path);
       checkbox.addEventListener('change', () => onFileToggle(file.path, checkbox.checked));
 
       const preview = element('button', 'book-tree__file-btn');
       preview.type = 'button';
       preview.dataset.preview = file.path;
-      preview.setAttribute('aria-label', `Preview ${file.path}`);
+      preview.setAttribute('aria-label', t('book.a11y.previewFile', { path: file.path }));
       preview.append(element('span', 'book-tree__name', file.name));
       const dir = file.path.includes('/')
         ? file.path.slice(0, file.path.lastIndexOf('/') + 1)
@@ -511,10 +535,7 @@ export function initBookExplorer() {
     let capped = wanted;
     if (wanted.length > MAX_BOOK_FILES) {
       capped = wanted.slice(0, MAX_BOOK_FILES);
-      setStatus(
-        `A book holds at most ${MAX_BOOK_FILES} files, so the first ${MAX_BOOK_FILES} were selected. Narrow the URL to a folder for a different set.`,
-        'error',
-      );
+      setStatus(t('book.status.capped', { max: MAX_BOOK_FILES }), 'error');
     }
     selected = new Set(capped);
     chapters = chapters.filter((path) => selected.has(path));
@@ -545,17 +566,19 @@ export function initBookExplorer() {
     const counts = selectionCounts(all, selected);
     if (summaryEl) {
       summaryEl.textContent = all.length
-        ? `${counts.selected} of ${counts.total} selected · ${plural(
-            chapters.length,
-            'chapter',
-          )} · max ${MAX_BOOK_FILES}`
-        : 'No files selected.';
+        ? t('book.selection.summary', {
+            selected: counts.selected,
+            total: counts.total,
+            chapters: tn('common.chapters', chapters.length),
+            max: MAX_BOOK_FILES,
+          })
+        : t('book.selection.noFiles');
     }
     const allState = computeSelectAllState(all, selected);
     if (selectAllBtn) {
       selectAllBtn.disabled = !all.length || allState === 'all';
       selectAllBtn.textContent =
-        allState === 'all' ? 'All files selected' : allState === 'some' ? 'Select all files' : 'Select all files';
+        allState === 'all' ? t('book.selection.allSelected') : t('book.selection.selectAll');
     }
     if (clearBtn) clearBtn.disabled = !counts.selected;
     if (buildBtn) buildBtn.disabled = !discovery || !chapters.length;
@@ -566,8 +589,8 @@ export function initBookExplorer() {
     if (!chapters.length) {
       chaptersEmpty.hidden = false;
       chaptersEmpty.textContent = discovery
-        ? 'No chapters yet. Tick files in the explorer.'
-        : 'Chapters appear here after a scan.';
+        ? t('book.chapters.emptyLoaded')
+        : t('book.chapters.emptyInitial');
       return;
     }
     chaptersEmpty.hidden = true;
@@ -579,9 +602,14 @@ export function initBookExplorer() {
       item.append(element('span', 'book-chapter-row__path', path));
 
       const controls = element('div', 'book-chapter-row__controls');
-      const up = chapterButton('↑', `Move ${path} up`, 'up', index === 0);
-      const down = chapterButton('↓', `Move ${path} down`, 'down', index === chapters.length - 1);
-      const remove = chapterButton('×', `Remove ${path} from the book`, 'remove', false);
+      const up = chapterButton('↑', t('book.a11y.moveUp', { path }), 'up', index === 0);
+      const down = chapterButton(
+        '↓',
+        t('book.a11y.moveDown', { path }),
+        'down',
+        index === chapters.length - 1,
+      );
+      const remove = chapterButton('×', t('book.a11y.remove', { path }), 'remove', false);
       up.addEventListener('click', () => {
         chapters = moveChapter(chapters, index, -1);
         renderChapters({ path, action: 'up', index: index - 1 });
@@ -634,7 +662,7 @@ export function initBookExplorer() {
   async function onPreview(path) {
     if (!discovery) return;
     if (buildController) {
-      setBuildStatus('Wait for the build to finish, or cancel it, before previewing a file.', 'error');
+      setBuildStatus(t('book.preview.waitBuild'), 'error');
       return;
     }
     cancelPreview();
@@ -645,9 +673,9 @@ export function initBookExplorer() {
     previewEl.hidden = false;
     bookOutput.hidden = true;
     previewBar.hidden = false;
-    previewLabel.textContent = `Preview · ${path}`;
+    previewLabel.textContent = t('book.preview.label', { path });
     previewEl.textContent = '';
-    previewEl.append(element('p', 'hint', 'Loading file preview…'));
+    previewEl.append(element('p', 'hint', t('book.status.loadingPreview')));
     // A preview replaces the built book on screen; printing that book now
     // would not match what the reader sees.
     printBtn.disabled = true;
@@ -666,7 +694,7 @@ export function initBookExplorer() {
       if (token !== previewToken) return;
       if (!report.complete || !report.documents.length) {
         const failure = report.failures[0];
-        throw Object.assign(new Error(failure?.message ?? 'Could not load that file.'), {
+        throw Object.assign(new Error(failure?.message ?? t('book.failure.load')), {
           code: failure?.code,
         });
       }
@@ -676,6 +704,7 @@ export function initBookExplorer() {
         repo: discovery.repo,
         commitSha: discovery.commitSha,
         sanitize: sanitizeHtml,
+        labels: clientBookLabels(),
       });
       if (token !== previewToken) return;
       previewEl.innerHTML = preview.html;
@@ -687,10 +716,8 @@ export function initBookExplorer() {
     } catch (error) {
       if (token !== previewToken) return;
       previewEl.textContent = '';
-      previewEl.append(element('p', 'status error', bookErrorMessage(error)));
-      previewEl.append(
-        element('p', 'hint', 'The file was not added to the book. Use “Back” to return to the builder.'),
-      );
+      previewEl.append(element('p', 'status error', bookErrorMessage(error, t)));
+      previewEl.append(element('p', 'hint', t('book.preview.notAdded')));
     } finally {
       if (token === previewToken) previewController = null;
     }
@@ -720,15 +747,15 @@ export function initBookExplorer() {
     // matches the controls (and enable printing it).
     if (buildController) {
       cancelBuild({ silent: true });
-      resetOutput('Selection or options changed. The in-flight build was cancelled; build again to refresh the preview.');
-      setBuildStatus('Build cancelled because the selection or options changed. Build again before printing.', 'error');
+      resetOutput(t('book.stale.changed'));
+      setBuildStatus(t('book.stale.cancelledStatus'), 'error');
       return;
     }
     if (!builtBook) return;
     builtBook = null;
     printBtn.disabled = true;
-    resetOutput('Selection or options changed. Build the book again to refresh the preview.');
-    setBuildStatus('The previous book is out of date. Build again before printing.', '');
+    resetOutput(t('book.stale.outdated'));
+    setBuildStatus(t('book.stale.outdatedStatus'), '');
   }
 
   function resetOutput(message) {
@@ -751,13 +778,13 @@ export function initBookExplorer() {
 
   function setScanBusy(busy) {
     scanBtn.disabled = busy;
-    scanBtn.textContent = busy ? 'Scanning…' : 'Scan repository';
+    scanBtn.textContent = busy ? t('book.scanning') : t('book.scan');
     if (cancelScanBtn) cancelScanBtn.hidden = !busy;
   }
 
   function setBuildBusy(busy) {
     buildBtn.disabled = busy || !discovery || !chapters.length;
-    buildBtn.textContent = busy ? 'Building…' : 'Build book';
+    buildBtn.textContent = busy ? t('book.building') : t('book.build');
     if (cancelBuildBtn) cancelBuildBtn.hidden = !busy;
     urlInput.disabled = busy;
     if (busy) retryBtn.hidden = true;
@@ -765,16 +792,19 @@ export function initBookExplorer() {
 
   async function onBuild() {
     if (!discovery) {
-      setBuildStatus('Scan a repository first.', 'error');
+      setBuildStatus(t('book.build.scanFirst'), 'error');
       return;
     }
     if (!chapters.length) {
-      setBuildStatus('Select at least one Markdown file to build a book.', 'error');
+      setBuildStatus(t('book.build.selectOne'), 'error');
       return;
     }
     if (chapters.length > MAX_BOOK_FILES) {
       setBuildStatus(
-        `A book holds at most ${MAX_BOOK_FILES} files. Remove ${chapters.length - MAX_BOOK_FILES} chapter(s) first.`,
+        t('book.build.tooMany', {
+          max: MAX_BOOK_FILES,
+          extra: chapters.length - MAX_BOOK_FILES,
+        }),
         'error',
       );
       return;
@@ -791,9 +821,15 @@ export function initBookExplorer() {
     failuresEl.hidden = true;
     failureList.textContent = '';
     lastFailures = [];
-    resetOutput('Fetching chapters…');
+    resetOutput(t('book.status.fetchingChapters'));
     setBuildBusy(true);
-    setBuildStatus(`Fetching ${plural(chapters.length, 'chapter')} at ${discovery.ref}…`, '');
+    setBuildStatus(
+      t('book.build.fetching', {
+        chapters: tn('common.chapters', chapters.length),
+        ref: discovery.ref,
+      }),
+      '',
+    );
 
     const order = [...chapters];
     try {
@@ -818,14 +854,16 @@ export function initBookExplorer() {
       if (!report.complete) {
         showFailures(report.failures);
         setBuildStatus(
-          `Book incomplete — ${plural(report.failures.length, 'file')} failed. Nothing will print until every chapter loads.`,
+          t('book.build.incomplete', {
+            files: tn('common.failedFiles', report.failures.length),
+          }),
           'error',
         );
-        resetOutput('The book was not rendered because some chapters are missing.');
+        resetOutput(t('book.build.notRendered'));
         return;
       }
 
-      setBuildStatus('Rendering chapters and sanitising HTML…', '');
+      setBuildStatus(t('book.build.rendering'), '');
       const book = await assembleBook(
         { ...report, ref: discovery.ref },
         {
@@ -834,6 +872,7 @@ export function initBookExplorer() {
           includeCover: coverToggle ? coverToggle.checked : true,
           includeToc: tocToggle ? tocToggle.checked : true,
           sanitize: sanitizeHtml,
+          labels: clientBookLabels(),
         },
       );
       if (token !== buildToken) return;
@@ -852,20 +891,21 @@ export function initBookExplorer() {
       printBtn.disabled = false;
       failuresEl.hidden = true;
       setBuildStatus(
-        `Book ready — ${plural(book.chapterCount, 'chapter')}, ${formatBytes(
-          report.totalBytes,
-        )}. Review it, then print or save as PDF.`,
+        t('book.build.ready', {
+          chapters: tn('common.chapters', book.chapterCount),
+          size: formatBytes(report.totalBytes),
+        }),
         '',
       );
     } catch (error) {
       if (token !== buildToken) return;
       if (error?.code === 'CANCELLED') {
-        setBuildStatus('Build cancelled. Nothing was printed.', '');
-        resetOutput('Build cancelled. Nothing was printed.');
+        setBuildStatus(t('book.build.cancelled'), '');
+        resetOutput(t('book.build.cancelled'));
         return;
       }
-      setBuildStatus(bookErrorMessage(error), 'error');
-      resetOutput('The book could not be built. Fix the issue above and retry.');
+      setBuildStatus(bookErrorMessage(error, t), 'error');
+      resetOutput(t('book.build.failedOutput'));
       if (Array.isArray(error?.failures) && error.failures.length) {
         showFailures(error.failures);
       }
@@ -887,8 +927,8 @@ export function initBookExplorer() {
     builtBook = null;
     printBtn.disabled = true;
     if (!silent) {
-      setBuildStatus('Build cancelled. Nothing was printed.', '');
-      resetOutput('Build cancelled. Nothing was printed.');
+      setBuildStatus(t('book.build.cancelled'), '');
+      resetOutput(t('book.build.cancelled'));
     }
   }
 
@@ -897,10 +937,14 @@ export function initBookExplorer() {
     failureList.textContent = '';
     for (const failure of lastFailures) {
       const item = element('li', 'book-failures__item');
-      item.append(element('span', 'book-failures__path', failure.path ?? 'Unknown file'));
-      item.append(element('span', 'book-failures__message', failure.message ?? 'Could not load.'));
+      item.append(
+        element('span', 'book-failures__path', failure.path ?? t('book.failure.unknownFile')),
+      );
+      item.append(
+        element('span', 'book-failures__message', failure.message ?? t('book.failure.load')),
+      );
       if (failure.retryable === false) {
-        item.append(element('span', 'book-failures__flag', 'Not retryable'));
+        item.append(element('span', 'book-failures__flag', t('book.failure.notRetryable')));
       }
       failureList.append(item);
     }
@@ -927,7 +971,7 @@ export function initBookExplorer() {
     // must run before the specific confirmation message.
     markStale();
     setBuildStatus(
-      `Removed ${plural(failed.size, 'failed file')}. Build again to create a complete book.`,
+      t('book.build.removed', { files: tn('common.failedFiles', failed.size) }),
       '',
     );
   }
@@ -942,18 +986,18 @@ export function initBookExplorer() {
 
   function onPrintBook() {
     if (!previewEl.hidden) {
-      setBuildStatus('Close the file preview before printing the book.', 'error');
+      setBuildStatus(t('book.preview.closeFirst'), 'error');
       return;
     }
     if (!builtBook) {
-      setBuildStatus('Build a complete book before printing.', 'error');
+      setBuildStatus(t('book.build.completeFirst'), 'error');
       return;
     }
     try {
       printDocument({ mode: 'book', book: builtBook });
-      setBuildStatus('Print dialog opened. Choose “Save as PDF” for a file.', '');
+      setBuildStatus(t('book.print.opened'), '');
     } catch (error) {
-      setBuildStatus(bookErrorMessage(error), 'error');
+      setBuildStatus(bookErrorMessage(error, t), 'error');
     }
   }
 

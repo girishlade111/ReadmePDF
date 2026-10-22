@@ -1,26 +1,29 @@
 ---
-import { formatDate, isoDate, readingTime } from '../lib/blog.js';
+import { translator } from '../i18n/index.js';
+import { formatDate, isoDate, postHref, readingTime, tagLabel } from '../lib/blog.js';
 
-const { post, headingLevel = 'h3' } = Astro.props;
+const { post, locale = 'en', headingLevel = 'h3' } = Astro.props;
+const t = translator(locale);
 const Heading = headingLevel;
+const href = postHref(post, locale);
 ---
 
 <article class="blog-card">
-  <div class="blog-tags" aria-label="Tags">
-    {post.data.tags.map((tag) => <span class="blog-tag">{tag}</span>)}
+  <div class="blog-tags" aria-label={t('a11y.tags')}>
+    {post.data.tags.map((tag) => <span class="blog-tag">{tagLabel(tag, t)}</span>)}
   </div>
   <Heading class="blog-card__title">
-    <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+    <a href={href}>{post.data.title}</a>
   </Heading>
   <p class="blog-card__desc">{post.data.description}</p>
   <div class="blog-card__footer">
     <div class="blog-meta">
-      <time datetime={isoDate(post.data.pubDate)}>{formatDate(post.data.pubDate)}</time>
+      <time datetime={isoDate(post.data.pubDate)}>{formatDate(post.data.pubDate, locale)}</time>
       <span aria-hidden="true">·</span>
-      <span>{readingTime(post.body)} min read</span>
+      <span>{t('blog.readingTime', { minutes: readingTime(post.body, locale) })}</span>
     </div>
-    <a class="blog-card__read" href={`/blog/${post.id}/`}>
-      Read the guide <span aria-hidden="true">→</span>
+    <a class="blog-card__read" href={href}>
+      {t('blog.readGuide')} <span aria-hidden="true">→</span>
     </a>
   </div>
 </article>

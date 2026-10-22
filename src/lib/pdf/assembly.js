@@ -24,6 +24,7 @@ import {
   renderMarkdownDocument,
   slugifyHeading,
 } from '../markdown.js';
+import { defaultBookLabels } from '../../i18n/book-labels.js';
 
 export const BOOK_CHAPTER_PREFIX = 'doc-';
 
@@ -135,18 +136,21 @@ export function assertBookComplete(book) {
   return true;
 }
 
-function buildCover({ title, subtitle, owner, repo, ref, commitSha, chapterCount }) {
+function buildCover({ title, subtitle, owner, repo, ref, commitSha, chapterCount, labels }) {
   const shortCommit = cleanMetadata(commitSha).slice(0, 8);
-  const source = cleanMetadata([owner, repo].filter(Boolean).join('/'), 'GitHub repository');
+  const source = cleanMetadata(
+    [owner, repo].filter(Boolean).join('/'),
+    labels.coverSourceFallback,
+  );
   const version = [
     cleanMetadata(ref),
-    shortCommit ? `commit ${shortCommit}` : '',
+    shortCommit ? labels.commit(shortCommit) : '',
   ]
     .filter(Boolean)
     .join(' · ');
 
-  return `<section class="book-cover" aria-label="Book cover">
-  <p class="book-cover__eyebrow">ReadmePDF documentation book</p>
+  return `<section class="book-cover" aria-label="${escapeAttr(labels.coverAria)}">
+  <p class="book-cover__eyebrow">${escapeHtml(labels.coverEyebrow)}</p>
   <h1 class="book-cover__title">${escapeHtml(title)}</h1>
   ${
     subtitle
@@ -156,12 +160,12 @@ function buildCover({ title, subtitle, owner, repo, ref, commitSha, chapterCount
   <div class="book-cover__meta">
     <p><strong>${escapeHtml(source)}</strong></p>
     ${version ? `<p>${escapeHtml(version)}</p>` : ''}
-    <p>${chapterCount} chapter${chapterCount === 1 ? '' : 's'}</p>
+    <p>${escapeHtml(labels.chapterCount(chapterCount))}</p>
   </div>
 </section>`;
 }
 
-function buildBookToc(documents, title) {
+function buildBookToc(documents, title, labels) {
   const chapters = documents
     .map((document) => {
       const headings = document.headings
@@ -183,19 +187,19 @@ function buildBookToc(documents, title) {
 
   return `<nav class="book-toc" aria-labelledby="book-toc-title">
   <h2 class="book-toc__title" id="book-toc-title">${escapeHtml(
-    title ? `Contents · ${title}` : 'Contents',
+    title ? labels.contentsWithTitle(title) : labels.contents,
   )}</h2>
   <ol class="book-toc__chapters">${chapters}</ol>
 </nav>`;
 }
 
-function buildChapter(document) {
-  const label = `Chapter ${document.number}: ${document.path}`;
+function buildChapter(document, labels) {
+  const label = labels.chapterAria(document.number, document.path);
   return `<section class="book-chapter" id="${escapeAttr(document.anchor)}" data-doc-path="${escapeAttr(
     document.path,
   )}" aria-label="${escapeAttr(label)}">
   <header class="book-chapter__head">
-    <p class="book-chapter__kicker">Chapter ${document.number}</p>
+    <p class="book-chapter__kicker">${escapeHtml(labels.chapter(document.number))}</p>
     <p class="book-chapter__source">${escapeHtml(document.path)}</p>
   </header>
   <div class="book-chapter__body">${document.html}</div>
@@ -230,6 +234,7 @@ function makeResolvers({ owner, repo, commitSha, documentsByPath }) {
  *   commitSha: string,
  *   sanitize?: (html: string) => string | Promise<string>,
  *   idPrefix?: string,
+ *   labels?: ReturnType<import('../../i18n/book-labels.js').makeBookLabels>,
  * }} options
  */
 export async function renderDocumentPreview({
@@ -239,6 +244,7 @@ export async function renderDocumentPreview({
   commitSha,
   sanitize,
   idPrefix = 'file-preview-',
+  labels = defaultBookLabels(),
 } = {}) {
   if (!document || typeof document.path !== 'string' || typeof document.markdown !== 'string') {
     throw githubError('INVALID_DOCUMENT', 'That file has no Markdown content to preview.');
@@ -286,7 +292,7 @@ export async function renderDocumentPreview({
     idPrefix,
     sanitize,
   });
-  const label = `File preview: ${document.path}`;
+  const label = labels.filePreviewAria(document.path);
 
   return {
     path: document.path,
@@ -296,7 +302,7 @@ export async function renderDocumentPreview({
       document.path,
     )}" aria-label="${escapeAttr(label)}">
   <header class="book-chapter__head">
-    <p class="book-chapter__kicker">File preview</p>
+    <p class="book-chapter__kicker">${escapeHtml(labels.filePreview)}</p>
     <p class="book-chapter__source">${escapeHtml(document.path)}</p>
   </header>
   <div class="book-chapter__body">${rendered.html}</div>
@@ -314,11 +320,13 @@ export async function renderDocumentPreview({
  * }} book
  * @param {{
  *   title?: string, subtitle?: string, includeCover?: boolean,
- *   includeToc?: boolean, sanitize?: (html: string) => string | Promise<string>
+ *   includeToc?: boolean, sanitize?: (html: string) => string | Promise<string>,
+ *   labels?: ReturnType<import('../../i18n/book-labels.js').makeBookLabels>
  * }} [options]
  */
 export async function assembleBook(book, options = {}) {
   assertBookComplete(book);
+  const labels = options.labels ?? defaultBookLabels();
 
   const owner = cleanMetadata(book.owner);
   const repo = cleanMetadata(book.repo);
@@ -333,7 +341,7 @@ export async function assembleBook(book, options = {}) {
 
   const title =
     cleanMetadata(options.title) ||
-    `${owner}/${repo} documentation`;
+    labels.defaultTitle(`${owner}/${repo}`);
   const subtitle = cleanMetadata(options.subtitle);
   const includeCover = options.includeCover !== false;
   const includeToc = options.includeToc !== false;
@@ -391,10 +399,13 @@ export async function assembleBook(book, options = {}) {
         ref,
         commitSha,
         chapterCount: renderedDocuments.length,
+        labels,
       })
     : '';
-  const tocHtml = includeToc ? buildBookToc(renderedDocuments, title) : '';
-  const chaptersHtml = renderedDocuments.map(buildChapter).join('\n');
+  const tocHtml = includeToc ? buildBookToc(renderedDocuments, title, labels) : '';
+  const chaptersHtml = renderedDocuments
+    .map((document) => buildChapter(document, labels))
+    .join('\n');
   const html = `<div class="book-document" data-book-root>
 ${coverHtml}
 ${tocHtml}

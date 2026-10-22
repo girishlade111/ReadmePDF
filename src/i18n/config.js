@@ -27,37 +27,83 @@ export const DEFAULT_LOCALE = 'en';
  *   htmlLang: string,
  *   prefix: string,
  *   dateLocale: string,
+ *   pluralCategories: ReadonlyArray<string>,
  *   provisional?: boolean,
  * }>}
  */
 export const LOCALE_META = Object.freeze({
-  en: { label: 'English', englishLabel: 'English', htmlLang: 'en', prefix: '', dateLocale: 'en' },
+  en: {
+    label: 'English',
+    englishLabel: 'English',
+    htmlLang: 'en',
+    prefix: '',
+    dateLocale: 'en',
+    pluralCategories: ['one', 'other'],
+  },
   es: {
     label: 'Español',
     englishLabel: 'Spanish',
     htmlLang: 'es',
     prefix: 'es',
     dateLocale: 'es',
+    pluralCategories: ['one', 'other'],
     provisional: true,
   },
-  ja: { label: '日本語', englishLabel: 'Japanese', htmlLang: 'ja', prefix: 'ja', dateLocale: 'ja' },
-  ko: { label: '한국어', englishLabel: 'Korean', htmlLang: 'ko', prefix: 'ko', dateLocale: 'ko' },
+  ja: {
+    label: '日本語',
+    englishLabel: 'Japanese',
+    htmlLang: 'ja',
+    prefix: 'ja',
+    dateLocale: 'ja',
+    pluralCategories: ['other'],
+  },
+  ko: {
+    label: '한국어',
+    englishLabel: 'Korean',
+    htmlLang: 'ko',
+    prefix: 'ko',
+    dateLocale: 'ko',
+    pluralCategories: ['other'],
+  },
   zh: {
     label: '简体中文',
     englishLabel: 'Chinese (Simplified)',
     htmlLang: 'zh-Hans',
     prefix: 'zh',
     dateLocale: 'zh-Hans',
+    pluralCategories: ['other'],
   },
-  ru: { label: 'Русский', englishLabel: 'Russian', htmlLang: 'ru', prefix: 'ru', dateLocale: 'ru' },
-  tr: { label: 'Türkçe', englishLabel: 'Turkish', htmlLang: 'tr', prefix: 'tr', dateLocale: 'tr' },
-  fr: { label: 'Français', englishLabel: 'French', htmlLang: 'fr', prefix: 'fr', dateLocale: 'fr' },
+  ru: {
+    label: 'Русский',
+    englishLabel: 'Russian',
+    htmlLang: 'ru',
+    prefix: 'ru',
+    dateLocale: 'ru',
+    pluralCategories: ['one', 'few', 'many', 'other'],
+  },
+  tr: {
+    label: 'Türkçe',
+    englishLabel: 'Turkish',
+    htmlLang: 'tr',
+    prefix: 'tr',
+    dateLocale: 'tr',
+    pluralCategories: ['one', 'other'],
+  },
+  fr: {
+    label: 'Français',
+    englishLabel: 'French',
+    htmlLang: 'fr',
+    prefix: 'fr',
+    dateLocale: 'fr',
+    pluralCategories: ['one', 'other'],
+  },
   pt: {
     label: 'Português (Brasil)',
     englishLabel: 'Portuguese (Brazil)',
     htmlLang: 'pt-BR',
     prefix: 'pt',
     dateLocale: 'pt-BR',
+    pluralCategories: ['one', 'other'],
   },
 });
 
@@ -106,6 +152,31 @@ export function localeHref(locale, path = '/') {
 export function localeFromPath(pathname = '/') {
   const segment = String(pathname).split('?')[0].split('#')[0].split('/').filter(Boolean)[0];
   return isLocale(segment) ? /** @type {Locale} */ (segment) : DEFAULT_LOCALE;
+}
+
+/**
+ * Remove a known locale prefix from a pathname. This is deliberately a
+ * path-only operation: no cookie, navigator.language, or redirect is involved.
+ *
+ * @param {string} pathname
+ */
+export function stripLocalePrefix(pathname = '/') {
+  const clean = String(pathname).split('?')[0].split('#')[0];
+  const parts = clean.split('/').filter(Boolean);
+  if (parts.length && isLocale(parts[0])) parts.shift();
+  return parts.length ? `/${parts.join('/')}${clean.endsWith('/') ? '/' : ''}` : '/';
+}
+
+/**
+ * Equivalent pathname in another locale, preserving the page path. Used by the
+ * explicit language switcher so visitors can move between the translated
+ * versions of the current document.
+ *
+ * @param {string} pathname
+ * @param {Locale} locale
+ */
+export function localizedPathname(pathname, locale) {
+  return localeHref(locale, stripLocalePrefix(pathname));
 }
 
 /** Metadata for one locale, with a safe runtime check. */

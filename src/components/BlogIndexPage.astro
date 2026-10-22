@@ -1,0 +1,112 @@
+---
+import { getCollection } from 'astro:content';
+import BlogLayout from '../layouts/BlogLayout.astro';
+import BlogCard from './BlogCard.astro';
+import { localeHref } from '../i18n/config.js';
+import { pluralizer, translator } from '../i18n/index.js';
+import { formatDate, isoDate, postHref, publishedPosts, readingTime, tagLabel } from '../lib/blog.js';
+
+const { locale = 'en', path = '/' } = Astro.props;
+const t = translator(locale);
+const tn = pluralizer(locale);
+
+const posts = publishedPosts(await getCollection('blog'), locale);
+const featured = posts.find((post) => post.data.featured) ?? posts[0];
+const rest = posts.filter((post) => post.data.translationKey !== featured?.data.translationKey);
+const converterHref = `${localeHref(locale, '/')}#converter`;
+---
+
+<BlogLayout
+  title={t('blog.kicker')}
+  description={t('meta.blog.description')}
+  locale={locale}
+  path={path}
+>
+  <section class="blog-hero">
+    <div class="container blog-hero__inner">
+      <p class="blog-kicker">{t('blog.kicker')}</p>
+      <h1 class="display-xl">{t('blog.title')}</h1>
+      <span class="rule" aria-hidden="true"></span>
+      <p class="lead">{t('blog.lead')}</p>
+    </div>
+  </section>
+
+  <main>
+    {featured ? (
+      <section class="band band--white">
+        <div class="container">
+          <article class="blog-featured">
+            <div class="blog-featured__body">
+              <p class="blog-kicker">{t('blog.featured')}</p>
+              <h2>
+                <a href={postHref(featured, locale)}>{featured.data.title}</a>
+              </h2>
+              <p class="blog-featured__desc">{featured.data.description}</p>
+              <div class="blog-meta">
+                <span>{featured.data.author}</span>
+                <span aria-hidden="true">·</span>
+                <time datetime={isoDate(featured.data.pubDate)}
+                  >{formatDate(featured.data.pubDate, locale)}</time
+                >
+                <span aria-hidden="true">·</span>
+                <span>{t('blog.readingTime', { minutes: readingTime(featured.body, locale) })}</span>
+              </div>
+              <div class="blog-tags" aria-label={t('a11y.tags')}>
+                {featured.data.tags.map((tag) => <span class="blog-tag">{tagLabel(tag, t)}</span>)}
+              </div>
+              <div class="blog-featured__action">
+                <a class="btn btn--primary" href={postHref(featured, locale)}>{t('blog.readGuide')}</a>
+              </div>
+            </div>
+            <aside class="blog-featured__aside" aria-label={t('a11y.guideOverview')}>
+              <p class="blog-featured__aside-label">{t('blog.inThisGuide')}</p>
+              <ul class="blog-featured__list">
+                <li>{t('blog.overview1')}</li>
+                <li>{t('blog.overview2')}</li>
+                <li>{t('blog.overview3')}</li>
+              </ul>
+            </aside>
+          </article>
+        </div>
+      </section>
+    ) : (
+      <section class="band band--white">
+        <div class="container">
+          <p class="lead">{t('blog.new')}</p>
+        </div>
+      </section>
+    )}
+
+    <section class="band band--soft">
+      <div class="container">
+        <div class="blog-section-head">
+          <div>
+            <p class="blog-kicker">{t('blog.allGuides')}</p>
+            <h2 class="display-lg">{t('blog.more')}</h2>
+          </div>
+          <p class="blog-section-head__note">
+            {t('blog.indexCount', { guides: tn('common.guides', posts.length) })}
+          </p>
+        </div>
+
+        {rest.length ? (
+          <div class="blog-grid">
+            {rest.map((post) => <BlogCard post={post} locale={locale} />)}
+          </div>
+        ) : (
+          <p class="body-loose">{t('blog.next')}</p>
+        )}
+      </div>
+    </section>
+
+    <section class="band band--teal">
+      <div class="container blog-cta__inner">
+        <div>
+          <h2 class="display-md">{t('blog.ctaTitle')}</h2>
+          <p class="body-loose">{t('blog.ctaBody')}</p>
+        </div>
+        <a class="btn btn--primary" href={converterHref}>{t('blog.openConverter')}</a>
+      </div>
+    </section>
+  </main>
+</BlogLayout>

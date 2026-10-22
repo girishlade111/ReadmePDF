@@ -4,6 +4,8 @@ description: "Client handoffs, course packs, audit snapshots, and more — where
 pubDate: 2026-10-02
 author: "Girish Lade"
 tags: ["Use Cases", "Documentation", "Workflow"]
+locale: "en"
+translationKey: "readme-to-pdf-use-cases"
 ---
 
 A repository link is a great way to share documentation with someone who already lives in GitHub. It is a poor way to share documentation with everyone else. Reviewers lose context, clients do not want to create an account, and a URL is not an archive. A PDF fixes the distribution problem, but only if it is produced deliberately.

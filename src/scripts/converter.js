@@ -10,40 +10,7 @@ import {
   injectHeadingIds,
 } from '../lib/markdown.js';
 import { printDocument } from '../lib/print.js';
-
-const SAMPLE = `# ReadmePDF — Sample README
-
-Paste a GitHub repo URL above, drop a \`README.md\`, or just type Markdown here.
-
-## Features
-
-- [x] GitHub URL fetch with image/badge path resolution
-- [x] Live GFM preview (tables, task lists, code)
-- [ ] Your next great README section
-
-## Table demo
-
-| Option | What it does |
-| ------ | ------------ |
-| Clean  | Neutral default |
-| Dark   | Screen-friendly (auto-lightens for print) |
-
-## Code demo
-
-\`\`\`js
-const msg = "hello readme";
-console.log(msg);
-\`\`\`
-
-## Links & images
-
-A relative image like \`docs/logo.png\` resolves against the fetched repo.
-An absolute badge like ![build](https://img.shields.io/badge/build-passing-brightgreen) is left untouched.
-
-### A fourth-level heading exists so TOC shows nesting
-
-#### Detail heading
-`;
+import { initClientI18n, t } from '../i18n/client.js';
 
 /**
  * Repo context line shown under the URL field.
@@ -59,6 +26,7 @@ export function repoMetaLabel(context) {
 export function initConverter() {
   if (typeof document === 'undefined' || document.body.dataset.readmepdfInit) return;
   document.body.dataset.readmepdfInit = '1';
+  initClientI18n();
   const $ = (id) => document.getElementById(id);
   const urlInput = $('gh-url');
   const fetchBtn = $('fetch-btn');
@@ -107,10 +75,10 @@ export function initConverter() {
     scheduleRender();
   });
   sampleBtn.addEventListener('click', () => {
-    mdInput.value = SAMPLE;
+    mdInput.value = t('converter.sample');
     repoCtx = null;
     renderMeta();
-    setStatus('Sample loaded. Paste a repo URL to try the real flow.', 'ok');
+    setStatus(t('converter.status.sampleLoaded'), 'ok');
     scheduleRender();
   });
   themeInputs.forEach((r) =>
@@ -124,11 +92,13 @@ export function initConverter() {
   previewEl.addEventListener(
     'error',
     (e) => {
-      const t = e.target;
-      if (t && t.tagName === 'IMG') {
-        t.classList.add('broken');
-        t.title = 'Image failed to load (missing or private). Export continues.';
-        t.alt = `${t.alt || 'image'} [unavailable]`;
+      const image = e.target;
+      if (image && image.tagName === 'IMG') {
+        image.classList.add('broken');
+        image.title = t('converter.image.failedTitle');
+        image.alt = t('converter.image.unavailable', {
+          alt: image.alt || t('converter.image.altFallback'),
+        });
       }
     },
     true,
@@ -137,22 +107,29 @@ export function initConverter() {
   async function onFetch() {
     const url = urlInput.value.trim();
     if (!url) {
-      setStatus('Paste a GitHub repo URL first, e.g. https://github.com/owner/repo', 'error');
+      setStatus(t('converter.status.emptyUrl'), 'error');
       return;
     }
     fetchBtn.disabled = true;
-    setStatus('Fetching README from GitHub…', '');
+    setStatus(t('converter.status.fetching'), '');
     try {
       const res = await fetchReadme(url);
       repoCtx = { owner: res.owner, repo: res.repo, branch: res.branch, readmePath: res.path };
       mdInput.value = res.markdown;
       renderMeta(res);
-      setStatus(`Loaded ${res.owner}/${res.repo} @ ${res.branch} — preview updated.`, 'ok');
+      setStatus(
+        t('converter.status.loaded', {
+          owner: res.owner,
+          repo: res.repo,
+          branch: res.branch,
+        }),
+        'ok',
+      );
       scheduleRender();
     } catch (e) {
       repoCtx = null;
       renderMeta();
-      setStatus(friendlyError(e), 'error');
+      setStatus(friendlyError(e, t), 'error');
     } finally {
       fetchBtn.disabled = false;
     }
@@ -162,7 +139,7 @@ export function initConverter() {
     const f = fileInput.files?.[0];
     if (!f) return;
     if (f.size > 2 * 1024 * 1024) {
-      setStatus('File is over the 2 MB free-tier limit. Try a smaller file.', 'error');
+      setStatus(t('converter.status.fileTooLarge'), 'error');
       fileInput.value = '';
       return;
     }
@@ -170,13 +147,10 @@ export function initConverter() {
       mdInput.value = await f.text();
       repoCtx = null; // uploaded files have no repo base; relative images can't resolve
       renderMeta();
-      setStatus(
-        `Loaded ${f.name}. Note: relative image paths can't resolve without a repo URL.`,
-        'ok',
-      );
+      setStatus(t('converter.status.fileLoaded', { name: f.name }), 'ok');
       scheduleRender();
     } catch {
-      setStatus('Could not read that file. Try pasting the Markdown instead.', 'error');
+      setStatus(t('converter.status.fileReadError'), 'error');
     } finally {
       fileInput.value = '';
     }
@@ -190,7 +164,10 @@ export function initConverter() {
   async function render() {
     const raw = mdInput.value || '';
     if (!raw.trim()) {
-      previewEl.innerHTML = '<p class="hint">Nothing to preview yet — paste a repo URL, drop a file, or type Markdown.</p>';
+      const empty = document.createElement('p');
+      empty.className = 'hint';
+      empty.textContent = t('converter.preview.empty');
+      previewEl.replaceChildren(empty);
       return;
     }
     let effective = raw;
@@ -212,13 +189,16 @@ export function initConverter() {
         a.rel = 'noopener noreferrer';
       });
     } catch {
-      previewEl.innerHTML = '<p class="hint">Preview failed on this input. The Markdown is kept — try printing anyway or simplify it.</p>';
+      const failed = document.createElement('p');
+      failed.className = 'hint';
+      failed.textContent = t('converter.preview.failed');
+      previewEl.replaceChildren(failed);
     }
   }
 
   function renderMeta(res) {
     if (!res && !repoCtx) {
-      metaEl.textContent = 'Local mode — everything stays in your browser.';
+      metaEl.textContent = t('converter.meta.localMode');
       return;
     }
     const c = res ?? repoCtx;
@@ -230,7 +210,7 @@ export function initConverter() {
       a.href = res.rawUrl;
       a.target = '_blank';
       a.rel = 'noopener noreferrer';
-      a.textContent = 'raw source';
+      a.textContent = t('converter.meta.rawSource');
       metaEl.append(a);
     }
   }
@@ -244,9 +224,9 @@ export function initConverter() {
   function printSingle() {
     try {
       printDocument({ mode: 'single' });
-      setStatus('Print dialog opened. Choose “Save as PDF” for a file.', '');
+      setStatus(t('converter.print.opened'), '');
     } catch (error) {
-      setStatus(friendlyPrintError(error), 'error');
+      setStatus(friendlyPrintError(error, t), 'error');
     }
   }
 
@@ -284,22 +264,40 @@ function initSubnav() {
   setActive(sections[0].id);
 }
 
-/** User-facing message for fetch failures. Pure function — covered by tests. */
-export function friendlyError(e) {
+/**
+ * User-facing message for fetch failures. Pure function — covered by tests.
+ * Without an explicit translator it preserves the historical English behaviour
+ * (notably returning the parser's own INVALID_URL message).
+ *
+ * @param {any} e
+ * @param {(key: string, vars?: Record<string, unknown>) => string} [translate]
+ */
+export function friendlyError(e, translate) {
   const code = e?.code;
-  if (code === 'INVALID_URL') return e.message;
-  if (code === 'PRIVATE_OR_NOT_FOUND')
-    return 'Repo not found or private (private repos need OAuth — phase 2). Paste the Markdown manually instead.';
-  if (code === 'NO_README')
-    return 'No README found on main/master (incl. .github/). Upload the file or paste it manually.';
-  if (code === 'RATE_LIMITED') return 'GitHub rate limit hit (unauthenticated API). Wait ~1 min and retry.';
-  return `Fetch failed: ${e?.message ?? e}. You can still paste Markdown manually.`;
+  const tr = translate ?? t;
+  if (code === 'INVALID_URL') {
+    return translate
+      ? tr('converter.errors.invalidUrl')
+      : e?.message || tr('converter.errors.invalidUrl');
+  }
+  if (code === 'PRIVATE_OR_NOT_FOUND') return tr('converter.errors.privateOrNotFound');
+  if (code === 'NO_README') return tr('converter.errors.noReadme');
+  if (code === 'RATE_LIMITED') return tr('converter.errors.rateLimited');
+  return tr('converter.errors.fetchFailed', { message: e?.message ?? e });
 }
 
-/** User-facing message for print failures. Pure function. */
-export function friendlyPrintError(e) {
+/**
+ * User-facing message for print failures. Pure function.
+ *
+ * @param {any} e
+ * @param {(key: string, vars?: Record<string, unknown>) => string} [translate]
+ */
+export function friendlyPrintError(e, translate) {
+  const tr = translate ?? t;
   if (e?.code === 'PRINT_UNAVAILABLE') {
-    return e.message || 'This browser could not open the print dialog. Use your browser menu to print instead.';
+    return translate
+      ? tr('converter.errors.printUnavailable')
+      : e?.message || tr('converter.errors.printUnavailable');
   }
-  return `Could not open the print dialog: ${e?.message ?? e}. Use your browser menu to print instead.`;
+  return tr('converter.errors.printFailed', { message: e?.message ?? e });
 }

@@ -11,7 +11,7 @@ import {
 } from '../src/scripts/book-explorer.js';
 
 const astroSource = readFileSync(
-  new URL('../src/pages/index.astro', import.meta.url),
+  new URL('../src/components/HomePage.astro', import.meta.url),
   'utf8',
 );
 const controllerSource = readFileSync(

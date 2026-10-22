@@ -1,0 +1,8 @@
+---
+import { inlineParts } from '../i18n/format.js';
+
+const { text = '' } = Astro.props;
+const parts = inlineParts(text);
+---
+
+{parts.map((part) => (part.type === 'code' ? <code>{part.value}</code> : part.value))}

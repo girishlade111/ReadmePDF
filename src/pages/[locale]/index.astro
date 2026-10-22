@@ -1,0 +1,15 @@
+---
+import HomePage from '../../components/HomePage.astro';
+import { PREFIXED_LOCALES } from '../../i18n/config.js';
+
+export function getStaticPaths() {
+  return PREFIXED_LOCALES.map((locale) => ({
+    params: { locale },
+    props: { locale },
+  }));
+}
+
+const { locale } = Astro.props;
+---
+
+<HomePage locale={locale} path={Astro.url.pathname} />

@@ -1,0 +1,36 @@
+---
+import { localeMeta, localeOptions, localizedPathname } from '../i18n/config.js';
+import { translator } from '../i18n/index.js';
+
+const { locale = 'en', path = '/' } = Astro.props;
+const t = translator(locale);
+const meta = localeMeta(locale);
+const options = localeOptions();
+---
+
+<label class="lang-switcher">
+  <span class="lang-switcher__label">{t('lang.label')}</span>
+  <select
+    class="lang-switcher__select"
+    data-language-switcher
+    aria-label={t('lang.switch')}
+    title={t('lang.current', { language: meta.label })}
+  >
+    {options.map((option) => (
+      <option value={localizedPathname(path, option.locale)} selected={option.locale === locale}>
+        {option.label}
+      </option>
+    ))}
+  </select>
+</label>
+
+<script is:inline>
+  document.querySelectorAll('[data-language-switcher]').forEach((select) => {
+    select.addEventListener('change', () => {
+      const target = new URL(select.value, window.location.origin);
+      target.search = window.location.search;
+      target.hash = window.location.hash;
+      window.location.assign(target.href);
+    });
+  });
+</script>
