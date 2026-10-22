@@ -1033,6 +1033,20 @@ class PdfRenderer {
   }
 
   renderOps() {
+    // pdf-lib's CFF subsetter throws while saving when an embedded font never
+    // encoded a glyph (the CJK font is embedded for every export so Chinese,
+    // Japanese, and Korean text can appear anywhere). One invisible space per
+    // face keeps every subset non-empty without changing the visible page.
+    const first = this.pages[0];
+    if (first) {
+      for (const font of new Set(Object.values(this.picker.fonts))) {
+        try {
+          first.page.drawText(' ', { x: 0, y: 0, size: 1, font, opacity: 0 });
+        } catch {
+          // A face without a space glyph is still usable for visible text.
+        }
+      }
+    }
     for (const entry of this.pages) {
       for (const op of entry.ops) {
         if (op.kind === 'text') {

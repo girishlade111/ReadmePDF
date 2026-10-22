@@ -298,6 +298,9 @@ export async function renderDocumentPreview({
     path: document.path,
     name: document.name || document.path.split('/').pop() || document.path,
     headings: rendered.headings,
+    // Sanitised body content without the preview chrome, used by the
+    // individual-PDF exporter (the renderer supplies its own chapter header).
+    contentHtml: rendered.html,
     html: `<article class="book-file-preview" data-doc-path="${escapeAttr(
       document.path,
     )}" aria-label="${escapeAttr(label)}">

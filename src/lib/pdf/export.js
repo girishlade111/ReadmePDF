@@ -374,7 +374,7 @@ export async function exportBookToZip(book, options = {}) {
         labels,
       });
       throwIfAborted(signal);
-      const blocks = parseHtml(preview.html);
+      const blocks = parseHtml(preview.contentHtml ?? preview.html);
       const title =
         chapterHeading(blocks) || document.name || planned.fileName.replace(/\.pdf$/i, '');
       const result = await renderPdf({
