@@ -158,6 +158,16 @@ class PdfRenderer {
     });
   }
 
+  /** First-line width of auto-font text, capped to `width`. */
+  measureAutoText(text, style, size, width = CONTENT_WIDTH) {
+    const lines = wrapRuns([{ text: String(text ?? ''), ...style }], {
+      picker: this.picker,
+      width,
+      size,
+    });
+    return Math.min(lines[0]?.width ?? 0, width);
+  }
+
   /**
    * Draw text whose font must be chosen per glyph (CJK, Cyrillic, emoji
    * fallbacks). Unlike `addText`, this never forces a face that may not cover
@@ -877,20 +887,19 @@ class PdfRenderer {
         width: 0.6,
       });
       for (const entry of group) {
-        const role = entry.kind === 'chapter' ? 'bold' : 'regular';
         const size = entry.kind === 'chapter' ? 10.4 : 9.4;
         const indent = entry.kind === 'chapter' ? 0 : 16 + (entry.level - 1) * 10;
         const numberWidth = 34;
         const textWidth = CONTENT_WIDTH - indent - numberWidth - 8;
-        const label = truncateText(entry.text, role, size, textWidth, this.picker);
-        this.addText(label, {
+        const { width: labelWidth } = this.addAutoText(entry.text, {
+          bold: entry.kind === 'chapter',
+        }, {
           x: PAGE_MARGIN + indent,
           top: this.y + 4,
           size,
-          role,
+          width: textWidth,
           color: entry.kind === 'chapter' ? this.palette.heading : this.palette.text,
         });
-        const labelWidth = this.picker.widthOf(label, role, size);
         const dotsStart = PAGE_MARGIN + indent + labelWidth + 5;
         const dotsEnd = PAGE_MARGIN + CONTENT_WIDTH - numberWidth;
         if (dotsEnd > dotsStart) {
@@ -952,21 +961,21 @@ class PdfRenderer {
       const headerY = 30;
       if (opts.chapters > 1) {
         this.ops = entry.ops;
-        this.addText(truncateText(cleanText(opts.title), 'regular', 8, 330, this.picker), {
+        this.addAutoText(cleanText(opts.title), {}, {
           x: PAGE_MARGIN,
           top: headerY,
           size: 8,
-          role: 'regular',
+          width: 330,
           color: this.palette.muted,
         });
         const right = cleanText([opts.owner, opts.repo].filter(Boolean).join('/'));
         if (right) {
-          const width = this.picker.widthOf(right, 'regular', 8);
-          this.addText(truncateText(right, 'regular', 8, 150, this.picker), {
+          const width = this.measureAutoText(right, {}, 8, 150);
+          this.addAutoText(right, {}, {
             x: PAGE_MARGIN + CONTENT_WIDTH - width,
             top: headerY,
             size: 8,
-            role: 'regular',
+            width: 150,
             color: this.palette.muted,
           });
         }
