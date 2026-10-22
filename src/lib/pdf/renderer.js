@@ -813,11 +813,10 @@ class PdfRenderer {
     }
     const meta = [opts.source, opts.ref, opts.commitSha?.slice(0, 8)].filter(Boolean).join(' · ');
     if (meta) {
-      this.addText(meta, {
+      this.addAutoText(meta, {}, {
         x: PAGE_MARGIN,
         top: this.y,
         size: 8.5,
-        role: 'regular',
         color: this.palette.muted,
       });
       this.y += 14;
