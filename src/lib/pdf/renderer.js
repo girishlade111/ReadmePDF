@@ -158,6 +158,41 @@ class PdfRenderer {
     });
   }
 
+  /**
+   * Draw text whose font must be chosen per glyph (CJK, Cyrillic, emoji
+   * fallbacks). Unlike `addText`, this never forces a face that may not cover
+   * the string.
+   *
+   * @param {string} text
+   * @param {{ bold?: boolean, italic?: boolean, code?: boolean }} style
+   * @param {{ x: number, top: number, size: number, color?: object, width?: number }} options
+   * @returns {{ width: number, truncated: boolean }}
+   */
+  addAutoText(text, style, { x, top, size, color, width = CONTENT_WIDTH }) {
+    const lines = wrapRuns([{ text: String(text ?? ''), ...style }], {
+      picker: this.picker,
+      width,
+      size,
+    });
+    const line = lines[0];
+    if (!line || !line.segments.length) return { width: 0, truncated: false };
+    if (lines.length > 1) {
+      const ellipsisWidth = this.picker.widthOf('…', 'regular', size);
+      if (line.width + ellipsisWidth <= width) {
+        line.segments.push({
+          text: '…',
+          role: 'regular',
+          size,
+          code: false,
+          link: null,
+        });
+        line.width += ellipsisWidth;
+      }
+    }
+    this.drawLine(line, x, top, { color });
+    return { width: line.width, truncated: lines.length > 1 };
+  }
+
   addRect({ x, top, width, height, fill, stroke, lineWidth = 0.6 }) {
     this.ops.push({ kind: 'rect', x, top, width, height, fill, stroke, lineWidth });
   }
@@ -690,11 +725,10 @@ class PdfRenderer {
     const palette = this.palette;
     this.addRect({ x: 0, top: 0, width: PAGE_WIDTH, height: 14, fill: palette.accent });
     let top = 138;
-    this.addText(cleanText(opts.labels?.coverEyebrow ?? 'README TO PDF').toUpperCase(), {
+    this.addAutoText(cleanText(opts.labels?.coverEyebrow ?? 'README TO PDF').toUpperCase(), { bold: true }, {
       x: PAGE_MARGIN + 10,
       top,
       size: 9,
-      role: 'bold',
       color: palette.accent,
     });
     top += 34;
