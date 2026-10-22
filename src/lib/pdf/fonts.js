@@ -81,8 +81,25 @@ export async function loadFontBytesSet(options = {}) {
   return result;
 }
 
-function toSet(charSet) {
-  return new Set(Array.isArray(charSet) ? charSet : []);
+/**
+ * Build the set of code points a font can actually draw.
+ *
+ * pdf-lib's `getCharacterSet()` reports every code point listed in the font's
+ * cmap, including entries whose glyph id is 0 (`.notdef`). Handing one of those
+ * to `drawText` makes the CFF subsetter crash on save with a RangeError, so the
+ * set is rebuilt from fontkit and filtered to real glyphs.
+ *
+ * @param {ArrayBuffer|Uint8Array} bytes
+ */
+function supportedCodePoints(bytes) {
+  const font = fontkit.create(
+    bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes),
+  );
+  const set = new Set();
+  for (const codePoint of font.characterSet ?? []) {
+    if (font.hasGlyphForCodePoint(codePoint)) set.add(codePoint);
+  }
+  return set;
 }
 
 function normalizeChar(char) {
@@ -112,8 +129,8 @@ export async function embedPdfFonts(pdfDoc, bytes) {
   await Promise.all(
     FONT_ROLES.map(async (role) => {
       if (!bytes[role]) throw new Error(`Missing font data for ${role}.`);
+      charsets[role] = supportedCodePoints(bytes[role]);
       fonts[role] = await pdfDoc.embedFont(bytes[role], { subset: true });
-      charsets[role] = toSet(fonts[role].getCharacterSet());
     }),
   );
 
@@ -176,8 +193,11 @@ export function createFontPicker(fonts, charsets) {
       let value = char;
       if (!role) continue;
       if (role === 'missing') {
-        role = supports('regular', '\uFFFD') ? 'regular' : 'regular';
-        value = supports('regular', '\uFFFD') ? '\uFFFD' : '?';
+        // U+FFFD is listed by some CJK cmaps but maps to .notdef; a plain
+        // question mark is guaranteed to exist in every embedded font and,
+        // more importantly, is a real glyph the subsetter can encode.
+        role = 'regular';
+        value = '?';
       }
       const previous = out[out.length - 1];
       if (previous && previous.role === role) previous.text += value;
