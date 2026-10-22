@@ -1,0 +1,164 @@
+<!DOCTYPE html><html lang="fr"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23211e1c'/%3E%3Ctext x='16' y='23' font-size='17' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'%3ER%3C/text%3E%3C/svg%3E"><meta name="theme-color" content="#f1efed"><title>Comment convertir un README GitHub en PDF (gratuit, sans compte) — ReadmePDF</title><meta name="description" content="Un guide pas à pas pour transformer un README GitHub public en PDF propre et prêt à imprimer avec ReadmePDF — sans compte, sans envoi et sans rendu côté serveur."><meta name="robots" content="index, follow, max-image-preview:large"><link rel="canonical" href="https://example.test/fr/blog/github-readme-to-pdf/"><link rel="alternate" hreflang="en" href="https://example.test/blog/github-readme-to-pdf/"><link rel="alternate" hreflang="es" href="https://example.test/es/blog/github-readme-to-pdf/"><link rel="alternate" hreflang="ja" href="https://example.test/ja/blog/github-readme-to-pdf/"><link rel="alternate" hreflang="ko" href="https://example.test/ko/blog/github-readme-to-pdf/"><link rel="alternate" hreflang="zh" href="https://example.test/zh/blog/github-readme-to-pdf/"><link rel="alternate" hreflang="ru" href="https://example.test/ru/blog/github-readme-to-pdf/"><link rel="alternate" hreflang="tr" href="https://example.test/tr/blog/github-readme-to-pdf/"><link rel="alternate" hreflang="fr" href="https://example.test/fr/blog/github-readme-to-pdf/"><link rel="alternate" hreflang="pt-BR" href="https://example.test/pt/blog/github-readme-to-pdf/"><link rel="alternate" hreflang="x-default" href="https://example.test/blog/github-readme-to-pdf/"><meta property="og:type" content="article"><meta property="og:site_name" content="ReadmePDF"><meta property="og:title" content="Comment convertir un README GitHub en PDF (gratuit, sans compte) — ReadmePDF"><meta property="og:description" content="Un guide pas à pas pour transformer un README GitHub public en PDF propre et prêt à imprimer avec ReadmePDF — sans compte, sans envoi et sans rendu côté serveur."><meta property="og:locale" content="fr_FR"><meta property="og:locale:alternate" content="en_US"><meta property="og:locale:alternate" content="es_ES"><meta property="og:locale:alternate" content="ja_JP"><meta property="og:locale:alternate" content="ko_KR"><meta property="og:locale:alternate" content="zh_CN"><meta property="og:locale:alternate" content="ru_RU"><meta property="og:locale:alternate" content="tr_TR"><meta property="og:locale:alternate" content="pt_BR"><meta property="og:url" content="https://example.test/fr/blog/github-readme-to-pdf/"><meta property="og:image" content="https://example.test/og/readmepdf.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="ReadmePDF — GitHub README to PDF"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Comment convertir un README GitHub en PDF (gratuit, sans compte) — ReadmePDF"><meta name="twitter:description" content="Un guide pas à pas pour transformer un README GitHub public en PDF propre et prêt à imprimer avec ReadmePDF — sans compte, sans envoi et sans rendu côté serveur."><meta name="twitter:image" content="https://example.test/og/readmepdf.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Comment convertir un README GitHub en PDF (gratuit, sans compte)","description":"Un guide pas à pas pour transformer un README GitHub public en PDF propre et prêt à imprimer avec ReadmePDF — sans compte, sans envoi et sans rendu côté serveur.","datePublished":"2026-09-18T00:00:00.000Z","dateModified":"2026-10-21T00:00:00.000Z","author":{"@type":"Person","name":"Girish Lade"},"publisher":{"@type":"Organization","name":"LadeStack","url":"https://ladestack.in"},"keywords":"GitHub, README, PDF, Tutorial","inLanguage":"fr","url":"https://example.test/fr/blog/github-readme-to-pdf/","mainEntityOfPage":{"@type":"WebPage","@id":"https://example.test/fr/blog/github-readme-to-pdf/"},"isPartOf":{"@type":"Blog","name":"The ReadmePDF Journal","url":"https://example.test/fr/blog/"}}</script><link rel="stylesheet" href="/_astro/index.SNJGXvUv.css">
+<link rel="stylesheet" href="/_astro/_slug_.B3yeAsbl.css"></head> <body> <header class="masthead"> <div class="container masthead__inner"> <a class="wordmark" href="/fr/">ReadmePDF</a> <span class="masthead__tag caption">par LadeStack · gratuit · sans compte · dans le navigateur</span> <div class="masthead__utils"> <label class="lang-switcher"> <span class="lang-switcher__label">Langue</span> <select class="lang-switcher__select" data-language-switcher aria-label="Changer de langue" title="Langue actuelle : Français"> <option value="/blog/github-readme-to-pdf/"> English </option><option value="/es/blog/github-readme-to-pdf/"> Español </option><option value="/ja/blog/github-readme-to-pdf/"> 日本語 </option><option value="/ko/blog/github-readme-to-pdf/"> 한국어 </option><option value="/zh/blog/github-readme-to-pdf/"> 简体中文 </option><option value="/ru/blog/github-readme-to-pdf/"> Русский </option><option value="/tr/blog/github-readme-to-pdf/"> Türkçe </option><option value="/fr/blog/github-readme-to-pdf/" selected> Français </option><option value="/pt/blog/github-readme-to-pdf/"> Português (Brasil) </option> </select> </label> <script>
+  document.querySelectorAll('[data-language-switcher]').forEach((select) => {
+    select.addEventListener('change', () => {
+      const target = new URL(select.value, window.location.origin);
+      target.search = window.location.search;
+      target.hash = window.location.hash;
+      window.location.assign(target.href);
+    });
+  });
+</script> <a class="icon-link" href="https://github.com/girishlade111/ReadmePDF" target="_blank" rel="noopener noreferrer" aria-label="ReadmePDF sur GitHub"> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"> <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path> </svg> </a> </div> </div> </header> <nav class="subnav" aria-label="Section"> <div class="container subnav__inner"> <a href="/fr/#converter">Convertisseur</a> <a href="/fr/#how">Fonctionnement</a> <a href="/fr/#themes">Thèmes</a> <a href="/fr/blog/" aria-current="page">Le blog</a> <a href="/fr/#privacy">Confidentialité</a> </div> </nav>  <header class="post-hero"> <div class="container post-hero__inner"> <nav class="breadcrumbs" aria-label="Fil d’Ariane"> <a href="/fr/">Accueil</a> <span aria-hidden="true">/</span> <a href="/fr/blog/">Le blog</a> <span aria-hidden="true">/</span> <span aria-current="page">Comment convertir un README GitHub en PDF (gratuit, sans compte)</span> </nav> <div class="blog-tags" aria-label="Mots-clés"> <span class="blog-tag">GitHub</span><span class="blog-tag">README</span><span class="blog-tag">PDF</span><span class="blog-tag">Tutoriel</span> </div> <h1 class="display-xl">Comment convertir un README GitHub en PDF (gratuit, sans compte)</h1> <p class="lead">Un guide pas à pas pour transformer un README GitHub public en PDF propre et prêt à imprimer avec ReadmePDF — sans compte, sans envoi et sans rendu côté serveur.</p> <div class="blog-meta post-meta"> <span>Girish Lade</span> <span aria-hidden="true">·</span> <time datetime="2026-09-18">18 septembre 2026</time> <span aria-hidden="true">·</span> <span>12 min de lecture</span>  <span aria-hidden="true">·</span> <span>Mis à jour le 21 octobre 2026</span>  </div> </div> </header> <main class="post-main"> <div class="container"> <div class="post-layout"> <aside class="post-aside" aria-label="Sur cette page"> <h2>Sur cette page</h2> <nav aria-label="Table des matières"> <ol class="post-toc"> <li class="post-toc__item post-toc__item--2"> <a href="#pourquoi-le-bouton-imprimer-du-navigateur-ne-suffit-pas">Pourquoi le bouton Imprimer du navigateur ne suffit pas</a> </li><li class="post-toc__item post-toc__item--2"> <a href="#ce-que-readmepdf-change">Ce que ReadmePDF change</a> </li><li class="post-toc__item post-toc__item--2"> <a href="#avant-de-commencer">Avant de commencer</a> </li><li class="post-toc__item post-toc__item--2"> <a href="#étape-1-fournir-un-dépôt-à-loutil">Étape 1 : fournir un dépôt à l’outil</a> </li><li class="post-toc__item post-toc__item--2"> <a href="#étape-2-laisser-récupérer-et-résoudre-le-readme">Étape 2 : laisser récupérer et résoudre le README</a> </li><li class="post-toc__item post-toc__item--2"> <a href="#étape-3-choisir-un-thème-adapté-au-document">Étape 3 : choisir un thème adapté au document</a> </li><li class="post-toc__item post-toc__item--2"> <a href="#étape-4-décider-si-la-table-des-matières-est-utile">Étape 4 : décider si la table des matières est utile</a> </li><li class="post-toc__item post-toc__item--2"> <a href="#étape-5-imprimer-en-pdf-avec-les-bons-réglages">Étape 5 : imprimer en PDF avec les bons réglages</a> </li><li class="post-toc__item post-toc__item--2"> <a href="#étape-6-vérifier-le-pdf-avant-de-lenvoyer">Étape 6 : vérifier le PDF avant de l’envoyer</a> </li><li class="post-toc__item post-toc__item--2"> <a href="#quand-la-récupération-échoue">Quand la récupération échoue</a> </li><li class="post-toc__item post-toc__item--2"> <a href="#coller-ou-importer-à-la-place">Coller ou importer à la place</a> </li><li class="post-toc__item post-toc__item--2"> <a href="#cinq-corrections-à-la-source-qui-améliorent-chaque-export">Cinq corrections à la source qui améliorent chaque export</a> </li><li class="post-toc__item post-toc__item--2"> <a href="#confidentialité-ce-qui-quitte-votre-navigateur">Confidentialité : ce qui quitte votre navigateur</a> </li><li class="post-toc__item post-toc__item--2"> <a href="#la-version-courte">La version courte</a> </li> </ol> </nav> </aside> <article class="post-prose"> <div class="prose"> <p>Un README est écrit pour un navigateur : il défile, renvoie vers d’autres pages et suppose que le lecteur peut cliquer dans le dépôt. Dès qu’il s’agit d’envoyer une documentation à un client, de la joindre à un devoir, d’archiver une version ou de la confier à quelqu’un qui ne clonera pas le dépôt, le PDF est le format qui voyage.</p>
+<p>Imprimer directement une page GitHub produit généralement un désordre. La navigation du site, les barres latérales et le pied de page suivent. Les blocs de code larges sont coupés. Les images relatives ne s’affichent plus, car le navigateur ne lit plus depuis la racine du dépôt. Les tableaux longs se scindent mal entre les pages. ReadmePDF existe pour résoudre précisément ces problèmes, sans vous demander de créer un compte ni d’envoyer votre fichier source à un serveur.</p>
+<p>Ce guide déroule l’ensemble du processus, depuis le collage d’une URL de dépôt jusqu’à la vérification du PDF exporté, et explique ce que fait l’outil à chaque étape.</p>
+<h2 id="pourquoi-le-bouton-imprimer-du-navigateur-ne-suffit-pas">Pourquoi le bouton Imprimer du navigateur ne suffit pas</h2>
+<p>L’interface web de GitHub est une application web, pas une feuille de style d’impression. Quand vous appuyez sur <code>Ctrl+P</code> sur la page d’un dépôt, le navigateur tente d’imprimer toute la page : l’en-tête, l’arborescence des fichiers, la barre latérale « À propos », les widgets de retour et tout ce qui se trouve dans la mise en page. Une partie peut être masquée avec une feuille de style d’impression personnalisée, mais vous ne pouvez pas modifier le balisage de GitHub depuis l’extérieur.</p>
+<p>Trois autres problèmes reviennent régulièrement :</p>
+<ul>
+<li><strong>Chemins d’images relatifs.</strong> Un README qui contient <code>![diagram](docs/architecture.png)</code> fonctionne sur GitHub parce que l’image est résolue par rapport au dépôt. Une page de navigateur imprimée n’a pas de contexte de dépôt fiable : l’image peut donc disparaître.</li>
+<li><strong>Code et tableaux larges.</strong> Les blocs de code et les tableaux comparatifs sont plus larges qu’une page imprimée. Sans règles spécifiques à l’impression, ils sont soit réduits à une taille illisible, soit tronqués.</li>
+<li><strong>Pagination.</strong> Les titres, les blocs de code et les lignes de tableau doivent éviter les coupures malheureuses. Une impression brute du navigateur y parvient rarement.</li>
+</ul>
+<p>ReadmePDF récupère le Markdown brut du README, résout les URL relatives au dépôt, effectue le rendu du Markdown compatible GitHub, assainit le résultat et applique une feuille de style d’impression avant l’ouverture de la boîte de dialogue d’impression. La sortie est toujours produite par le moteur « Enregistrer au format PDF » natif de votre navigateur, mais le document qu’il reçoit est déjà nettoyé.</p>
+<h2 id="ce-que-readmepdf-change">Ce que ReadmePDF change</h2>
+<p>Le pipeline de conversion s’exécute entièrement dans le navigateur. Concrètement :</p>
+<ol>
+<li>Vous fournissez l’URL d’un dépôt GitHub public, un fichier Markdown local ou du Markdown collé.</li>
+<li>Pour un dépôt, l’application découvre la branche par défaut et essaie une série de noms de fichiers README courants, y compris les fichiers situés dans <code>.github/</code>.</li>
+<li>Les chemins d’images relatifs sont réécrits vers <code>raw.githubusercontent.com</code>, et les liens de documents vers la vue blob de GitHub.</li>
+<li>Le Markdown est rendu avec la prise en charge de GFM : tableaux, listes de tâches, texte barré, blocs de code délimités et liens automatiques.</li>
+<li>Le HTML est assaini par DOMPurify avant d’atteindre l’aperçu.</li>
+<li>Une table des matières est générée lorsque le document comporte au moins trois titres.</li>
+<li>La feuille de style d’impression du thème choisi est appliquée, et le navigateur ouvre sa boîte de dialogue d’impression.</li>
+</ol>
+<p>Aucun fichier n’est envoyé. Les seules requêtes sortantes sont des lectures anonymes du dépôt public demandé, plus l’appel à l’API GitHub utilisé pour découvrir la branche par défaut. Les dépôts privés ne sont pas pris en charge dans cette version.</p>
+<h2 id="avant-de-commencer">Avant de commencer</h2>
+<p>Il vous faut :</p>
+<ul>
+<li>Un dépôt GitHub <strong>public</strong>, ou un fichier Markdown local, ou un bloc de Markdown à coller.</li>
+<li>Un navigateur moderne. Chrome, Edge, Firefox et Safari prennent tous en charge « Enregistrer au format PDF » dans leur boîte de dialogue d’impression.</li>
+<li>Environ deux minutes pour un document court, davantage si vous comptez relire le PDF page par page.</li>
+</ul>
+<p>Si le dépôt est privé, la récupération échouera. Le repli manuel fonctionne toujours : copiez le texte du README, collez-le dans l’éditeur et utilisez des URL d’images absolues.</p>
+<h2 id="étape-1-fournir-un-dépôt-à-loutil">Étape 1 : fournir un dépôt à l’outil</h2>
+<p>Ouvrez le convertisseur et collez l’URL du dépôt dans le champ <strong>URL du dépôt GitHub</strong>. ReadmePDF accepte plus que l’URL canonique :</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>https://github.com/owner/repo</span></span>
+<span class="line"><span>https://github.com/owner/repo.git</span></span>
+<span class="line"><span>github.com/owner/repo</span></span>
+<span class="line"><span>owner/repo</span></span>
+<span class="line"><span>https://github.com/owner/repo/tree/main/docs</span></span>
+<span class="line"><span>https://github.com/owner/repo/blob/main/README.md</span></span></code></pre>
+<p>Toutes ces formes renvoient à la même paire <code>owner/repo</code>. Les URL sans protocole et la forme abrégée <code>owner/repo</code> sont pratiques lorsque vous copiez depuis un terminal ou un message. Les segments de chemin supplémentaires sont acceptés par commodité, mais ignorés : l’application lit toujours le README à la racine du dépôt sur la branche par défaut, et non le fichier imbriqué affiché dans l’URL. Si c’est ce fichier imbriqué qu’il vous faut, collez directement son Markdown.</p>
+<p>Appuyez sur <strong>Récupérer</strong> ou sur <code>Enter</code>. Si le champ est vide, l’application vous indique ce qu’elle attend au lieu de ne rien faire.</p>
+<h2 id="étape-2-laisser-récupérer-et-résoudre-le-readme">Étape 2 : laisser récupérer et résoudre le README</h2>
+<p>L’application demande d’abord à l’API GitHub la branche par défaut du dépôt. Elle essaie ensuite une liste de noms de fichiers README sur cette branche, y compris des variantes de casse courantes et l’emplacement <code>.github/README.md</code>. Si l’API est limitée en débit, la récupération brute peut se poursuivre, ce qui explique qu’une défaillance temporaire de l’API ne mette pas toujours fin au processus.</p>
+<p>Une fois le Markdown reçu, l’aperçu se met à jour. C’est le moment de vérifier trois points :</p>
+<ul>
+<li><strong>Images.</strong> Les images relatives au dépôt doivent apparaître. Si l’une manque, elle renvoie peut-être vers une ressource privée, un chemin inexistant ou une URL absolue qui bloque le hotlinking.</li>
+<li><strong>Blocs de code.</strong> Les blocs délimités avec un langage sont rendus comme du code. Les lignes très larges défilent dans l’aperçu, mais méritent tout de même une vérification à l’impression.</li>
+<li><strong>Liens.</strong> Les liens de documents sont réécrits vers la vue blob de GitHub afin de rester significatifs dans le PDF. Les liens externes s’ouvrent dans un nouvel onglet dans l’aperçu.</li>
+</ul>
+<p>Si une image échoue, ReadmePDF la marque comme cassée et poursuit. L’export n’échoue pas parce qu’un badge est indisponible. C’est volontaire : un badge manquant est généralement moins important que le reste du document.</p>
+<h2 id="étape-3-choisir-un-thème-adapté-au-document">Étape 3 : choisir un thème adapté au document</h2>
+<p>Il existe quatre thèmes d’impression :</p>
+<ul>
+<li><strong>Clean</strong> est le thème par défaut. Il utilise une typographie sans empattement neutre et constitue le choix le plus sûr pour les spécifications, les README techniques et les documents riches en code.</li>
+<li><strong>Business</strong> associe une typographie à empattements et un bloc de code sombre. Il convient aux rapports, aux propositions et aux transmissions destinées aux clients.</li>
+<li><strong>Academic</strong> propose des pages à empattements justifiées avec un traitement discret du code. Il est conçu pour les textes longs, les supports de cours et les soumissions de type universitaire.</li>
+<li><strong>Dark</strong> est un thème pensé pour l’écran. L’aperçu est sombre pour une lecture confortable, et la feuille de style d’impression impose une encre claire et des fonds de code clairs pour que le PDF reste lisible.</li>
+</ul>
+<p>Pour une comparaison plus détaillée, voir <a href="/blog/readme-pdf-print-themes/">Clean vs Business vs Academic vs Dark</a>. Pour la plupart des premiers exports, commencez par Clean et ne changez que si le document répond à une attente claire du public.</p>
+<h2 id="étape-4-décider-si-la-table-des-matières-est-utile">Étape 4 : décider si la table des matières est utile</h2>
+<p>La table des matières automatique est activée par défaut et générée lorsque le document comporte au moins trois titres. Elle utilise des ancres de titre stables et uniques, de sorte que les entrées renvoient aux bonnes sections dans l’aperçu.</p>
+<p>Conservez-la lorsque :</p>
+<ul>
+<li>Le document dépasse quelques pages.</li>
+<li>Le lecteur doit accéder directement à une section précise.</li>
+<li>Vous remettez le PDF à quelqu’un qui n’en imprimera peut-être qu’une partie.</li>
+</ul>
+<p>Désactivez-la lorsque :</p>
+<ul>
+<li>Le README est court et le bloc de sommaire ajoute plus de bruit que de navigation.</li>
+<li>Le document possède déjà une table des matières rédigée à la main.</li>
+<li>Vous produisez une fiche d’une seule page.</li>
+</ul>
+<p>Le réglage s’applique à l’aperçu et à la sortie imprimée. Il n’existe pas d’option réservée au PDF.</p>
+<h2 id="étape-5-imprimer-en-pdf-avec-les-bons-réglages">Étape 5 : imprimer en PDF avec les bons réglages</h2>
+<p>Cliquez sur <strong>Télécharger / Imprimer le PDF</strong> dans le panneau Aperçu en direct. L’application ouvre la boîte de dialogue d’impression du navigateur. Dans cette fenêtre :</p>
+<ol>
+<li>Définissez <strong>Destination</strong> sur <strong>Enregistrer au format PDF</strong> (ou l’équivalent dans votre navigateur).</li>
+<li>Choisissez <strong>A4</strong> ou <strong>Letter</strong> selon la région du destinataire.</li>
+<li>Laissez <strong>Marges</strong> sur la valeur par défaut, sauf si vous avez une charte maison. La feuille de style d’impression définit déjà les marges de page.</li>
+<li>Conservez <strong>Échelle</strong> à 100 % pour le premier essai. Si un tableau ou un bloc de code large est tronqué, réduisez légèrement l’échelle plutôt que la taille de police dans la source.</li>
+<li>Activez <strong>Graphiques d’arrière-plan</strong> si votre navigateur le propose. Les accents du thème, les fonds des blocs de code et les en-têtes de tableau dépendent des couleurs de fond. Sans eux, le PDF reste lisible, mais Business et Dark perdent une partie de leur structure visuelle.</li>
+<li>Désactivez les <strong>En-têtes et pieds de page</strong> du navigateur, sauf si vous voulez précisément l’URL et les numéros de page. Ils ne font pas partie de la conception du document.</li>
+<li>Enregistrez le fichier sous un nom descriptif, par exemple <code>owner-repo-readme-2026-10.pdf</code>.</li>
+</ol>
+<p>Les libellés exacts varient selon le navigateur. Dans Chrome et Edge, les graphiques d’arrière-plan se trouvent sous « Plus de paramètres ». Dans Firefox, cherchez « Imprimer les arrière-plans ». Safari expose moins de contrôles ; vérifiez l’aperçu avant d’enregistrer.</p>
+<h2 id="étape-6-vérifier-le-pdf-avant-de-lenvoyer">Étape 6 : vérifier le PDF avant de l’envoyer</h2>
+<p>Ouvrez le PDF enregistré et recherchez les problèmes que l’impression révèle :</p>
+<ul>
+<li><strong>Sauts de page.</strong> Un titre ne doit pas rester seul en bas de page. Les blocs de code, les tableaux et les images ne doivent pas être coupés au milieu.</li>
+<li><strong>Contenu large.</strong> Les longues lignes de code et les tableaux sont les causes d’overflow les plus fréquentes. S’ils sont tronqués, raccourcissez les lignes dans la source ou réduisez l’échelle d’impression.</li>
+<li><strong>Liens.</strong> Cliquez sur quelques liens dans le PDF. Les liens blob de GitHub doivent ouvrir la bonne vue de fichier.</li>
+<li><strong>Images.</strong> Vérifiez que les schémas et les badges ont survécu. Une ressource privée manquante ne se réparera pas d’elle-même dans le PDF.</li>
+<li><strong>Métadonnées.</strong> Le titre et l’auteur du document proviennent du README et des réglages de métadonnées d’impression du navigateur, pas d’un formulaire de métadonnées PDF dédié. Nommez le fichier clairement.</li>
+<li><strong>Lisibilité.</strong> Imprimez une page à 100 % et vérifiez que le texte courant est confortable. Le texte justifié d’Academic et la typographie à empattements de Business peuvent rendre différemment sur papier qu’à l’écran.</li>
+</ul>
+<h2 id="quand-la-récupération-échoue">Quand la récupération échoue</h2>
+<p>L’application associe les échecs de récupération à des messages exploitables. Les cas courants :</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Ce que vous voyez</th><th>Ce que cela signifie généralement</th><th>Que faire</th></tr></thead><tbody><tr><td>Dépôt introuvable ou privé</td><td>L’URL est incorrecte, ou le dépôt exige une authentification</td><td>Vérifiez l’URL ; collez le Markdown manuellement si le dépôt est privé</td></tr><tr><td>Aucun README trouvé</td><td>Le dépôt n’a pas de README sur la branche par défaut, <code>main</code> ou <code>master</code></td><td>Importez le fichier ou collez le Markdown</td></tr><tr><td>Limite de débit GitHub atteinte</td><td>Trop de requêtes API non authentifiées</td><td>Attendez environ une minute et réessayez ; la récupération brute peut encore fonctionner</td></tr><tr><td>Échec ou expiration de la récupération</td><td>Problème réseau, ou dépassement du délai de 15 secondes</td><td>Réessayez ; le collage manuel reste possible</td></tr></tbody></table>
+<p>Si la récupération échoue, l’éditeur conserve ce que vous avez déjà saisi. Vous pouvez passer au mode collage ou import sans perdre la page.</p>
+<h2 id="coller-ou-importer-à-la-place">Coller ou importer à la place</h2>
+<p>La récupération GitHub est pratique, mais ce n’est pas la seule entrée possible. Le convertisseur prend aussi en charge :</p>
+<ul>
+<li><strong>L’import</strong> d’un fichier <code>.md</code>, <code>.markdown</code> ou <code>.txt</code> jusqu’à 2 Mo.</li>
+<li><strong>Le collage</strong> de Markdown directement dans l’éditeur. L’aperçu est de nouveau rendu après un court délai pendant la frappe.</li>
+<li><strong>Le chargement de l’exemple</strong> pour voir comment les tableaux, les listes de tâches et les blocs de code sont traités.</li>
+</ul>
+<p>Une réserve : les chemins d’images relatifs ne sont résolus que si un dépôt a été récupéré au préalable. Le Markdown importé ou collé n’a pas de dépôt de référence ; utilisez donc des URL d’images absolues dans ce mode. Tout le reste — titres, tableaux, code, listes de tâches — fonctionne de la même manière.</p>
+<h2 id="cinq-corrections-à-la-source-qui-améliorent-chaque-export">Cinq corrections à la source qui améliorent chaque export</h2>
+<p>Le PDF vaut ce que vaut le Markdown de départ. Ces changements portent immédiatement leurs fruits :</p>
+<ol>
+<li><strong>Utilisez une vraie hiérarchie de titres.</strong> Commencez les sections avec <code>##</code>, utilisez <code>###</code> pour les sous-sections et évitez de sauter des niveaux. La table des matières et la feuille de style d’impression dépendent toutes deux de la structure.</li>
+<li><strong>Donnez un texte alternatif utile aux images.</strong> C’est bon pour l’accessibilité, et cela offre au PDF un repli lisible lorsqu’une image ne peut pas se charger.</li>
+<li><strong>Délimitez le code avec un langage.</strong> Les blocs étiquetés par langage sont rendus de manière plus prévisible que le code indenté, surtout lorsque les lignes sont longues.</li>
+<li><strong>Gardez des tableaux étroits.</strong> Un tableau à huit colonnes ne tiendra pas sur du A4 sans réduction. Déplacez les détails dans le texte ou scindez le tableau.</li>
+<li><strong>Privilégiez les chemins relatifs pour les ressources du dépôt.</strong> ReadmePDF les réécrit correctement. Les liens absolus vers une machine locale ou un compartiment privé ne survivront pas au voyage.</li>
+</ol>
+<h2 id="confidentialité-ce-qui-quitte-votre-navigateur">Confidentialité : ce qui quitte votre navigateur</h2>
+<p>ReadmePDF n’envoie pas votre Markdown. Le rendu, l’assainissement, la génération de la table des matières et l’export PDF se font tous localement. Pour la récupération d’un dépôt, les seules requêtes sortantes sont des lectures anonymes sur GitHub du README public et de ses images. Aucun compte, aucun cookie et aucune analytique ne sont associés à la conversion.</p>
+<p>Cela compte lorsque le document contient des notes internes, des noms de clients ou des projets non publiés. Vous pouvez coller du Markdown sensible et l’exporter sans envoyer le texte à un service de conversion tiers. Il en va de même pour les fichiers locaux : le fichier est lu par votre navigateur, pas envoyé.</p>
+<h2 id="la-version-courte">La version courte</h2>
+<p>Collez l’URL d’un dépôt public, appuyez sur Récupérer, vérifiez l’aperçu, choisissez un thème, laissez la table des matières active pour les documents longs, puis imprimez en PDF avec les graphiques d’arrière-plan activés. Vérifiez les sauts de page et les blocs de code larges avant d’envoyer le fichier. Si la récupération échoue, collez ou importez le Markdown et poursuivez.</p>
+<p>Tout le processus est conçu pour être ennuyeux : pas de compte, pas de file d’attente, pas d’envoi, pas de rendu côté serveur. Juste un README, une feuille de style d’impression et un PDF que vous pouvez remettre à quelqu’un.</p> </div> <div class="post-footer"> <a class="link-inline" href="/fr/blog/">← Tous les guides</a> </div> <div class="post-cta"> <div> <h2 class="heading-lg">Créez votre propre PDF de README</h2> <p class="body-loose">Gratuit, sans compte et entièrement côté client.</p> </div> <a class="btn btn--primary" href="/fr/#converter">Ouvrir le convertisseur</a> </div> </article> </div> </div> </main> <section class="related"> <div class="container"> <div class="blog-section-head"> <div> <p class="blog-kicker">Continuer la lecture</p> <h2 class="display-lg">Guides associés</h2> </div> </div> <div class="blog-grid"> <article class="blog-card"> <div class="blog-tags" aria-label="Mots-clés"> <span class="blog-tag">Thèmes</span><span class="blog-tag">Design</span><span class="blog-tag">PDF</span> </div> <h3 class="blog-card__title"> <a href="/fr/blog/readme-pdf-print-themes/">Clean, Business, Academic ou Dark : quel thème ReadmePDF choisir ?</a> </h3> <p class="blog-card__desc">Comparaison pratique des quatre thèmes d’impression de ReadmePDF — typographie, blocs de code, tableaux et documents auxquels chacun convient.</p> <div class="blog-card__footer"> <div class="blog-meta"> <time datetime="2026-10-14">14 octobre 2026</time> <span aria-hidden="true">·</span> <span>11 min de lecture</span> </div> <a class="blog-card__read" href="/fr/blog/readme-pdf-print-themes/"> Lire le guide <span aria-hidden="true">→</span> </a> </div> </article><article class="blog-card"> <div class="blog-tags" aria-label="Mots-clés"> <span class="blog-tag">Cas d’usage</span><span class="blog-tag">Documentation</span><span class="blog-tag">Workflow</span> </div> <h3 class="blog-card__title"> <a href="/fr/blog/readme-to-pdf-use-cases/">7 cas d’usage concrets pour transformer un README en PDF</a> </h3> <p class="blog-card__desc">Transmissions clients, supports de cours, archives d’audit et plus encore — quand un PDF de README bat un lien vers le dépôt, avec le thème et les réglages adaptés.</p> <div class="blog-card__footer"> <div class="blog-meta"> <time datetime="2026-10-02">2 octobre 2026</time> <span aria-hidden="true">·</span> <span>13 min de lecture</span> </div> <a class="blog-card__read" href="/fr/blog/readme-to-pdf-use-cases/"> Lire le guide <span aria-hidden="true">→</span> </a> </div> </article> </div> </div> </section> <footer class="footer"> <div class="container"> <nav class="footer__links" aria-label="Pied de page"> <a href="/fr/#converter">Convertisseur</a> <a href="/fr/#how">Fonctionnement</a> <a href="/fr/#themes">Thèmes</a> <a href="/fr/blog/">Le blog</a> <a href="/fr/#privacy">Confidentialité</a> <a href="https://github.com/girishlade111/ReadmePDF" target="_blank" rel="noopener noreferrer">GitHub</a> </nav> <div class="footer__social"> <a href="https://github.com/girishlade111/ReadmePDF" target="_blank" rel="noopener noreferrer" aria-label="ReadmePDF sur GitHub"> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"> <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path> </svg> </a> <a href="https://ladestack.in" target="_blank" rel="noopener noreferrer" aria-label="LadeStack"> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"> <path d="M3.5 9.5 12 3.5l8.5 6v9a1.5 1.5 0 0 1-1.5 1.5h-14A1.5 1.5 0 0 1 3.5 18.5z"></path> <path d="M9.5 20v-6h5v6"></path> </svg> </a> </div> <p class="footer__credit caption">© 2026 LadeStack · ReadmePDF est gratuit, sous licence MIT, et conçu par Girish Lade.</p> </div> </footer> </body></html>

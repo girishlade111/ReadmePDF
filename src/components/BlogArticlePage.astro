@@ -2,8 +2,10 @@
 import { getCollection, render } from 'astro:content';
 import BlogLayout from '../layouts/BlogLayout.astro';
 import BlogCard from './BlogCard.astro';
-import { localeHref, localeMeta } from '../i18n/config.js';
+import { localeHref } from '../i18n/config.js';
 import { translator } from '../i18n/index.js';
+import { articleJsonLd } from '../lib/seo.js';
+import { siteFromEnv } from '../lib/site.js';
 import {
   formatDate,
   isoDate,
@@ -15,7 +17,6 @@ import {
 
 const { post, locale = 'en', path = '/' } = Astro.props;
 const t = translator(locale);
-const meta = localeMeta(locale);
 const { Content, headings } = await render(post);
 const toc = headings.filter((heading) => heading.depth <= 3);
 
@@ -26,19 +27,8 @@ const homeHref = localeHref(locale, '/');
 const blogHref = localeHref(locale, '/blog/');
 const converterHref = `${homeHref}#converter`;
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'BlogPosting',
-  headline: post.data.title,
-  description: post.data.description,
-  datePublished: post.data.pubDate.toISOString(),
-  dateModified: (post.data.updatedDate ?? post.data.pubDate).toISOString(),
-  author: { '@type': 'Person', name: post.data.author },
-  publisher: { '@type': 'Organization', name: 'LadeStack' },
-  keywords: post.data.tags.join(', '),
-  inLanguage: meta.htmlLang,
-  mainEntityOfPage: postHref(post, locale),
-};
+const site = siteFromEnv(import.meta.env);
+const jsonLd = articleJsonLd({ post, locale, path, site });
 ---
 
 <BlogLayout
@@ -47,11 +37,8 @@ const jsonLd = {
   article={true}
   locale={locale}
   path={path}
+  jsonLd={jsonLd}
 >
-  <Fragment slot="head">
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
-  </Fragment>
-
   <header class="post-hero">
     <div class="container post-hero__inner">
       <nav class="breadcrumbs" aria-label={t('a11y.breadcrumb')}>

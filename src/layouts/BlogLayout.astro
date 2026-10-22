@@ -2,10 +2,18 @@
 import '../styles/app.css';
 import '../styles/blog.css';
 import LanguageSwitcher from '../components/LanguageSwitcher.astro';
+import SeoHead from '../components/SeoHead.astro';
 import { localeHref, localeMeta } from '../i18n/config.js';
 import { translator } from '../i18n/index.js';
 
-const { title, description, article = false, locale = 'en', path = '/' } = Astro.props;
+const {
+  title,
+  description,
+  article = false,
+  locale = 'en',
+  path = '/',
+  jsonLd = null,
+} = Astro.props;
 const t = translator(locale);
 const meta = localeMeta(locale);
 const pageTitle = title.includes('ReadmePDF') ? title : `${title} — ReadmePDF`;
@@ -22,14 +30,15 @@ const blogHref = localeHref(locale, '/blog/');
       rel="icon"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23211e1c'/%3E%3Ctext x='16' y='23' font-size='17' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'%3ER%3C/text%3E%3C/svg%3E"
     />
-    <meta name="description" content={description} />
     <meta name="theme-color" content="#f1efed" />
-    <meta property="og:title" content={pageTitle} />
-    <meta property="og:description" content={description} />
-    <meta property="og:type" content={article ? 'article' : 'website'} />
-    <meta property="og:site_name" content="ReadmePDF" />
-    <meta name="twitter:card" content="summary" />
-    <title>{pageTitle}</title>
+    <SeoHead
+      title={pageTitle}
+      description={description}
+      locale={locale}
+      path={path}
+      type={article ? 'article' : 'website'}
+      jsonLd={jsonLd}
+    />
     <slot name="head" />
   </head>
   <body>

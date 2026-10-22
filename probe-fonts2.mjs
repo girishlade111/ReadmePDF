@@ -1,0 +1,13 @@
+﻿import { PDFDocument } from 'pdf-lib';
+import fontkit from '@pdf-lib/fontkit';
+import fs from 'node:fs/promises';
+const doc = await PDFDocument.create();
+doc.registerFontkit(fontkit);
+const latin = await doc.embedFont(await fs.readFile('public/fonts/DejaVuSans.ttf'), { subset: true });
+const cjk = await doc.embedFont(await fs.readFile('public/fonts/NotoSansCJKsc-Common.otf'), { subset: true });
+const page = doc.addPage();
+page.drawText('Hello Привет ş', { x: 50, y: 700, size: 12, font: latin });
+page.drawText('中文文档', { x: 130, y: 700, size: 12, font: cjk });
+const out = await doc.save();
+await fs.writeFile('dist-seo/_font-probe2.pdf', out);
+console.log('bytes', out.length);

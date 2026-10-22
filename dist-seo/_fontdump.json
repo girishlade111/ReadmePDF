@@ -1,0 +1,14 @@
+{
+  "/DejaVuSans-7098480789": {
+    "Subtype": "/Type0",
+    "BaseFont": "/DejaVuSans-2000",
+    "Encoding": "/Identity-H",
+    "ToUnicodeSample": "/CIDInit /ProcSet findresource begin\n12 dict begin\nbegincmap\n/CIDSystemInfo <<\n  /Registry (Adobe)\n  /Ordering (UCS)\n  /Supplement 0\n>> def\n/CMapName /Adobe-Identity-UCS def\n/CMapType 2 def\n1 begincodespacerange\n<0000><ffff>\nendcodespacerange\n12 beginbfchar\n<0001> <0048>\n<0002> <0065>\n<0003> <006C>\n<0004> <006F>\n<0005> <0020>\n<0006> <041F>\n<0007> <0440>\n<0008> <0438>\n<0009> <0432>\n<000A> <0435>\n<000B> <0442>\n<000C> <015F>\nendbfchar\nendcmap\nCMapName currentdict /CMap defineresource pop\nend\nend"
+  },
+  "/NotoSansCJKsc-Regular-9742682568": {
+    "Subtype": "/Type0",
+    "BaseFont": "/NotoSansCJKsc-Regular-9750",
+    "Encoding": "/Identity-H",
+    "ToUnicodeSample": "/CIDInit /ProcSet findresource begin\n12 dict begin\nbegincmap\n/CIDSystemInfo <<\n  /Registry (Adobe)\n  /Ordering (UCS)\n  /Supplement 0\n>> def\n/CMapName /Adobe-Identity-UCS def\n/CMapType 2 def\n1 begincodespacerange\n<0000><ffff>\nendcodespacerange\n3 beginbfchar\n<0001> <4E2D>\n<0002> <6587>\n<0003> <6863>\nendbfchar\nendcmap\nCMapName currentdict /CMap defineresource pop\nend\nend"
+  }
+}

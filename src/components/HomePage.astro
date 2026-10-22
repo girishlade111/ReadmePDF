@@ -2,13 +2,23 @@
 import '../styles/app.css';
 import LanguageSwitcher from './LanguageSwitcher.astro';
 import RichText from './RichText.astro';
+import SeoHead from './SeoHead.astro';
 import { localeHref, localeMeta } from '../i18n/config.js';
 import { serializeDictionary, translator } from '../i18n/index.js';
+import { homeJsonLd } from '../lib/seo.js';
+import { siteFromEnv } from '../lib/site.js';
 
 const { locale = 'en', path = '/' } = Astro.props;
 const meta = localeMeta(locale);
 const t = translator(locale);
 const blogHref = localeHref(locale, '/blog/');
+const site = siteFromEnv(import.meta.env);
+const jsonLd = homeJsonLd({
+  locale,
+  description: t('meta.home.description'),
+  site,
+  path,
+});
 ---
 
 <!doctype html>
@@ -20,9 +30,15 @@ const blogHref = localeHref(locale, '/blog/');
       rel="icon"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23211e1c'/%3E%3Ctext x='16' y='23' font-size='17' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'%3ER%3C/text%3E%3C/svg%3E"
     />
-    <meta name="description" content={t('meta.home.description')} />
     <meta name="theme-color" content="#f1efed" />
-    <title>{t('meta.home.title')}</title>
+    <SeoHead
+      title={t('meta.home.title')}
+      description={t('meta.home.description')}
+      locale={locale}
+      path={path}
+      type="website"
+      jsonLd={jsonLd}
+    />
   </head>
   <body>
     <header class="masthead">

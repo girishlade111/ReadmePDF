@@ -1,0 +1,55 @@
+---
+/**
+ * Shared, localized <head> metadata.
+ *
+ * Renders a self-referencing canonical, reciprocal hreflang links (only when
+ * an absolute deployment origin is configured), localized Open Graph tags,
+ * Twitter metadata, and optional JSON-LD.
+ */
+import { buildSeoPage, serializeJsonLd } from '../lib/seo.js';
+import { siteFromEnv } from '../lib/site.js';
+
+const {
+  title,
+  description,
+  locale = 'en',
+  path = '/',
+  type = 'website',
+  jsonLd = null,
+} = Astro.props;
+
+const site = siteFromEnv(import.meta.env);
+const seo = buildSeoPage({ title, description, locale, path, site, type });
+const ogImage = site ? seo.image : null;
+---
+
+<title>{seo.title}</title>
+<meta name="description" content={seo.description} />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<link rel="canonical" href={seo.canonical} />
+
+{
+  seo.hasAbsolute &&
+    seo.alternates.map((alternate) => (
+      <link rel="alternate" hreflang={alternate.hreflang} href={alternate.href} />
+    ))
+}
+
+<meta property="og:type" content={seo.type} />
+<meta property="og:site_name" content="ReadmePDF" />
+<meta property="og:title" content={seo.title} />
+<meta property="og:description" content={seo.description} />
+<meta property="og:locale" content={seo.ogLocale} />
+{seo.ogAlternates.map((alternate) => <meta property="og:locale:alternate" content={alternate} />)}
+{seo.url && <meta property="og:url" content={seo.url} />}
+{ogImage && <meta property="og:image" content={ogImage} />}
+{ogImage && <meta property="og:image:width" content="1200" />}
+{ogImage && <meta property="og:image:height" content="630" />}
+{ogImage && <meta property="og:image:alt" content="ReadmePDF — GitHub README to PDF" />}
+
+<meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+<meta name="twitter:title" content={seo.title} />
+<meta name="twitter:description" content={seo.description} />
+{ogImage && <meta name="twitter:image" content={ogImage} />}
+
+{jsonLd && <script type="application/ld+json" set:html={serializeJsonLd(jsonLd)} />}

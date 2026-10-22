@@ -1,0 +1,205 @@
+<!DOCTYPE html><html lang="zh-Hans"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23211e1c'/%3E%3Ctext x='16' y='23' font-size='17' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'%3ER%3C/text%3E%3C/svg%3E"><meta name="theme-color" content="#f1efed"><title>将 README 转为 PDF 的 7 个实用场景 — ReadmePDF</title><meta name="description" content="客户交付、课程包、审计快照等——在这些场景中，精致的 README PDF 胜过仓库链接，并附上各自适用的主题与设置。"><meta name="robots" content="index, follow, max-image-preview:large"><link rel="canonical" href="https://example.test/zh/blog/readme-to-pdf-use-cases/"><link rel="alternate" hreflang="en" href="https://example.test/blog/readme-to-pdf-use-cases/"><link rel="alternate" hreflang="es" href="https://example.test/es/blog/readme-to-pdf-use-cases/"><link rel="alternate" hreflang="ja" href="https://example.test/ja/blog/readme-to-pdf-use-cases/"><link rel="alternate" hreflang="ko" href="https://example.test/ko/blog/readme-to-pdf-use-cases/"><link rel="alternate" hreflang="zh" href="https://example.test/zh/blog/readme-to-pdf-use-cases/"><link rel="alternate" hreflang="ru" href="https://example.test/ru/blog/readme-to-pdf-use-cases/"><link rel="alternate" hreflang="tr" href="https://example.test/tr/blog/readme-to-pdf-use-cases/"><link rel="alternate" hreflang="fr" href="https://example.test/fr/blog/readme-to-pdf-use-cases/"><link rel="alternate" hreflang="pt-BR" href="https://example.test/pt/blog/readme-to-pdf-use-cases/"><link rel="alternate" hreflang="x-default" href="https://example.test/blog/readme-to-pdf-use-cases/"><meta property="og:type" content="article"><meta property="og:site_name" content="ReadmePDF"><meta property="og:title" content="将 README 转为 PDF 的 7 个实用场景 — ReadmePDF"><meta property="og:description" content="客户交付、课程包、审计快照等——在这些场景中，精致的 README PDF 胜过仓库链接，并附上各自适用的主题与设置。"><meta property="og:locale" content="zh_CN"><meta property="og:locale:alternate" content="en_US"><meta property="og:locale:alternate" content="es_ES"><meta property="og:locale:alternate" content="ja_JP"><meta property="og:locale:alternate" content="ko_KR"><meta property="og:locale:alternate" content="ru_RU"><meta property="og:locale:alternate" content="tr_TR"><meta property="og:locale:alternate" content="fr_FR"><meta property="og:locale:alternate" content="pt_BR"><meta property="og:url" content="https://example.test/zh/blog/readme-to-pdf-use-cases/"><meta property="og:image" content="https://example.test/og/readmepdf.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="ReadmePDF — GitHub README to PDF"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="将 README 转为 PDF 的 7 个实用场景 — ReadmePDF"><meta name="twitter:description" content="客户交付、课程包、审计快照等——在这些场景中，精致的 README PDF 胜过仓库链接，并附上各自适用的主题与设置。"><meta name="twitter:image" content="https://example.test/og/readmepdf.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"将 README 转为 PDF 的 7 个实用场景","description":"客户交付、课程包、审计快照等——在这些场景中，精致的 README PDF 胜过仓库链接，并附上各自适用的主题与设置。","datePublished":"2026-10-02T00:00:00.000Z","dateModified":"2026-10-02T00:00:00.000Z","author":{"@type":"Person","name":"Girish Lade"},"publisher":{"@type":"Organization","name":"LadeStack","url":"https://ladestack.in"},"keywords":"Use Cases, Documentation, Workflow","inLanguage":"zh","url":"https://example.test/zh/blog/readme-to-pdf-use-cases/","mainEntityOfPage":{"@type":"WebPage","@id":"https://example.test/zh/blog/readme-to-pdf-use-cases/"},"isPartOf":{"@type":"Blog","name":"The ReadmePDF Journal","url":"https://example.test/zh/blog/"}}</script><link rel="stylesheet" href="/_astro/index.SNJGXvUv.css">
+<link rel="stylesheet" href="/_astro/_slug_.B3yeAsbl.css"></head> <body> <header class="masthead"> <div class="container masthead__inner"> <a class="wordmark" href="/zh/">ReadmePDF</a> <span class="masthead__tag caption">由 LadeStack 打造 · 免费 · 无需登录 · 全程本地</span> <div class="masthead__utils"> <label class="lang-switcher"> <span class="lang-switcher__label">语言</span> <select class="lang-switcher__select" data-language-switcher aria-label="切换语言" title="当前语言：简体中文"> <option value="/blog/readme-to-pdf-use-cases/"> English </option><option value="/es/blog/readme-to-pdf-use-cases/"> Español </option><option value="/ja/blog/readme-to-pdf-use-cases/"> 日本語 </option><option value="/ko/blog/readme-to-pdf-use-cases/"> 한국어 </option><option value="/zh/blog/readme-to-pdf-use-cases/" selected> 简体中文 </option><option value="/ru/blog/readme-to-pdf-use-cases/"> Русский </option><option value="/tr/blog/readme-to-pdf-use-cases/"> Türkçe </option><option value="/fr/blog/readme-to-pdf-use-cases/"> Français </option><option value="/pt/blog/readme-to-pdf-use-cases/"> Português (Brasil) </option> </select> </label> <script>
+  document.querySelectorAll('[data-language-switcher]').forEach((select) => {
+    select.addEventListener('change', () => {
+      const target = new URL(select.value, window.location.origin);
+      target.search = window.location.search;
+      target.hash = window.location.hash;
+      window.location.assign(target.href);
+    });
+  });
+</script> <a class="icon-link" href="https://github.com/girishlade111/ReadmePDF" target="_blank" rel="noopener noreferrer" aria-label="在 GitHub 上查看 ReadmePDF"> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"> <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path> </svg> </a> </div> </div> </header> <nav class="subnav" aria-label="区块"> <div class="container subnav__inner"> <a href="/zh/#converter">转换器</a> <a href="/zh/#how">工作原理</a> <a href="/zh/#themes">主题</a> <a href="/zh/blog/" aria-current="page">博客</a> <a href="/zh/#privacy">隐私</a> </div> </nav>  <header class="post-hero"> <div class="container post-hero__inner"> <nav class="breadcrumbs" aria-label="面包屑导航"> <a href="/zh/">首页</a> <span aria-hidden="true">/</span> <a href="/zh/blog/">博客</a> <span aria-hidden="true">/</span> <span aria-current="page">将 README 转为 PDF 的 7 个实用场景</span> </nav> <div class="blog-tags" aria-label="标签"> <span class="blog-tag">用例</span><span class="blog-tag">文档</span><span class="blog-tag">工作流</span> </div> <h1 class="display-xl">将 README 转为 PDF 的 7 个实用场景</h1> <p class="lead">客户交付、课程包、审计快照等——在这些场景中，精致的 README PDF 胜过仓库链接，并附上各自适用的主题与设置。</p> <div class="blog-meta post-meta"> <span>Girish Lade</span> <span aria-hidden="true">·</span> <time datetime="2026-10-02">2026年10月2日</time> <span aria-hidden="true">·</span> <span>阅读时间 10 分钟</span>  </div> </div> </header> <main class="post-main"> <div class="container"> <div class="post-layout"> <aside class="post-aside" aria-label="本页内容"> <h2>本页内容</h2> <nav aria-label="目录"> <ol class="post-toc"> <li class="post-toc__item post-toc__item--2"> <a href="#1-客户与相关方交付">1. 客户与相关方交付</a> </li><li class="post-toc__item post-toc__item--2"> <a href="#2-离线归档与版本文档">2. 离线归档与版本文档</a> </li><li class="post-toc__item post-toc__item--2"> <a href="#3-学术提交与课程包">3. 学术提交与课程包</a> </li><li class="post-toc__item post-toc__item--2"> <a href="#4-内部评审材料与发布说明">4. 内部评审材料与发布说明</a> </li><li class="post-toc__item post-toc__item--2"> <a href="#5-研讨会讲义与会议材料">5. 研讨会讲义与会议材料</a> </li><li class="post-toc__item post-toc__item--2"> <a href="#6-基金作品集与求职申请">6. 基金、作品集与求职申请</a> </li><li class="post-toc__item post-toc__item--2"> <a href="#7-审计与合规快照">7. 审计与合规快照</a> </li><li class="post-toc__item post-toc__item--2"> <a href="#pdf-不合适的情况">PDF 不合适的情况</a> </li><li class="post-toc__item post-toc__item--2"> <a href="#五分钟飞行前检查清单">五分钟飞行前检查清单</a> </li><li class="post-toc__item post-toc__item--2"> <a href="#主题速查表">主题速查表</a> </li> </ol> </nav> </aside> <article class="post-prose"> <div class="prose"> <p>如果对方本来就常驻 GitHub，仓库链接是分享文档的好方法；但对其他所有人来说，它都很糟糕。审阅者会丢失上下文，客户不想注册账号，而 URL 也不是归档。PDF 能解决分发问题，但前提是它被有意识地制作出来。</p>
+<p>ReadmePDF 围绕一条克制的流程构建：从公开仓库、本地文件或剪贴板获取 Markdown；以 GitHub 风格 Markdown 渲染；应用打印样式表；送入浏览器的“另存为 PDF”对话框。这种克制很有用。它意味着同一个工具既能服务五页的客户交付，也能服务五十页的课程读本，而无需服务器、账号或上传。</p>
+<p>下面介绍七个能体现这套流程价值的场景，并说明让每个场景奏效的设置与准备工作。</p>
+<h2 id="1-客户与相关方交付">1. 客户与相关方交付</h2>
+<p>客户很少会为了读一份项目概览而要求仓库访问权限。他们想要的是一份能打开、能转发给同事、能在会议上批注的文档。README PDF 往往正好提供恰当的细节层级：范围、架构说明、安装步骤、截图和已知限制，全都放在一个文件里。</p>
+<p><strong>推荐设置：</strong></p>
+<ul>
+<li>主题：对外受众用<strong>商务</strong>，技术背景很深的客户用<strong>简洁</strong>。</li>
+<li>目录：超过四页的文档开启。</li>
+<li>页面尺寸：匹配客户所在地区——欧洲和亚洲大部分地区用 A4，美国和加拿大用 Letter。</li>
+<li>来源：仓库公开时直接获取；否则粘贴 Markdown 或上传 README 文件。</li>
+</ul>
+<p><strong>重要的准备工作：</strong></p>
+<ul>
+<li>导出前移除内部工单链接、预发布环境 URL 和凭据。工具不会上传文档，但 PDF 仍然是可以被转发的文件。</li>
+<li>把相对图片路径替换为确实存在的仓库路径。ReadmePDF 会在获取仓库时解析它们，但源图片损坏，PDF 中依然会损坏。</li>
+<li>检查 README 是否以摘要开篇，而不是更新日志。交付文档应当先告诉读者项目是什么，再告诉他们改了什么。</li>
+<li>如果 README 把安装说明与架构背景混在一起，请添加一段简短的“如何阅读本文档”。</li>
+</ul>
+<p>如果客户会在评审中引用具体页码，请使用浏览器的页码选项。应用的打印样式表本身不会添加页码；浏览器页眉和页脚是最简单的实现方式。</p>
+<h2 id="2-离线归档与版本文档">2. 离线归档与版本文档</h2>
+<p>只存在于仓库中的文档，会在读者脚下不断变化。当你需要记录某个版本在某一时点的样貌时，PDF 是稳定的产物。它可以与二进制文件放在一起、附加到发布记录，或存入项目档案，而不必担心未来的 README 改写。</p>
+<p><strong>推荐设置：</strong></p>
+<ul>
+<li>主题：<strong>简洁</strong>。</li>
+<li>目录：开启。</li>
+<li>文件名：包含仓库、发布标签或提交，以及日期，例如 <code>acme-api-v2.4.0-readme-2026-10-02.pdf</code>。</li>
+<li>来源：获取公开仓库，然后确认你导出的正是想要的 README。应用读取默认分支，因此如果需要锁定标签或提交，请使用粘贴方式。</li>
+</ul>
+<p><strong>重要的准备工作：</strong></p>
+<ul>
+<li>在文档或文件名中记录来源。没有版本信息的 PDF，不过是又一份没有日期的附件。</li>
+<li>归档前检查链接。blob 链接会始终指向仓库的默认分支。如果你需要标签或提交的真正快照，请粘贴该版本的 README，而不是使用获取流程，并在页脚行或随附的发布记录中注明提交哈希。</li>
+<li>如果浏览器页眉和页脚包含本地文件路径或内部主机名，请将其禁用。归档应当自包含，而不是泄露生成它的机器信息。</li>
+<li>如果归档需要可复现，请把 Markdown 源文件与 PDF 一并保存。PDF 是产物，Markdown 是配方。</li>
+</ul>
+<p>这也是审阅阶段使用<strong>深色</strong>主题的好场景：在屏幕上阅读预览，然后导出，并清楚打印样式表会为纸张将其调亮。只需检查最终 PDF，而不要假设屏幕上的样子就是打印机将收到的样子。</p>
+<h2 id="3-学术提交与课程包">3. 学术提交与课程包</h2>
+<p>学生和教师常常有 Markdown 笔记、项目文档或阅读材料，需要作为单一文档提交或分发。学术主题与产品 README 的任务不同：它需要充裕的论述空间、克制的代码块，以及一种不像落地页的版式。</p>
+<p><strong>推荐设置：</strong></p>
+<ul>
+<li>主题：<strong>学术</strong>。</li>
+<li>目录：超过三个章节的文档开启。</li>
+<li>页面尺寸：遵循院校要求。美国以外常用 A4，美国常用 Letter。</li>
+<li>来源：如果作品未公开，请上传或粘贴 Markdown。绝不要为了转换而把未发表的作品放进公开仓库。</li>
+</ul>
+<p><strong>重要的准备工作：</strong></p>
+<ul>
+<li>导出前检查标题层级。标题跳级的课程读本会生成令人困惑的目录。</li>
+<li>学术主题会对正文做两端对齐。很长的 URL、代码标识符和公式可能产生尴尬的间距。请把长 URL 改为引用式链接，或移入类似脚注的章节。</li>
+<li>保持代码块简短。该主题使用打印效果良好的浅色代码背景，但 120 个字符的行仍会溢出页面。</li>
+<li>如果文档包含引文，请把它们作为参考文献章节保留在 Markdown 中。ReadmePDF 只渲染文本，不管理引文格式。</li>
+<li>提交前打印一份草稿。两端对齐的文本和衬线字体在纸上的观感可能与预览不同。</li>
+</ul>
+<p>由于转换在客户端完成，未发表的笔记和论文草稿不会离开浏览器。相比于“把你的文档粘贴到我们的转换器”这类服务，这是实实在在的优势。</p>
+<h2 id="4-内部评审材料与发布说明">4. 内部评审材料与发布说明</h2>
+<p>工程团队常常需要一份单一文档，用于设计评审、发布就绪检查或事故后的跟进。来源可能已经是 README 或文档页面。把它转成 PDF，可以为会议建立固定议程，并留下审阅者所见内容的记录。</p>
+<p><strong>推荐设置：</strong></p>
+<ul>
+<li>主题：工程评审用<strong>简洁</strong>，跨职能受众用<strong>商务</strong>。</li>
+<li>目录：开启。</li>
+<li>来源：获取公开仓库，或在仓库私有时粘贴 Markdown。</li>
+</ul>
+<p><strong>重要的准备工作：</strong></p>
+<ul>
+<li>把决策或请求放在开头。一份以三页背景开场的评审材料不会被人认真评审。</li>
+<li>明确标出待定问题。PDF 格式便于在打印稿上批注，但前提是问题清晰可见。</li>
+<li>移除机密信息和客户标识符。工具不会把文档发送到任何地方，但评审材料往往会被转发。</li>
+<li>在文件名中包含提交或文档版本。没有版本的评审记录日后很难核对。</li>
+<li>如果文档包含任务列表，请检查渲染效果。GitHub 风格 Markdown 任务列表受支持，但长清单可能跨页拆分。请把相关条目放在一起。</li>
+</ul>
+<p>获取流程不支持私有仓库。对于内部工作，粘贴或上传是实际可行的选择。这不是临时拼凑的变通方案，而是处理不应从公开 URL 读取的材料的预期方式。</p>
+<h2 id="5-研讨会讲义与会议材料">5. 研讨会讲义与会议材料</h2>
+<p>放在仓库里的研讨会练习，默认读者有网络、有 GitHub 账号、有一台能用的笔记本。打印讲义则对这些一概不作要求。对于教程、会议演讲或课堂实验，PDF 往往是现场最可靠的副本。</p>
+<p><strong>推荐设置：</strong></p>
+<ul>
+<li>主题：精致讲义用<strong>商务</strong>，代码密集的实验用<strong>简洁</strong>。</li>
+<li>目录：包含多个练习的讲义开启。</li>
+<li>页面尺寸：匹配场地打印机。A4 和 Letter 都很常见；打印五十份之前请先确认。</li>
+<li>来源：公开研讨会仓库直接获取，私有草稿则上传。</li>
+</ul>
+<p><strong>重要的准备工作：</strong></p>
+<ul>
+<li>按灰度设计。仅靠颜色区分章节的主题，在黑白打印机上会失去这种区分。</li>
+<li>代码行控制在约 80 个字符以内。讲义是在一臂距离外阅读的，而不是在 27 英寸显示器上。</li>
+<li>如果读者需要最新版本，请添加实时仓库的短链接或二维码。PDF 是稳定副本，仓库是持续更新的版本。</li>
+<li>检查页数。40 页的讲义与 6 页的练习单是两种不同的产物。用目录和标题判断哪些内容应当保留。</li>
+<li>活动前先打印一份。屏幕上看起来没问题的浏览器打印设置，在场地打印机上可能产生不同的边距。</li>
+</ul>
+<p>应用的打印样式表专为清晰分页而设计，但它无法预知某台打印机如何处理边距。一次试打印仍然是最好的质量检查。</p>
+<h2 id="6-基金作品集与求职申请">6. 基金、作品集与求职申请</h2>
+<p>申请材料常常要求把项目概览、技术说明或作品集样例作为单个附件提交。README PDF 在这里很适用，因为它以审阅者无需 GitHub 账号即可打开的形式，展示项目自身的文档。</p>
+<p><strong>推荐设置：</strong></p>
+<ul>
+<li>主题：面向一般受众用<strong>商务</strong>，研究导向的申请用<strong>学术</strong>。</li>
+<li>目录：超过几页的文档开启。</li>
+<li>页面尺寸：遵循申请说明。</li>
+<li>来源：获取公开仓库，或在项目私有时粘贴 Markdown。</li>
+</ul>
+<p><strong>重要的准备工作：</strong></p>
+<ul>
+<li>把最相关的项目放在最前面。申请审阅者可能只读前两页。</li>
+<li>移除没有实际含义的徽章。一整墙的构建徽章在作品集附件里只是噪音。</li>
+<li>确保截图和图表有替代文本，并且确实能显示。损坏的图片比没有图片更糟。</li>
+<li>检查 PDF 中的链接是否可点击。无法点进在线项目的审阅者会丢失上下文。</li>
+<li>保持文件大小合理。图片过多的大型 PDF 可能触及申请门户的上传上限。</li>
+</ul>
+<p>这也是<strong>商务</strong>主题的衬线字体能发挥作用的场景：它可以让技术项目读起来像一份专业文档，而不是仓库内容的原始倾倒。内容仍然必须撑起申请本身；主题只负责设定语域。</p>
+<h2 id="7-审计与合规快照">7. 审计与合规快照</h2>
+<p>有时 PDF 的目的并不是供人从头读到尾，而是证明文档在某个日期是这样写的。描述访问控制、数据处理或操作流程的 README，在被捕获为不可变产物后，可以成为审计材料的有用组成部分。</p>
+<p><strong>推荐设置：</strong></p>
+<ul>
+<li>主题：<strong>简洁</strong>。</li>
+<li>目录：长文档开启。</li>
+<li>文件名：包含仓库、提交和捕获日期。</li>
+<li>来源：获取公开仓库，或粘贴经过审阅的准确 Markdown。</li>
+</ul>
+<p><strong>重要的准备工作：</strong></p>
+<ul>
+<li>记录来源版本。没有提交引用的 PDF 证据力较弱，因为底层 README 可能变化。</li>
+<li>不要把 PDF 当作记录系统。它是文档的快照，不能替代日志、政策或签署证明。</li>
+<li>检查文档是否包含机密信息、内部主机名或个人数据。审计材料的分发范围往往比原仓库更广。</li>
+<li>把 Markdown 源文件与 PDF 放在一起。如果有人质疑捕获内容，源文件可以说明产物是如何生成的。</li>
+<li>源文件变化时重新导出。文件名很新但内容过期的 PDF，比明显标明日期的旧 PDF 更糟。</li>
+</ul>
+<h2 id="pdf-不合适的情况">PDF 不合适的情况</h2>
+<p>PDF 是分发格式，不是协作格式。以下情况它并不合适：</p>
+<ul>
+<li>文档每天变化，读者需要最新版本。请改为链接到仓库，或按计划生成 PDF。</li>
+<li>内容依赖交互元素、实时数据或嵌入视频。PDF 会把这一切压平。</li>
+<li>仓库是私有的，而收件人需要浏览源码。PDF 给他们的是快照，不是访问权限。</li>
+<li>文档只是很短的单页，在仓库中阅读体验已经很好。多这一步可能不值得。</li>
+<li>你需要带跟踪的评论和建议。请使用协作文档工具；PDF 批注不能替代评审工作流。</li>
+</ul>
+<p>这个工具刻意不做一个文档平台。它把你已经拥有的文档转换成便于携带的版本。知道何时不该用它，也是用好它的一部分。</p>
+<h2 id="五分钟飞行前检查清单">五分钟飞行前检查清单</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>检查项</th><th>为什么重要</th></tr></thead><tbody><tr><td>来源是正确的仓库或文件</td><td>项目名称错误的 PDF 比没有 PDF 更糟</td></tr><tr><td>标题层级一致</td><td>决定目录和页面结构</td></tr><tr><td>图片可解析</td><td>仓库相对路径需要先获取仓库</td></tr><tr><td>代码行不过宽</td><td>过宽代码块是最常见的裁切问题</td></tr><tr><td>表格适配页面</td><td>八列表格在 A4 上很少能完好呈现</td></tr><tr><td>链接有意义</td><td>blob 链接和外部链接在离线时仍应说得通</td></tr><tr><td>已移除机密文本</td><td>尽管转换在本地完成，PDF 仍可被转发</td></tr><tr><td>主题匹配受众</td><td>工程用简洁，客户用商务，论述用学术</td></tr><tr><td>页面尺寸匹配收件人</td><td>A4 与 Letter 会改变分页</td></tr><tr><td>文件名包含版本</td><td>让产物可追溯</td></tr></tbody></table>
+<h2 id="主题速查表">主题速查表</h2>
+<ul>
+<li><strong>简洁</strong>——规格文档、技术 README、代码密集讲义、审计。</li>
+<li><strong>商务</strong>——客户交付、提案、研讨会材料、作品集附件。</li>
+<li><strong>学术</strong>——课程包、论文、长篇论述、研究申请。</li>
+<li><strong>深色</strong>——导出前的屏幕审阅；打印样式表会为纸张将其调亮。</li>
+</ul>
+<p>如果拿不准，从简洁开始，导出一份，在手机上或打印纸上阅读。在大显示器上最好看的主题，未必在一臂距离外最易读。</p>
+<p>包含打印设置与故障排查的完整流程，请参阅<a href="/blog/github-readme-to-pdf/">如何将 GitHub README 转换为 PDF</a>。想进一步了解四款主题，请参阅<a href="/blog/readme-pdf-print-themes/">简洁、商务、学术与深色主题对比</a>。</p> </div> <div class="post-footer"> <a class="link-inline" href="/zh/blog/">← 全部指南</a> </div> <div class="post-cta"> <div> <h2 class="heading-lg">制作你自己的 README PDF</h2> <p class="body-loose">免费、无需登录，全程在浏览器本地完成。</p> </div> <a class="btn btn--primary" href="/zh/#converter">打开转换器</a> </div> </article> </div> </div> </main> <section class="related"> <div class="container"> <div class="blog-section-head"> <div> <p class="blog-kicker">继续阅读</p> <h2 class="display-lg">相关指南</h2> </div> </div> <div class="blog-grid"> <article class="blog-card"> <div class="blog-tags" aria-label="标签"> <span class="blog-tag">主题</span><span class="blog-tag">设计</span><span class="blog-tag">PDF</span> </div> <h3 class="blog-card__title"> <a href="/zh/blog/readme-pdf-print-themes/">简洁、商务、学术与深色：该选哪款 ReadmePDF 主题？</a> </h3> <p class="blog-card__desc">对 ReadmePDF 四款打印主题的实用对比——字体排版、代码块、表格，以及各自适合的文档类型。</p> <div class="blog-card__footer"> <div class="blog-meta"> <time datetime="2026-10-14">2026年10月14日</time> <span aria-hidden="true">·</span> <span>阅读时间 8 分钟</span> </div> <a class="blog-card__read" href="/zh/blog/readme-pdf-print-themes/"> 阅读指南 <span aria-hidden="true">→</span> </a> </div> </article><article class="blog-card"> <div class="blog-tags" aria-label="标签"> <span class="blog-tag">GitHub</span><span class="blog-tag">README</span><span class="blog-tag">PDF</span><span class="blog-tag">教程</span> </div> <h3 class="blog-card__title"> <a href="/zh/blog/github-readme-to-pdf/">如何将 GitHub README 转换为 PDF（免费、无需登录）</a> </h3> <p class="blog-card__desc">分步指南：使用 ReadmePDF 将公开的 GitHub README 转换为整洁、适合打印的 PDF——无需账号、无需上传，也没有服务器端渲染器。</p> <div class="blog-card__footer"> <div class="blog-meta"> <time datetime="2026-09-18">2026年9月18日</time> <span aria-hidden="true">·</span> <span>阅读时间 10 分钟</span> </div> <a class="blog-card__read" href="/zh/blog/github-readme-to-pdf/"> 阅读指南 <span aria-hidden="true">→</span> </a> </div> </article> </div> </div> </section> <footer class="footer"> <div class="container"> <nav class="footer__links" aria-label="页脚"> <a href="/zh/#converter">转换器</a> <a href="/zh/#how">工作原理</a> <a href="/zh/#themes">主题</a> <a href="/zh/blog/">博客</a> <a href="/zh/#privacy">隐私</a> <a href="https://github.com/girishlade111/ReadmePDF" target="_blank" rel="noopener noreferrer">GitHub</a> </nav> <div class="footer__social"> <a href="https://github.com/girishlade111/ReadmePDF" target="_blank" rel="noopener noreferrer" aria-label="在 GitHub 上查看 ReadmePDF"> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"> <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path> </svg> </a> <a href="https://ladestack.in" target="_blank" rel="noopener noreferrer" aria-label="LadeStack"> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"> <path d="M3.5 9.5 12 3.5l8.5 6v9a1.5 1.5 0 0 1-1.5 1.5h-14A1.5 1.5 0 0 1 3.5 18.5z"></path> <path d="M9.5 20v-6h5v6"></path> </svg> </a> </div> <p class="footer__credit caption">© 2026 LadeStack · ReadmePDF 免费、采用 MIT 许可证，由 Girish Lade 构建。</p> </div> </footer> </body></html>

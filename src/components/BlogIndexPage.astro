@@ -5,6 +5,8 @@ import BlogCard from './BlogCard.astro';
 import { localeHref } from '../i18n/config.js';
 import { pluralizer, translator } from '../i18n/index.js';
 import { formatDate, isoDate, postHref, publishedPosts, readingTime, tagLabel } from '../lib/blog.js';
+import { blogIndexJsonLd } from '../lib/seo.js';
+import { siteFromEnv } from '../lib/site.js';
 
 const { locale = 'en', path = '/' } = Astro.props;
 const t = translator(locale);
@@ -14,6 +16,15 @@ const posts = publishedPosts(await getCollection('blog'), locale);
 const featured = posts.find((post) => post.data.featured) ?? posts[0];
 const rest = posts.filter((post) => post.data.translationKey !== featured?.data.translationKey);
 const converterHref = `${localeHref(locale, '/')}#converter`;
+
+const site = siteFromEnv(import.meta.env);
+const jsonLd = blogIndexJsonLd({
+  locale,
+  description: t('meta.blog.description'),
+  site,
+  path,
+  posts: posts.map((post) => ({ title: post.data.title, href: postHref(post, locale) })),
+});
 ---
 
 <BlogLayout
@@ -21,6 +32,7 @@ const converterHref = `${localeHref(locale, '/')}#converter`;
   description={t('meta.blog.description')}
   locale={locale}
   path={path}
+  jsonLd={jsonLd}
 >
   <section class="blog-hero">
     <div class="container blog-hero__inner">
