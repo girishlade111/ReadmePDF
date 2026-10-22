@@ -12,7 +12,7 @@
  */
 import { PDFDocument, PDFName, PDFString, rgb } from 'pdf-lib';
 import { embedPdfFonts } from './fonts.js';
-import { truncateText, wrapRuns } from './text.js';
+import { wrapRuns } from './text.js';
 
 export const PAGE_WIDTH = 595.28;
 export const PAGE_HEIGHT = 841.89;
@@ -1039,11 +1039,10 @@ class PdfRenderer {
       else this.newPage();
       const anchor = chapter.anchor ?? `chapter-${index + 1}`;
       this.anchors.set(anchor, { page: this.currentPageIndex, top: this.y });
-      this.addText(cleanText(chapter.path || chapter.title || ''), {
+      this.addAutoText(cleanText(chapter.path || chapter.title || ''), {}, {
         x: PAGE_MARGIN,
         top: this.y,
         size: 8.5,
-        role: 'regular',
         color: this.palette.accent,
       });
       this.y += 13;
