@@ -1761,6 +1761,80 @@ textarea.field {
   text-transform: uppercase;
 }
 
+/* ---- Individual PDF export ------------------------------------------------ */
+.book-export {
+  margin-top: var(--sp-xl);
+  padding-top: var(--sp-xl);
+  border-top: 1px solid var(--divider);
+}
+
+.book-export__limit {
+  margin-top: 4px;
+}
+
+.book-export__actions {
+  flex-wrap: wrap;
+  gap: var(--sp-sm);
+  margin-top: var(--sp-md);
+}
+
+.book-export__progress {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-sm);
+  margin-top: var(--sp-md);
+}
+
+.book-export__progress progress {
+  flex: 1;
+  min-width: 0;
+  height: 8px;
+  border: 1px solid var(--field-border);
+  border-radius: var(--r-full);
+  background: var(--canvas-tint);
+  overflow: hidden;
+  appearance: none;
+}
+
+.book-export__progress progress::-webkit-progress-bar {
+  background: var(--canvas-tint);
+}
+
+.book-export__progress progress::-webkit-progress-value {
+  background: var(--primary);
+  border-radius: var(--r-full);
+}
+
+.book-export__progress progress::-moz-progress-bar {
+  background: var(--primary);
+  border-radius: var(--r-full);
+}
+
+.book-export__progress-label {
+  flex: none;
+  min-width: 6.5em;
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  line-height: 18px;
+  text-align: right;
+  opacity: 0.72;
+}
+
+.book-export__warning {
+  color: var(--error);
+  opacity: 1;
+}
+
+.book-export__single {
+  margin-top: var(--sp-md);
+}
+
+.book-export[aria-busy='true'] #book-export-btn {
+  cursor: progress;
+}
+
 .book-preview-panel {
   margin-top: var(--sp-xxxl);
 }

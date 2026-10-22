@@ -35,7 +35,7 @@ import {
 import { assembleBook, renderDocumentPreview } from '../lib/pdf/assembly.js';
 import { printDocument } from '../lib/print.js';
 import { sanitizeHtml } from '../lib/sanitize.js';
-import { initClientI18n, t, tn, clientBookLabels } from '../i18n/client.js';
+import { initClientI18n, t, tn, clientBookLabels, clientLocale } from '../i18n/client.js';
 
 export const MAX_BOOK_FILES = BOOK_FETCH_LIMITS.maxFiles;
 
