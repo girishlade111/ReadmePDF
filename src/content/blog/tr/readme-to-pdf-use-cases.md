@@ -10,7 +10,7 @@ translationKey: "readme-to-pdf-use-cases"
 
 Bir depo bağlantısı, dokümantasyonu zaten GitHub'da yaşayan biriyle paylaşmanın harika bir yoludur. Herkesle paylaşmanın ise kötü bir yoludur. Gözden geçirenler bağlamı kaybeder, müşteriler hesap oluşturmak istemez ve bir URL arşiv değildir. PDF dağıtım sorununu çözer, ancak yalnızca bilinçli olarak üretilirse.
 
-ReadmePDF dar bir iş akışı etrafında kurulmuştur: Markdown'u herkese açık bir depodan, yerel bir dosyadan veya panodan alın; GitHub tarzı Markdown ile işleyin; bir baskı stil sayfası uygulayın ve tarayıcının “PDF olarak kaydet” iletişim kutusuna gönderin. Bu odaklılık işe yarar. Aynı aracın beş sayfalık bir müşteri teslimine de elli sayfalık bir ders okuma dosyasına da sunucu, hesap veya yükleme olmadan hizmet edebilmesi anlamına gelir.
+md2pdf dar bir iş akışı etrafında kurulmuştur: Markdown'u herkese açık bir depodan, yerel bir dosyadan veya panodan alın; GitHub tarzı Markdown ile işleyin; bir baskı stil sayfası uygulayın ve tarayıcının “PDF olarak kaydet” iletişim kutusuna gönderin. Bu odaklılık işe yarar. Aynı aracın beş sayfalık bir müşteri teslimine de elli sayfalık bir ders okuma dosyasına da sunucu, hesap veya yükleme olmadan hizmet edebilmesi anlamına gelir.
 
 Aşağıda bu iş akışının karşılığını verdiği yedi durum ve her birini işler hale getiren ayarlar ile hazırlıklar yer alıyor.
 
@@ -28,7 +28,7 @@ Bir müşteri, yalnızca bir proje genel bakışını okumak için depo erişimi
 **Önemli hazırlık:**
 
 - Dışa aktarmadan önce dahili bilet bağlantılarını, staging URL'lerini ve kimlik bilgilerini kaldırın. Araç belgeyi yüklemez, ancak PDF yine de iletilebilecek bir dosyadır.
-- Göreli görsel yollarını gerçekten var olan depo yollarıyla değiştirin. ReadmePDF bunları depo getirmesi sırasında çözümler, ancak bozuk bir kaynak görsel PDF'de de bozuk kalır.
+- Göreli görsel yollarını gerçekten var olan depo yollarıyla değiştirin. md2pdf bunları depo getirmesi sırasında çözümler, ancak bozuk bir kaynak görsel PDF'de de bozuk kalır.
 - README'nin değişiklik günlüğüyle değil bir özetle açıldığını kontrol edin. Bir teslim belgesi, okuyucuya neyin değiştiğini söylemeden önce projenin ne olduğunu anlatmalıdır.
 - README kurulum talimatlarını mimari arka planla karıştırıyorsa kısa bir “Bu belge nasıl okunur” paragrafı ekleyin.
 
@@ -70,7 +70,7 @@ Bu aynı zamanda inceleme sırasında **Dark** teması için de iyi bir kullanı
 - Dışa aktarmadan önce başlık hiyerarşisini kontrol edin. Düzeyleri atlanmış bir ders okuma dosyası kafa karıştırıcı bir içindekiler tablosu üretir.
 - Academic gövde metnini iki yana yaslar. Çok uzun URL'ler, kod tanımlayıcıları ve denklemler garip aralıklar oluşturabilir. Uzun URL'leri referans tarzı bağlantılara bölün veya dipnot benzeri bir bölüme taşıyın.
 - Kod bloklarını kısa tutun. Tema iyi basılan açık bir kod arka planı kullanır, ancak 120 karakterlik bir satır yine de sayfayı taşar.
-- Belge atıflar içeriyorsa bunları Markdown'da bir kaynaklar bölümü olarak tutun. ReadmePDF metni işler; bir atıf stili yönetmez.
+- Belge atıflar içeriyorsa bunları Markdown'da bir kaynaklar bölümü olarak tutun. md2pdf metni işler; bir atıf stili yönetmez.
 - Teslim etmeden önce bir taslak yazdırın. İki yana yaslı metin ve serif yazı tipi kâğıtta önizlemedekinden farklı görünebilir.
 
 Dönüştürme istemci tarafında olduğu için yayınlanmamış notlar ve taslak makaleler tarayıcıdan ayrılmaz. Bu, “belgenizi dönüştürücümüze yapıştırın” hizmetine göre anlamlı bir avantajdır.

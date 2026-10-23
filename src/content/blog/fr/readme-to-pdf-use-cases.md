@@ -10,7 +10,7 @@ translationKey: "readme-to-pdf-use-cases"
 
 Un lien vers un dépôt est excellent pour partager de la documentation avec quelqu’un qui vit déjà dans GitHub. C’est un mauvais moyen de la partager avec tous les autres. Les relecteurs perdent le contexte, les clients ne veulent pas créer de compte, et une URL n’est pas une archive. Le PDF règle le problème de diffusion, à condition d’être produit avec soin.
 
-ReadmePDF s’articule autour d’un flux étroit : récupérer du Markdown depuis un dépôt public, un fichier local ou le presse-papiers ; le rendre avec le Markdown compatible GitHub ; appliquer une feuille de style d’impression ; puis l’envoyer à la boîte de dialogue « Enregistrer au format PDF » du navigateur. Cette étroitesse est utile. Elle permet au même outil de servir une transmission client de cinq pages comme un recueil de cours de cinquante pages, sans serveur, sans compte et sans envoi.
+md2pdf s’articule autour d’un flux étroit : récupérer du Markdown depuis un dépôt public, un fichier local ou le presse-papiers ; le rendre avec le Markdown compatible GitHub ; appliquer une feuille de style d’impression ; puis l’envoyer à la boîte de dialogue « Enregistrer au format PDF » du navigateur. Cette étroitesse est utile. Elle permet au même outil de servir une transmission client de cinq pages comme un recueil de cours de cinquante pages, sans serveur, sans compte et sans envoi.
 
 Voici sept situations où ce flux fait ses preuves, avec les réglages et la préparation qui font fonctionner chacune d’elles.
 
@@ -28,7 +28,7 @@ Un client veut rarement un accès au dépôt juste pour lire une présentation d
 **Préparation indispensable :**
 
 - Supprimez les liens vers des tickets internes, les URL de préproduction et les identifiants avant l’export. L’outil n’envoie pas le document, mais le PDF reste un fichier qui peut être transféré.
-- Remplacez les chemins d’images relatifs par des chemins de dépôt qui existent réellement. ReadmePDF les résout lors de la récupération d’un dépôt, mais une image source cassée restera cassée dans le PDF.
+- Remplacez les chemins d’images relatifs par des chemins de dépôt qui existent réellement. md2pdf les résout lors de la récupération d’un dépôt, mais une image source cassée restera cassée dans le PDF.
 - Vérifiez que le README s’ouvre sur un résumé, pas sur un journal des modifications. Un document de transmission doit dire au lecteur ce qu’est le projet avant de lui dire ce qui a changé.
 - Ajoutez un court paragraphe « Comment lire ce document » si le README mêle instructions d’installation et contexte architectural.
 
@@ -70,7 +70,7 @@ Les étudiants et les enseignants ont souvent des notes en Markdown, de la docum
 - Vérifiez la hiérarchie des titres avant l’export. Un recueil de cours aux niveaux sautés produit une table des matières confuse.
 - Academic justifie le texte courant. Les URL très longues, les identifiants de code et les équations peuvent créer des espacements disgracieux. Transformez les URL longues en liens de type référence ou déplacez-les dans une section de type note de bas de page.
 - Gardez les blocs de code courts. Le thème utilise un fond de code clair qui s’imprime bien, mais une ligne de 120 caractères débordera tout de même de la page.
-- Si le document comporte des citations, conservez-les dans le Markdown sous forme de section de références. ReadmePDF rend le texte ; il ne gère pas de style de citation.
+- Si le document comporte des citations, conservez-les dans le Markdown sous forme de section de références. md2pdf rend le texte ; il ne gère pas de style de citation.
 - Imprimez un brouillon avant de remettre. Le texte justifié et la typographie à empattements peuvent rendre différemment sur papier que dans l’aperçu.
 
 Comme la conversion est côté client, les notes inédites et les articles en brouillon ne quittent pas le navigateur. C’est un avantage réel par rapport à un service du type « collez votre document dans notre convertisseur ».

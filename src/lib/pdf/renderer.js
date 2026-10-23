@@ -791,7 +791,7 @@ class PdfRenderer {
       });
       top += 17;
     }
-    this.addAutoText('Generated locally by ReadmePDF. No file was uploaded.', {}, {
+    this.addAutoText('Generated locally by md2pdf. No file was uploaded.', {}, {
       x: PAGE_MARGIN + 10,
       top: PAGE_HEIGHT - PAGE_MARGIN - 16,
       size: 8,
@@ -1214,11 +1214,11 @@ export async function renderPdf(options) {
 
   const pdfDoc = await PDFDocument.create();
   const generatedAt = options.generatedAt ?? new Date();
-  pdfDoc.setTitle(cleanText(options.title, 'ReadmePDF document'));
-  pdfDoc.setAuthor(cleanText(options.author ?? 'ReadmePDF'));
+  pdfDoc.setTitle(cleanText(options.title, 'md2pdf document'));
+  pdfDoc.setAuthor(cleanText(options.author ?? 'md2pdf'));
   pdfDoc.setSubject(cleanText(options.subtitle ?? 'Documentation exported from GitHub'));
-  pdfDoc.setCreator('ReadmePDF');
-  pdfDoc.setProducer('ReadmePDF (pdf-lib)');
+  pdfDoc.setCreator('md2pdf');
+  pdfDoc.setProducer('md2pdf (pdf-lib)');
   pdfDoc.setCreationDate(generatedAt);
   pdfDoc.setModificationDate(generatedAt);
   if (options.locale) pdfDoc.setLanguage(options.locale);

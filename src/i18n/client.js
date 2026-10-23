@@ -2,7 +2,7 @@
  * Browser-side translation runtime.
  *
  * Each localized page embeds exactly one dictionary in
- * `<script type="application/json" id="readmepdf-i18n">`. Controllers call
+ * `<script type="application/json" id="md2pdf-i18n">`. Controllers call
  * `initClientI18n()` once and then use `t()` / `tn()`. English is bundled as a
  * fallback so pure helpers behave identically in Node tests and in the browser.
  */
@@ -25,7 +25,7 @@ let initialized = false;
 export function initClientI18n() {
   if (initialized || typeof document === 'undefined') return active;
   initialized = true;
-  const node = document.getElementById('readmepdf-i18n');
+  const node = document.getElementById('md2pdf-i18n');
   if (!node) return active;
   try {
     const parsed = JSON.parse(node.textContent || '{}');

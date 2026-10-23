@@ -156,7 +156,7 @@ export function createGitHubApi({
     const requestHeaders = { ...headers, Accept: accept };
     if (accept === 'application/vnd.github+json') {
       requestHeaders['X-GitHub-Api-Version'] = '2022-11-28';
-      requestHeaders['User-Agent'] = 'ReadmePDF';
+      requestHeaders['User-Agent'] = 'md2pdf';
     }
 
     let response;

@@ -1,6 +1,6 @@
 ---
-title: "Clean vs Business vs Academic vs Dark: 어떤 ReadmePDF 테마를 사용해야 할까요?"
-description: "ReadmePDF의 네 가지 인쇄 테마를 실용적으로 비교합니다 — 타이포그래피, 코드 블록, 표, 그리고 각 테마에 어울리는 문서까지."
+title: "Clean vs Business vs Academic vs Dark: 어떤 md2pdf 테마를 사용해야 할까요?"
+description: "md2pdf의 네 가지 인쇄 테마를 실용적으로 비교합니다 — 타이포그래피, 코드 블록, 표, 그리고 각 테마에 어울리는 문서까지."
 pubDate: 2026-10-14
 author: "Girish Lade"
 tags: ["Themes", "Design", "PDF"]
@@ -8,7 +8,7 @@ locale: "ko"
 translationKey: "readme-pdf-print-themes"
 ---
 
-ReadmePDF의 테마 선택기는 작은 선택처럼 보입니다. 내보내기 버튼 위의 라디오 버튼 네 개일 뿐이니까요. 하지만 실제로는 누군가 내용을 읽기도 전에 문서의 인상을 바꿉니다. Academic으로 인쇄한 명세서는 논문처럼 보이고, Clean으로 인쇄한 고객 제안서는 저장소를 그대로 쏟아낸 것처럼 보입니다. 올바른 테마는 독자의 기대에 맞는 테마입니다.
+md2pdf의 테마 선택기는 작은 선택처럼 보입니다. 내보내기 버튼 위의 라디오 버튼 네 개일 뿐이니까요. 하지만 실제로는 누군가 내용을 읽기도 전에 문서의 인상을 바꿉니다. Academic으로 인쇄한 명세서는 논문처럼 보이고, Clean으로 인쇄한 고객 제안서는 저장소를 그대로 쏟아낸 것처럼 보입니다. 올바른 테마는 독자의 기대에 맞는 테마입니다.
 
 네 테마 모두 같은 Markdown을 렌더링합니다. 차이는 서체 계열, 정렬, 코드 처리, 표 스타일, 링크 색상, 그리고 제목에 얼마나 많은 시각적 구조를 더하는지입니다. 어느 테마도 워터마크, 표지, 로고를 추가하지 않습니다. 콘텐츠는 여러분의 것입니다.
 

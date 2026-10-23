@@ -1,6 +1,6 @@
 ---
 title: "Comment convertir un README GitHub en PDF (gratuit, sans compte)"
-description: "Un guide pas à pas pour transformer un README GitHub public en PDF propre et prêt à imprimer avec ReadmePDF — sans compte, sans envoi et sans rendu côté serveur."
+description: "Un guide pas à pas pour transformer un README GitHub public en PDF propre et prêt à imprimer avec md2pdf — sans compte, sans envoi et sans rendu côté serveur."
 pubDate: 2026-09-18
 updatedDate: 2026-10-21
 author: "Girish Lade"
@@ -12,7 +12,7 @@ translationKey: "github-readme-to-pdf"
 
 Un README est écrit pour un navigateur : il défile, renvoie vers d’autres pages et suppose que le lecteur peut cliquer dans le dépôt. Dès qu’il s’agit d’envoyer une documentation à un client, de la joindre à un devoir, d’archiver une version ou de la confier à quelqu’un qui ne clonera pas le dépôt, le PDF est le format qui voyage.
 
-Imprimer directement une page GitHub produit généralement un désordre. La navigation du site, les barres latérales et le pied de page suivent. Les blocs de code larges sont coupés. Les images relatives ne s’affichent plus, car le navigateur ne lit plus depuis la racine du dépôt. Les tableaux longs se scindent mal entre les pages. ReadmePDF existe pour résoudre précisément ces problèmes, sans vous demander de créer un compte ni d’envoyer votre fichier source à un serveur.
+Imprimer directement une page GitHub produit généralement un désordre. La navigation du site, les barres latérales et le pied de page suivent. Les blocs de code larges sont coupés. Les images relatives ne s’affichent plus, car le navigateur ne lit plus depuis la racine du dépôt. Les tableaux longs se scindent mal entre les pages. md2pdf existe pour résoudre précisément ces problèmes, sans vous demander de créer un compte ni d’envoyer votre fichier source à un serveur.
 
 Ce guide déroule l’ensemble du processus, depuis le collage d’une URL de dépôt jusqu’à la vérification du PDF exporté, et explique ce que fait l’outil à chaque étape.
 
@@ -26,9 +26,9 @@ Trois autres problèmes reviennent régulièrement :
 - **Code et tableaux larges.** Les blocs de code et les tableaux comparatifs sont plus larges qu’une page imprimée. Sans règles spécifiques à l’impression, ils sont soit réduits à une taille illisible, soit tronqués.
 - **Pagination.** Les titres, les blocs de code et les lignes de tableau doivent éviter les coupures malheureuses. Une impression brute du navigateur y parvient rarement.
 
-ReadmePDF récupère le Markdown brut du README, résout les URL relatives au dépôt, effectue le rendu du Markdown compatible GitHub, assainit le résultat et applique une feuille de style d’impression avant l’ouverture de la boîte de dialogue d’impression. La sortie est toujours produite par le moteur « Enregistrer au format PDF » natif de votre navigateur, mais le document qu’il reçoit est déjà nettoyé.
+md2pdf récupère le Markdown brut du README, résout les URL relatives au dépôt, effectue le rendu du Markdown compatible GitHub, assainit le résultat et applique une feuille de style d’impression avant l’ouverture de la boîte de dialogue d’impression. La sortie est toujours produite par le moteur « Enregistrer au format PDF » natif de votre navigateur, mais le document qu’il reçoit est déjà nettoyé.
 
-## Ce que ReadmePDF change
+## Ce que md2pdf change
 
 Le pipeline de conversion s’exécute entièrement dans le navigateur. Concrètement :
 
@@ -54,7 +54,7 @@ Si le dépôt est privé, la récupération échouera. Le repli manuel fonctionn
 
 ## Étape 1 : fournir un dépôt à l’outil
 
-Ouvrez le convertisseur et collez l’URL du dépôt dans le champ **URL du dépôt GitHub**. ReadmePDF accepte plus que l’URL canonique :
+Ouvrez le convertisseur et collez l’URL du dépôt dans le champ **URL du dépôt GitHub**. md2pdf accepte plus que l’URL canonique :
 
 ```text
 https://github.com/owner/repo
@@ -79,7 +79,7 @@ Une fois le Markdown reçu, l’aperçu se met à jour. C’est le moment de vé
 - **Blocs de code.** Les blocs délimités avec un langage sont rendus comme du code. Les lignes très larges défilent dans l’aperçu, mais méritent tout de même une vérification à l’impression.
 - **Liens.** Les liens de documents sont réécrits vers la vue blob de GitHub afin de rester significatifs dans le PDF. Les liens externes s’ouvrent dans un nouvel onglet dans l’aperçu.
 
-Si une image échoue, ReadmePDF la marque comme cassée et poursuit. L’export n’échoue pas parce qu’un badge est indisponible. C’est volontaire : un badge manquant est généralement moins important que le reste du document.
+Si une image échoue, md2pdf la marque comme cassée et poursuit. L’export n’échoue pas parce qu’un badge est indisponible. C’est volontaire : un badge manquant est généralement moins important que le reste du document.
 
 ## Étape 3 : choisir un thème adapté au document
 
@@ -166,11 +166,11 @@ Le PDF vaut ce que vaut le Markdown de départ. Ces changements portent immédia
 2. **Donnez un texte alternatif utile aux images.** C’est bon pour l’accessibilité, et cela offre au PDF un repli lisible lorsqu’une image ne peut pas se charger.
 3. **Délimitez le code avec un langage.** Les blocs étiquetés par langage sont rendus de manière plus prévisible que le code indenté, surtout lorsque les lignes sont longues.
 4. **Gardez des tableaux étroits.** Un tableau à huit colonnes ne tiendra pas sur du A4 sans réduction. Déplacez les détails dans le texte ou scindez le tableau.
-5. **Privilégiez les chemins relatifs pour les ressources du dépôt.** ReadmePDF les réécrit correctement. Les liens absolus vers une machine locale ou un compartiment privé ne survivront pas au voyage.
+5. **Privilégiez les chemins relatifs pour les ressources du dépôt.** md2pdf les réécrit correctement. Les liens absolus vers une machine locale ou un compartiment privé ne survivront pas au voyage.
 
 ## Confidentialité : ce qui quitte votre navigateur
 
-ReadmePDF n’envoie pas votre Markdown. Le rendu, l’assainissement, la génération de la table des matières et l’export PDF se font tous localement. Pour la récupération d’un dépôt, les seules requêtes sortantes sont des lectures anonymes sur GitHub du README public et de ses images. Aucun compte, aucun cookie et aucune analytique ne sont associés à la conversion.
+md2pdf n’envoie pas votre Markdown. Le rendu, l’assainissement, la génération de la table des matières et l’export PDF se font tous localement. Pour la récupération d’un dépôt, les seules requêtes sortantes sont des lectures anonymes sur GitHub du README public et de ses images. Aucun compte, aucun cookie et aucune analytique ne sont associés à la conversion.
 
 Cela compte lorsque le document contient des notes internes, des noms de clients ou des projets non publiés. Vous pouvez coller du Markdown sensible et l’exporter sans envoyer le texte à un service de conversion tiers. Il en va de même pour les fichiers locaux : le fichier est lu par votre navigateur, pas envoyé.
 

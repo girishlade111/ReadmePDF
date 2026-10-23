@@ -28,7 +28,7 @@ import {
   verifyReleaseArtifacts,
 } from '../scripts/lib/release-verify.mjs';
 
-const ORIGIN = 'https://release-gate.readmepdf.dev';
+const ORIGIN = 'https://release-gate.md2pdf.dev';
 const TRANSLATION_KEYS = ['alpha', 'beta', 'gamma'];
 const REAL_CONTENT_DIR = path.join(process.cwd(), 'src', 'content', 'blog');
 
@@ -86,7 +86,7 @@ function renderPage(routeInfo, site) {
  * canonical/hreflang/sitemap shapes the application emits.
  */
 async function createFixture() {
-  const root = await mkdtemp(path.join(os.tmpdir(), 'readmepdf-release-'));
+  const root = await mkdtemp(path.join(os.tmpdir(), 'md2pdf-release-'));
   const contentDir = path.join(root, 'content');
   const distDir = path.join(root, 'dist');
   const site = parseReleaseSiteUrl(ORIGIN);
@@ -180,14 +180,14 @@ async function withFixture(callback) {
 
 describe('release origin policy', () => {
   it('accepts normal HTTPS public domains and normalizes them', () => {
-    assert.equal(parseReleaseSiteUrl('https://readmepdf.dev').origin, 'https://readmepdf.dev');
+    assert.equal(parseReleaseSiteUrl('https://md2pdf.dev').origin, 'https://md2pdf.dev');
     assert.equal(
-      parseReleaseSiteUrl('  https://WWW.ReadmePDF.dev/  ').origin,
-      'https://www.readmepdf.dev',
+      parseReleaseSiteUrl('  https://WWW.md2pdf.dev/  ').origin,
+      'https://www.md2pdf.dev',
     );
     assert.equal(
-      parseReleaseSiteUrl('https://readmepdf.dev:8443').origin,
-      'https://readmepdf.dev:8443',
+      parseReleaseSiteUrl('https://md2pdf.dev:8443').origin,
+      'https://md2pdf.dev:8443',
     );
   });
 
@@ -196,22 +196,22 @@ describe('release origin policy', () => {
       assert.throws(() => parseReleaseSiteUrl(value), /required/, String(value));
     }
     for (const value of [
-      'http://readmepdf.dev',
+      'http://md2pdf.dev',
       'https://localhost',
       'https://app.localhost',
       'https://127.0.0.1',
       'https://[::1]',
       'https://10.0.0.8',
-      'https://readmepdf',
+      'https://md2pdf',
       'https://example.com',
       'https://docs.example.org',
-      'https://readmepdf.test',
-      'https://readmepdf.invalid',
-      'https://readmepdf.local',
+      'https://md2pdf.test',
+      'https://md2pdf.invalid',
+      'https://md2pdf.local',
       'https://yourdomain.com',
       'https://www.example.net',
-      'https://readmepdf.dev/path',
-      'https://user:pass@readmepdf.dev',
+      'https://md2pdf.dev/path',
+      'https://user:pass@md2pdf.dev',
       'not a url',
     ]) {
       assert.throws(() => parseReleaseSiteUrl(value), TypeError, value);

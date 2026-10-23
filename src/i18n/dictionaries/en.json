@@ -1,7 +1,7 @@
 {
-  "meta.home.title": "ReadmePDF — GitHub README to PDF (free, no login)",
-  "meta.home.description": "ReadmePDF — free, no-login tool to convert a GitHub README or Markdown into a polished PDF. Paste a repo URL, preview, print to PDF.",
-  "meta.blog.title": "The ReadmePDF Journal",
+  "meta.home.title": "md2pdf — GitHub README to PDF (free, no login)",
+  "meta.home.description": "md2pdf — free, no-login tool to convert a GitHub README or Markdown into a polished PDF. Paste a repo URL, preview, print to PDF.",
+  "meta.blog.title": "The md2pdf Journal",
   "meta.blog.description": "Practical guides for converting GitHub READMEs and Markdown into clean, print-ready PDFs — themes, workflows, and real use cases.",
 
   "common.files.one": "{count} file",
@@ -54,7 +54,7 @@
   "nav.privacy": "Privacy",
   "nav.github": "GitHub",
 
-  "a11y.github": "ReadmePDF on GitHub",
+  "a11y.github": "md2pdf on GitHub",
   "a11y.ladestack": "LadeStack",
   "a11y.githubUrl": "GitHub repository URL",
   "a11y.uploadMarkdown": "Upload Markdown file",
@@ -74,13 +74,13 @@
   "a11y.onThisPage": "On this page",
   "a11y.guideOverview": "Guide overview",
 
-  "footer.credit": "© 2026 LadeStack · ReadmePDF is free, MIT licensed, and built by Girish Lade.",
+  "footer.credit": "© 2026 LadeStack · md2pdf is free, MIT licensed, and built by Girish Lade.",
 
   "home.tagline": "by LadeStack · free · no login · client-side",
   "home.hero.kicker": "Free · No login · Nothing uploaded",
   "home.hero.titleLine1": "Any GitHub README,",
   "home.hero.titleLine2": "as a print-ready PDF.",
-  "home.hero.lead": "Paste a repository URL and ReadmePDF fetches the README, resolves its images and badges, and lays the whole thing out for paper — all inside your browser.",
+  "home.hero.lead": "Paste a repository URL and md2pdf fetches the README, resolves its images and badges, and lays the whole thing out for paper — all inside your browser.",
   "home.hero.primary": "Start converting",
   "home.hero.secondary": "How it works",
 
@@ -306,7 +306,7 @@
   "book.failure.load": "Could not load.",
   "book.failure.notRetryable": "Not retryable",
   "book.errors.invalidUrl": "That is not a GitHub repository URL. Paste one like https://github.com/owner/repo",
-  "book.errors.privateOrNotFound": "Repository not found, or it is private. ReadmePDF reads public repositories only — paste Markdown in the converter instead.",
+  "book.errors.privateOrNotFound": "Repository not found, or it is private. md2pdf reads public repositories only — paste Markdown in the converter instead.",
   "book.errors.refNotFound": "{message} Branch names containing slashes are supported when GitHub can resolve them.",
   "book.errors.refNotFoundFallback": "Could not resolve that branch, tag, or commit.",
   "book.errors.pathNotFound": "That folder or file does not exist at the selected branch.",
@@ -343,7 +343,7 @@
   "book.warnings.firstFiles": "Only the first {max} Markdown files are listed. Narrow the URL to a folder for a complete list.",
 
   "assembly.coverAria": "Book cover",
-  "assembly.coverEyebrow": "ReadmePDF documentation book",
+  "assembly.coverEyebrow": "md2pdf documentation book",
   "assembly.coverSourceFallback": "GitHub repository",
   "assembly.contents": "Contents",
   "assembly.contentsWithTitle": "Contents · {title}",
@@ -354,7 +354,7 @@
   "assembly.filePreview": "File preview",
   "assembly.filePreviewAria": "File preview: {path}",
 
-  "blog.kicker": "The ReadmePDF Journal",
+  "blog.kicker": "The md2pdf Journal",
   "blog.title": "Make documentation travel well.",
   "blog.lead": "Practical guides for turning READMEs into documents people can print, sign, archive, and pass around — without an account or an upload.",
   "blog.featured": "Featured guide",
@@ -380,5 +380,5 @@
   "blog.keepReading": "Keep reading",
   "blog.related": "Related guides",
 
-  "converter.sample": "# ReadmePDF — Sample README\n\nPaste a GitHub repo URL above, drop a `README.md`, or just type Markdown here.\n\n## Features\n\n- [x] GitHub URL fetch with image/badge path resolution\n- [x] Live GFM preview (tables, task lists, code)\n- [ ] Your next great README section\n\n## Table demo\n\n| Option | What it does |\n| ------ | ------------ |\n| Clean  | Neutral default |\n| Dark   | Screen-friendly (auto-lightens for print) |\n\n## Code demo\n\n```js\nconst msg = \"hello readme\";\nconsole.log(msg);\n```\n\n## Links & images\n\nA relative image like `docs/logo.png` resolves against the fetched repo.\nAn absolute badge like ![build](https://img.shields.io/badge/build-passing-brightgreen) is left untouched.\n\n### A fourth-level heading exists so TOC shows nesting\n\n#### Detail heading\n"
+  "converter.sample": "# md2pdf — Sample README\n\nPaste a GitHub repo URL above, drop a `README.md`, or just type Markdown here.\n\n## Features\n\n- [x] GitHub URL fetch with image/badge path resolution\n- [x] Live GFM preview (tables, task lists, code)\n- [ ] Your next great README section\n\n## Table demo\n\n| Option | What it does |\n| ------ | ------------ |\n| Clean  | Neutral default |\n| Dark   | Screen-friendly (auto-lightens for print) |\n\n## Code demo\n\n```js\nconst msg = \"hello readme\";\nconsole.log(msg);\n```\n\n## Links & images\n\nA relative image like `docs/logo.png` resolves against the fetched repo.\nAn absolute badge like ![build](https://img.shields.io/badge/build-passing-brightgreen) is left untouched.\n\n### A fourth-level heading exists so TOC shows nesting\n\n#### Detail heading\n"
 }

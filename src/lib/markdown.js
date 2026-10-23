@@ -1,5 +1,5 @@
 /**
- * ReadmePDF — Markdown → HTML (GFM) + TOC helpers.
+ * md2pdf — Markdown → HTML (GFM) + TOC helpers.
  * Works in browser (Vite-bundled) and Node (tests).
  *
  * Heading ids are produced from markdown-it's own token stream so the table of

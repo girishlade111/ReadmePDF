@@ -140,7 +140,7 @@ proof that the enforcing policy is safe.
 ## Verification
 
 Replace `$SITE_URL` with the real HTTPS origin. Do not use the synthetic
-`release-gate.readmepdf.dev` origin as if it were production.
+`release-gate.md2pdf.dev` origin as if it were production.
 
 ```bash
 SITE_URL="https://your-real-domain.example"

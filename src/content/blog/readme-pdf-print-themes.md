@@ -1,6 +1,6 @@
 ---
-title: "Clean vs Business vs Academic vs Dark: Which ReadmePDF Theme Should You Use?"
-description: "A practical comparison of ReadmePDF's four print themes — typography, code blocks, tables, and the documents each one suits."
+title: "Clean vs Business vs Academic vs Dark: Which md2pdf Theme Should You Use?"
+description: "A practical comparison of md2pdf's four print themes — typography, code blocks, tables, and the documents each one suits."
 pubDate: 2026-10-14
 author: "Girish Lade"
 tags: ["Themes", "Design", "PDF"]
@@ -8,7 +8,7 @@ locale: "en"
 translationKey: "readme-pdf-print-themes"
 ---
 
-The theme picker in ReadmePDF looks like a small choice: four radio buttons above the export button. In practice, it changes how the document reads before anyone gets to the content. A specification printed in Academic looks like a paper. A client proposal printed in Clean looks like a repository dump. The right theme is the one that matches the reader's expectations.
+The theme picker in md2pdf looks like a small choice: four radio buttons above the export button. In practice, it changes how the document reads before anyone gets to the content. A specification printed in Academic looks like a paper. A client proposal printed in Clean looks like a repository dump. The right theme is the one that matches the reader's expectations.
 
 All four themes render the same Markdown. They differ in type family, alignment, code treatment, table styling, link color, and how much visual structure they add to headings. None of them adds a watermark, a cover page, or a logo. The content stays yours.
 

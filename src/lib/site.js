@@ -8,8 +8,8 @@
  * a domain that belongs to somebody else.
  *
  * Accepted values are bare HTTP(S) origins:
- *   https://readmepdf.example
- *   https://readmepdf.example/
+ *   https://md2pdf.example
+ *   https://md2pdf.example/
  *
  * A path, query string, fragment, credentials, or non-HTTP protocol is
  * rejected. Hosting under a sub-path would also require Astro's `base`

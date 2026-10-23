@@ -1,6 +1,6 @@
 ---
-title: "Clean, Business, Academic ou Dark : quel thème ReadmePDF choisir ?"
-description: "Comparaison pratique des quatre thèmes d’impression de ReadmePDF — typographie, blocs de code, tableaux et documents auxquels chacun convient."
+title: "Clean, Business, Academic ou Dark : quel thème md2pdf choisir ?"
+description: "Comparaison pratique des quatre thèmes d’impression de md2pdf — typographie, blocs de code, tableaux et documents auxquels chacun convient."
 pubDate: 2026-10-14
 author: "Girish Lade"
 tags: ["Themes", "Design", "PDF"]
@@ -8,7 +8,7 @@ locale: "fr"
 translationKey: "readme-pdf-print-themes"
 ---
 
-Le sélecteur de thème de ReadmePDF ressemble à un petit choix : quatre boutons radio au-dessus du bouton d’export. En pratique, il change la façon dont le document se lit avant même que quiconque atteigne le contenu. Une spécification imprimée en Academic ressemble à un article scientifique. Une proposition client imprimée en Clean ressemble à un export de dépôt. Le bon thème est celui qui correspond aux attentes du lecteur.
+Le sélecteur de thème de md2pdf ressemble à un petit choix : quatre boutons radio au-dessus du bouton d’export. En pratique, il change la façon dont le document se lit avant même que quiconque atteigne le contenu. Une spécification imprimée en Academic ressemble à un article scientifique. Une proposition client imprimée en Clean ressemble à un export de dépôt. Le bon thème est celui qui correspond aux attentes du lecteur.
 
 Les quatre thèmes rendent le même Markdown. Ils diffèrent par la famille typographique, l’alignement, le traitement du code, le style des tableaux, la couleur des liens et la structure visuelle ajoutée aux titres. Aucun n’ajoute de filigrane, de page de couverture ou de logo. Le contenu reste le vôtre.
 

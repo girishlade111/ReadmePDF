@@ -23,7 +23,7 @@ const site = parseSiteUrl(process.env.PUBLIC_SITE_URL ?? fileEnv.PUBLIC_SITE_URL
  */
 function releaseGuard(siteConfig) {
   return {
-    name: 'readmepdf-release-guard',
+    name: 'md2pdf-release-guard',
     hooks: {
       'astro:build:done': async ({ dir, logger }) => {
         const sitemapUrl = new URL('sitemap.xml', dir);

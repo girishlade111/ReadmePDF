@@ -1,5 +1,5 @@
 /**
- * Central locale registry for ReadmePDF.
+ * Central locale registry for md2pdf.
  *
  * Every locale-dependent decision (routing, <html lang>, date formatting,
  * language-switcher labels, future hreflang identifiers) reads from this one

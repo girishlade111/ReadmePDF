@@ -1,6 +1,6 @@
 ---
-title: "Clean mi Business mı Academic mi Dark mı: Hangi ReadmePDF Temasını Kullanmalısınız?"
-description: "ReadmePDF'nin dört baskı temasının pratik karşılaştırması — tipografi, kod blokları, tablolar ve her birinin uygun olduğu belgeler."
+title: "Clean mi Business mı Academic mi Dark mı: Hangi md2pdf Temasını Kullanmalısınız?"
+description: "md2pdf'nin dört baskı temasının pratik karşılaştırması — tipografi, kod blokları, tablolar ve her birinin uygun olduğu belgeler."
 pubDate: 2026-10-14
 author: "Girish Lade"
 tags: ["Themes", "Design", "PDF"]
@@ -8,7 +8,7 @@ locale: "tr"
 translationKey: "readme-pdf-print-themes"
 ---
 
-ReadmePDF'deki tema seçici küçük bir tercih gibi görünür: dışa aktarma düğmesinin üstünde dört radyo düğmesi. Oysa pratikte, kimse içeriğe ulaşmadan önce belgenin nasıl okunacağını değiştirir. Academic ile yazdırılan bir şartname makale gibi görünür. Clean ile yazdırılan bir müşteri teklifi depo dökümü gibi durur. Doğru tema, okuyucunun beklentileriyle eşleşen temadır.
+md2pdf'deki tema seçici küçük bir tercih gibi görünür: dışa aktarma düğmesinin üstünde dört radyo düğmesi. Oysa pratikte, kimse içeriğe ulaşmadan önce belgenin nasıl okunacağını değiştirir. Academic ile yazdırılan bir şartname makale gibi görünür. Clean ile yazdırılan bir müşteri teklifi depo dökümü gibi durur. Doğru tema, okuyucunun beklentileriyle eşleşen temadır.
 
 Dört tema da aynı Markdown'u işler. Yazı tipi ailesi, hizalama, kod görünümü, tablo stili, bağlantı rengi ve başlıklara ekledikleri görsel yapı miktarı bakımından farklılaşırlar. Hiçbiri filigran, kapak sayfası veya logo eklemez. İçerik sizin kalır.
 

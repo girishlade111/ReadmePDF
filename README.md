@@ -1,4 +1,4 @@
-# ReadmePDF
+# md2pdf
 
 **Free, no-login, client-side GitHub README → PDF converter.** Paste a repository URL, preview the rendered Markdown, assemble a multi-chapter documentation book, and export print-ready PDFs — all processed in your browser.
 
@@ -27,7 +27,7 @@
 
 ## Overview
 
-ReadmePDF (part of **LadeStack**) turns public GitHub repositories and local Markdown files into polished documents. It supports two workflows:
+md2pdf (part of **LadeStack**) turns public GitHub repositories and local Markdown files into polished documents. It supports two workflows:
 
 1. **Single document** — fetch a README, paste Markdown, or upload a file, then preview, print, or export one PDF.
 2. **Documentation book** — scan a repository, choose Markdown files in a searchable tree, reorder chapters, build a cover and table of contents, print the assembled book, or download a ZIP of per-chapter PDFs.
@@ -78,7 +78,7 @@ There is no application backend. Fetching, Markdown rendering, sanitization, PDF
 - **Single document:** native browser Print → Save as PDF, isolated from the rest of the page.
 - **Book:** native browser print of the assembled cover, TOC, and chapters.
 - **ZIP export:** direct download of one PDF per selected chapter, preserving repository paths and Unicode filenames (NFC-normalized).
-- ZIP root is `readmepdf-{owner}-{repo}-{sha8}.zip`; exports are capped at 30 PDFs.
+- ZIP root is `md2pdf-{owner}-{repo}-{sha8}.zip`; exports are capped at 30 PDFs.
 - PDFs embed images, internal links, external URI annotations, and self-hosted fonts.
 - Unicode coverage includes Latin, Cyrillic, Turkish, and CJK text. DejaVu Sans/Mono cover Latin and Cyrillic; Noto Sans CJK SC covers Chinese, Japanese, and Korean.
 - Export can be cancelled at any point; a cancelled export downloads nothing and reports it explicitly.
@@ -106,7 +106,7 @@ There is no application backend. Fetching, Markdown rendering, sanitization, PDF
 The interface follows [`design.md`](./design.md) — a warm-neutral, shadow-free system.
 
 - **A six-rung neutral ladder.** Sections are separated by which background rung they use, not by cards or shadows.
-- **One red.** `#c74634` appears on the ReadmePDF wordmark only.
+- **One red.** `#c74634` appears on the md2pdf wordmark only.
 - **One action colour.** Buttons use the warm charcoal `#312d2a`; polarity flips on dark bands.
 - **Two type registers.** Georgia for display headings, Inter for everything else.
 - **One ornament.** A gold rule under the hero headline.
@@ -151,7 +151,7 @@ No uploads. No application backend. No cookies.
 ## Project Structure
 
 ```
-ReadmePDF/
+md2pdf/
 ├── astro.config.mjs              # Static output, i18n, origin guard
 ├── design.md                     # Design system specification
 ├── public/
@@ -189,7 +189,7 @@ ReadmePDF/
 
 ```bash
 git clone https://github.com/girishlade111/ReadmePDF.git
-cd ReadmePDF
+cd md2pdf
 npm install
 ```
 
@@ -262,7 +262,7 @@ The release verifier derives the expected routes from the content collection, th
 Exporting a ZIP preserves the repository hierarchy:
 
 ```
-readmepdf-octo-demo-c0ffee12/
+md2pdf-octo-demo-c0ffee12/
 ├── README.pdf
 └── docs/
     ├── guide.pdf

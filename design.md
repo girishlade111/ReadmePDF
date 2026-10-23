@@ -1,6 +1,6 @@
-# ReadmePDF — Design System
+# md2pdf — Design System
 
-Reference specification for the ReadmePDF interface. The implementation lives in
+Reference specification for the md2pdf interface. The implementation lives in
 `src/styles/app.css`; the CSS custom property names map one-to-one onto the token
 names used below.
 

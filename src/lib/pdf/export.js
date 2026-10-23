@@ -174,8 +174,8 @@ function uniqueRelativePath(relative, used) {
  * @param {Array<{path: string}>} documents
  * @param {{ root?: string }} [options]
  */
-export function planPdfPaths(documents = [], { root = 'readmepdf-export' } = {}) {
-  const folder = sanitizeSegment(root, 'readmepdf-export');
+export function planPdfPaths(documents = [], { root = 'md2pdf-export' } = {}) {
+  const folder = sanitizeSegment(root, 'md2pdf-export');
   const used = new Set();
   return documents.map((document) => {
     const relative = uniqueRelativePath(safeRelativePdfPath(document?.path), used);
@@ -256,7 +256,7 @@ function archiveRoot(book) {
   const owner = sanitizeSegment(book?.owner, 'repository');
   const repo = sanitizeSegment(book?.repo, 'repository');
   const sha = sanitizeSegment(String(book?.commitSha ?? '').slice(0, 8), 'snapshot');
-  return `readmepdf-${owner}-${repo}-${sha}`;
+  return `md2pdf-${owner}-${repo}-${sha}`;
 }
 
 /**

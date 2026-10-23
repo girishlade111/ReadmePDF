@@ -1,12 +1,12 @@
 /**
- * International SEO for ReadmePDF.
+ * International SEO for md2pdf.
  *
  * One source of truth for:
  * - BCP-47 hreflang codes (which deliberately differ from <html lang> for
  *   Simplified Chinese and Brazilian Portuguese);
  * - canonical and reciprocal alternate URLs;
  * - localized Open Graph metadata;
- * - JSON-LD for the homepage, journal index, and articles;
+ * - JSON-LD for the homepage, journal index, articles, and About page;
  * - the multilingual XML sitemap and robots.txt.
  *
  * Absolute URLs are emitted only when a validated `PUBLIC_SITE_URL` exists.
@@ -48,7 +48,9 @@ export const OG_LOCALE_MAP = Object.freeze({
 });
 
 export const X_DEFAULT = 'x-default';
-export const DEFAULT_OG_IMAGE_PATH = '/og/readmepdf.png';
+export const DEFAULT_OG_IMAGE_PATH = '/og/md2pdf.png';
+export const PRODUCT_NAME = 'md2pdf';
+export const PRODUCT_TAGLINE = 'Markdown to PDF';
 
 /** @param {string} locale */
 export function hreflangFor(locale) {
@@ -193,7 +195,8 @@ export function homeJsonLd({ locale, description, site, path }) {
       {
         '@type': 'WebSite',
         '@id': `${url}#website`,
-        name: 'ReadmePDF',
+        name: PRODUCT_NAME,
+        alternateName: `${PRODUCT_NAME} — ${PRODUCT_TAGLINE}`,
         url,
         description,
         inLanguage,
@@ -202,7 +205,8 @@ export function homeJsonLd({ locale, description, site, path }) {
       {
         '@type': 'SoftwareApplication',
         '@id': `${url}#software`,
-        name: 'ReadmePDF',
+        name: PRODUCT_NAME,
+        alternateName: `${PRODUCT_NAME} — ${PRODUCT_TAGLINE}`,
         applicationCategory: 'UtilitiesApplication',
         operatingSystem: 'Any',
         isAccessibleForFree: true,
@@ -210,6 +214,7 @@ export function homeJsonLd({ locale, description, site, path }) {
         url,
         description,
         inLanguage,
+        publisher: organization(),
       },
     ],
   };
@@ -232,11 +237,11 @@ export function blogIndexJsonLd({ locale, description, site, path, posts }) {
   return {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
-    name: 'The ReadmePDF Journal',
+    name: 'The md2pdf Journal',
     url,
     description,
     inLanguage: localeMeta(locale).htmlLang,
-    isPartOf: { '@type': 'WebSite', name: 'ReadmePDF', url: home },
+    isPartOf: { '@type': 'WebSite', name: PRODUCT_NAME, url: home },
     mainEntity: {
       '@type': 'ItemList',
       numberOfItems: posts.length,
@@ -279,7 +284,7 @@ export function articleJsonLd({ post, locale, path, site }) {
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
     isPartOf: {
       '@type': 'Blog',
-      name: 'The ReadmePDF Journal',
+      name: 'The md2pdf Journal',
       url: absoluteUrl(site, localeHref(locale, '/blog/')),
     },
   };

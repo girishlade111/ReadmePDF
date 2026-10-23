@@ -16,7 +16,7 @@ const {
 } = Astro.props;
 const t = translator(locale);
 const meta = localeMeta(locale);
-const pageTitle = title.includes('ReadmePDF') ? title : `${title} — ReadmePDF`;
+const pageTitle = title.includes('md2pdf') ? title : `${title} — md2pdf`;
 const homeHref = localeHref(locale, '/');
 const blogHref = localeHref(locale, '/blog/');
 ---
@@ -44,7 +44,7 @@ const blogHref = localeHref(locale, '/blog/');
   <body>
     <header class="masthead">
       <div class="container masthead__inner">
-        <a class="wordmark" href={homeHref}>ReadmePDF</a>
+        <a class="wordmark" href={homeHref}>md2pdf</a>
         <span class="masthead__tag caption">{t('home.tagline')}</span>
         <div class="masthead__utils">
           <LanguageSwitcher locale={locale} path={path} />

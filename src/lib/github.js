@@ -1,5 +1,5 @@
 /**
- * ReadmePDF — GitHub compatibility facade.
+ * md2pdf — GitHub compatibility facade.
  *
  * URL parsing, path resolution, and URL rewriting live in ./github/urls.js.
  * Discovery, reference resolution, and multi-file fetching live alongside it.

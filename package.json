@@ -1,9 +1,9 @@
 {
-  "name": "readmepdf",
+  "name": "md2pdf",
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "ReadmePDF — free, no-login, client-side GitHub README to PDF converter (LadeStack)",
+  "description": "md2pdf — free, no-login, client-side GitHub README to PDF converter (LadeStack)",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",

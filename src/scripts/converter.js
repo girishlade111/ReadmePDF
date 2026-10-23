@@ -1,5 +1,5 @@
 /**
- * ReadmePDF — client-side converter controller (no login, no uploads).
+ * md2pdf — client-side converter controller (no login, no uploads).
  * Only network calls: github.com / raw.githubusercontent.com via lib/github.js.
  */
 import { fetchReadme, rewriteRelativeUrls } from '../lib/github.js';
@@ -24,8 +24,8 @@ export function repoMetaLabel(context) {
 }
 
 export function initConverter() {
-  if (typeof document === 'undefined' || document.body.dataset.readmepdfInit) return;
-  document.body.dataset.readmepdfInit = '1';
+  if (typeof document === 'undefined' || document.body.dataset.md2pdfInit) return;
+  document.body.dataset.md2pdfInit = '1';
   initClientI18n();
   const $ = (id) => document.getElementById(id);
   const urlInput = $('gh-url');

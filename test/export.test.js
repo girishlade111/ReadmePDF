@@ -39,7 +39,7 @@ const GENERATED_AT = new Date('2026-10-20T12:00:00.000Z');
 const parseHtml = (html) =>
   htmlToBlocks(html, { document: new JSDOM(`<body>${html}</body>`).window.document });
 
-async function makePdf(text = 'ReadmePDF') {
+async function makePdf(text = 'md2pdf') {
   const pdf = await PDFDocument.create();
   const page = pdf.addPage([200, 200]);
   page.drawText(text, { x: 20, y: 100, size: 12 });
@@ -166,7 +166,7 @@ describe('portable archive layout', () => {
         { path: 'docs/Guide 中文.md' },
         { path: 'docs/Guide 中文.markdown' },
       ],
-      { root: 'readmepdf-octo-demo-abc12345' },
+      { root: 'md2pdf-octo-demo-abc12345' },
     );
     assert.deepEqual(
       planned.map((entry) => entry.relative),
@@ -178,7 +178,7 @@ describe('portable archive layout', () => {
         'docs/Guide 中文-2.pdf',
       ],
     );
-    assert.equal(planned[0].zipPath, 'readmepdf-octo-demo-abc12345/README.pdf');
+    assert.equal(planned[0].zipPath, 'md2pdf-octo-demo-abc12345/README.pdf');
     assert.ok(planned.every((entry) => isSafeZipPath(entry.zipPath)));
     assert.deepEqual(
       planned.map((entry) => entry.fileName),
@@ -246,7 +246,7 @@ describe('exportBookToZip', () => {
       {
         path: 'README.md',
         markdown: [
-          '# ReadmePDF export',
+          '# md2pdf export',
           '',
           'A **real** client-side PDF, packed into a ZIP.',
           '',
@@ -280,7 +280,7 @@ describe('exportBookToZip', () => {
       onProgress: (event) => progress.push(event.phase),
     });
 
-    assert.equal(result.zipName, 'readmepdf-octo-demo-abc12345.zip');
+    assert.equal(result.zipName, 'md2pdf-octo-demo-abc12345.zip');
     assert.equal(result.files.length, 3);
     assert.deepEqual(result.failures, []);
     assert.ok(result.totalBytes > 1000);
@@ -291,9 +291,9 @@ describe('exportBookToZip', () => {
     assert.deepEqual(
       result.files.map((file) => file.zipPath),
       [
-        'readmepdf-octo-demo-abc12345/README.pdf',
-        'readmepdf-octo-demo-abc12345/docs/readme.pdf',
-        'readmepdf-octo-demo-abc12345/docs/中文 指南.pdf',
+        'md2pdf-octo-demo-abc12345/README.pdf',
+        'md2pdf-octo-demo-abc12345/docs/readme.pdf',
+        'md2pdf-octo-demo-abc12345/docs/中文 指南.pdf',
       ],
     );
     for (const file of result.files) {
@@ -305,15 +305,15 @@ describe('exportBookToZip', () => {
     }
 
     const english = await zip
-      .file('readmepdf-octo-demo-abc12345/README.pdf')
+      .file('md2pdf-octo-demo-abc12345/README.pdf')
       .async('uint8array');
     const turkish = await zip
-      .file('readmepdf-octo-demo-abc12345/docs/readme.pdf')
+      .file('md2pdf-octo-demo-abc12345/docs/readme.pdf')
       .async('uint8array');
     const chinese = await zip
-      .file('readmepdf-octo-demo-abc12345/docs/中文 指南.pdf')
+      .file('md2pdf-octo-demo-abc12345/docs/中文 指南.pdf')
       .async('uint8array');
-    assert.match(await pdfText(english), /ReadmePDF export/);
+    assert.match(await pdfText(english), /md2pdf export/);
     assert.match(await pdfText(turkish), /Merhaba Dünya/);
     assert.match(await pdfText(chinese), /中文标题/);
 
@@ -365,7 +365,7 @@ describe('exportBookToZip', () => {
   });
 
   it('embeds a successfully fetched image instead of failing the whole PDF', async () => {
-    const png = readFileSync(new URL('../public/og/readmepdf.png', import.meta.url));
+    const png = readFileSync(new URL('../public/og/md2pdf.png', import.meta.url));
     let embedded = null;
     const result = await exportBookToZip(
       {

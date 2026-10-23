@@ -1,6 +1,6 @@
 ---
 title: "GitHub README'sini PDF'ye Dönüştürme (Ücretsiz, Giriş Yok)"
-description: "Herkese açık bir GitHub README'sini ReadmePDF ile hesap açmadan, yükleme yapmadan ve sunucu tarafı işleyici olmadan temiz, yazdırmaya hazır bir PDF'ye dönüştürme rehberi."
+description: "Herkese açık bir GitHub README'sini md2pdf ile hesap açmadan, yükleme yapmadan ve sunucu tarafı işleyici olmadan temiz, yazdırmaya hazır bir PDF'ye dönüştürme rehberi."
 pubDate: 2026-09-18
 updatedDate: 2026-10-21
 author: "Girish Lade"
@@ -12,7 +12,7 @@ translationKey: "github-readme-to-pdf"
 
 Bir README tarayıcı için yazılır: kaydırılır, dışarıya bağlantı verir ve okuyucunun depoda dolaşabildiğini varsayar. Dokümantasyonu bir müşteriye göndermeniz, bir ödeve eklemeniz, bir sürümü arşivlemeniz veya depoyu klonlamayacak birine iletmeniz gerektiği anda, her yere ulaşan format PDF'tir.
 
-Bir GitHub sayfasını doğrudan yazdırmak genellikle dağınık bir sonuç verir. Site gezintisi, yan çubuklar ve alt bilgi de işin içine karışır. Geniş kod blokları kesilir. Göreli görseller bozulur çünkü tarayıcı artık depo kökünü esas almaz. Uzun tablolar sayfalar arasında garip biçimde bölünür. ReadmePDF tam olarak bu sorunları, sizden hesap oluşturmanızı veya kaynak dosyanızı bir sunucuya yüklemenizi istemeden çözmek için var.
+Bir GitHub sayfasını doğrudan yazdırmak genellikle dağınık bir sonuç verir. Site gezintisi, yan çubuklar ve alt bilgi de işin içine karışır. Geniş kod blokları kesilir. Göreli görseller bozulur çünkü tarayıcı artık depo kökünü esas almaz. Uzun tablolar sayfalar arasında garip biçimde bölünür. md2pdf tam olarak bu sorunları, sizden hesap oluşturmanızı veya kaynak dosyanızı bir sunucuya yüklemenizi istemeden çözmek için var.
 
 Bu rehber, bir depo URL'si yapıştırmaktan dışa aktarılan PDF'yi kontrol etmeye kadar tüm iş akışını adım adım anlatır ve aracın her adımda ne yaptığını açıklar.
 
@@ -26,9 +26,9 @@ Yinelenen üç sorun daha var:
 - **Geniş kod ve tablolar.** Kod blokları ve karşılaştırma tabloları basılı bir sayfadan geniştir. Baskıya özel kurallar olmadan ya okunamayacak kadar küçülür ya da kesilir.
 - **Sayfalanma.** Başlıklar, kod blokları ve tablo satırları garip kesintilerden kaçınmalıdır. Ham bir tarayıcı baskısı bunu nadiren iyi yönetir.
 
-ReadmePDF README'nin ham Markdown'unu getirir, depoya göreli URL'leri çözümler, GitHub tarzı Markdown'u işler, sonucu temizler ve tarayıcının yazdırma iletişim kutusu açılmadan önce bir baskı stil sayfası uygular. Çıktı yine tarayıcınızın yerleşik “PDF olarak kaydet” motoru tarafından üretilir, ancak aldığı belge çoktan temizlenmiştir.
+md2pdf README'nin ham Markdown'unu getirir, depoya göreli URL'leri çözümler, GitHub tarzı Markdown'u işler, sonucu temizler ve tarayıcının yazdırma iletişim kutusu açılmadan önce bir baskı stil sayfası uygular. Çıktı yine tarayıcınızın yerleşik “PDF olarak kaydet” motoru tarafından üretilir, ancak aldığı belge çoktan temizlenmiştir.
 
-## ReadmePDF neleri değiştirir
+## md2pdf neleri değiştirir
 
 Dönüştürme hattı tamamen tarayıcıda çalışır. Pratikte:
 
@@ -54,7 +54,7 @@ Depo özelse getirme başarısız olur. Elle yedek yol yine de çalışır: READ
 
 ## Adım 1: Araca bir depo verin
 
-Dönüştürücüyü açın ve depo URL'sini **GitHub depo URL'si** alanına yapıştırın. ReadmePDF standart URL'den fazlasını kabul eder:
+Dönüştürücüyü açın ve depo URL'sini **GitHub depo URL'si** alanına yapıştırın. md2pdf standart URL'den fazlasını kabul eder:
 
 ```text
 https://github.com/owner/repo
@@ -79,7 +79,7 @@ Markdown geldiğinde önizleme güncellenir. Bu, üç şeyi kontrol etme anıdı
 - **Kod blokları.** Dil etiketi taşıyan kod çitleri kod olarak işlenir. Çok geniş satırlar önizlemede kaydırılır, ancak yine de baskı kontrolü gerekir.
 - **Bağlantılar.** Belge bağlantıları PDF'de anlamlı kalmaları için GitHub blob görünümüne yeniden yazılır. Dış bağlantılar önizlemede yeni sekmede açılır.
 
-Bir görsel başarısız olursa ReadmePDF onu bozuk olarak işaretler ve devam eder. Bir rozet kullanılamadığı için dışa aktarma başarısız olmaz. Bu bilinçli bir tercihtir: eksik bir rozet genellikle belgenin geri kalanından daha az önemlidir.
+Bir görsel başarısız olursa md2pdf onu bozuk olarak işaretler ve devam eder. Bir rozet kullanılamadığı için dışa aktarma başarısız olmaz. Bu bilinçli bir tercihtir: eksik bir rozet genellikle belgenin geri kalanından daha az önemlidir.
 
 ## Adım 3: Belgeye uygun bir tema seçin
 
@@ -166,11 +166,11 @@ PDF, başladığı Markdown kadar iyidir. Bu değişiklikler hemen karşılığ�
 2. **Görsellere işe yarar alt metin verin.** Bu hem erişilebilirlik için iyidir hem de bir görsel yüklenemediğinde PDF'ye okunabilir bir yedek sağlar.
 3. **Kodu bir dille çitleyin.** Dil etiketli bloklar, özellikle satırlar uzun olduğunda, girintili koddan daha öngörülebilir biçimde işlenir.
 4. **Tabloları dar tutun.** Sekiz sütunlu bir tablo küçültülmeden A4'e sığmaz. Ayrıntıları metne taşıyın veya tabloyu bölün.
-5. **Depo varlıkları için göreli yolları tercih edin.** ReadmePDF bunları doğru şekilde yeniden yazar. Yerel bir makineye veya özel bir kovaya giden mutlak bağlantılar bu yolculuktan sağ çıkmaz.
+5. **Depo varlıkları için göreli yolları tercih edin.** md2pdf bunları doğru şekilde yeniden yazar. Yerel bir makineye veya özel bir kovaya giden mutlak bağlantılar bu yolculuktan sağ çıkmaz.
 
 ## Gizlilik: tarayıcınızdan neler çıkar
 
-ReadmePDF Markdown'unuzu yüklemez. İşleme, temizleme, içindekiler oluşturma ve PDF dışa aktarma tamamen yerel olarak gerçekleşir. Bir depo getirmesinde dışarı giden tek istekler, herkese açık README ve görselleri için GitHub'a yapılan anonim okumalardır. Dönüştürmeye bağlı hesap, çerez veya analitik yoktur.
+md2pdf Markdown'unuzu yüklemez. İşleme, temizleme, içindekiler oluşturma ve PDF dışa aktarma tamamen yerel olarak gerçekleşir. Bir depo getirmesinde dışarı giden tek istekler, herkese açık README ve görselleri için GitHub'a yapılan anonim okumalardır. Dönüştürmeye bağlı hesap, çerez veya analitik yoktur.
 
 Bu, belge dahili notlar, müşteri adları veya yayınlanmamış planlar içerdiğinde önemlidir. Hassas Markdown'u yapıştırıp metni üçüncü taraf bir dönüştürme hizmetine göndermeden dışa aktarabilirsiniz. Aynısı yerel dosyalar için de geçerlidir: dosya yüklenmez, tarayıcınız tarafından okunur.
 

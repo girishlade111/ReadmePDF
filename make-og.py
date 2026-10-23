@@ -31,6 +31,6 @@ for label in labels:
     d.text((x + 18, 483), label, font=f_badge, fill='#211e1c')
     x += tw + 52
 
-d.text((120, 565), 'readmepdf  •  free  •  private  •  offline-capable', font=f_footer, fill='#6b625a')
-img.save('public/og/readmepdf.png', optimize=True)
-print('wrote public/og/readmepdf.png', Path('public/og/readmepdf.png').stat().st_size)
+d.text((120, 565), 'md2pdf  •  free  •  private  •  offline-capable', font=f_footer, fill='#6b625a')
+img.save('public/og/md2pdf.png', optimize=True)
+print('wrote public/og/md2pdf.png', Path('public/og/md2pdf.png').stat().st_size)

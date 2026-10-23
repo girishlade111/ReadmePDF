@@ -1,6 +1,6 @@
 ---
 title: "How to Convert a GitHub README to PDF (Free, No Login)"
-description: "A step-by-step guide to turning a public GitHub README into a clean, print-ready PDF with ReadmePDF — no account, no upload, and no server-side renderer."
+description: "A step-by-step guide to turning a public GitHub README into a clean, print-ready PDF with md2pdf — no account, no upload, and no server-side renderer."
 pubDate: 2026-09-18
 updatedDate: 2026-10-21
 author: "Girish Lade"
@@ -12,7 +12,7 @@ translationKey: "github-readme-to-pdf"
 
 A README is written for a browser: it scrolls, it links out, and it assumes the reader can click around the repository. The moment you need to send documentation to a client, attach it to an assignment, archive a release, or hand it to someone who will not clone the repo, a PDF is the format that travels.
 
-Printing a GitHub page directly usually produces a mess. The site navigation, sidebars, and footer come along for the ride. Wide code blocks are cut off. Relative images break because the browser is no longer reading from the repository root. Long tables split awkwardly across pages. ReadmePDF exists to solve those specific problems without asking you to create an account or upload your source file to a server.
+Printing a GitHub page directly usually produces a mess. The site navigation, sidebars, and footer come along for the ride. Wide code blocks are cut off. Relative images break because the browser is no longer reading from the repository root. Long tables split awkwardly across pages. md2pdf exists to solve those specific problems without asking you to create an account or upload your source file to a server.
 
 This guide walks through the full workflow, from pasting a repository URL to checking the exported PDF, and explains what the tool is doing at each step.
 
@@ -26,9 +26,9 @@ There are three other recurring problems:
 - **Wide code and tables.** Code blocks and comparison tables are wider than a printed page. Without print-specific rules, they either shrink to unreadable sizes or get clipped.
 - **Pagination.** Headings, code blocks, and table rows need to avoid awkward breaks. A raw browser print rarely handles that well.
 
-ReadmePDF fetches the README's raw Markdown, resolves repository-relative URLs, renders GitHub-flavored Markdown, sanitizes the result, and applies a print stylesheet before the browser's print dialog opens. The output is still produced by your browser's native "Save as PDF" engine, but the document it receives is already cleaned up.
+md2pdf fetches the README's raw Markdown, resolves repository-relative URLs, renders GitHub-flavored Markdown, sanitizes the result, and applies a print stylesheet before the browser's print dialog opens. The output is still produced by your browser's native "Save as PDF" engine, but the document it receives is already cleaned up.
 
-## What ReadmePDF changes
+## What md2pdf changes
 
 The conversion pipeline runs entirely in the browser. In practical terms:
 
@@ -54,7 +54,7 @@ If the repository is private, the fetch will fail. The manual fallback still wor
 
 ## Step 1: Give the tool a repository
 
-Open the converter and paste the repository URL into the **GitHub repo URL** field. ReadmePDF accepts more than the canonical URL:
+Open the converter and paste the repository URL into the **GitHub repo URL** field. md2pdf accepts more than the canonical URL:
 
 ```text
 https://github.com/owner/repo
@@ -79,7 +79,7 @@ Once the Markdown arrives, the preview updates. This is the point to check three
 - **Code blocks.** Language-tagged fences render as code. Very wide lines will scroll in the preview, but they still need a print check.
 - **Links.** Document links are rewritten to the GitHub blob view so they remain meaningful in the PDF. External links open in a new tab in the preview.
 
-If an image fails, ReadmePDF marks it as broken and keeps going. The export does not fail because one badge is unavailable. That is deliberate: a missing badge is usually less important than the rest of the document.
+If an image fails, md2pdf marks it as broken and keeps going. The export does not fail because one badge is unavailable. That is deliberate: a missing badge is usually less important than the rest of the document.
 
 ## Step 3: Pick a theme that matches the document
 
@@ -166,11 +166,11 @@ The PDF is only as good as the Markdown it starts from. These changes pay off im
 2. **Give images useful alt text.** It is good for accessibility, and it gives the PDF a readable fallback when an image cannot load.
 3. **Fence code with a language.** Language-tagged blocks render more predictably than indented code, especially when lines are long.
 4. **Keep tables narrow.** A table with eight columns will not fit on A4 without shrinking. Move detail into prose or split the table.
-5. **Prefer relative paths for repository assets.** ReadmePDF rewrites them correctly. Absolute links to a local machine or a private bucket will not survive the trip.
+5. **Prefer relative paths for repository assets.** md2pdf rewrites them correctly. Absolute links to a local machine or a private bucket will not survive the trip.
 
 ## Privacy: what leaves your browser
 
-ReadmePDF does not upload your Markdown. Rendering, sanitization, table-of-contents generation, and PDF export all happen locally. For a repository fetch, the only outbound requests are anonymous reads against GitHub for the public README and its images. There are no accounts, no cookies, and no analytics attached to the conversion.
+md2pdf does not upload your Markdown. Rendering, sanitization, table-of-contents generation, and PDF export all happen locally. For a repository fetch, the only outbound requests are anonymous reads against GitHub for the public README and its images. There are no accounts, no cookies, and no analytics attached to the conversion.
 
 That matters when the document contains internal notes, customer names, or unreleased plans. You can paste sensitive Markdown and export it without sending the text to a third-party conversion service. The same is true for local files: the file is read by your browser, not uploaded.
 

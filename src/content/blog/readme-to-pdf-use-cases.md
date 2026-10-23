@@ -10,7 +10,7 @@ translationKey: "readme-to-pdf-use-cases"
 
 A repository link is a great way to share documentation with someone who already lives in GitHub. It is a poor way to share documentation with everyone else. Reviewers lose context, clients do not want to create an account, and a URL is not an archive. A PDF fixes the distribution problem, but only if it is produced deliberately.
 
-ReadmePDF is built around a narrow workflow: get Markdown from a public repository, a local file, or the clipboard; render it with GitHub-flavored Markdown; apply a print stylesheet; and send it to the browser's "Save as PDF" dialog. That narrowness is useful. It means the same tool can serve a five-page client handoff and a fifty-page course reader without a server, an account, or an upload.
+md2pdf is built around a narrow workflow: get Markdown from a public repository, a local file, or the clipboard; render it with GitHub-flavored Markdown; apply a print stylesheet; and send it to the browser's "Save as PDF" dialog. That narrowness is useful. It means the same tool can serve a five-page client handoff and a fifty-page course reader without a server, an account, or an upload.
 
 Below are seven situations where that workflow earns its keep, with the settings and preparation that make each one work.
 
@@ -28,7 +28,7 @@ A client rarely wants repository access just to read a project overview. They wa
 **Preparation that matters:**
 
 - Remove internal ticket links, staging URLs, and credentials before exporting. The tool does not upload the document, but the PDF is still a file that can be forwarded.
-- Replace relative image paths with repository paths that actually exist. ReadmePDF resolves them during a repository fetch, but a broken source image will still be broken in the PDF.
+- Replace relative image paths with repository paths that actually exist. md2pdf resolves them during a repository fetch, but a broken source image will still be broken in the PDF.
 - Check that the README opens with a summary, not a changelog. A handoff document should tell the reader what the project is before it tells them what changed.
 - Add a short "How to read this document" paragraph if the README mixes setup instructions with architectural background.
 
@@ -70,7 +70,7 @@ Students and instructors often have Markdown notes, project documentation, or re
 - Check the heading hierarchy before exporting. A course reader with skipped levels produces a confusing table of contents.
 - Academic justifies body text. Very long URLs, code identifiers, and equations can create awkward spacing. Break long URLs into reference-style links or move them to a footnote-like section.
 - Keep code blocks short. The theme uses a light code background that prints well, but a 120-character line will still overflow the page.
-- If the document includes citations, keep them in the Markdown as a references section. ReadmePDF renders the text; it does not manage a citation style.
+- If the document includes citations, keep them in the Markdown as a references section. md2pdf renders the text; it does not manage a citation style.
 - Print a draft before submitting. Justified text and serif type can look different on paper than in the preview.
 
 Because the conversion is client-side, unpublished notes and draft papers do not leave the browser. That is a meaningful advantage over a "paste your document into our converter" service.

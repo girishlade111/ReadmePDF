@@ -43,7 +43,7 @@ const jsonLd = homeJsonLd({
   <body>
     <header class="masthead">
       <div class="container masthead__inner">
-        <a class="wordmark" href="#top">ReadmePDF</a>
+        <a class="wordmark" href="#top">md2pdf</a>
         <span class="masthead__tag caption">{t('home.tagline')}</span>
         <div class="masthead__utils">
           <LanguageSwitcher locale={locale} path={path} />
@@ -633,7 +633,7 @@ const jsonLd = homeJsonLd({
       </div>
     </footer>
 
-    <script type="application/json" id="readmepdf-i18n" set:html={serializeDictionary(locale)} />
+    <script type="application/json" id="md2pdf-i18n" set:html={serializeDictionary(locale)} />
     <script>
       import { initConverter } from '../scripts/converter.js';
       import { initBookExplorer } from '../scripts/book-explorer.js';

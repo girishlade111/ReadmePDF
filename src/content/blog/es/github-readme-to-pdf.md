@@ -1,6 +1,6 @@
 ---
 title: "Cómo convertir un README de GitHub a PDF (gratis, sin registro)"
-description: "Guía paso a paso para convertir un README público de GitHub en un PDF limpio y listo para imprimir con ReadmePDF: sin cuenta, sin subidas y sin renderizador en el servidor."
+description: "Guía paso a paso para convertir un README público de GitHub en un PDF limpio y listo para imprimir con md2pdf: sin cuenta, sin subidas y sin renderizador en el servidor."
 pubDate: 2026-09-18
 updatedDate: 2026-10-21
 author: "Girish Lade"
@@ -12,7 +12,7 @@ translationKey: "github-readme-to-pdf"
 
 Un README está escrito para un navegador: se desplaza, enlaza hacia fuera y da por hecho que quien lo lee puede hacer clic por el repositorio. En el momento en que necesitas enviar documentación a un cliente, adjuntarla a un trabajo, archivar una versión o entregársela a alguien que no va a clonar el repositorio, el PDF es el formato que viaja.
 
-Imprimir directamente una página de GitHub suele producir un desastre. La navegación del sitio, las barras laterales y el pie de página se cuelan. Los bloques de código anchos se cortan. Las imágenes relativas se rompen porque el navegador ya no lee desde la raíz del repositorio. Las tablas largas se parten de forma torpe entre páginas. ReadmePDF existe para resolver esos problemas concretos sin pedirte que crees una cuenta ni que subas tu archivo fuente a un servidor.
+Imprimir directamente una página de GitHub suele producir un desastre. La navegación del sitio, las barras laterales y el pie de página se cuelan. Los bloques de código anchos se cortan. Las imágenes relativas se rompen porque el navegador ya no lee desde la raíz del repositorio. Las tablas largas se parten de forma torpe entre páginas. md2pdf existe para resolver esos problemas concretos sin pedirte que crees una cuenta ni que subas tu archivo fuente a un servidor.
 
 Esta guía recorre el flujo completo, desde pegar la URL de un repositorio hasta revisar el PDF exportado, y explica qué hace la herramienta en cada paso.
 
@@ -26,9 +26,9 @@ Hay otros tres problemas recurrentes:
 - **Código y tablas anchos.** Los bloques de código y las tablas comparativas son más anchos que una página impresa. Sin reglas específicas de impresión, o se reducen hasta tamaños ilegibles o se recortan.
 - **Paginación.** Los encabezados, los bloques de código y las filas de tabla deben evitar saltos torpes. Una impresión directa del navegador rara vez lo resuelve bien.
 
-ReadmePDF obtiene el Markdown sin procesar del README, resuelve las URL relativas al repositorio, renderiza Markdown al estilo GitHub, sanea el resultado y aplica una hoja de estilos de impresión antes de que se abra el diálogo de impresión del navegador. La salida la sigue generando el motor nativo «Guardar como PDF» del navegador, pero el documento que recibe ya está limpio.
+md2pdf obtiene el Markdown sin procesar del README, resuelve las URL relativas al repositorio, renderiza Markdown al estilo GitHub, sanea el resultado y aplica una hoja de estilos de impresión antes de que se abra el diálogo de impresión del navegador. La salida la sigue generando el motor nativo «Guardar como PDF» del navegador, pero el documento que recibe ya está limpio.
 
-## Qué cambia ReadmePDF
+## Qué cambia md2pdf
 
 El proceso de conversión se ejecuta por completo en el navegador. En la práctica:
 
@@ -54,7 +54,7 @@ Si el repositorio es privado, la obtención fallará. El método manual sigue fu
 
 ## Paso 1: dale un repositorio a la herramienta
 
-Abre el convertidor y pega la URL del repositorio en el campo **URL del repositorio de GitHub**. ReadmePDF acepta más que la URL canónica:
+Abre el convertidor y pega la URL del repositorio en el campo **URL del repositorio de GitHub**. md2pdf acepta más que la URL canónica:
 
 ```text
 https://github.com/owner/repo
@@ -79,7 +79,7 @@ Cuando llega el Markdown, la vista previa se actualiza. Este es el momento de co
 - **Bloques de código.** Los bloques delimitados con una etiqueta de lenguaje se renderizan como código. Las líneas muy anchas se desplazarán en la vista previa, pero aún necesitan una comprobación en impresión.
 - **Enlaces.** Los enlaces del documento se reescriben a la vista blob de GitHub para que sigan teniendo sentido en el PDF. Los enlaces externos se abren en una pestaña nueva en la vista previa.
 
-Si una imagen falla, ReadmePDF la marca como rota y continúa. La exportación no falla porque una insignia no esté disponible. Es deliberado: una insignia que falta suele importar menos que el resto del documento.
+Si una imagen falla, md2pdf la marca como rota y continúa. La exportación no falla porque una insignia no esté disponible. Es deliberado: una insignia que falta suele importar menos que el resto del documento.
 
 ## Paso 3: elige un tema que encaje con el documento
 
@@ -166,11 +166,11 @@ El PDF es tan bueno como el Markdown del que parte. Estos cambios dan resultado 
 2. **Da a las imágenes un texto alternativo útil.** Es bueno para la accesibilidad y le da al PDF un recurso legible cuando una imagen no se puede cargar.
 3. **Delimita el código con un lenguaje.** Los bloques con etiqueta de lenguaje se renderizan de forma más predecible que el código indentado, sobre todo cuando las líneas son largas.
 4. **Mantén las tablas estrechas.** Una tabla de ocho columnas no cabrá en A4 sin reducirse. Lleva el detalle a la prosa o divide la tabla.
-5. **Prefiere rutas relativas para los recursos del repositorio.** ReadmePDF las reescribe correctamente. Los enlaces absolutos a una máquina local o a un bucket privado no sobrevivirán al viaje.
+5. **Prefiere rutas relativas para los recursos del repositorio.** md2pdf las reescribe correctamente. Los enlaces absolutos a una máquina local o a un bucket privado no sobrevivirán al viaje.
 
 ## Privacidad: qué sale de tu navegador
 
-ReadmePDF no sube tu Markdown. El renderizado, el saneado, la generación de la tabla de contenidos y la exportación a PDF ocurren en local. Cuando se obtiene un repositorio, las únicas solicitudes salientes son lecturas anónimas a GitHub del README público y sus imágenes. No hay cuentas, ni cookies, ni analíticas asociadas a la conversión.
+md2pdf no sube tu Markdown. El renderizado, el saneado, la generación de la tabla de contenidos y la exportación a PDF ocurren en local. Cuando se obtiene un repositorio, las únicas solicitudes salientes son lecturas anónimas a GitHub del README público y sus imágenes. No hay cuentas, ni cookies, ni analíticas asociadas a la conversión.
 
 Eso importa cuando el documento contiene notas internas, nombres de clientes o planes no publicados. Puedes pegar Markdown sensible y exportarlo sin enviar el texto a un servicio de conversión de terceros. Lo mismo ocurre con los archivos locales: el archivo lo lee tu navegador, no se sube.
 

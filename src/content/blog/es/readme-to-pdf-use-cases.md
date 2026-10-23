@@ -10,7 +10,7 @@ translationKey: "readme-to-pdf-use-cases"
 
 Un enlace a un repositorio es una buena forma de compartir documentación con alguien que ya vive en GitHub. Es una mala forma de compartir documentación con todos los demás. Los revisores pierden contexto, los clientes no quieren crear una cuenta y una URL no es un archivo. Un PDF resuelve el problema de distribución, pero solo si se produce con intención.
 
-ReadmePDF gira en torno a un flujo acotado: obtener Markdown de un repositorio público, de un archivo local o del portapapeles; renderizarlo con Markdown al estilo GitHub; aplicar una hoja de estilos de impresión; y enviarlo al diálogo «Guardar como PDF» del navegador. Esa estrechez es útil. Significa que la misma herramienta puede servir para una entrega a cliente de cinco páginas y para una lectura de curso de cincuenta, sin servidor, cuenta ni subidas.
+md2pdf gira en torno a un flujo acotado: obtener Markdown de un repositorio público, de un archivo local o del portapapeles; renderizarlo con Markdown al estilo GitHub; aplicar una hoja de estilos de impresión; y enviarlo al diálogo «Guardar como PDF» del navegador. Esa estrechez es útil. Significa que la misma herramienta puede servir para una entrega a cliente de cinco páginas y para una lectura de curso de cincuenta, sin servidor, cuenta ni subidas.
 
 A continuación, siete situaciones en las que ese flujo se gana su lugar, con los ajustes y la preparación que hacen funcionar cada una.
 
@@ -28,7 +28,7 @@ Un cliente rara vez quiere acceso al repositorio solo para leer un resumen del p
 **Preparación que importa:**
 
 - Elimina los enlaces a tickets internos, las URL de staging y las credenciales antes de exportar. La herramienta no sube el documento, pero el PDF sigue siendo un archivo que se puede reenviar.
-- Sustituye las rutas de imagen relativas por rutas del repositorio que existan de verdad. ReadmePDF las resuelve durante la obtención de un repositorio, pero una imagen de origen rota seguirá rota en el PDF.
+- Sustituye las rutas de imagen relativas por rutas del repositorio que existan de verdad. md2pdf las resuelve durante la obtención de un repositorio, pero una imagen de origen rota seguirá rota en el PDF.
 - Comprueba que el README empieza con un resumen, no con un registro de cambios. Un documento de entrega debe decirle al lector qué es el proyecto antes de decirle qué cambió.
 - Añade un párrafo breve de «Cómo leer este documento» si el README mezcla instrucciones de configuración con antecedentes de arquitectura.
 
@@ -70,7 +70,7 @@ Estudiantes y docentes suelen tener apuntes en Markdown, documentación de proye
 - Revisa la jerarquía de encabezados antes de exportar. Una lectura de curso con niveles saltados produce una tabla de contenidos confusa.
 - Academic justifica el cuerpo de texto. Las URL muy largas, los identificadores de código y las ecuaciones pueden crear un espaciado incómodo. Divide las URL largas en enlaces de estilo referencia o llévalas a una sección tipo notas al pie.
 - Mantén los bloques de código cortos. El tema usa un fondo de código claro que se imprime bien, pero una línea de 120 caracteres seguirá desbordando la página.
-- Si el documento incluye citas, mantenlas en el Markdown como sección de referencias. ReadmePDF renderiza el texto; no gestiona un estilo de cita.
+- Si el documento incluye citas, mantenlas en el Markdown como sección de referencias. md2pdf renderiza el texto; no gestiona un estilo de cita.
 - Imprime un borrador antes de entregar. El texto justificado y la tipografía serif pueden verse distintos en papel que en la vista previa.
 
 Como la conversión ocurre en el navegador, los apuntes no publicados y los borradores de artículos no salen de él. Es una ventaja importante frente a un servicio de «pega tu documento en nuestro convertidor».
