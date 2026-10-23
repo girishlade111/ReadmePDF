@@ -1,14 +1,14 @@
 import { readFileSync } from 'node:fs';
 import { JSDOM } from 'jsdom';
 import { PDFDocument, PDFName, PDFArray, PDFDict } from 'pdf-lib';
-import { htmlToBlocks } from 'C:/Users/Girish Lade/OneDrive/Desktop/ReadmePDF/src/lib/pdf/model.js';
-import { renderPdf } from 'C:/Users/Girish Lade/OneDrive/Desktop/ReadmePDF/src/lib/pdf/renderer.js';
+import { htmlToBlocks } from './src/lib/pdf/model.js';
+import { renderPdf } from './src/lib/pdf/renderer.js';
 
 const FONT_FILES = {
   regular: 'DejaVuSans.ttf', bold: 'DejaVuSans-Bold.ttf', italic: 'DejaVuSans-Oblique.ttf',
   boldItalic: 'DejaVuSans-BoldOblique.ttf', mono: 'DejaVuSansMono.ttf', cjk: 'NotoSansCJKsc-Common.ttf',
 };
-const fontBytes = Object.fromEntries(Object.entries(FONT_FILES).map(([role, name]) => [role, readFileSync(`C:/Users/Girish Lade/OneDrive/Desktop/ReadmePDF/public/fonts/${name}`)]));
+const fontBytes = Object.fromEntries(Object.entries(FONT_FILES).map(([role, name]) => [role, readFileSync(new URL(`./public/fonts/${name}`, import.meta.url))]));
 
 const html = `<p>Before <a href="https://example.com/docs">external link</a> after.</p>
 <ul><li><a href="https://example.com/nested">nested link</a> tail</li></ul>
