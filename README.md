@@ -1,9 +1,8 @@
 # ReadmePDF
 
-**Free, no-login, client-side GitHub README → PDF converter.**
-Paste a repository URL, preview the rendered Markdown, and export a polished PDF — all processed in your browser.
+**Free, no-login, client-side GitHub README → PDF converter.** Paste a repository URL, preview the rendered Markdown, assemble a multi-chapter documentation book, and export print-ready PDFs — all processed in your browser.
 
-> Built with **Astro 5** · Markdown by **markdown-it** · Sanitized with **DOMPurify** · Tests on the **Node built-in test runner**
+> Built with **Astro 7.4.2** · Markdown by **markdown-it** · Sanitized with **DOMPurify** · PDFs by **pdf-lib + fontkit** · Tests on the **Node built-in test runner**
 
 ---
 
@@ -11,15 +10,16 @@ Paste a repository URL, preview the rendered Markdown, and export a polished PDF
 
 - [Overview](#overview)
 - [Features](#features)
-- [Design system](#design-system)
+- [Design System](#design-system)
 - [How It Works](#how-it-works)
 - [Tech Stack](#tech-stack)
 - [Project Structure](#project-structure)
 - [Getting Started](#getting-started)
+- [SEO Modes and the Release Gate](#seo-modes-and-the-release-gate)
 - [Usage](#usage)
 - [Testing](#testing)
-- [Privacy & Security](#privacy--security)
-- [Error Handling](#error-handling)
+- [Privacy and Security](#privacy-and-security)
+- [Deployment and Security Headers](#deployment-and-security-headers)
 - [Roadmap](#roadmap)
 - [License](#license)
 
@@ -27,101 +27,109 @@ Paste a repository URL, preview the rendered Markdown, and export a polished PDF
 
 ## Overview
 
-ReadmePDF (part of **LadeStack**) turns any public GitHub repository's README into a print-ready document without requiring an account, an API token, or a server.
+ReadmePDF (part of **LadeStack**) turns public GitHub repositories and local Markdown files into polished documents. It supports two workflows:
 
-Most README-to-PDF tools upload your content to a backend. ReadmePDF does the opposite: the entire conversion pipeline — fetching, path resolution, rendering, sanitizing, and PDF export — runs in the browser. The only network requests made are anonymous reads against `github.com`, `api.github.com`, and `raw.githubusercontent.com`.
+1. **Single document** — fetch a README, paste Markdown, or upload a file, then preview, print, or export one PDF.
+2. **Documentation book** — scan a repository, choose Markdown files in a searchable tree, reorder chapters, build a cover and table of contents, print the assembled book, or download a ZIP of per-chapter PDFs.
+
+There is no application backend. Fetching, Markdown rendering, sanitization, PDF layout, font embedding, image embedding, and ZIP creation all run in the browser. The static Astro site exists to serve the UI and localized content.
 
 ### Why it exists
 
-- Generate shareable PDF docs (specs, proposals, reports) from repo READMEs.
-- Archive or distribute project documentation offline.
-- Produce clean PDFs from hand-written Markdown without leaving the page.
+- Turn a repository README into a shareable PDF without an account or API token.
+- Assemble several documentation pages into one printable book.
+- Archive documentation offline while keeping links and images intact.
+- Produce PDFs from hand-written Markdown without uploading it anywhere.
 
 ---
 
 ## Features
 
-### GitHub fetch
-- Accepts full URLs (`https://github.com/owner/repo`), protocol-less hosts, `owner/repo` shorthand, and URLs with extra paths (`/tree/main/docs`, `/blob/main/README.md`).
-- Discovers the default branch via the GitHub API, then falls back to `main` and `master`.
-- Tries **10 README filename candidates** (`README.md`, `readme.md`, `README.MD`, `Readme.md`, `README.markdown`, `README`, `.github/README.md`, and more).
-- Degrades gracefully when the API is rate-limited — raw fetches have an independent quota, so the flow continues instead of aborting.
+### GitHub import
 
-### Relative-path resolution
-- Images and badges (`docs/logo.png`, `./assets/chart.svg`) are rewritten to `raw.githubusercontent.com` so they render in the PDF.
-- Document links become `github.com/.../blob/...` so they stay clickable in the exported file.
-- Path traversal is clamped at the repo root (`../..` can never escape the repository).
-- READMEs located in `.github/` resolve relative paths against their own directory.
-- Absolute URLs, anchors (`#section`), and `data:`/`mailto:` links are left untouched.
-- Fenced code blocks and inline code spans are never rewritten, so examples stay correct.
+- Accepts full URLs (`https://github.com/owner/repo`), protocol-less hosts, `owner/repo` shorthand, and URLs with extra paths (`/tree/main/docs`, `/blob/main/README.md`, raw file URLs).
+- Resolves the default branch through the GitHub API, then falls back to `main` and `master` where appropriate.
+- Tries ten README filename candidates, including `.github/README.md`.
+- Rewrites relative images to `raw.githubusercontent.com` and relative document links to GitHub blob URLs.
+- Clamps traversal at the repository root and never rewrites fenced code or inline code.
+- Continues with raw fetches when the unauthenticated API is rate-limited, and surfaces localized errors instead of failing silently.
 
-### Rendering
-- GitHub Flavored Markdown: tables, task lists, strikethrough, fenced code, linkify.
-- Auto **table of contents** with stable, unique heading slugs (auto-enabled for documents with 3+ headings; toggleable).
-- DOMPurify sanitization in the browser — `script`, `style`, `iframe`, `object`, `embed`, and `form` tags are stripped.
-- External links open in a new tab with `rel="noopener noreferrer"`.
+### Markdown workspace
 
-### Themes & export
-- Four print themes: **Clean**, **Business**, **Academic**, **Dark** (dark auto-lightens for print/PDF to preserve legibility).
-- Export uses the browser's native **Print → Save as PDF** — no server-side PDF engine.
-- Broken images get a placeholder instead of failing the entire export.
+- Paste Markdown, load the bundled sample, or upload `.md` / `.markdown` / `.txt` files up to 2 MB.
+- GitHub Flavored Markdown: tables, task lists, strikethrough, fenced code, and linkify.
+- Live, debounced preview with an optional auto-generated table of contents for documents with three or more headings.
+- Four print themes: **Clean**, **Business**, **Academic**, and **Dark** (dark lightens for print legibility).
+- DOMPurify strips `script`, `style`, `iframe`, `object`, `embed`, and `form` elements; external links open in a new tab with `rel="noopener noreferrer"`.
+- Broken images degrade to a placeholder rather than aborting the document.
 
-### Input modes
-1. Paste a GitHub repository URL and click **Fetch**.
-2. Upload a local `.md` / `.markdown` / `.txt` file (2 MB free-tier limit).
-3. Paste Markdown directly into the textarea.
-4. Load a bundled sample document.
+### Documentation book
+
+- Scans a repository through the Git Trees API with bounded fallbacks and explicit completeness warnings.
+- Searchable file tree with tri-state folder checkboxes, select-all, clear-selection, per-file preview, and a 30-chapter safety limit.
+- Chapter ordering with move-up, move-down, and remove controls; newly selected files append predictably.
+- Builds a cover, table of contents, and chapter sequence that preserves the chosen order.
+- Cancellation-safe scanning and building: a cancelled build leaves no partial output and cannot be printed.
+- Editing the title, subtitle, cover, or TOC marks the assembled book stale and disables print/export until it is rebuilt.
+- Print isolation shows either the single document or the assembled book, never both.
+
+### PDF and print
+
+- **Single document:** native browser Print → Save as PDF, isolated from the rest of the page.
+- **Book:** native browser print of the assembled cover, TOC, and chapters.
+- **ZIP export:** direct download of one PDF per selected chapter, preserving repository paths and Unicode filenames (NFC-normalized).
+- ZIP root is `readmepdf-{owner}-{repo}-{sha8}.zip`; exports are capped at 30 PDFs.
+- PDFs embed images, internal links, external URI annotations, and self-hosted fonts.
+- Unicode coverage includes Latin, Cyrillic, Turkish, and CJK text. DejaVu Sans/Mono cover Latin and Cyrillic; Noto Sans CJK SC covers Chinese, Japanese, and Korean.
+- Export can be cancelled at any point; a cancelled export downloads nothing and reports it explicitly.
+
+### Internationalization and blog
+
+- Nine locales: English (`en`), Spanish (`es`), Japanese (`ja`), Korean (`ko`), Simplified Chinese (`zh-Hans`), Russian (`ru`), Turkish (`tr`), French (`fr`), and Brazilian Portuguese (`pt-BR`).
+- 45 static pages: nine homepages, nine journal indexes, and 27 localized articles (three translation keys across nine locales).
+- 362 translated message keys per locale.
+- English keeps unprefixed URLs; every other locale uses a prefix (`/es/`, `/ja/`, `/pt/`, and so on).
+- Language selection is URL-first. There is no `Accept-Language`, cookie, or redirect-based guessing.
+- Localized articles share a `translationKey` identity for reciprocal hreflang metadata.
+
+### SEO and release safety
+
+- Self-referencing canonicals, reciprocal hreflang links (including `x-default`), localized Open Graph metadata, and JSON-LD.
+- A 45-URL sitemap with 450 alternates generated only when a public origin is configured.
+- `npm run build` remains a local static build and works without an origin.
+- `npm run build:release` fails closed: it requires a valid public HTTPS origin and verifies the generated artifact before the command succeeds.
 
 ---
 
-## Design system
+## Design System
 
-The interface follows the spec in [`design.md`](./design.md) — a warm-neutral, shadow-free system
-borrowed from Oracle's web properties. The rules that shape the page:
+The interface follows [`design.md`](./design.md) — a warm-neutral, shadow-free system.
 
-- **A six-rung neutral ladder.** `canvas` → `canvas-soft` → `canvas-tint` → `canvas-warm` →
-  `hairline` → `ink-deep`. Sections are told apart by *which rung they sit on*, not by cards, rules
-  or shadows. Full-bleed, square-cornered, `48px 0` padding on every band.
-- **No shadows, anywhere.** Depth comes from position on the ladder. A white card on a warm band
-  reads as raised because it is lighter.
-- **One red.** `#c74634` appears on the ReadmePDF wordmark and nowhere else. Chromatic colour is
-  deployed only at whole-band scale — the teal statement strip and the deep-green privacy band.
-- **One action colour.** Every button is the warm charcoal `#312d2a` at a 4px radius with
-  `10px 16px` padding. Polarity flips on dark bands instead of changing hue.
-- **Two registers.** Georgia for display (h1/h2), Inter for everything else — running copy at
-  350/400, section headings at 800. Hierarchy is carried by the weight jump, not by size.
-- **One ornament.** A 40 × 4px gold rule under the hero headline. Nothing else is decorated.
-- **Focus ring declared once** (`#227e9e`), applied identically on light and dark surfaces.
+- **A six-rung neutral ladder.** Sections are separated by which background rung they use, not by cards or shadows.
+- **One red.** `#c74634` appears on the ReadmePDF wordmark only.
+- **One action colour.** Buttons use the warm charcoal `#312d2a`; polarity flips on dark bands.
+- **Two type registers.** Georgia for display headings, Inter for everything else.
+- **One ornament.** A gold rule under the hero headline.
+- **Focus ring declared once** (`#227e9e`) and applied consistently.
 
-**Fonts are self-hosted.** `Inter` ships as a variable `woff2` in `src/fonts/` (latin + latin-ext),
-so the page makes no third-party requests and the "nothing leaves your browser" promise holds
-literally. Georgia and Consolas use system stacks.
-
-**Template note.** ReadmePDF is a *product* template, so it uses Georgia display type and 8px
-card radii throughout — the 15px radii in the spec belong to the corporate-index template and are
-deliberately not mixed in.
+**Page fonts are self-hosted.** Inter ships as variable `woff2` files in `src/fonts/`; Georgia and Consolas use system stacks. The page makes no third-party font requests.
 
 ---
 
 ## How It Works
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│  Browser (everything below happens locally)                     │
-│                                                                 │
-│  1. parseGitHubUrl()      → { owner, repo }                     │
-│  2. GET api.github.com    → default_branch                      │
-│  3. GET raw.githubusercontent.com/{branch}/{README candidate}   │
-│  4. rewriteRelativeUrls() → images → raw, links → blob          │
-│  5. extractHeadings()     → TOC entries with slugs              │
-│  6. markdown-it render    → HTML (GFM)                          │
-│  7. DOMPurify.sanitize()  → safe HTML                           │
-│  8. injectHeadingIds()    → matching anchor ids                 │
-│  9. window.print()        → user picks "Save as PDF"            │
-└─────────────────────────────────────────────────────────────────┘
+Browser
+  1. Parse the repository URL or read the local Markdown.
+  2. Fetch GitHub metadata / README / file tree when needed.
+  3. Resolve relative images and document links.
+  4. Render GFM with markdown-it, extract headings and TOC.
+  5. Sanitize the HTML with DOMPurify.
+  6. Preview, print, or lay out PDFs with pdf-lib + fontkit.
+  7. Bundle per-chapter PDFs into a ZIP with JSZip.
 ```
 
-No uploads. No backend. No cookies.
+No uploads. No application backend. No cookies.
 
 ---
 
@@ -129,12 +137,14 @@ No uploads. No backend. No cookies.
 
 | Layer | Choice | Why |
 | ----- | ------ | --- |
-| Framework | [Astro 5](https://astro.build) (`output: 'static'`) | Zero-JS static pages, ships only what runs |
-| Markdown | `markdown-it` + `markdown-it-task-lists` | GFM coverage, extensible, fast |
-| Sanitization | `dompurify` | Industry-standard XSS defense for HTML-in-Markdown |
-| Typography | Self-hosted Inter (variable) + system Georgia | Full 350/800 weight axis, no third-party requests |
-| Testing | Node built-in `node:test` + `jsdom` | Zero-config runner, DOM support for widget tests |
-| PDF | Browser Print → Save as PDF | 100% client-side, no rendering service |
+| Framework | [Astro 7.4.2](https://astro.build) (`output: 'static'`) | Static HTML with only the client code that is needed |
+| Markdown | `markdown-it` + `markdown-it-task-lists` | GFM coverage with an extensible renderer |
+| Sanitization | `dompurify` | Battle-tested HTML sanitization for HTML-in-Markdown |
+| PDF layout | `pdf-lib` + `@pdf-lib/fontkit` | Client-side PDF creation with embedded fonts and images |
+| ZIP packaging | `jszip` | Per-chapter PDF bundles without a server |
+| Typography | Self-hosted Inter; DejaVu + Noto for PDFs | No third-party page fonts; broad PDF Unicode coverage |
+| Testing | Node `node:test` + `jsdom` + `pdfjs-dist` | Fast unit/integration tests and real PDF parsing checks |
+| Release verification | Custom Node scripts | Compares `dist/` with the source inventory and one origin |
 
 ---
 
@@ -142,35 +152,29 @@ No uploads. No backend. No cookies.
 
 ```
 ReadmePDF/
-├── astro.config.mjs          # Astro config (static output)
-├── design.md                 # Design system spec the UI implements
-├── package.json
-├── .gitignore                # node_modules/, dist/, .astro/
+├── astro.config.mjs              # Static output, i18n, origin guard
+├── design.md                     # Design system specification
+├── public/
+│   ├── fonts/                    # PDF fonts (DejaVu, Noto CJK) + licenses
+│   └── og/                       # Social preview image
+├── scripts/
+│   ├── build-release.mjs         # Fail-closed release build
+│   └── lib/release-verify.mjs    # Artifact and SEO verification
 ├── src/
-│   ├── fonts/                # Self-hosted Inter variable (latin, latin-ext)
+│   ├── components/               # Home, blog, SEO, language switcher
+│   ├── content/blog/             # 27 localized article files
+│   ├── i18n/                     # Locale config, dictionaries, formatting
 │   ├── lib/
-│   │   ├── github.js         # URL parsing, README fetch, relative-URL rewriting
-│   │   └── markdown.js       # GFM render, sanitization, TOC, heading slugs
-│   ├── pages/
-│   │   └── index.astro       # Single-page UI (bands + converter + live preview)
-│   ├── scripts/
-│   │   └── converter.js      # Client controller wiring inputs → render → print
-│   └── styles/
-│       └── app.css           # Design tokens, bands, components, print styles
-└── test/
-    ├── github.test.js        # URL parsing, path resolution, fetch resilience
-    ├── markdown.test.js      # GFM rendering, TOC extraction
-    ├── integration.test.js   # Full pipeline with mocked GitHub
-    └── features.test.js      # TOC injection, error messaging (jsdom)
+│   │   ├── github/               # URL parsing, API, discovery, references
+│   │   ├── pdf/                  # Model, fonts, renderer, assembly, export
+│   │   ├── seo.js, site.js       # Canonicals, hreflang, sitemap, origin rules
+│   │   ├── markdown.js           # GFM rendering and TOC
+│   │   └── sanitize.js           # DOMPurify policy
+│   ├── pages/                    # English + prefixed locale routes and blog
+│   ├── scripts/                  # converter.js and book-explorer.js
+│   └── styles/                   # app.css and blog.css, including print rules
+└── test/                         # 19 test files, 201 tests, 59 suites
 ```
-
-### Module responsibilities
-
-| Module | Exports |
-| ------ | ------- |
-| `src/lib/github.js` | `parseGitHubUrl`, `resolveRepoPath`, `buildRawUrl`, `buildBlobUrl`, `rewriteRelativeUrls`, `fetchReadme`, `README_CANDIDATES`, `BRANCH_FALLBACKS` |
-| `src/lib/markdown.js` | `renderMarkdown`, `renderMarkdownSync`, `extractHeadings`, `buildTocHtml`, `injectHeadingIds` |
-| `src/scripts/converter.js` | `initConverter`, `friendlyError` |
 
 ---
 
@@ -178,8 +182,8 @@ ReadmePDF/
 
 ### Prerequisites
 
-- **Node.js ≥ 18** (for `AbortSignal.timeout`, native test runner, ESM)
-- **npm** (ships with Node)
+- **Node.js ≥ 22.23.4** (Astro 7 requirement; tested with Node 26.4.0)
+- **npm ≥ 9.6.5**
 
 ### Installation
 
@@ -192,47 +196,90 @@ npm install
 ### Development
 
 ```bash
-npm run dev        # start Astro dev server → http://localhost:4321
+npm run dev        # Astro dev server → http://localhost:4321
 ```
 
-### Production build
+### Local production build (MODE A)
 
 ```bash
 npm run build      # static output → dist/
-npm run preview    # serve the production build locally
+npm run preview    # serve dist/ locally
 ```
+
+Without `PUBLIC_SITE_URL`, pages use root-relative canonicals, the sitemap is omitted, and `robots.txt` has no `Sitemap:` directive. This is intentional: a local build must not advertise a fake production origin.
+
+### Release build (MODE B)
+
+```bash
+PUBLIC_SITE_URL=https://your-real-domain.example npm run build:release
+```
+
+On Windows PowerShell:
+
+```powershell
+$env:PUBLIC_SITE_URL = "https://your-real-domain.example"
+npm run build:release
+```
+
+The command rejects missing, HTTP, loopback/IP, single-label, reserved-TLD, `example.*`, and placeholder hosts. It then runs Astro, verifies the output, and exits non-zero if any check fails. There is no bypass flag.
+
+---
+
+## SEO Modes and the Release Gate
+
+| Behavior | MODE A — `npm run build` | MODE B — `npm run build:release` |
+| -------- | ------------------------ | -------------------------------- |
+| `PUBLIC_SITE_URL` | Optional | Required, public HTTPS |
+| Canonicals | Root-relative, self-referencing | 45 absolute self-canonicals |
+| hreflang | Omitted (requires absolute URLs) | 10 links per page, including `x-default` |
+| `sitemap.xml` | Omitted | 45 URLs, 450 alternates |
+| `robots.txt` | No `Sitemap:` directive | Absolute `Sitemap:` directive |
+| JSON-LD | Local-safe | Rejects non-origin deployment URLs |
+| Artifact verification | Astro build only | Full page/SEO/artifact inventory |
+
+The release verifier derives the expected routes from the content collection, then checks every HTML page, canonical, hreflang set, Open Graph URL, HTML `lang`, JSON-LD block, sitemap entry, and the robots directive. The only external URL allowed in JSON-LD is the publisher link to `https://ladestack.in`.
 
 ---
 
 ## Usage
 
-### Convert a GitHub README
+### Convert one README
 
-1. Paste a repository URL into the **GitHub repo URL** field:
-   ```
-   https://github.com/owner/repo
-   ```
-2. Click **Fetch** (or press Enter). The README loads into the editor and the preview updates.
-3. Pick a theme: **Clean**, **Business**, **Academic**, or **Dark**.
-4. Toggle **Auto table of contents** if you want/avoid the generated Contents block.
-5. Click **Download / Print PDF** → choose **Save as PDF** in the print dialog.
+1. Paste a repository URL into **GitHub repo URL**.
+2. Click **Fetch** (or press Enter). The README loads into the editor and preview.
+3. Choose a theme and toggle the table of contents.
+4. Click **Download / Print PDF** and choose **Save as PDF**.
 
-### Paste or upload Markdown
+### Assemble a documentation book
 
-- Use the file picker for `.md` / `.markdown` / `.txt` files (≤ 2 MB), or
-- Type/paste Markdown directly into the textarea — the preview re-renders as you type (debounced 180 ms).
+1. Open **Documentation book** and enter a repository URL.
+2. Scan the repository.
+3. Search or expand the tree; use tri-state folder checkboxes to select Markdown files.
+4. Reorder chapters with the up/down controls.
+5. Optionally set a title, subtitle, cover, and TOC.
+6. Build the book, then print it or export a ZIP of per-chapter PDFs.
 
-> **Note:** relative image paths only resolve when a repository URL was fetched first. Uploaded/pasted Markdown has no repo base, so use absolute image URLs in that mode.
+Exporting a ZIP preserves the repository hierarchy:
+
+```
+readmepdf-octo-demo-c0ffee12/
+├── README.pdf
+└── docs/
+    ├── guide.pdf
+    ├── setup.pdf
+    └── 日本語ガイド.pdf
+```
 
 ### Supported URL forms
 
-```
+```text
 https://github.com/owner/repo
 https://github.com/owner/repo.git
 github.com/owner/repo
 owner/repo
 https://github.com/owner/repo/tree/main/docs
 https://github.com/owner/repo/blob/main/README.md
+https://raw.githubusercontent.com/owner/repo/main/README.md
 ```
 
 ---
@@ -243,52 +290,51 @@ https://github.com/owner/repo/blob/main/README.md
 npm test
 ```
 
-Runs 27 tests across 10 suites using Node's built-in test runner:
+The suite currently runs **201 tests across 59 suites in 19 files**:
 
-| Suite | Covers |
-| ----- | ------ |
-| `github.test.js` | URL parsing, `.git`/path stripping, host rejection, path resolution & clamping, raw/blob URL building, relative-URL rewriting (code fences untouched), `fetchReadme` fallbacks with mocked `fetch` |
-| `markdown.test.js` | GFM tables, task lists, strikethrough, fences; heading extraction outside code fences; TOC threshold (≥3 headings) |
-| `integration.test.js` | End-to-end pipeline: fetch → resolve → render → TOC, with a mocked GitHub |
-| `features.test.js` | `injectHeadingIds` slug ordering via jsdom; `friendlyError` mapping for all error codes |
+| Area | Representative coverage |
+| ---- | ----------------------- |
+| GitHub parsing and fetching | URL forms, branch fallback, raw/blob URLs, relative-path resolution, rate limits |
+| Markdown and sanitization | GFM tables/tasks/fences, TOC slugs, XSS payloads, unsafe URL schemes |
+| Explorer and selection | Tree building, tri-state folders, search, chapter ordering, limits |
+| Book assembly and UI | Cover/TOC order, stale output, cancellation races, print isolation |
+| PDF and export | Font fallback, pagination, images, link annotations, ZIP paths, Unicode names |
+| Internationalization and SEO | 362 keys per locale, locale routes, canonicals, hreflang, sitemap, JSON-LD |
+| Release gate | Origin policy and 45-route artifact verification fixtures |
 
-All tests use injectable/mocked `fetch` — no live network calls during CI.
-
----
-
-## Privacy & Security
-
-- **No accounts, no tokens, no cookies.** Nothing to sign up for.
-- **No uploads.** Markdown and PDF generation happen entirely in your browser.
-- **Sanitized output.** Rendered HTML passes through DOMPurify with `script`, `style`, `iframe`, `object`, `embed`, and `form` forbidden.
-- **Only outbound calls:** `api.github.com` (default branch lookup) and `raw.githubusercontent.com` (README + images) for the public repo you requested.
-- **Private repositories are not supported** in the MVP (they would require OAuth — see Roadmap).
+Tests use injected or mocked `fetch`; no live GitHub calls are required.
 
 ---
 
-## Error Handling
+## Privacy and Security
 
-`fetchReadme` throws errors carrying a machine-readable `.code`, which `friendlyError()` maps to actionable user messages:
+- **No accounts, tokens, or cookies.** There is nothing to sign up for.
+- **No application uploads.** Markdown and PDF generation happen in the browser.
+- **Sanitized previews.** DOMPurify removes executable and embedded content before it reaches the DOM.
+- **Outbound requests are limited to GitHub** (`api.github.com`, `raw.githubusercontent.com`, and GitHub pages for link targets) for the public repository the user requests.
+- **Private repositories are not supported.** They would require OAuth and are on the roadmap.
+- **No production domain is hard-coded.** Canonicals and sitemap URLs come from the validated `PUBLIC_SITE_URL`.
 
-| Code | Meaning | User-facing guidance |
-| ---- | ------- | -------------------- |
-| `INVALID_URL` | Unparseable or non-github.com URL | Shows the exact parse error |
-| `PRIVATE_OR_NOT_FOUND` | Repo 404 (private or typo) | Suggest pasting Markdown manually |
-| `NO_README` | No README on `main`/`master` (incl. `.github/`) | Suggest upload or manual paste |
-| `RATE_LIMITED` | Unauthenticated API 403/429 | Wait ~1 minute and retry |
-| `NETWORK_ERROR` | Fetch failure or 15 s timeout | Retry; manual paste still works |
+---
 
-Every fetch has a **15-second timeout** so the UI never hangs silently.
+## Deployment and Security Headers
+
+This repository does **not** include a hosting-provider configuration and does not assume a provider. Deployment must supply `PUBLIC_SITE_URL` and the platform's security headers. See [`docs/SECURITY-HEADERS.md`](./docs/SECURITY-HEADERS.md) for a provider-neutral checklist.
+
+Real HTTP response-header verification is **pending** until a production domain and host are chosen. Do not treat a local preview as proof of deployed headers.
 
 ---
 
 ## Roadmap
 
-- [ ] Private repository support via GitHub OAuth (phase 2)
-- [ ] Custom CSS / font selection for the PDF
-- [ ] Multi-file documentation bundles (docs/ folder → single PDF)
-- [ ] Direct PDF export without the print dialog
-- [ ] GitHub Pages deployment workflow
+- [x] Direct per-chapter PDF export with images, links, and embedded fonts
+- [x] Multi-file documentation books with ZIP export
+- [x] Nine locales, localized blog, and URL-first language selection
+- [x] Fail-closed release build and SEO artifact verification
+- [ ] Lazy-load the 9.4 MB CJK font only when a document needs it
+- [ ] Private repository support via GitHub OAuth
+- [ ] Combined single-PDF export in addition to per-chapter ZIPs
+- [ ] Deployment automation once the production host is chosen
 
 ---
 
@@ -296,7 +342,7 @@ Every fetch has a **15-second timeout** so the UI never hangs silently.
 
 MIT © LadeStack
 
-## 🙏 Credits
+## Credits
 
 **Built by Girish Lade** — [ladestack.in](https://ladestack.in)
 
