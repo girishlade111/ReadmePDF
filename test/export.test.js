@@ -24,7 +24,7 @@ const FONT_FILES = {
   italic: 'DejaVuSans-Oblique.ttf',
   boldItalic: 'DejaVuSans-BoldOblique.ttf',
   mono: 'DejaVuSansMono.ttf',
-  cjk: 'NotoSansCJKsc-Common.otf',
+  cjk: 'NotoSansCJKsc-Common.ttf',
 };
 
 const FONT_BYTES = Object.fromEntries(
