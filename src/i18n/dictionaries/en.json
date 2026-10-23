@@ -152,7 +152,7 @@
   "home.book.exportCancelled": "Export cancelled. Nothing was downloaded.",
   "home.book.exportReadyHint": "Keep this tab open until the download begins.",
   "home.book.exportSingle": "Each chapter becomes its own PDF inside the ZIP, with its folder path preserved.",
-  "home.book.exportWarning": "Characters outside the embedded fonts are shown as ?.",
+  "home.book.exportWarning": "Some content was simplified: unsupported characters are shown as ? and inaccessible images are skipped.",
   "home.book.exportFailuresTitle": "Files skipped during export",
   "home.book.exportStale": "The book changed. Build it again before exporting.",
   "home.book.exportBuildFirst": "Build the book before exporting PDFs.",

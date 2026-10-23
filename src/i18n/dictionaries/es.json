@@ -142,7 +142,7 @@
   "home.book.exportCancelled": "Exportación cancelada. No se descargó nada.",
   "home.book.exportReadyHint": "Mantén esta pestaña abierta hasta que empiece la descarga.",
   "home.book.exportSingle": "Cada capítulo se convierte en un PDF independiente dentro del ZIP, conservando la ruta de su carpeta.",
-  "home.book.exportWarning": "Los caracteres que no están en las fuentes integradas se muestran como ?.",
+  "home.book.exportWarning": "Parte del contenido se simplificó: los caracteres no compatibles se muestran como ? y las imágenes inaccesibles se omiten.",
   "home.book.exportFailuresTitle": "Archivos omitidos durante la exportación",
   "home.book.exportStale": "El libro cambió. Vuelve a compilarlo antes de exportar.",
   "home.book.exportBuildFirst": "Compila el libro antes de exportar los PDF.",

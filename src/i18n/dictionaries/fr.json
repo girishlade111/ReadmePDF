@@ -142,7 +142,7 @@
   "home.book.exportCancelled": "Export annulé. Aucun fichier n'a été téléchargé.",
   "home.book.exportReadyHint": "Gardez cet onglet ouvert jusqu'au début du téléchargement.",
   "home.book.exportSingle": "Chaque chapitre devient un PDF distinct dans le ZIP, avec le chemin de son dossier conservé.",
-  "home.book.exportWarning": "Les caractères absents des polices intégrées s'affichent sous la forme ?.",
+  "home.book.exportWarning": "Une partie du contenu a été simplifiée : les caractères non pris en charge s'affichent sous la forme ? et les images inaccessibles sont ignorées.",
   "home.book.exportFailuresTitle": "Fichiers ignorés pendant l'export",
   "home.book.exportStale": "Le livre a changé. Recompilez-le avant d’exporter.",
   "home.book.exportBuildFirst": "Compilez le livre avant d’exporter les PDF.",

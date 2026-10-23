@@ -146,6 +146,9 @@ export async function embedPdfFonts(pdfDoc, bytes) {
  */
 export function createFontPicker(fonts, charsets) {
   const latinRoles = ['regular', 'bold', 'italic', 'boldItalic', 'mono'];
+  // Unique code points that no embedded face can draw. The renderer turns
+  // this into a per-document warning so a PDF never silently loses content.
+  const missingCodePoints = new Set();
 
   function supports(role, char) {
     const cp = char.codePointAt(0);
@@ -174,6 +177,7 @@ export function createFontPicker(fonts, charsets) {
       if (supports(role, normalized)) return role;
     }
     if (supports('cjk', normalized)) return 'cjk';
+    missingCodePoints.add(normalized.codePointAt(0));
     return 'missing';
   }
 
@@ -211,7 +215,15 @@ export function createFontPicker(fonts, charsets) {
     return font.widthOfTextAtSize(text, size);
   }
 
-  return { fonts, charsets, roleFor, split, widthOf, normalizeChar };
+  return {
+    fonts,
+    charsets,
+    roleFor,
+    split,
+    widthOf,
+    normalizeChar,
+    missingCodePoints,
+  };
 }
 
 /** Font role used for a bold/italic combination. */

@@ -142,7 +142,7 @@
   "home.book.exportCancelled": "导出已取消，未下载任何文件。",
   "home.book.exportReadyHint": "在下载开始前，请保持此标签页打开。",
   "home.book.exportSingle": "每个章节都会在 ZIP 中成为独立的 PDF，并保留其文件夹路径。",
-  "home.book.exportWarning": "内置字体不支持的字符会显示为 ?。",
+  "home.book.exportWarning": "部分内容已简化：不支持的字符显示为 ?，无法访问的图片将被跳过。",
   "home.book.exportFailuresTitle": "导出时跳过的文件",
   "home.book.exportStale": "书籍已更改。请重新构建后再导出。",
   "home.book.exportBuildFirst": "请先构建书籍，再导出 PDF。",

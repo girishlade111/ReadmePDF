@@ -142,7 +142,7 @@
   "home.book.exportCancelled": "書き出しをキャンセルしました。ダウンロードは行われていません。",
   "home.book.exportReadyHint": "ダウンロードが始まるまで、このタブを開いたままにしてください。",
   "home.book.exportSingle": "各章は ZIP 内の個別の PDF になり、フォルダーのパスが保持されます。",
-  "home.book.exportWarning": "埋め込みフォントにない文字は ? と表示されます。",
+  "home.book.exportWarning": "一部の内容は簡略化されています。未対応の文字は ? で表示され、読み込めない画像は省略されます。",
   "home.book.exportFailuresTitle": "書き出し中にスキップされたファイル",
   "home.book.exportStale": "ブックが変更されました。書き出す前に再ビルドしてください。",
   "home.book.exportBuildFirst": "PDF を書き出す前にブックをビルドしてください。",

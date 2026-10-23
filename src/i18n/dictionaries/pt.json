@@ -142,7 +142,7 @@
   "home.book.exportCancelled": "Exportação cancelada. Nada foi baixado.",
   "home.book.exportReadyHint": "Mantenha esta aba aberta até o download começar.",
   "home.book.exportSingle": "Cada capítulo vira um PDF separado dentro do ZIP, com o caminho da pasta preservado.",
-  "home.book.exportWarning": "Caracteres ausentes nas fontes incorporadas aparecem como ?.",
+  "home.book.exportWarning": "Parte do conteúdo foi simplificada: caracteres não suportados aparecem como ? e imagens inacessíveis são ignoradas.",
   "home.book.exportFailuresTitle": "Arquivos ignorados durante a exportação",
   "home.book.exportStale": "O livro mudou. Monte-o novamente antes de exportar.",
   "home.book.exportBuildFirst": "Monte o livro antes de exportar os PDFs.",

@@ -7,6 +7,7 @@ import {
   formatBytes,
   bookErrorMessage,
   defaultBookSelection,
+  hasExportWarnings,
   initBookExplorer,
 } from '../src/scripts/book-explorer.js';
 
@@ -36,6 +37,24 @@ describe('formatBytes', () => {
     assert.equal(formatBytes('nope'), '');
     assert.equal(formatBytes(Number.NaN), '');
     assert.equal(formatBytes(undefined), '');
+  });
+});
+
+describe('hasExportWarnings', () => {
+  it('detects non-empty warning arrays, including the warning object shape', () => {
+    assert.equal(hasExportWarnings(null), false);
+    assert.equal(hasExportWarnings([]), false);
+    assert.equal(hasExportWarnings([{ warnings: [] }]), false);
+    assert.equal(
+      hasExportWarnings([{ warnings: [] }, { warnings: [{ code: 'MISSING_GLYPHS' }] }]),
+      true,
+    );
+    assert.equal(hasExportWarnings([{ warnings: ['Image skipped'] }]), true);
+  });
+
+  it('does not treat a numeric or missing warnings field as a warning', () => {
+    assert.equal(hasExportWarnings([{ warnings: 1 }]), false);
+    assert.equal(hasExportWarnings([{}]), false);
   });
 });
 

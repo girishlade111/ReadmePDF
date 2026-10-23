@@ -142,7 +142,7 @@
   "home.book.exportCancelled": "내보내기를 취소했습니다. 다운로드된 파일이 없습니다.",
   "home.book.exportReadyHint": "다운로드가 시작될 때까지 이 탭을 열어 두세요.",
   "home.book.exportSingle": "각 장은 ZIP 안에서 개별 PDF가 되며 폴더 경로가 유지됩니다.",
-  "home.book.exportWarning": "내장 글꼴에 없는 문자는 ?로 표시됩니다.",
+  "home.book.exportWarning": "일부 콘텐츠가 단순화되었습니다. 지원되지 않는 문자는 ?로 표시되고, 불러올 수 없는 이미지는 생략됩니다.",
   "home.book.exportFailuresTitle": "내보내기 중 건너뛴 파일",
   "home.book.exportStale": "책이 변경되었습니다. 내보내기 전에 다시 빌드하세요.",
   "home.book.exportBuildFirst": "PDF를 내보내기 전에 책을 빌드하세요.",

@@ -280,8 +280,7 @@ describe('exportBookToZip', () => {
     assert.equal(progress.at(-1), 'packing');
   });
 
-  it('returns per-file evidence when one path is unsafe and still exports the rest', async () => {
-    const result = await exportBookToZip(
+  it('returns per-file evidence when one path is unsafe and still exports the rest', async () => {    const result = await exportBookToZip(
       {
         ...book,
         requested: 4,

@@ -142,7 +142,7 @@
   "home.book.exportCancelled": "Dışa aktarma iptal edildi. Hiçbir dosya indirilmedi.",
   "home.book.exportReadyHint": "İndirme başlayana kadar bu sekmeyi açık tutun.",
   "home.book.exportSingle": "Her bölüm ZIP içinde ayrı bir PDF olur ve klasör yolu korunur.",
-  "home.book.exportWarning": "Gömülü yazı tiplerinde bulunmayan karakterler ? olarak gösterilir.",
+  "home.book.exportWarning": "Bazı içerikler sadeleştirildi: desteklenmeyen karakterler ? olarak gösterilir ve erişilemeyen görseller atlanır.",
   "home.book.exportFailuresTitle": "Dışa aktarma sırasında atlanan dosyalar",
   "home.book.exportStale": "Kitap değişti. Dışa aktarmadan önce yeniden oluşturun.",
   "home.book.exportBuildFirst": "PDF'leri dışa aktarmadan önce kitabı oluşturun.",

@@ -1231,6 +1231,26 @@ export async function renderPdf(options) {
     generatedAt,
   });
   const result = await renderer.build();
+
+  // `?` substitution keeps the export valid, but the reader must know that
+  // the PDF is not a faithful copy. Report the exact code points once per
+  // document instead of failing the whole export (an emoji in a heading must
+  // not cost the reader the other twenty-nine chapters).
+  const missing = [...(picker.missingCodePoints ?? [])].sort((a, b) => a - b);
+  if (missing.length) {
+    const shown = missing
+      .slice(0, 24)
+      .map((cp) => `U+${cp.toString(16).toUpperCase().padStart(4, '0')}`);
+    renderer.warnings.push({
+      code: 'MISSING_GLYPHS',
+      message: `Characters with no embedded glyph were replaced by "?": ${shown.join(', ')}${
+        missing.length > shown.length ? ` (+${missing.length - shown.length} more)` : ''
+      }.`,
+      codePoints: shown,
+      count: missing.length,
+    });
+  }
+
   const bytes = await pdfDoc.save({ useObjectStreams: true });
   return {
     bytes: Uint8Array.from(bytes),

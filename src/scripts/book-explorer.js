@@ -55,6 +55,20 @@ export function formatBytes(bytes) {
 }
 
 /**
+ * True when at least one exported PDF reported a non-fatal warning (skipped
+ * image, unsupported glyph, or similar). Kept as a pure function so the
+ * regression is covered without simulating a multi-megabyte export in JSDOM.
+ *
+ * @param {Array<{ warnings?: unknown }>|null|undefined} files
+ */
+export function hasExportWarnings(files) {
+  return (
+    Array.isArray(files) &&
+    files.some((file) => Array.isArray(file?.warnings) && file.warnings.length > 0)
+  );
+}
+
+/**
  * Actionable, non-technical copy for every failure the explorer can surface.
  * Pure function — covered by tests. The optional translator lets the browser
  * use the active locale while library callers keep English defaults.
@@ -1212,7 +1226,7 @@ export function initBookExplorer() {
       } else {
         setExportStatus(summary, '');
       }
-      if (result.files.some((file) => Number(file.warnings) > 0) && exportWarning) {
+      if (hasExportWarnings(result.files) && exportWarning) {
         exportWarning.hidden = false;
       }
     } catch (error) {
