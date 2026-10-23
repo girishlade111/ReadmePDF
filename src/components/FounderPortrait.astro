@@ -1,0 +1,49 @@
+---
+/**
+ * Founder portrait slot.
+ *
+ * The page ships with a branded monogram until an authentic photograph is
+ * added at `public/images/girish-lade-profile.webp`. The existence check runs
+ * at build time, so dropping the file in is the only change needed to switch
+ * the component over. No generated or stock portrait is substituted.
+ */
+import { existsSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+
+const { name = 'Girish Lade', alt = 'Portrait of Girish Lade', note = '' } = Astro.props;
+
+const portraitFile = fileURLToPath(
+  new URL('../../public/images/girish-lade-profile.webp', import.meta.url),
+);
+const hasPortrait = existsSync(portraitFile);
+const initials = String(name)
+  .split(/\s+/)
+  .filter(Boolean)
+  .slice(0, 2)
+  .map((part) => part[0]?.toUpperCase() ?? '')
+  .join('');
+---
+
+<figure class="founder-portrait">
+  <div class:list={['founder-portrait__frame', !hasPortrait && 'founder-portrait__frame--monogram']}>
+    {
+      hasPortrait ? (
+        <img
+          class="founder-portrait__image"
+          src="/images/girish-lade-profile.webp"
+          alt={alt}
+          width="420"
+          height="420"
+          loading="lazy"
+          decoding="async"
+        />
+      ) : (
+        <span class="founder-portrait__monogram" aria-hidden="true">{initials}</span>
+      )
+    }
+  </div>
+  <figcaption class="founder-portrait__caption">
+    <span class="founder-portrait__name">{name}</span>
+    {note && <span class="founder-portrait__note">{note}</span>}
+  </figcaption>
+</figure>

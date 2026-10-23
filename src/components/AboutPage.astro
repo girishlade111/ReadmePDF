@@ -1,0 +1,254 @@
+---
+import BlogLayout from '../layouts/BlogLayout.astro';
+import FounderPortrait from './FounderPortrait.astro';
+import '../styles/about.css';
+import {
+  CONTACT_EMAIL,
+  CONTACT_GITHUB,
+  CONTACT_LINKEDIN,
+  CONTACT_WEBSITE,
+  aboutContent,
+} from '../i18n/about.js';
+import { localeHref } from '../i18n/config.js';
+import { translator } from '../i18n/index.js';
+import { aboutJsonLd } from '../lib/seo.js';
+import { siteFromEnv } from '../lib/site.js';
+
+const { locale = 'en', path = '/' } = Astro.props;
+const t = translator(locale);
+const content = aboutContent(locale);
+const homeHref = localeHref(locale, '/');
+const converterHref = `${homeHref}#converter`;
+const site = siteFromEnv(import.meta.env);
+const jsonLd = aboutJsonLd({
+  locale,
+  description: t('meta.about.description'),
+  site,
+  path,
+});
+const contactLinks = [
+  {
+    label: content.contactEmailLabel,
+    value: CONTACT_EMAIL,
+    href: `mailto:${CONTACT_EMAIL}`,
+    external: false,
+  },
+  {
+    label: content.contactGithubLabel,
+    value: 'github.com/girishlade111',
+    href: CONTACT_GITHUB,
+    external: true,
+  },
+  {
+    label: content.contactLinkedinLabel,
+    value: 'linkedin.com/in/girish-lade',
+    href: CONTACT_LINKEDIN,
+    external: true,
+  },
+  {
+    label: content.contactWebsiteLabel,
+    value: 'ladestack.in',
+    href: CONTACT_WEBSITE,
+    external: true,
+  },
+];
+---
+
+<BlogLayout
+  title={t('meta.about.title')}
+  description={t('meta.about.description')}
+  locale={locale}
+  path={path}
+  section="about"
+  jsonLd={jsonLd}
+>
+  <header class="about-hero">
+    <div class="container about-hero__inner">
+      <nav class="breadcrumbs" aria-label={t('a11y.breadcrumb')}>
+        <a href={homeHref}>{t('home.wordmark')}</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">{t('nav.about')}</span>
+      </nav>
+      <p class="blog-kicker">{content.kicker}</p>
+      <h1 class="display-xl">{content.heroTitle}</h1>
+      <span class="rule" aria-hidden="true"></span>
+      <p class="lead">{content.heroLead}</p>
+      <div class="btn-row about-hero__actions">
+        <a class="btn btn--primary" href={converterHref}>{content.ctaButton}</a>
+        <a class="link-inline" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="about-main">
+    <section class="band band--white">
+      <div class="container about-split">
+        <div>
+          <p class="blog-kicker">{content.storyTitle}</p>
+          <h2 class="display-lg">{content.heroTitle}</h2>
+        </div>
+        <div class="prose about-prose">
+          <p>{content.storyP1}</p>
+          <p>{content.storyP2}</p>
+          <p>{content.storyP3}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band--soft">
+      <div class="container">
+        <div class="about-pair">
+          <article class="about-card">
+            <p class="blog-kicker">{content.missionTitle}</p>
+            <h2 class="heading-lg">{content.missionTitle}</h2>
+            <p class="body-loose">{content.missionBody}</p>
+          </article>
+          <article class="about-card">
+            <p class="blog-kicker">{content.visionTitle}</p>
+            <h2 class="heading-lg">{content.visionTitle}</h2>
+            <p class="body-loose">{content.visionBody}</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band--white">
+      <div class="container about-founder">
+        <FounderPortrait name={content.founderName} alt={content.founderName} />
+        <div class="about-founder__body">
+          <p class="blog-kicker">{content.founderTitle}</p>
+          <h2 class="display-lg">{content.founderName}</h2>
+          <p class="about-founder__role">{content.founderRole}</p>
+          <p class="body-loose">{content.founderP1}</p>
+          <p class="body-loose">{content.founderP2}</p>
+          <p class="about-note">{content.founderNote}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band--soft">
+      <div class="container">
+        <div class="blog-section-head">
+          <div>
+            <p class="blog-kicker">{content.approachTitle}</p>
+            <h2 class="display-lg">{content.approachTitle}</h2>
+          </div>
+        </div>
+        <div class="about-grid">
+          {
+            content.approachItems.map((item) => (
+              <article class="about-card">
+                <h3 class="heading-md">{item.title}</h3>
+                <p class="body-loose">{item.body}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="band band--white">
+      <div class="container about-split">
+        <div>
+          <p class="blog-kicker">{content.achievementsTitle}</p>
+          <h2 class="display-lg">{content.achievementsTitle}</h2>
+          <p class="body-loose about-section-lead">{content.achievementsLead}</p>
+        </div>
+        <ul class="about-list">
+          {content.achievements.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    </section>
+
+    <section class="band band--soft">
+      <div class="container">
+        <div class="blog-section-head">
+          <div>
+            <p class="blog-kicker">{content.usefulnessTitle}</p>
+            <h2 class="display-lg">{content.usefulnessTitle}</h2>
+          </div>
+          <p class="blog-section-head__note">{content.usefulnessBody}</p>
+        </div>
+        <div class="about-grid">
+          {
+            content.usefulnessItems.map((item) => (
+              <article class="about-card">
+                <h3 class="heading-md">{item.title}</h3>
+                <p class="body-loose">{item.body}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="band band--white">
+      <div class="container about-pair">
+        <article class="about-card about-card--plain">
+          <h2 class="heading-lg">{content.privacyTitle}</h2>
+          <p class="body-loose">{content.privacyBody}</p>
+        </article>
+        <article class="about-card about-card--plain">
+          <h2 class="heading-lg">{content.accessibilityTitle}</h2>
+          <p class="body-loose">{content.accessibilityBody}</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="band band--soft">
+      <div class="container about-split">
+        <div>
+          <p class="blog-kicker">{content.ownershipTitle}</p>
+          <h2 class="display-lg">{content.ownershipTitle}</h2>
+        </div>
+        <div>
+          <p class="body-loose about-prose">{content.ownershipBody}</p>
+          <p class="about-note">
+            <a href={CONTACT_WEBSITE} target="_blank" rel="noopener noreferrer">LadeStack</a>
+            <span aria-hidden="true"> · </span>
+            <a href="https://github.com/girishlade111/ReadmePDF" target="_blank" rel="noopener noreferrer">
+              github.com/girishlade111/ReadmePDF
+            </a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band--white" id="contact">
+      <div class="container">
+        <div class="blog-section-head">
+          <div>
+            <p class="blog-kicker">{content.contactTitle}</p>
+            <h2 class="display-lg">{content.contactTitle}</h2>
+          </div>
+          <p class="blog-section-head__note">{content.contactBody}</p>
+        </div>
+        <ul class="about-contact">
+          {
+            contactLinks.map((link) => (
+              <li>
+                <span class="about-contact__label">{link.label}</span>
+                <a
+                  href={link.href}
+                  {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                >
+                  {link.value}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <section class="band band--teal">
+      <div class="container blog-cta__inner">
+        <div>
+          <h2 class="display-md">{content.ctaTitle}</h2>
+          <p class="body-loose">{content.ctaBody}</p>
+        </div>
+        <a class="btn btn--primary" href={converterHref}>{content.ctaButton}</a>
+      </div>
+    </section>
+  </main>
+</BlogLayout>
