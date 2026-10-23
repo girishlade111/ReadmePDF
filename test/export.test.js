@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 
 import JSZip from 'jszip';
 import { JSDOM } from 'jsdom';
-import { PDFDocument } from 'pdf-lib';
+import { PDFDocument, PDFName, PDFArray, PDFDict, PDFString } from 'pdf-lib';
 
 import {
   EXPORT_LIMITS,
@@ -94,6 +94,25 @@ async function pdfImageOps(bytes) {
   } finally {
     await task.destroy();
   }
+}
+
+async function pdfLinks(bytes) {
+  const pdf = await PDFDocument.load(bytes);
+  const links = [];
+  for (const page of pdf.getPages()) {
+    const annots = page.node.lookupMaybe(PDFName.of('Annots'), PDFArray);
+    for (let index = 0; index < (annots?.size() ?? 0); index += 1) {
+      const annot = annots.lookup(index, PDFDict);
+      if (annot.get(PDFName.of('Subtype'))?.toString() !== '/Link') continue;
+      const action = annot.lookupMaybe(PDFName.of('A'), PDFDict);
+      if (!action) continue;
+      links.push({
+        action: action.get(PDFName.of('S'))?.toString() ?? null,
+        uri: action.lookupMaybe(PDFName.of('URI'), PDFString)?.decodeText() ?? null,
+      });
+    }
+  }
+  return links;
 }
 
 describe('ZIP path safety', () => {
