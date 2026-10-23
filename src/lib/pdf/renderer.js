@@ -470,7 +470,7 @@ class PdfRenderer {
       width = height * ratio;
     }
     const x = PAGE_MARGIN + indent + Math.max(0, (available - width) / 2);
-    this.ops.push({ kind: 'image', image: loaded.image, x, top: this.y, width, height });
+    this.ops.push({ kind: 'image', image: loaded, x, top: this.y, width, height });
     this.y += height + 6;
     if (block.alt) {
       this.placeRuns([{ text: cleanText(block.alt), italic: true }], {

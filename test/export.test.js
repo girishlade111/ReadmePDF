@@ -321,6 +321,52 @@ describe('exportBookToZip', () => {
     );
   });
 
+  it('embeds a successfully fetched image instead of failing the whole PDF', async () => {
+    const png = readFileSync(new URL('../public/og/readmepdf.png', import.meta.url));
+    let embedded = null;
+    const result = await exportBookToZip(
+      {
+        ...book,
+        requested: 1,
+        documents: [
+          {
+            path: 'docs/image.md',
+            markdown: [
+              '# Image success',
+              '',
+              '![Project logo](https://example.test/logo.png)',
+              '',
+              'The paragraph after the image must still render.',
+            ].join('\n'),
+          },
+        ],
+      },
+      {
+        sanitize: (html) => html,
+        parseHtml,
+        fontBytes: FONT_BYTES,
+        generatedAt: GENERATED_AT,
+        imageLoader: async (url, pdfDoc) => {
+          assert.match(url, /logo\.png$/);
+          embedded = await pdfDoc.embedPng(png);
+          return embedded;
+        },
+      },
+    );
+
+    assert.deepEqual(result.failures, []);
+    assert.equal(result.files.length, 1);
+    assert.ok(embedded.width > 0);
+    assert.equal(result.files[0].warnings.length, 0);
+
+    const zip = await readZip(result.zipBytes);
+    const bytes = await zip.file(result.files[0].zipPath).async('uint8array');
+    assert.equal(isPdfBytes(bytes), true);
+    assert.ok((await pdfImageOps(bytes)) >= 1, 'embedded image was not painted');
+    assert.match(await pdfText(bytes), /Project logo/);
+    assert.match(await pdfText(bytes), /paragraph after the image/);
+  });
+
   it('returns per-file evidence when one path is unsafe and still exports the rest', async () => {    const result = await exportBookToZip(
       {
         ...book,
