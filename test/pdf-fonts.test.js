@@ -43,8 +43,7 @@ describe('PDF font selection', () => {
     });
 
     assert.deepEqual(select.split('A😀😀'), [
-      { text: 'A', role: 'regular' },
-      { text: '??', role: 'regular' },
+      { text: 'A??', role: 'regular' },
     ]);
     assert.deepEqual([...select.missingCodePoints], [0x1f600]);
   });

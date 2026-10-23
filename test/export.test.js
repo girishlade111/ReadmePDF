@@ -280,6 +280,47 @@ describe('exportBookToZip', () => {
     assert.equal(progress.at(-1), 'packing');
   });
 
+  it('reports unsupported glyphs and skipped images as per-file warnings', async () => {
+    const result = await exportBookToZip(
+      {
+        ...book,
+        requested: 1,
+        documents: [
+          {
+            path: 'docs/warnings.md',
+            markdown: [
+              '# Warning 🚀',
+              '',
+              'The rocket emoji has no embedded glyph.',
+              '',
+              '![missing](https://example.test/missing.png)',
+            ].join('\n'),
+          },
+        ],
+      },
+      {
+        sanitize: (html) => html,
+        parseHtml,
+        fontBytes: FONT_BYTES,
+        generatedAt: GENERATED_AT,
+        imageLoader: async () => {
+          throw new Error('offline');
+        },
+      },
+    );
+
+    assert.equal(result.files.length, 1);
+    const warnings = result.files[0].warnings;
+    assert.ok(Array.isArray(warnings));
+    const glyph = warnings.find((warning) => warning.code === 'MISSING_GLYPHS');
+    assert.ok(glyph, 'missing-glyph warning was not propagated');
+    assert.match(glyph.message, /U\+1F680/);
+    assert.ok(
+      warnings.some((warning) => /Image skipped: offline/.test(warning.message ?? '')),
+      'image warning was not propagated',
+    );
+  });
+
   it('returns per-file evidence when one path is unsafe and still exports the rest', async () => {    const result = await exportBookToZip(
       {
         ...book,
