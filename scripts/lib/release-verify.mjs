@@ -164,6 +164,7 @@ export async function collectExpectedRoutes(contentDir) {
   for (const locale of LOCALES) {
     push(localeHref(locale, '/'), locale, 'home', 'home');
     push(localeHref(locale, '/blog/'), locale, 'blog', 'blog');
+    push(localeHref(locale, '/about/'), locale, 'about', 'about');
   }
 
   for (const post of posts) {
