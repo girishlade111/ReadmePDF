@@ -12,6 +12,7 @@ const { locale = 'en', path = '/' } = Astro.props;
 const meta = localeMeta(locale);
 const t = translator(locale);
 const blogHref = localeHref(locale, '/blog/');
+const aboutHref = localeHref(locale, '/about/');
 const site = siteFromEnv(import.meta.env);
 const jsonLd = homeJsonLd({
   locale,
@@ -28,7 +29,7 @@ const jsonLd = homeJsonLd({
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
       rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23211e1c'/%3E%3Ctext x='16' y='23' font-size='17' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'%3ER%3C/text%3E%3C/svg%3E"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23211e1c'/%3E%3Ctext x='16' y='23' font-size='17' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'%3EM%3C/text%3E%3C/svg%3E"
     />
     <meta name="theme-color" content="#f1efed" />
     <SeoHead
@@ -69,6 +70,7 @@ const jsonLd = homeJsonLd({
         <a href="#how">{t('nav.how')}</a>
         <a href="#themes">{t('nav.themes')}</a>
         <a href={blogHref}>{t('nav.blog')}</a>
+        <a href={aboutHref}>{t('nav.about')}</a>
         <a href="#privacy">{t('nav.privacy')}</a>
       </div>
     </nav>
@@ -596,7 +598,7 @@ const jsonLd = homeJsonLd({
             <div>
               <h3 class="heading-md">{t('home.privacy.finePrint')}</h3>
               <ul>
-                <li><a href="https://github.com/girishlade111/ReadmePDF/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">{t('home.privacy.license')}</a></li>
+                <li><a href={aboutHref}>{t('home.privacy.about')}</a></li>
                 <li><a href="#top">{t('home.privacy.backTop')}</a></li>
               </ul>
             </div>
@@ -613,6 +615,7 @@ const jsonLd = homeJsonLd({
           <a href="#how">{t('nav.how')}</a>
           <a href="#themes">{t('nav.themes')}</a>
           <a href={blogHref}>{t('nav.blog')}</a>
+          <a href={aboutHref}>{t('nav.about')}</a>
           <a href="#privacy">{t('nav.privacy')}</a>
           <a href="https://github.com/girishlade111/ReadmePDF" target="_blank" rel="noopener noreferrer">{t('nav.github')}</a>
         </nav>

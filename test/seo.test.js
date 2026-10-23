@@ -250,22 +250,32 @@ describe('JSON-LD builders', () => {
 });
 
 describe('multilingual sitemap and robots', () => {
-  it('covers all 45 public pages with per-page reciprocal alternates', () => {
+  it('covers all 54 public pages with per-page reciprocal alternates', () => {
     const pages = buildSitemapPages(mockPosts());
-    assert.equal(pages.length, 45);
+    assert.equal(pages.length, 54);
     assert.equal(pages.filter((page) => page.key === 'home').length, 9);
     assert.equal(pages.filter((page) => page.key === 'blog').length, 9);
+    assert.equal(pages.filter((page) => page.key === 'about').length, 9);
     assert.equal(pages.filter((page) => TRANSLATION_KEYS.includes(page.key)).length, 27);
     assert.ok(pages.every((page) => page.path.startsWith('/') && page.path.endsWith('/')));
 
     const entries = buildSitemapEntries(pages, SITE);
-    assert.equal(entries.length, 45);
+    assert.equal(entries.length, 54);
     for (const entry of entries) {
       assert.equal(entry.alternates.length, LOCALES.length + 1);
       assert.ok(entry.loc.startsWith(`${ORIGIN}/`));
       assert.ok(entry.alternates.every((alternate) => alternate.href.startsWith(`${ORIGIN}/`)));
       assert.ok(entry.alternates.some((alternate) => alternate.hreflang === X_DEFAULT));
     }
+  });
+
+  it('publishes one About page per locale as a fixed sitemap group', () => {
+    const pages = buildSitemapPages(mockPosts()).filter((page) => page.key === 'about');
+    assert.equal(pages.length, LOCALES.length);
+    assert.deepEqual(
+      pages.map((page) => page.path),
+      ['/about/', '/es/about/', '/fr/about/', '/ja/about/', '/ko/about/', '/pt/about/', '/ru/about/', '/tr/about/', '/zh/about/'],
+    );
   });
 
   it('keeps the English page as x-default for translated groups', () => {
@@ -288,8 +298,8 @@ describe('multilingual sitemap and robots', () => {
     assert.match(xml, /^<\?xml version="1\.0" encoding="UTF-8"\?>/);
     assert.match(xml, /xmlns="http:\/\/www\.sitemaps\.org\/schemas\/sitemap\/0\.9"/);
     assert.match(xml, /xmlns:xhtml="http:\/\/www\.w3\.org\/1999\/xhtml"/);
-    assert.equal((xml.match(/<url>/g) ?? []).length, 45);
-    assert.equal((xml.match(/hreflang="x-default"/g) ?? []).length, 45);
+    assert.equal((xml.match(/<url>/g) ?? []).length, 54);
+    assert.equal((xml.match(/hreflang="x-default"/g) ?? []).length, 54);
     assert.ok(!xml.includes('& '));
     assert.equal(escapeXml(`<&>"'`), '&lt;&amp;&gt;&quot;&apos;');
   });

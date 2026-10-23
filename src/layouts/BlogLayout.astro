@@ -10,6 +10,7 @@ const {
   title,
   description,
   article = false,
+  section = 'blog',
   locale = 'en',
   path = '/',
   jsonLd = null,
@@ -19,6 +20,7 @@ const meta = localeMeta(locale);
 const pageTitle = title.includes('md2pdf') ? title : `${title} — md2pdf`;
 const homeHref = localeHref(locale, '/');
 const blogHref = localeHref(locale, '/blog/');
+const aboutHref = localeHref(locale, '/about/');
 ---
 
 <!doctype html>
@@ -28,7 +30,7 @@ const blogHref = localeHref(locale, '/blog/');
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
       rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23211e1c'/%3E%3Ctext x='16' y='23' font-size='17' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'%3ER%3C/text%3E%3C/svg%3E"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23211e1c'/%3E%3Ctext x='16' y='23' font-size='17' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'%3EM%3C/text%3E%3C/svg%3E"
     />
     <meta name="theme-color" content="#f1efed" />
     <SeoHead
@@ -68,7 +70,12 @@ const blogHref = localeHref(locale, '/blog/');
         <a href={`${homeHref}#converter`}>{t('nav.converter')}</a>
         <a href={`${homeHref}#how`}>{t('nav.how')}</a>
         <a href={`${homeHref}#themes`}>{t('nav.themes')}</a>
-        <a href={blogHref} aria-current="page">{t('nav.blog')}</a>
+        <a href={blogHref} aria-current={section === 'blog' ? 'page' : undefined}>
+          {t('nav.blog')}
+        </a>
+        <a href={aboutHref} aria-current={section === 'about' ? 'page' : undefined}>
+          {t('nav.about')}
+        </a>
         <a href={`${homeHref}#privacy`}>{t('nav.privacy')}</a>
       </div>
     </nav>
@@ -82,6 +89,7 @@ const blogHref = localeHref(locale, '/blog/');
           <a href={`${homeHref}#how`}>{t('nav.how')}</a>
           <a href={`${homeHref}#themes`}>{t('nav.themes')}</a>
           <a href={blogHref}>{t('nav.blog')}</a>
+          <a href={aboutHref}>{t('nav.about')}</a>
           <a href={`${homeHref}#privacy`}>{t('nav.privacy')}</a>
           <a href="https://github.com/girishlade111/ReadmePDF" target="_blank" rel="noopener noreferrer">{t('nav.github')}</a>
         </nav>
@@ -89,6 +97,12 @@ const blogHref = localeHref(locale, '/blog/');
           <a href="https://github.com/girishlade111/ReadmePDF" target="_blank" rel="noopener noreferrer" aria-label={t('a11y.github')}>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
               <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+            </svg>
+          </a>
+          <a href="https://www.linkedin.com/in/girish-lade/" target="_blank" rel="noopener noreferrer" aria-label={t('a11y.linkedin')}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M5 9v11M5 5.5v.01M10 20v-6a4 4 0 0 1 8 0v6" />
+              <path d="M10 9v11" />
             </svg>
           </a>
           <a href="https://ladestack.in" target="_blank" rel="noopener noreferrer" aria-label={t('a11y.ladestack')}>

@@ -1,0 +1,386 @@
+/* =============================================================================
+   md2pdf — About page
+   Uses the tokens and primitives in app.css. No shadows, no new palette.
+   ========================================================================== */
+
+.about-hero {
+  background: var(--canvas-warm);
+  padding: var(--sp-section) 0 calc(var(--sp-section) + 8px);
+}
+
+.about-hero__inner {
+  max-width: 1080px;
+}
+
+.about-hero h1 {
+  max-width: 940px;
+}
+
+.about-hero .rule {
+  margin: var(--sp-xxl) 0;
+}
+
+.about-hero .lead {
+  max-width: 760px;
+}
+
+.about-hero__actions {
+  align-items: center;
+  margin-top: var(--sp-xxxl);
+}
+
+.about-main {
+  background: var(--canvas);
+}
+
+.about-split {
+  display: grid;
+  grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+  gap: var(--sp-gutter);
+  align-items: start;
+}
+
+.about-split h2 {
+  margin: 0;
+}
+
+.about-prose {
+  max-width: 720px;
+}
+
+.about-prose p:last-child {
+  margin-bottom: 0;
+}
+
+.about-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sp-xxxl);
+}
+
+.about-card {
+  min-width: 0;
+  padding: var(--sp-xxxl);
+  background: var(--canvas);
+  border-radius: var(--r-md);
+}
+
+.about-card--plain {
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+}
+
+.about-card h2,
+.about-card h3 {
+  margin: 0 0 var(--sp-md);
+}
+
+.about-card .blog-kicker {
+  margin-bottom: var(--sp-xs);
+}
+
+.about-section-lead {
+  max-width: 600px;
+  margin-top: var(--sp-lg);
+}
+
+.about-founder {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: var(--sp-gutter);
+  align-items: start;
+}
+
+.about-founder__body {
+  max-width: 760px;
+}
+
+.about-founder__body h2 {
+  margin: 0 0 var(--sp-xs);
+}
+
+.about-founder__role {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 22px;
+  color: var(--ink);
+  opacity: 0.68;
+  margin: 0 0 var(--sp-xl);
+}
+
+.about-note {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--ink);
+  opacity: 0.66;
+  margin: var(--sp-xl) 0 0;
+  padding-top: var(--sp-md);
+  border-top: 1px solid var(--hairline);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sp-xxxl);
+}
+
+.about-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.about-list li {
+  position: relative;
+  padding: var(--sp-md) 0 var(--sp-md) var(--sp-xxl);
+  border-top: 1px solid var(--hairline);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--ink);
+}
+
+.about-list li:last-child {
+  border-bottom: 1px solid var(--hairline);
+}
+
+.about-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 25px;
+  width: 10px;
+  height: 1px;
+  background: var(--accent-gold);
+}
+
+.about-contact {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 var(--sp-gutter);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.about-contact li {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--sp-md) 0;
+  border-top: 1px solid var(--hairline);
+}
+
+.about-contact li:last-child,
+.about-contact li:nth-last-child(2) {
+  border-bottom: 1px solid var(--hairline);
+}
+
+.about-contact__label {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  opacity: 0.62;
+}
+
+.about-contact a {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--link);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  overflow-wrap: anywhere;
+}
+
+.about-contact a:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* ---- Founder portrait / monogram fallback --------------------------------- */
+.founder-portrait {
+  margin: 0;
+}
+
+.founder-portrait__frame {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--canvas-tint);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-md);
+}
+
+.founder-portrait__frame--monogram {
+  background: var(--ink-deep);
+}
+
+.founder-portrait__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.founder-portrait__monogram {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-size: 88px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--canvas);
+}
+
+.founder-portrait__caption {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: var(--sp-sm);
+}
+
+.founder-portrait__name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  color: var(--ink);
+}
+
+.founder-portrait__note {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  color: var(--ink);
+  opacity: 0.62;
+}
+
+/* ---- Responsive ------------------------------------------------------------ */
+@media (max-width: 970px) {
+  .about-split,
+  .about-founder {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-xxl);
+  }
+
+  .about-founder {
+    max-width: 640px;
+  }
+
+  .founder-portrait__frame {
+    max-width: 280px;
+  }
+}
+
+@media (max-width: 770px) {
+  .about-hero {
+    padding: var(--sp-xxl) 0;
+  }
+
+  .about-hero h1 {
+    font-size: 40px;
+    line-height: 1.16;
+  }
+
+  .about-pair,
+  .about-grid,
+  .about-contact {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-md);
+  }
+
+  .about-contact li:nth-last-child(2) {
+    border-bottom: 0;
+  }
+
+  .about-contact li:last-child {
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .about-card {
+    padding: var(--sp-xxl);
+  }
+
+  .about-card--plain {
+    padding: 0;
+  }
+
+  .about-grid {
+    gap: var(--sp-xxl);
+  }
+}
+
+@media (max-width: 600px) {
+  .about-hero h1 {
+    font-size: 34px;
+    line-height: 1.18;
+  }
+
+  .about-hero__actions .btn {
+    width: 100%;
+  }
+
+  .founder-portrait__monogram {
+    font-size: 64px;
+  }
+}
+
+/* ---- Print ---------------------------------------------------------------- */
+@media print {
+  .about-hero {
+    padding: 0 0 18px;
+    background: #fff;
+  }
+
+  .about-hero .breadcrumbs,
+  .about-hero__actions,
+  .about-main .band--teal,
+  .founder-portrait__caption {
+    display: none !important;
+  }
+
+  .about-main {
+    background: #fff;
+  }
+
+  .about-split,
+  .about-pair,
+  .about-grid,
+  .about-founder,
+  .about-contact {
+    display: block;
+  }
+
+  .about-card {
+    padding: 0;
+    background: transparent;
+    break-inside: avoid;
+  }
+
+  .about-card + .about-card {
+    margin-top: 18pt;
+  }
+
+  .about-founder {
+    max-width: none;
+  }
+
+  .founder-portrait__frame {
+    max-width: 160px;
+  }
+}

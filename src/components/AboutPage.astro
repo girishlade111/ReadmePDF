@@ -65,7 +65,7 @@ const contactLinks = [
   <header class="about-hero">
     <div class="container about-hero__inner">
       <nav class="breadcrumbs" aria-label={t('a11y.breadcrumb')}>
-        <a href={homeHref}>{t('home.wordmark')}</a>
+        <a href={homeHref}>md2pdf</a>
         <span aria-hidden="true">/</span>
         <span aria-current="page">{t('nav.about')}</span>
       </nav>
@@ -84,8 +84,8 @@ const contactLinks = [
     <section class="band band--white">
       <div class="container about-split">
         <div>
-          <p class="blog-kicker">{content.storyTitle}</p>
-          <h2 class="display-lg">{content.heroTitle}</h2>
+          <p class="blog-kicker">{content.kicker}</p>
+          <h2 class="display-lg">{content.storyTitle}</h2>
         </div>
         <div class="prose about-prose">
           <p>{content.storyP1}</p>

@@ -3,7 +3,7 @@
  *
  * These tests exercise the two independent halves of `npm run build:release`:
  * the strict origin parser and the artifact verifier. The verifier is run
- * against a synthetic 45-page build so every failure mode can be triggered
+ * against a synthetic 54-page build so every failure mode can be triggered
  * deterministically, without relying on the checked-in `dist/` directory.
  */
 import { describe, it } from 'node:test';
@@ -220,31 +220,37 @@ describe('release origin policy', () => {
 });
 
 describe('source inventory', () => {
-  it('derives the real 45 routes and three translation keys', async () => {
+  it('derives the real 99 routes and eight translation keys', async () => {
     const { routes, keys } = await collectExpectedRoutes(REAL_CONTENT_DIR);
-    assert.equal(routes.length, 45);
+    assert.equal(routes.length, 99);
     assert.deepEqual(keys, [
+      'browser-only-markdown-to-pdf',
       'github-readme-to-pdf',
+      'markdown-code-blocks-to-pdf',
+      'markdown-table-of-contents-pdf',
+      'markdown-tables-to-pdf',
+      'multi-file-markdown-book',
       'readme-pdf-print-themes',
       'readme-to-pdf-use-cases',
     ]);
     assert.equal(routes.filter((route) => route.kind === 'home').length, 9);
     assert.equal(routes.filter((route) => route.kind === 'blog').length, 9);
-    assert.equal(routes.filter((route) => route.kind === 'article').length, 27);
+    assert.equal(routes.filter((route) => route.kind === 'about').length, 9);
+    assert.equal(routes.filter((route) => route.kind === 'article').length, 72);
   });
 });
 
 describe('release artifact verification', () => {
-  it('accepts a complete 45-page build and reports exact counts', async () => {
+  it('accepts a complete 54-page build and reports exact counts', async () => {
     await withFixture(async (fixture) => {
       const summary = await fixture.verify();
       assert.deepEqual(summary, {
         origin: ORIGIN,
-        pages: 45,
-        htmlPages: 45,
-        sitemapUrls: 45,
-        alternates: 450,
-        jsonLdBlocks: 45,
+        pages: 54,
+        htmlPages: 54,
+        sitemapUrls: 54,
+        alternates: 540,
+        jsonLdBlocks: 54,
       });
     });
   });

@@ -32,7 +32,16 @@ const blogDir = fileURLToPath(new URL('../src/content/blog/', import.meta.url));
 const dictionary = (locale) => DICTIONARIES[locale];
 const english = dictionary('en');
 const allDictionaries = LOCALES.map((locale) => [locale, dictionary(locale)]);
-const translationKeys = ['github-readme-to-pdf', 'readme-pdf-print-themes', 'readme-to-pdf-use-cases'];
+const translationKeys = [
+  'browser-only-markdown-to-pdf',
+  'github-readme-to-pdf',
+  'markdown-code-blocks-to-pdf',
+  'markdown-table-of-contents-pdf',
+  'markdown-tables-to-pdf',
+  'multi-file-markdown-book',
+  'readme-pdf-print-themes',
+  'readme-to-pdf-use-cases',
+];
 const nonEnglish = PREFIXED_LOCALES;
 
 function read(path) {
@@ -140,9 +149,9 @@ describe('locale registry and path mapping', () => {
 });
 
 describe('dictionary parity and translation quality', () => {
-  it('ships the same non-empty 362 keys in every locale', () => {
+  it('ships the same non-empty 366 keys in every locale', () => {
     const expected = Object.keys(english).sort();
-    assert.equal(expected.length, 362);
+    assert.equal(expected.length, 366);
     for (const [locale, messages] of allDictionaries) {
       assert.deepEqual(Object.keys(messages).sort(), expected, `${locale} key parity`);
       for (const key of expected) {
@@ -240,7 +249,7 @@ describe('dictionary parity and translation quality', () => {
 });
 
 describe('blog inventory and translation structure', () => {
-  it('publishes exactly three articles in each of the nine locales', () => {
+  it('publishes exactly eight articles in each of the nine locales', () => {
     const englishFiles = readdirSync(blogDir, { withFileTypes: true })
       .filter((entry) => entry.isFile() && entry.name.endsWith('.md'))
       .map((entry) => entry.name)
