@@ -72,6 +72,30 @@ async function pdfText(bytes) {
   }
 }
 
+async function pdfImageOps(bytes) {
+  const { getDocument, OPS } = await import('pdfjs-dist/legacy/build/pdf.mjs');
+  const task = getDocument({
+    data: new Uint8Array(bytes),
+    isEvalSupported: false,
+    useSystemFonts: true,
+  });
+  const document = await task.promise;
+  try {
+    let images = 0;
+    for (let number = 1; number <= document.numPages; number += 1) {
+      const page = await document.getPage(number);
+      const ops = await page.getOperatorList();
+      images += ops.fnArray.filter(
+        (fn) => fn === OPS.paintImageXObject || fn === OPS.paintInlineImageXObject,
+      ).length;
+      page.cleanup();
+    }
+    return images;
+  } finally {
+    await task.destroy();
+  }
+}
+
 describe('ZIP path safety', () => {
   it('accepts portable relative paths', () => {
     for (const path of ['a.pdf', 'docs/a.pdf', 'docs/中文 指南.pdf', 'a/b/c.pdf']) {
