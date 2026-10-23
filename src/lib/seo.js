@@ -221,6 +221,55 @@ export function homeJsonLd({ locale, description, site, path }) {
 }
 
 /**
+ * AboutPage + Person graph for the localized About page.
+ *
+ * The founder is described only with facts the project can verify: his name,
+ * his role as creator, and his public profiles. Social profiles use `sameAs`
+ * rather than `url` so the release verifier keeps every `url` on the product
+ * origin.
+ *
+ * @param {{
+ *   locale: string,
+ *   description: string,
+ *   site: import('./site.js').SiteConfig|null,
+ *   path: string,
+ * }} options
+ */
+export function aboutJsonLd({ locale, description, site, path }) {
+  const url = absoluteUrl(site, canonicalPath(path));
+  const home = absoluteUrl(site, localeHref(locale, '/'));
+  const founderId = `${url}#founder`;
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'AboutPage',
+        '@id': `${url}#about`,
+        url,
+        name: `About ${PRODUCT_NAME} — ${PRODUCT_TAGLINE}`,
+        description,
+        inLanguage: localeMeta(locale).htmlLang,
+        isPartOf: { '@type': 'WebSite', name: PRODUCT_NAME, url: home },
+        about: { '@id': founderId },
+        mainEntity: { '@id': founderId },
+        publisher: organization(),
+      },
+      {
+        '@type': 'Person',
+        '@id': founderId,
+        name: 'Girish Lade',
+        jobTitle: 'Creator of md2pdf',
+        worksFor: organization(),
+        sameAs: [
+          'https://github.com/girishlade111',
+          'https://www.linkedin.com/in/girish-lade/',
+        ],
+      },
+    ],
+  };
+}
+
+/**
  * CollectionPage + ItemList for the journal index.
  *
  * @param {{
@@ -302,8 +351,8 @@ function isoDate(value) {
 }
 
 /**
- * The 45 public pages: nine homepages, nine journal indexes, and one article
- * page per locale for each of the three translation keys.
+ * Every public page: nine homepages, nine journal indexes, nine About pages,
+ * and one article page per locale for each published translation key.
  *
  * @param {Array<any>} posts Published collection entries.
  */
@@ -333,6 +382,14 @@ export function buildSitemapPages(posts = []) {
       lastmod: latest ?? null,
       changefreq: 'weekly',
       priority: '0.8',
+    });
+    pages.push({
+      key: 'about',
+      locale,
+      path: localeHref(locale, '/about/'),
+      lastmod: null,
+      changefreq: 'monthly',
+      priority: '0.6',
     });
     for (const post of localePosts) {
       pages.push({
