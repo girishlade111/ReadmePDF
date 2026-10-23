@@ -57,9 +57,14 @@ A heading has two jobs: it tells a reader what the section contains, and it beco
 
 Prefer specific nouns and verbs:
 
-- `## Install the CLI` is better than `## Getting started`.
-- `## Configure GitHub access` is better than `## Configuration`.
-- `## Recover from a failed export` is better than `## Errors`.
+```text
+Vague:  ## Overview
+Useful: ## Configure GitHub access
+Vague:  ## Errors
+Useful: ## Recover from a failed export
+```
+
+The useful version tells a reader what they will find without opening the section. The vague version could describe almost anything.
 
 Keep headings short enough to fit on one line. A contents entry that wraps to three lines is hard to scan. If a heading needs a qualifier, put the qualifier after a colon: `## Export: per-chapter PDFs`.
 
