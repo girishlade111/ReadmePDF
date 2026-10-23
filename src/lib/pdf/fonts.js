@@ -10,6 +10,18 @@
  * Fonts are embedded subsetted. `pdf-lib` writes a correct ToUnicode CMap, so
  * the result stays selectable and searchable (verified with pdf.js, which
  * honours the CMap; some older extractors such as pypdf do not).
+ *
+ * The CJK asset is TrueType, not the original CID-keyed CFF OTF: pdf-lib
+ * declares `CIDToGIDMap /Identity`, and a CFF CID font's CIDs do not match its
+ * glyph IDs, so the OTF renders as blanks even though text extraction works.
+ * It also has every glyph padded to a 4-byte boundary. @pdf-lib/fontkit 1.1.1
+ * re-emits the subset with short `loca` offsets; an odd-length glyph silently
+ * truncates both itself and every glyph after it. Keep the padding when
+ * regenerating this file:
+ *
+ *   font = TTFont('NotoSansCJKsc-Common-source.ttf')
+ *   font['glyf'].padding = 4
+ *   font.save('public/fonts/NotoSansCJKsc-Common.ttf')
  */
 import fontkit from '@pdf-lib/fontkit';
 
@@ -19,7 +31,7 @@ export const FONT_FILES = Object.freeze({
   italic: '/fonts/DejaVuSans-Oblique.ttf',
   boldItalic: '/fonts/DejaVuSans-BoldOblique.ttf',
   mono: '/fonts/DejaVuSansMono.ttf',
-  cjk: '/fonts/NotoSansCJKsc-Common.otf',
+  cjk: '/fonts/NotoSansCJKsc-Common.ttf',
 });
 
 export const FONT_ROLES = Object.freeze(Object.keys(FONT_FILES));

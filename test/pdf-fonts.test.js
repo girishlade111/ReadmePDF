@@ -1,7 +1,23 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
+import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-import { createFontPicker, roleForStyle } from '../src/lib/pdf/fonts.js';
+import fontkit from '@pdf-lib/fontkit';
+
+import { createFontPicker, FONT_FILES, roleForStyle } from '../src/lib/pdf/fonts.js';
+
+const FONT_DIR = fileURLToPath(new URL('../public/fonts/', import.meta.url));
+
+function collect(stream) {
+  return new Promise((resolve, reject) => {
+    const chunks = [];
+    stream.on('data', (chunk) => chunks.push(Buffer.from(chunk)));
+    stream.on('end', () => resolve(Buffer.concat(chunks)));
+    stream.on('error', reject);
+  });
+}
 
 const WIDTHS = (text, size) => [...String(text)].length * size;
 
@@ -70,5 +86,35 @@ describe('PDF font selection', () => {
     assert.equal(roleForStyle({ italic: true }), 'italic');
     assert.equal(roleForStyle({ bold: true, italic: true }), 'boldItalic');
     assert.equal(roleForStyle({ code: true, bold: true }), 'mono');
+  });
+});
+
+describe('CJK PDF font asset', () => {
+  it('is TrueType with 4-byte aligned glyph boundaries', async () => {
+    assert.match(FONT_FILES.cjk, /\.ttf$/);
+    const bytes = await readFile(new URL(`.${FONT_FILES.cjk}`, `file://${FONT_DIR}`));
+    const font = fontkit.create(bytes);
+
+    assert.equal(font.head.indexToLocFormat, 1);
+    assert.ok(font.numGlyphs > 30000, `expected broad coverage, got ${font.numGlyphs}`);
+    assert.ok(
+      font.loca.offsets.every((offset) => offset % 4 === 0),
+      'glyf boundaries must be 4-byte aligned for fontkit short loca output',
+    );
+  });
+
+  it('keeps every subset outline intact after encoding', async () => {
+    const bytes = await readFile(new URL(`.${FONT_FILES.cjk}`, `file://${FONT_DIR}`));
+    const font = fontkit.create(bytes);
+    const subset = font.createSubset();
+    const ids = [...'中文日本語한국어漢字'].map((char) =>
+      subset.includeGlyph(font.glyphForCodePoint(char.codePointAt(0))),
+    );
+
+    const encoded = fontkit.create(await collect(subset.encodeStream()));
+    for (const id of ids) {
+      const { minX, minY, maxX, maxY } = encoded.getGlyph(id).path.bbox;
+      assert.ok(maxX > minX && maxY > minY, `subset glyph ${id} has an empty outline`);
+    }
   });
 });
