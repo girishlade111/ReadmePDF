@@ -135,6 +135,45 @@ function imageBlock(element) {
 }
 
 /**
+ * Inline content of a child node that sits directly inside a list item.
+ *
+ * `inlineRuns` applies a tag's meaning when it walks *children*, so an `<a>`
+ * or `<strong>` at the item level would otherwise lose its style. Apply the
+ * node's own inline semantics before delegating to the normal walker.
+ *
+ * @param {Element} element
+ * @param {{ bold?: boolean, italic?: boolean, code?: boolean, link?: string|null }} style
+ * @param {Array<object>} images
+ */
+function inlineChildRuns(element, style, images) {
+  const tag = element.tagName;
+  if (SKIP_TAGS.has(tag) || tag === 'INPUT') return [];
+  if (tag === 'IMG') {
+    images.push(imageBlock(element));
+    return [];
+  }
+  if (tag === 'PICTURE') {
+    const img = element.querySelector('img');
+    if (img) images.push(imageBlock(img));
+    return [];
+  }
+  if (tag === 'STRONG' || tag === 'B') {
+    return inlineRuns(element, { ...style, bold: true }, images);
+  }
+  if (tag === 'EM' || tag === 'I' || tag === 'CITE') {
+    return inlineRuns(element, { ...style, italic: true }, images);
+  }
+  if (tag === 'CODE' || tag === 'KBD' || tag === 'SAMP') {
+    return inlineRuns(element, { ...style, code: true }, images);
+  }
+  if (tag === 'A') {
+    const href = element.getAttribute('href') ?? '';
+    return inlineRuns(element, { ...style, link: href || null }, images);
+  }
+  return inlineRuns(element, style, images);
+}
+
+/**
  * Convert a list item into blocks, dropping the item's own marker so the PDF
  * renderer controls numbering and indentation.
  *
@@ -172,7 +211,7 @@ function listItemBlocks(item, context) {
     }
     // Inline node at item level.
     const images = [];
-    const runs = inlineRuns(child, {}, images);
+    const runs = inlineChildRuns(child, {}, images);
     inline.push(...runs);
     for (const image of images) {
       flushInline();
