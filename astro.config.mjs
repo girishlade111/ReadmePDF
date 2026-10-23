@@ -85,6 +85,10 @@ function releaseGuard(siteConfig) {
  */
 export default defineConfig({
   output: 'static',
+  // Astro 7 defaults to `compressHTML: 'jsx'`, which applies JSX whitespace
+  // trimming. Keep the Astro 5 collapse semantics so existing prose spacing
+  // does not change during this migration.
+  compressHTML: true,
   // No production domain is assumed. When PUBLIC_SITE_URL is absent, pages
   // emit root-relative canonicals and sitemap publication is disabled.
   ...(site ? { site: site.origin } : {}),
