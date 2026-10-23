@@ -1,8 +1,10 @@
 {
-  "meta.home.title": "md2pdf — GitHub README to PDF (free, no login)",
-  "meta.home.description": "md2pdf — free, no-login tool to convert a GitHub README or Markdown into a polished PDF. Paste a repo URL, preview, print to PDF.",
+  "meta.home.title": "md2pdf — Markdown to PDF (free, no login)",
+  "meta.home.description": "md2pdf — free, no-login tool that turns Markdown into a polished, print-ready PDF in your browser. Paste, preview, print. Nothing is uploaded.",
   "meta.blog.title": "The md2pdf Journal",
-  "meta.blog.description": "Practical guides for converting GitHub READMEs and Markdown into clean, print-ready PDFs — themes, workflows, and real use cases.",
+  "meta.blog.description": "Practical guides for turning Markdown and GitHub READMEs into clean, print-ready PDFs — tables, code, books, themes, and real workflows.",
+  "meta.about.title": "About md2pdf — built by Girish Lade",
+  "meta.about.description": "Why md2pdf exists: a free, browser-only Markdown to PDF tool by LadeStack, built by Girish Lade. No uploads, no accounts, no server-side renderer.",
 
   "common.files.one": "{count} file",
   "common.files.few": "{count} files",
@@ -51,11 +53,13 @@
   "nav.how": "How it works",
   "nav.themes": "Themes",
   "nav.blog": "Blog",
+  "nav.about": "About",
   "nav.privacy": "Privacy",
   "nav.github": "GitHub",
 
   "a11y.github": "md2pdf on GitHub",
   "a11y.ladestack": "LadeStack",
+  "a11y.linkedin": "Girish Lade on LinkedIn",
   "a11y.githubUrl": "GitHub repository URL",
   "a11y.uploadMarkdown": "Upload Markdown file",
   "a11y.markdownInput": "Markdown input",
@@ -74,13 +78,13 @@
   "a11y.onThisPage": "On this page",
   "a11y.guideOverview": "Guide overview",
 
-  "footer.credit": "© 2026 LadeStack · md2pdf is free, MIT licensed, and built by Girish Lade.",
+  "footer.credit": "© 2026 LadeStack · md2pdf is free to use and built by Girish Lade.",
 
   "home.tagline": "by LadeStack · free · no login · client-side",
   "home.hero.kicker": "Free · No login · Nothing uploaded",
-  "home.hero.titleLine1": "Any GitHub README,",
+  "home.hero.titleLine1": "Your Markdown,",
   "home.hero.titleLine2": "as a print-ready PDF.",
-  "home.hero.lead": "Paste a repository URL and md2pdf fetches the README, resolves its images and badges, and lays the whole thing out for paper — all inside your browser.",
+  "home.hero.lead": "Paste Markdown, drop a file, or fetch a public GitHub README. md2pdf renders it with your chosen print theme and opens your browser's PDF dialog — all on your device.",
   "home.hero.primary": "Start converting",
   "home.hero.secondary": "How it works",
 
@@ -215,7 +219,7 @@
   "home.privacy.issue": "Report an issue",
   "home.privacy.documentation": "Documentation",
   "home.privacy.moreTools": "More free tools",
-  "home.privacy.license": "MIT licence",
+  "home.privacy.about": "About md2pdf",
   "home.privacy.backTop": "Back to top",
 
   "converter.status.emptyUrl": "Paste a GitHub repo URL first, e.g. https://github.com/owner/repo",
