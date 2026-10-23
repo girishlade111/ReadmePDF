@@ -410,6 +410,56 @@ describe('exportBookToZip', () => {
     assert.match(await pdfText(bytes), /paragraph after the image/);
   });
 
+  it('preserves external and internal link annotations, including list-item links', async () => {
+    const result = await exportBookToZip(
+      {
+        ...book,
+        requested: 1,
+        documents: [
+          {
+            path: 'docs/links.md',
+            markdown: [
+              '# Link fidelity',
+              '',
+              'Read the [external docs](https://example.com/docs) first.',
+              '',
+              '- [nested link](https://example.com/nested)',
+              '- plain item',
+              '',
+              'Jump to [the target](#target-section).',
+              '',
+              '## Target section',
+            ].join('\n'),
+          },
+        ],
+      },
+      {
+        sanitize: (html) => html,
+        parseHtml,
+        fontBytes: FONT_BYTES,
+        generatedAt: GENERATED_AT,
+      },
+    );
+
+    assert.deepEqual(result.failures, []);
+    const zip = await readZip(result.zipBytes);
+    const bytes = await zip.file(result.files[0].zipPath).async('uint8array');
+    const links = await pdfLinks(bytes);
+    assert.equal(
+      links.filter((link) => link.uri === 'https://example.com/docs').length,
+      1,
+    );
+    assert.equal(
+      links.filter((link) => link.uri === 'https://example.com/nested').length,
+      1,
+      'list-item link annotation was lost',
+    );
+    assert.ok(
+      links.some((link) => link.action === '/GoTo'),
+      'internal anchor annotation was lost',
+    );
+  });
+
   it('returns per-file evidence when one path is unsafe and still exports the rest', async () => {    const result = await exportBookToZip(
       {
         ...book,
