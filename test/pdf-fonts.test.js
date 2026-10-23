@@ -92,7 +92,7 @@ describe('PDF font selection', () => {
 describe('CJK PDF font asset', () => {
   it('is TrueType with 4-byte aligned glyph boundaries', async () => {
     assert.match(FONT_FILES.cjk, /\.ttf$/);
-    const bytes = await readFile(new URL(`.${FONT_FILES.cjk}`, `file://${FONT_DIR}`));
+    const bytes = await readFile(join(FONT_DIR, FONT_FILES.cjk.replace('/fonts/', '')));
     const font = fontkit.create(bytes);
 
     assert.equal(font.head.indexToLocFormat, 1);
@@ -104,7 +104,7 @@ describe('CJK PDF font asset', () => {
   });
 
   it('keeps every subset outline intact after encoding', async () => {
-    const bytes = await readFile(new URL(`.${FONT_FILES.cjk}`, `file://${FONT_DIR}`));
+    const bytes = await readFile(join(FONT_DIR, FONT_FILES.cjk.replace('/fonts/', '')));
     const font = fontkit.create(bytes);
     const subset = font.createSubset();
     const ids = [...'中文日本語한국어漢字'].map((char) =>
