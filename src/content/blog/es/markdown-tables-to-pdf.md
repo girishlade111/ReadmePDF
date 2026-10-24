@@ -10,7 +10,7 @@ translationKey: "markdown-tables-to-pdf"
 
 Una tabla es de lo primero que busca un lector en documentación técnica. Y también de lo primero que se rompe al convertir Markdown a PDF. Columnas legibles en un monitor ancho quedan apiñadas en A4, celdas extensas desbordan los márgenes y las filas se dividen entre páginas de modo que el encabezado pierde sentido.
 
-md2pdf renderiza tablas de GitHub-flavored Markdown y transfiere el resultado a la hoja de estilo de impresión o, en libros, al renderizador A4 PDF. La herramienta mantiene legible una tabla razonable, pero no puede crear espacio donde no lo hay. La clave radica en el Markdown fuente: elegir columnas adecuadas y mantener celdas breves.
+md2pdf renderiza tablas de [GitHub-flavored Markdown](https://github.github.com/gfm/) y transfiere el resultado a la hoja de estilo de impresión o, en libros, al renderizador A4 PDF. La herramienta mantiene legible una tabla razonable, pero no puede crear espacio donde no lo hay. La clave radica en el Markdown fuente: elegir columnas adecuadas y mantener celdas breves.
 
 Esta guía aborda primero el diseño del documento fuente y después las revisiones de impresión para detectar problemas. Para el flujo general, consulte [Cómo convertir un README de GitHub a PDF](/blog/github-readme-to-pdf/).
 

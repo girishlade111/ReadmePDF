@@ -31,7 +31,7 @@ Multilingual Glyph Coverage in md2pdf:
 
 md2pdfは `@pdf-lib/fontkit` を活用し、ブラウザ内でTrueType（TTF）やOpenType（OTF）のフォントテーブルを直接解析します:
 
-1. **オンデマンドなフォント取得**: ドキュメントの言語属性に応じて、高品質なオープンソースフォント（Noto Sans、Source Han Sans、Roboto Mono等）をクライアント側でフェッチします。
+1. **オンデマンドなフォント取得**: ドキュメントの言語属性に応じて、高品質なオープンソースフォント（[Noto Sans](https://fonts.google.com/noto)、Source Han Sans、Roboto Mono等）をクライアント側でフェッチします。
 2. **文字コードの精密マッピング**: `fontkit` がMarkdownテキスト内の各Unicode文字を解析し、フォントテーブル内の正確なベクター輪郭データと照合します。
 3. **バイナリ内部への埋め込み**: `pdf-lib` が抽出されたグリフ情報をPDFファイルの構造体に直接埋め込み、自己完結型のドキュメントを生成します。
 

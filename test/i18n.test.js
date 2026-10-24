@@ -79,6 +79,44 @@ function body(source) {
   return source.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/, '');
 }
 
+export function extractMarkdownUrls(text) {
+  const rawMatches = [...text.matchAll(/https?:\/\/[a-zA-Z0-9\-._~:/?#[\]@!$&'()*+,;%=]+/g)].map(
+    (m) => m[0],
+  );
+
+  const cleaned = rawMatches
+    .map((url) => {
+      let u = url;
+      while (u.length > 0) {
+        const lastChar = u[u.length - 1];
+        if (/[.,;:!?'">。、，；：！？）〕】』」〉》”’]/.test(lastChar)) {
+          u = u.slice(0, -1);
+          continue;
+        }
+        if (lastChar === ')') {
+          const opens = (u.match(/\(/g) || []).length;
+          const closes = (u.match(/\)/g) || []).length;
+          if (closes > opens) {
+            u = u.slice(0, -1);
+            continue;
+          }
+        }
+        break;
+      }
+      return u;
+    })
+    .filter((u) => u.length > 'https://'.length);
+
+  return [...new Set(cleaned)].sort();
+}
+
+export function extractRelativeInternalLinks(text) {
+  const matches = [...text.matchAll(/\[[^\]]+\]\(((?:\/[a-zA-Z0-9\-._~:/?#[\]@!$&'*+,;%=]*))\)/g)].map(
+    (m) => m[1],
+  );
+  return [...new Set(matches)].sort();
+}
+
 function markdownFacts(source) {
   const headings = [];
   const codeBlocks = [];
@@ -105,13 +143,11 @@ function markdownFacts(source) {
     if (heading) headings.push({ depth: heading[1].length, text: heading[2] });
   }
   const text = body(source);
-  const urls = [...text.matchAll(/https?:\/\/[^\s)\]"'<>,]+/g)].map((match) =>
-    match[0].replace(/[.;:]$/, ''),
-  );
+  const urls = extractMarkdownUrls(text);
   return {
     headings,
     codeBlocks: codeBlocks.map((lines) => lines.join('\n')),
-    urls: [...new Set(urls)].sort(),
+    urls,
   };
 }
 
@@ -375,5 +411,61 @@ describe('locale-aware blog helpers', () => {
     assert.equal(readingTime('word '.repeat(440), 'en'), 2);
     assert.equal(readingTime('日本語'.repeat(600), 'ja'), 4);
     assert.equal(readingTime('', 'en'), 1);
+  });
+});
+
+describe('markdown link and URL extraction regression', () => {
+  it('correctly handles Japanese fullwidth parentheses and CJK punctuation without truncation', () => {
+    const jaSample = '詳細情報については公式リポジトリ（https://github.com/girishlade111/ReadmePDF）をご確認ください。';
+    assert.deepEqual(extractMarkdownUrls(jaSample), ['https://github.com/girishlade111/ReadmePDF']);
+
+    const zhSample = '参见官方文档：https://github.com/girishlade111/ReadmePDF。此外还可参考官网https://ladestack.in，获取更多支持。';
+    assert.deepEqual(extractMarkdownUrls(zhSample), [
+      'https://github.com/girishlade111/ReadmePDF',
+      'https://ladestack.in',
+    ]);
+  });
+
+  it('correctly extracts standard Markdown inline links and code block URLs', () => {
+    const inlineSample = 'Review the [md2pdf Repository](https://github.com/girishlade111/ReadmePDF) for source code.';
+    assert.deepEqual(extractMarkdownUrls(inlineSample), ['https://github.com/girishlade111/ReadmePDF']);
+
+    const codeSample = '```bash\ngit clone https://github.com/girishlade111/ReadmePDF.git\ncd ReadmePDF\n```';
+    assert.deepEqual(extractMarkdownUrls(codeSample), ['https://github.com/girishlade111/ReadmePDF.git']);
+  });
+
+  it('correctly preserves balanced parentheses and handles escaped/query characters in URLs', () => {
+    const balancedSample = 'Reference: [Markdown Spec](https://en.wikipedia.org/wiki/Markdown_(markup_language)).';
+    assert.deepEqual(extractMarkdownUrls(balancedSample), [
+      'https://en.wikipedia.org/wiki/Markdown_(markup_language)',
+    ]);
+
+    const querySample = 'Search: https://example.com/search?q=markdown+pdf&lang=en#results.';
+    assert.deepEqual(extractMarkdownUrls(querySample), [
+      'https://example.com/search?q=markdown+pdf&lang=en#results',
+    ]);
+  });
+
+  it('correctly extracts relative internal links from markdown', () => {
+    const relativeSample = 'Jump to [Converter](/#converter) or read [All Guides](/blog/) or [Book Section](/es/#book).';
+    assert.deepEqual(extractRelativeInternalLinks(relativeSample), [
+      '/#converter',
+      '/blog/',
+      '/es/#book',
+    ]);
+  });
+
+  it('validates actual external HTTPS references across articles', () => {
+    const readmeSource = read(`${blogDir}github-readme-to-pdf.md`);
+    const readmeUrls = extractMarkdownUrls(readmeSource);
+    assert.ok(readmeUrls.some((u) => u.startsWith('https://github.com/')));
+
+    const fontsSource = read(`${blogDir}multilingual-markdown-pdf-fonts.md`);
+    const fontsUrls = extractMarkdownUrls(fontsSource);
+    assert.ok(fontsUrls.includes('https://fonts.google.com/noto'));
+
+    const tablesSource = read(`${blogDir}markdown-tables-to-pdf.md`);
+    const tablesUrls = extractMarkdownUrls(tablesSource);
+    assert.ok(tablesUrls.includes('https://github.github.com/gfm/'));
   });
 });

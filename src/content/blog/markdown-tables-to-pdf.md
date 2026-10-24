@@ -10,7 +10,7 @@ translationKey: "markdown-tables-to-pdf"
 
 A table is one of the first things readers look for in technical documentation. It is also one of the first things to break when Markdown becomes a PDF. Columns that look fine in a wide browser window become cramped on A4, long cell text pushes the grid past the margin, and rows split across pages in ways that make the header meaningless.
 
-md2pdf renders GitHub-flavored Markdown tables and sends the result to a print stylesheet or, for book exports, an A4 PDF renderer. The tool can keep a reasonable table readable, but it cannot invent space. Most of the work happens in the Markdown source: choosing the right columns, keeping cells short, and deciding what belongs in a table at all.
+md2pdf renders [GitHub-flavored Markdown](https://github.github.com/gfm/) tables and sends the result to a print stylesheet or, for book exports, an A4 PDF renderer. The tool can keep a reasonable table readable, but it cannot invent space. Most of the work happens in the Markdown source: choosing the right columns, keeping cells short, and deciding what belongs in a table at all.
 
 This guide covers that source-level work first, then the print checks that catch the remaining problems. For the full conversion workflow, see [How to convert a GitHub README to PDF](/blog/github-readme-to-pdf/).
 

@@ -10,7 +10,7 @@ translationKey: "markdown-tables-to-pdf"
 
 Le tableau est l'un des premiers éléments consultés dans une documentation technique. C'est aussi l'un des premiers à dysfonctionner lors de la conversion en PDF. Des colonnes parfaites sur écran large se chevauchent sur du A4, les textes longs débordent et les lignes se brisent maladroitement entre deux pages.
 
-md2pdf assure le rendu des tableaux GitHub-flavored Markdown vers la feuille de style d'impression ou vers le moteur PDF A4 pour les livres. L'outil veille à préserver la clarté d'un tableau équilibré, mais ne peut créer d'espace artificiel. L'essentiel du travail repose sur la rédaction source : cibler les colonnes indispensables et condenser les cellules.
+md2pdf assure le rendu des tableaux [GitHub-flavored Markdown](https://github.github.com/gfm/) vers la feuille de style d'impression ou vers le moteur PDF A4 pour les livres. L'outil veille à préserver la clarté d'un tableau équilibré, mais ne peut créer d'espace artificiel. L'essentiel du travail repose sur la rédaction source : cibler les colonnes indispensables et condenser les cellules.
 
 Ce guide expose d'abord l'optimisation du document source, puis les vérifications finales avant impression. Pour la procédure globale, consultez [Comment convertir un README GitHub en PDF](/blog/github-readme-to-pdf/).
 

@@ -31,7 +31,7 @@ Multilingual Glyph Coverage in md2pdf:
 
 md2pdf utilizes `@pdf-lib/fontkit` to parse TrueType (TTF) and OpenType (OTF) font tables directly inside your browser:
 
-1. **Client-Side Font Loading**: High-quality open-source typefaces (including Noto Sans, Source Han Sans, and Roboto Mono) are fetched on-demand based on document language detection.
+1. **Client-Side Font Loading**: High-quality open-source typefaces (including [Noto Sans](https://fonts.google.com/noto), Source Han Sans, and Roboto Mono) are fetched on-demand based on document language detection.
 2. **Custom Glyph Mapping**: `fontkit` inspects the character stream in your Markdown content and matches each codepoint to its exact vector outline in the font table.
 3. **PDF Font Embedding**: `pdf-lib` embeds the vector outlines into the final document structure, making the PDF completely self-contained.
 

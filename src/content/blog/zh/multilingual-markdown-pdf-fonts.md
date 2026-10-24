@@ -31,7 +31,7 @@ Multilingual Glyph Coverage in md2pdf:
 
 md2pdf 运用 `@pdf-lib/fontkit` 引擎在用户浏览器本地直接解析 TrueType（TTF）与 OpenType（OTF）字体字形表：
 
-1. **按需前端加载**：根据文档内容语种，精准获取经过严谨调校的高品质开源字体（如 Noto Sans、思源黑体及 Roboto Mono）。
+1. **按需前端加载**：根据文档内容语种，精准获取经过严谨调校的高品质开源字体（如 [Noto Sans](https://fonts.google.com/noto)、思源黑体及 Roboto Mono）。
 2. **字符流矢量映射**：`fontkit` 逐字扫描 Markdown 文本中的 Unicode 码点，并在字体表中准确提取对应的贝塞尔矢量轮廓。
 3. **原生嵌入 PDF 骨架**：`pdf-lib` 将提取的矢量外轮廓直接写入 PDF 内部字典流，使生成的 PDF 成为 100% 独立便携的电子文档。
 

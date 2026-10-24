@@ -31,7 +31,7 @@ Multilingual Glyph Coverage in md2pdf:
 
 md2pdf mobilise la bibliothèque `@pdf-lib/fontkit` pour décoder les tables TrueType (TTF) et OpenType (OTF) au sein même de votre navigateur :
 
-1. **Chargement côté client** : Des typographies libres de référence (telles que Noto Sans, Source Han Sans et Roboto Mono) sont téléchargées à la demande selon la langue du texte.
+1. **Chargement côté client** : Des typographies libres de référence (telles que [Noto Sans](https://fonts.google.com/noto), Source Han Sans et Roboto Mono) sont téléchargées à la demande selon la langue du texte.
 2. **Correspondance vectorielle** : Le moteur `fontkit` parcourt les chaînes Unicode de votre fichier Markdown et associe chaque caractère à son tracé vectoriel exact.
 3. **Incorporation dans le fichier** : `pdf-lib` injecte les vecteurs dans la structure binaire du document, garantissant un PDF totalement indépendant.
 

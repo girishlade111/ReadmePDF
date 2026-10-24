@@ -31,7 +31,7 @@ Multilingual Glyph Coverage in md2pdf:
 
 md2pdf utiliza `@pdf-lib/fontkit` para analizar tablas de fuentes TrueType (TTF) y OpenType (OTF) directamente en su navegador:
 
-1. **Carga en el cliente**: Tipografías abiertas de alta calidad (como Noto Sans, Source Han Sans y Roboto Mono) se descargan bajo demanda según el idioma detectado.
+1. **Carga en el cliente**: Tipografías abiertas de alta calidad (como [Noto Sans](https://fonts.google.com/noto), Source Han Sans y Roboto Mono) se descargan bajo demanda según el idioma detectado.
 2. **Mapeo de glifos**: `fontkit` examina el texto de su Markdown y vincula cada punto de código con su trazo vectorial exacto.
 3. **Incrustación en el documento**: `pdf-lib` almacena los vectores en la estructura del PDF, convirtiéndolo en un archivo autónomo.
 

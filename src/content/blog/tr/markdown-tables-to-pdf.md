@@ -10,7 +10,7 @@ translationKey: "markdown-tables-to-pdf"
 
 Teknik dokümantasyonda okuyucuların ilk aradığı şeylerden biri tablodur. Markdown bir PDF'e dönüştüğünde ilk bozulan şeylerden biri de odur. Geniş bir tarayıcı penceresinde sorunsuz görünen sütunlar A4'te sıkışır, uzun hücre metni ızgarayı kenar boşluğunun dışına iter ve satırlar sayfalar arasında öyle bölünür ki başlık satırı anlamsızlaşır.
 
-md2pdf, GitHub uyumlu Markdown tablolarını işler ve sonucu bir baskı stil sayfasına ya da kitap dışa aktarımlarında bir A4 PDF işleyicisine gönderir. Araç makul bir tabloyu okunabilir tutabilir, ancak yoktan yer yaratamaz. İşin büyük kısmı Markdown kaynağında olur: doğru sütunları seçmek, hücreleri kısa tutmak ve neyin tabloya ait olduğuna karar vermek.
+md2pdf, [GitHub uyumlu Markdown](https://github.github.com/gfm/) tablolarını işler ve sonucu bir baskı stil sayfasına ya da kitap dışa aktarımlarında bir A4 PDF işleyicisine gönderir. Araç makul bir tabloyu okunabilir tutabilir, ancak yoktan yer yaratamaz. İşin büyük kısmı Markdown kaynağında olur: doğru sütunları seçmek, hücreleri kısa tutmak ve neyin tabloya ait olduğuna karar vermek.
 
 Bu rehber önce bu kaynak düzeyindeki işi, ardından kalan sorunları yakalayan baskı kontrollerini ele alır. Dönüştürme iş akışının tamamı için [GitHub README'sini PDF'e dönüştürme](/blog/github-readme-to-pdf/) rehberine bakın.
 

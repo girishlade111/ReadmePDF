@@ -10,7 +10,7 @@ translationKey: "markdown-tables-to-pdf"
 
 在技术文档中，表格是读者最常查阅的元素之一。同时，它也是 Markdown 转换为 PDF 时最容易排版错乱的部分。在宽屏显示器上清晰美观的列，在 A4 页面上会显得异常拥挤；过长的单元格文字会将网格挤出边距，而行跨页切断则会导致表头失去意义。
 
-md2pdf 负责解析 GitHub Flavored Markdown 表格并将其交由打印样式表或 A4 PDF 渲染引擎输出。工具能保持规范表格的清晰度，但无法凭空创造打印空间。核心关键在于优化 Markdown 源文档：精简列数、压缩单元格字数，并合理规划表格承载的内容。
+md2pdf 负责解析 [GitHub Flavored Markdown](https://github.github.com/gfm/) 表格并将其交由打印样式表或 A4 PDF 渲染引擎输出。工具能保持规范表格的清晰度，但无法凭空创造打印空间。核心关键在于优化 Markdown 源文档：精简列数、压缩单元格字数，并合理规划表格承载的内容。
 
 本指南首先介绍源文档层面的优化技巧，随后提供打印输出前的核查要点。完整转换流程请参阅[如何将 GitHub README 转换为 PDF](/blog/github-readme-to-pdf/)。
 

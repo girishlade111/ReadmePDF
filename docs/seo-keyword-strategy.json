@@ -441,6 +441,231 @@
     ]
   },
   {
+    "pageKey": "blog",
+    "locale": "en",
+    "topic": "md2pdf Journal — Markdown and Technical Documentation Guides",
+    "searchIntent": "Informational & Directory / Resource hub (practical guides for turning Markdown and READMEs into print-ready PDFs)",
+    "primaryKeyword": "markdown to pdf guides",
+    "secondaryKeywords": [
+      "markdown tutorials",
+      "github readme pdf guide",
+      "technical documentation pdf",
+      "the md2pdf journal"
+    ],
+    "longTailQueries": [
+      "practical guides for markdown to pdf conversion",
+      "how to format markdown for printing",
+      "turn github readmes into print-ready pdfs"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/about/",
+      "/blog/github-readme-to-pdf/",
+      "/blog/multi-file-markdown-book/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "blog",
+    "locale": "es",
+    "topic": "El diario de md2pdf — Guías de Markdown y documentación técnica",
+    "searchIntent": "Informational & Directory / Resource hub (guías prácticas para convertir Markdown y READMEs en PDF listos para imprimir)",
+    "primaryKeyword": "guías de markdown a pdf",
+    "secondaryKeywords": [
+      "tutoriales de markdown",
+      "guía readme github pdf",
+      "documentación técnica en pdf",
+      "el diario de md2pdf"
+    ],
+    "longTailQueries": [
+      "guías prácticas para convertir markdown a pdf",
+      "cómo dar formato a markdown para imprimir",
+      "convertir readmes de github en pdf para imprimir"
+    ],
+    "internalLinkTargets": [
+      "/es/",
+      "/es/about/",
+      "/es/blog/github-readme-to-pdf/",
+      "/es/blog/multi-file-markdown-book/",
+      "/es/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "blog",
+    "locale": "ja",
+    "topic": "md2pdfジャーナル — Markdownおよび技術ドキュメント実践ガイド",
+    "searchIntent": "Informational & Directory / Resource hub (READMEやMarkdownを印刷適正の高いPDFへ変換するための実践ガイド一覧)",
+    "primaryKeyword": "markdown pdf ガイド",
+    "secondaryKeywords": [
+      "markdown チュートリアル",
+      "github readme pdf 変換方法",
+      "技術文書 pdf 作成",
+      "md2pdf ジャーナル"
+    ],
+    "longTailQueries": [
+      "markdownを印刷用pdfに変換する実践ガイド",
+      "githubのreadmeをきれいにpdf化する手順",
+      "表やコードを含むmarkdownのpdf出力"
+    ],
+    "internalLinkTargets": [
+      "/ja/",
+      "/ja/about/",
+      "/ja/blog/github-readme-to-pdf/",
+      "/ja/blog/multi-file-markdown-book/",
+      "/ja/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "blog",
+    "locale": "ko",
+    "topic": "md2pdf 저널 — 마크다운 및 기술 문서화 실용 가이드",
+    "searchIntent": "Informational & Directory / Resource hub (마크다운과 GitHub README를 인쇄용 PDF로 변환하는 실용 가이드 모음)",
+    "primaryKeyword": "마크다운 pdf 가이드",
+    "secondaryKeywords": [
+      "마크다운 튜토리얼",
+      "github readme pdf 변환 가이드",
+      "기술 문서 pdf 변환",
+      "md2pdf 저널"
+    ],
+    "longTailQueries": [
+      "마크다운 문서를 인쇄용 pdf로 변환하는 방법",
+      "github readme를 깔끔한 pdf로 내보내기",
+      "마크다운 표와 코드 블록 인쇄 가이드"
+    ],
+    "internalLinkTargets": [
+      "/ko/",
+      "/ko/about/",
+      "/ko/blog/github-readme-to-pdf/",
+      "/ko/blog/multi-file-markdown-book/",
+      "/ko/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "blog",
+    "locale": "zh",
+    "topic": "md2pdf 手记 — Markdown 与技术文档实用指南",
+    "searchIntent": "Informational & Directory / Resource hub (将 Markdown 与 GitHub README 转换为干净、规范打印 PDF 的实用指南全集)",
+    "primaryKeyword": "markdown 转换 pdf 指南",
+    "secondaryKeywords": [
+      "markdown 教程",
+      "github readme 转 pdf 教程",
+      "技术文档导出 pdf",
+      "md2pdf 手记"
+    ],
+    "longTailQueries": [
+      "将 markdown 技术文档导出为精美 pdf 的实用指南",
+      "github readme 完美转换 pdf 方法",
+      "markdown 表格与代码打印排版优化"
+    ],
+    "internalLinkTargets": [
+      "/zh/",
+      "/zh/about/",
+      "/zh/blog/github-readme-to-pdf/",
+      "/zh/blog/multi-file-markdown-book/",
+      "/zh/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "blog",
+    "locale": "ru",
+    "topic": "Журнал md2pdf — Практические руководства по Markdown и PDF",
+    "searchIntent": "Informational & Directory / Resource hub (практические руководства по превращению Markdown и README из GitHub в чистые PDF)",
+    "primaryKeyword": "руководства markdown в pdf",
+    "secondaryKeywords": [
+      "туториалы markdown",
+      "инструкция github readme в pdf",
+      "техническая документация в pdf",
+      "журнал md2pdf"
+    ],
+    "longTailQueries": [
+      "как конвертировать документацию markdown в pdf",
+      "руководство по форматированию markdown для печати",
+      "экспорт readme из github в готовый к печати pdf"
+    ],
+    "internalLinkTargets": [
+      "/ru/",
+      "/ru/about/",
+      "/ru/blog/github-readme-to-pdf/",
+      "/ru/blog/multi-file-markdown-book/",
+      "/ru/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "blog",
+    "locale": "tr",
+    "topic": "md2pdf Günlüğü — Markdown ve Teknik Belgelendirme Rehberleri",
+    "searchIntent": "Informational & Directory / Resource hub (Markdown ve GitHub README'lerini baskıya hazır PDF'lere dönüştürmek için pratik rehberler)",
+    "primaryKeyword": "markdown pdf rehberleri",
+    "secondaryKeywords": [
+      "markdown eğitimleri",
+      "github readme pdf rehberi",
+      "teknik dokümantasyon pdf",
+      "md2pdf günlüğü"
+    ],
+    "longTailQueries": [
+      "markdown belgelerini pdf'e dönüştürme pratik rehberleri",
+      "github readme'sini baskıya hazır pdf yapma",
+      "markdown tabloları ve kod blokları pdf yazdırma"
+    ],
+    "internalLinkTargets": [
+      "/tr/",
+      "/tr/about/",
+      "/tr/blog/github-readme-to-pdf/",
+      "/tr/blog/multi-file-markdown-book/",
+      "/tr/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "blog",
+    "locale": "fr",
+    "topic": "Le journal md2pdf — Guides pratiques Markdown et documentation technique",
+    "searchIntent": "Informational & Directory / Resource hub (guides pratiques pour transformer Markdown et les README GitHub en PDF propres et prêts à imprimer)",
+    "primaryKeyword": "guides markdown en pdf",
+    "secondaryKeywords": [
+      "tutoriels markdown",
+      "guide readme github en pdf",
+      "documentation technique en pdf",
+      "le journal md2pdf"
+    ],
+    "longTailQueries": [
+      "guides pratiques pour convertir du markdown en pdf",
+      "comment formater du markdown pour l'impression",
+      "transformer des readme github en pdf prêts à imprimer"
+    ],
+    "internalLinkTargets": [
+      "/fr/",
+      "/fr/about/",
+      "/fr/blog/github-readme-to-pdf/",
+      "/fr/blog/multi-file-markdown-book/",
+      "/fr/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "blog",
+    "locale": "pt",
+    "topic": "O Diário md2pdf — Guias práticos de Markdown e documentação técnica",
+    "searchIntent": "Informational & Directory / Resource hub (guias práticos para transformar Markdown e READMEs do GitHub em PDFs limpos e prontos para imprimir)",
+    "primaryKeyword": "guias de markdown para pdf",
+    "secondaryKeywords": [
+      "tutoriais de markdown",
+      "guia readme github para pdf",
+      "documentação técnica em pdf",
+      "o diário md2pdf"
+    ],
+    "longTailQueries": [
+      "guias práticos para converter markdown em pdf",
+      "como formatar markdown para impressão",
+      "transformar readme do github em pdf pronto para imprimir"
+    ],
+    "internalLinkTargets": [
+      "/pt/",
+      "/pt/about/",
+      "/pt/blog/github-readme-to-pdf/",
+      "/pt/blog/multi-file-markdown-book/",
+      "/pt/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
     "pageKey": "github-readme-to-pdf",
     "locale": "en",
     "topic": "Converting GitHub README.md documents into PDF files",

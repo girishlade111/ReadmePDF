@@ -31,7 +31,7 @@ Multilingual Glyph Coverage in md2pdf:
 
 md2pdf, TrueType (TTF) ve OpenType (OTF) yazı tipi tablolarını doğrudan tarayıcınızda ayrıştırmak için `@pdf-lib/fontkit` kütüphanesini kullanır:
 
-1. **İstemcide Yazı Tipi İndirme**: Noto Sans, Source Han Sans ve Roboto Mono gibi açık kaynaklı kaliteli fontlar belge diline göre belleğe alınır.
+1. **İstemcide Yazı Tipi İndirme**: [Noto Sans](https://fonts.google.com/noto), Source Han Sans ve Roboto Mono gibi açık kaynaklı kaliteli fontlar belge diline göre belleğe alınır.
 2. **Karakter Eşleştirme**: `fontkit` metindeki her Unicode karakterini tarayarak font tablosundaki tam vektör çizimiyle eşleştirir.
 3. **PDF İçine Vektör Kaydı**: `pdf-lib` bu vektörleri PDF dosyasının içine gömer ve belgeyi tamamen bağımsız bir hale getirir.
 
