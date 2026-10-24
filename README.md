@@ -86,8 +86,9 @@ There is no application backend. Fetching, Markdown rendering, sanitization, PDF
 ### Internationalization and blog
 
 - Nine locales: English (`en`), Spanish (`es`), Japanese (`ja`), Korean (`ko`), Simplified Chinese (`zh-Hans`), Russian (`ru`), Turkish (`tr`), French (`fr`), and Brazilian Portuguese (`pt-BR`).
-- 45 static pages: nine homepages, nine journal indexes, and 27 localized articles (three translation keys across nine locales).
-- 362 translated message keys per locale.
+- 99 static pages: nine homepages, nine journal indexes, nine About pages, and 72 localized feature articles (eight translation keys across nine locales).
+- 366 translated message keys per locale, plus structured localized About page content.
+- Dedicated, localized About pages at /about/ and /{locale}/about/ detailing product purpose, LadeStack ownership, founder Girish Lade, mission, vision, and contact channels.
 - English keeps unprefixed URLs; every other locale uses a prefix (`/es/`, `/ja/`, `/pt/`, and so on).
 - Language selection is URL-first. There is no `Accept-Language`, cookie, or redirect-based guessing.
 - Localized articles share a `translationKey` identity for reciprocal hreflang metadata.
@@ -95,7 +96,7 @@ There is no application backend. Fetching, Markdown rendering, sanitization, PDF
 ### SEO and release safety
 
 - Self-referencing canonicals, reciprocal hreflang links (including `x-default`), localized Open Graph metadata, and JSON-LD.
-- A 45-URL sitemap with 450 alternates generated only when a public origin is configured.
+- A 99-URL sitemap with 990 alternates (10 per URL including x-default) generated only when a public origin is configured.
 - `npm run build` remains a local static build and works without an origin.
 - `npm run build:release` fails closed: it requires a valid public HTTPS origin and verifies the generated artifact before the command succeeds.
 

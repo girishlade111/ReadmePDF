@@ -1,0 +1,2081 @@
+[
+  {
+    "pageKey": "home",
+    "locale": "en",
+    "topic": "Online Markdown and GitHub README to PDF converter",
+    "searchIntent": "Transactional / Tool usage (convert markdown to PDF in browser without account)",
+    "primaryKeyword": "markdown to pdf",
+    "secondaryKeywords": [
+      "md to pdf",
+      "github readme to pdf",
+      "markdown converter",
+      "online markdown to pdf"
+    ],
+    "longTailQueries": [
+      "convert markdown to pdf online for free",
+      "convert github readme to pdf without login",
+      "browser based markdown to pdf tool"
+    ],
+    "internalLinkTargets": [
+      "/about/",
+      "/blog/",
+      "#converter",
+      "#book",
+      "#themes",
+      "#privacy"
+    ]
+  },
+  {
+    "pageKey": "home",
+    "locale": "es",
+    "topic": "Online Markdown and GitHub README to PDF converter",
+    "searchIntent": "Transactional / Tool usage (convert markdown to PDF in browser without account)",
+    "primaryKeyword": "convertir markdown a pdf",
+    "secondaryKeywords": [
+      "md a pdf",
+      "readme a pdf",
+      "convertidor markdown online",
+      "markdown a pdf gratis"
+    ],
+    "longTailQueries": [
+      "convertir markdown a pdf gratis sin registrarse",
+      "exportar readme de github a pdf online",
+      "herramienta markdown a pdf en el navegador"
+    ],
+    "internalLinkTargets": [
+      "/about/",
+      "/blog/",
+      "#converter",
+      "#book",
+      "#themes",
+      "#privacy"
+    ]
+  },
+  {
+    "pageKey": "home",
+    "locale": "ja",
+    "topic": "Online Markdown and GitHub README to PDF converter",
+    "searchIntent": "Transactional / Tool usage (convert markdown to PDF in browser without account)",
+    "primaryKeyword": "markdown pdf 変換",
+    "secondaryKeywords": [
+      "md pdf",
+      "github readme pdf",
+      "markdown 変換ツール",
+      "ブラウザ markdown pdf"
+    ],
+    "longTailQueries": [
+      "ログイン不要でgithubのreadmeをpdfに変換",
+      "ブラウザでmarkdownをpdfに無料変換",
+      "markdownから印刷用pdfを作成"
+    ],
+    "internalLinkTargets": [
+      "/about/",
+      "/blog/",
+      "#converter",
+      "#book",
+      "#themes",
+      "#privacy"
+    ]
+  },
+  {
+    "pageKey": "home",
+    "locale": "ko",
+    "topic": "Online Markdown and GitHub README to PDF converter",
+    "searchIntent": "Transactional / Tool usage (convert markdown to PDF in browser without account)",
+    "primaryKeyword": "마크다운 pdf 변환",
+    "secondaryKeywords": [
+      "md pdf 변환",
+      "깃허브 리드미 pdf",
+      "온라인 마크다운 변환기",
+      "무료 마크다운 pdf"
+    ],
+    "longTailQueries": [
+      "로그인 없이 깃허브 리드미 pdf 변환",
+      "브라우저에서 마크다운 pdf 무료 변환",
+      "설치 없이 md 파일 pdf 변환"
+    ],
+    "internalLinkTargets": [
+      "/about/",
+      "/blog/",
+      "#converter",
+      "#book",
+      "#themes",
+      "#privacy"
+    ]
+  },
+  {
+    "pageKey": "home",
+    "locale": "zh",
+    "topic": "Online Markdown and GitHub README to PDF converter",
+    "searchIntent": "Transactional / Tool usage (convert markdown to PDF in browser without account)",
+    "primaryKeyword": "markdown 转 pdf",
+    "secondaryKeywords": [
+      "md 转 pdf",
+      "github readme 导出 pdf",
+      "在线 markdown 转换",
+      "免费 markdown pdf 工具"
+    ],
+    "longTailQueries": [
+      "无需登录在线将 github readme 转为 pdf",
+      "纯浏览器端免费 markdown 转 pdf",
+      "无需安装软件导出 readme pdf"
+    ],
+    "internalLinkTargets": [
+      "/about/",
+      "/blog/",
+      "#converter",
+      "#book",
+      "#themes",
+      "#privacy"
+    ]
+  },
+  {
+    "pageKey": "home",
+    "locale": "ru",
+    "topic": "Online Markdown and GitHub README to PDF converter",
+    "searchIntent": "Transactional / Tool usage (convert markdown to PDF in browser without account)",
+    "primaryKeyword": "конвертер markdown в pdf",
+    "secondaryKeywords": [
+      "md в pdf",
+      "github readme в pdf",
+      "онлайн конвертер markdown",
+      "сохранить markdown в pdf"
+    ],
+    "longTailQueries": [
+      "конвертировать github readme в pdf без регистрации",
+      "бесплатный онлайн конвертер markdown в pdf",
+      "сохранить markdown в pdf в браузере"
+    ],
+    "internalLinkTargets": [
+      "/about/",
+      "/blog/",
+      "#converter",
+      "#book",
+      "#themes",
+      "#privacy"
+    ]
+  },
+  {
+    "pageKey": "home",
+    "locale": "tr",
+    "topic": "Online Markdown and GitHub README to PDF converter",
+    "searchIntent": "Transactional / Tool usage (convert markdown to PDF in browser without account)",
+    "primaryKeyword": "markdown pdf dönüştürücü",
+    "secondaryKeywords": [
+      "md pdf yapma",
+      "github readme pdf dönüştürme",
+      "çevrimiçi markdown pdf",
+      "ücretsiz md pdf"
+    ],
+    "longTailQueries": [
+      "kayıt olmadan github readme pdf dönüştürme",
+      "tarayıcıda ücretsiz markdown pdf yapma",
+      "kurulumsuz markdown dosyasını pdf yapma"
+    ],
+    "internalLinkTargets": [
+      "/about/",
+      "/blog/",
+      "#converter",
+      "#book",
+      "#themes",
+      "#privacy"
+    ]
+  },
+  {
+    "pageKey": "home",
+    "locale": "fr",
+    "topic": "Online Markdown and GitHub README to PDF converter",
+    "searchIntent": "Transactional / Tool usage (convert markdown to PDF in browser without account)",
+    "primaryKeyword": "convertir markdown en pdf",
+    "secondaryKeywords": [
+      "md en pdf",
+      "github readme en pdf",
+      "convertisseur markdown en ligne",
+      "markdown pdf gratuit"
+    ],
+    "longTailQueries": [
+      "convertir un readme github en pdf sans inscription",
+      "outil gratuit markdown en pdf dans le navigateur",
+      "exporter du markdown en pdf sans installer de logiciel"
+    ],
+    "internalLinkTargets": [
+      "/about/",
+      "/blog/",
+      "#converter",
+      "#book",
+      "#themes",
+      "#privacy"
+    ]
+  },
+  {
+    "pageKey": "home",
+    "locale": "pt",
+    "topic": "Online Markdown and GitHub README to PDF converter",
+    "searchIntent": "Transactional / Tool usage (convert markdown to PDF in browser without account)",
+    "primaryKeyword": "converter markdown em pdf",
+    "secondaryKeywords": [
+      "md para pdf",
+      "github readme para pdf",
+      "conversor markdown online",
+      "markdown em pdf gratis"
+    ],
+    "longTailQueries": [
+      "converter github readme em pdf sem cadastro",
+      "ferramenta de markdown para pdf no navegador gratis",
+      "salvar markdown como pdf sem instalar programa"
+    ],
+    "internalLinkTargets": [
+      "/about/",
+      "/blog/",
+      "#converter",
+      "#book",
+      "#themes",
+      "#privacy"
+    ]
+  },
+  {
+    "pageKey": "about",
+    "locale": "en",
+    "topic": "About md2pdf, LadeStack, founder Girish Lade, mission and privacy architecture",
+    "searchIntent": "Informational / Trust & Verification (founder background, company mission, privacy model)",
+    "primaryKeyword": "about md2pdf",
+    "secondaryKeywords": [
+      "Girish Lade",
+      "LadeStack",
+      "browser-first markdown tool",
+      "privacy documentation tools"
+    ],
+    "longTailQueries": [
+      "who created md2pdf",
+      "is md2pdf private",
+      "LadeStack developer tools by Girish Lade"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/",
+      "#contact"
+    ]
+  },
+  {
+    "pageKey": "about",
+    "locale": "es",
+    "topic": "About md2pdf, LadeStack, founder Girish Lade, mission and privacy architecture",
+    "searchIntent": "Informational / Trust & Verification (founder background, company mission, privacy model)",
+    "primaryKeyword": "acerca de md2pdf",
+    "secondaryKeywords": [
+      "Girish Lade",
+      "LadeStack",
+      "herramienta markdown privada",
+      "software desarrollador"
+    ],
+    "longTailQueries": [
+      "quién creó md2pdf",
+      "es seguro md2pdf",
+      "herramientas de desarrollo LadeStack"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/",
+      "#contact"
+    ]
+  },
+  {
+    "pageKey": "about",
+    "locale": "ja",
+    "topic": "About md2pdf, LadeStack, founder Girish Lade, mission and privacy architecture",
+    "searchIntent": "Informational / Trust & Verification (founder background, company mission, privacy model)",
+    "primaryKeyword": "md2pdfについて",
+    "secondaryKeywords": [
+      "Girish Lade",
+      "LadeStack",
+      "ブラウザ完結開発者ツール",
+      "プライバシー重視ツール"
+    ],
+    "longTailQueries": [
+      "md2pdfの開発者",
+      "md2pdfのセキュリティと安全性",
+      "Girish LadeのLadeStackプロジェクト"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/",
+      "#contact"
+    ]
+  },
+  {
+    "pageKey": "about",
+    "locale": "ko",
+    "topic": "About md2pdf, LadeStack, founder Girish Lade, mission and privacy architecture",
+    "searchIntent": "Informational / Trust & Verification (founder background, company mission, privacy model)",
+    "primaryKeyword": "md2pdf 소개",
+    "secondaryKeywords": [
+      "Girish Lade",
+      "LadeStack",
+      "브라우저 기반 개발자 도구",
+      "프라이버시 중심 도구"
+    ],
+    "longTailQueries": [
+      "md2pdf 만든 사람",
+      "md2pdf 개인정보 보호 안전성",
+      "Girish Lade LadeStack 개발자 도구"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/",
+      "#contact"
+    ]
+  },
+  {
+    "pageKey": "about",
+    "locale": "zh",
+    "topic": "About md2pdf, LadeStack, founder Girish Lade, mission and privacy architecture",
+    "searchIntent": "Informational / Trust & Verification (founder background, company mission, privacy model)",
+    "primaryKeyword": "关于 md2pdf",
+    "secondaryKeywords": [
+      "Girish Lade",
+      "LadeStack",
+      "纯浏览器端开发者工具",
+      "隐私优先技术工具"
+    ],
+    "longTailQueries": [
+      "谁开发了 md2pdf",
+      "md2pdf 数据安全与隐私保障",
+      "LadeStack 创始人 Girish Lade"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/",
+      "#contact"
+    ]
+  },
+  {
+    "pageKey": "about",
+    "locale": "ru",
+    "topic": "About md2pdf, LadeStack, founder Girish Lade, mission and privacy architecture",
+    "searchIntent": "Informational / Trust & Verification (founder background, company mission, privacy model)",
+    "primaryKeyword": "о сервисе md2pdf",
+    "secondaryKeywords": [
+      "Girish Lade",
+      "LadeStack",
+      "приватные инструменты разработчика",
+      "веб-конвертер без сервера"
+    ],
+    "longTailQueries": [
+      "кто создал md2pdf",
+      "безопасность и приватность в md2pdf",
+      "проекты LadeStack от Girish Lade"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/",
+      "#contact"
+    ]
+  },
+  {
+    "pageKey": "about",
+    "locale": "tr",
+    "topic": "About md2pdf, LadeStack, founder Girish Lade, mission and privacy architecture",
+    "searchIntent": "Informational / Trust & Verification (founder background, company mission, privacy model)",
+    "primaryKeyword": "md2pdf hakkında",
+    "secondaryKeywords": [
+      "Girish Lade",
+      "LadeStack",
+      "tarayıcı tabanlı geliştirici araçları",
+      "gizlilik odaklı araçlar"
+    ],
+    "longTailQueries": [
+      "md2pdf kimin",
+      "md2pdf güvenli mi",
+      "Girish Lade LadeStack projeleri"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/",
+      "#contact"
+    ]
+  },
+  {
+    "pageKey": "about",
+    "locale": "fr",
+    "topic": "About md2pdf, LadeStack, founder Girish Lade, mission and privacy architecture",
+    "searchIntent": "Informational / Trust & Verification (founder background, company mission, privacy model)",
+    "primaryKeyword": "à propos de md2pdf",
+    "secondaryKeywords": [
+      "Girish Lade",
+      "LadeStack",
+      "outil développeur sans serveur",
+      "outils respectueux de la vie privée"
+    ],
+    "longTailQueries": [
+      "qui a développé md2pdf",
+      "md2pdf respecte-t-il la confidentialité",
+      "outils LadeStack par Girish Lade"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/",
+      "#contact"
+    ]
+  },
+  {
+    "pageKey": "about",
+    "locale": "pt",
+    "topic": "About md2pdf, LadeStack, founder Girish Lade, mission and privacy architecture",
+    "searchIntent": "Informational / Trust & Verification (founder background, company mission, privacy model)",
+    "primaryKeyword": "sobre o md2pdf",
+    "secondaryKeywords": [
+      "Girish Lade",
+      "LadeStack",
+      "ferramenta de desenvolvedor no navegador",
+      "ferramenta com foco em privacidade"
+    ],
+    "longTailQueries": [
+      "quem criou o md2pdf",
+      "o md2pdf é seguro e privado",
+      "ferramentas da LadeStack por Girish Lade"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/",
+      "#contact"
+    ]
+  },
+  {
+    "pageKey": "github-readme-to-pdf",
+    "locale": "en",
+    "topic": "Converting GitHub README.md documents into PDF files",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "github readme to pdf",
+    "secondaryKeywords": [
+      "convert github readme to pdf",
+      "export readme.md to pdf",
+      "github documentation pdf"
+    ],
+    "longTailQueries": [
+      "how to convert a github readme to pdf with images",
+      "export github readme to pdf without login",
+      "print readme.md from github repository"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/readme-pdf-print-themes/",
+      "/blog/browser-only-markdown-to-pdf/"
+    ]
+  },
+  {
+    "pageKey": "github-readme-to-pdf",
+    "locale": "es",
+    "topic": "Converting GitHub README.md documents into PDF files",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "readme de github a pdf",
+    "secondaryKeywords": [
+      "convertir readme github a pdf",
+      "descargar readme github en pdf",
+      "documentacion github a pdf"
+    ],
+    "longTailQueries": [
+      "cómo convertir un readme de github a pdf con imagenes",
+      "exportar readme de github a pdf gratis",
+      "imprimir readme.md de repositorio github"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/readme-pdf-print-themes/",
+      "/blog/browser-only-markdown-to-pdf/"
+    ]
+  },
+  {
+    "pageKey": "github-readme-to-pdf",
+    "locale": "ja",
+    "topic": "Converting GitHub README.md documents into PDF files",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "github readme pdf 変換",
+    "secondaryKeywords": [
+      "github readme ダウンロード pdf",
+      "readme.md pdf 書き出し",
+      "github ドキュメント pdf"
+    ],
+    "longTailQueries": [
+      "画像付きでgithubのreadmeをpdfに変換する方法",
+      "githubのreadme.mdをそのままpdf印刷",
+      "ログインなしでリポジトリのreadmeをpdf出力"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/readme-pdf-print-themes/",
+      "/blog/browser-only-markdown-to-pdf/"
+    ]
+  },
+  {
+    "pageKey": "github-readme-to-pdf",
+    "locale": "ko",
+    "topic": "Converting GitHub README.md documents into PDF files",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "깃허브 readme pdf 변환",
+    "secondaryKeywords": [
+      "깃허브 리드미 pdf 내보내기",
+      "readme.md pdf 다운로드",
+      "깃허브 문서 pdf 변환"
+    ],
+    "longTailQueries": [
+      "이미지 깨짐 없이 깃허브 readme pdf 변환하는 법",
+      "로그인 없이 깃허브 리드미를 pdf로 저장하기",
+      "github readme.md 인쇄 레이아웃"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/readme-pdf-print-themes/",
+      "/blog/browser-only-markdown-to-pdf/"
+    ]
+  },
+  {
+    "pageKey": "github-readme-to-pdf",
+    "locale": "zh",
+    "topic": "Converting GitHub README.md documents into PDF files",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "github readme 转 pdf",
+    "secondaryKeywords": [
+      "将 github readme 导出为 pdf",
+      "readme.md 打印 pdf",
+      "github 项目文档 pdf"
+    ],
+    "longTailQueries": [
+      "如何将带有图片的 github readme 转换为 pdf",
+      "免登录直接导出 github 项目 readme pdf",
+      "将 github 仓库的 readme.md 打印成 pdf"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/readme-pdf-print-themes/",
+      "/blog/browser-only-markdown-to-pdf/"
+    ]
+  },
+  {
+    "pageKey": "github-readme-to-pdf",
+    "locale": "ru",
+    "topic": "Converting GitHub README.md documents into PDF files",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "github readme в pdf",
+    "secondaryKeywords": [
+      "сохранить readme github в pdf",
+      "экспорт readme.md в pdf",
+      "документация github в pdf"
+    ],
+    "longTailQueries": [
+      "как сохранить github readme в pdf с картинками",
+      "экспортировать readme из github в pdf без регистрации",
+      "распечатать readme.md из репозитория github"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/readme-pdf-print-themes/",
+      "/blog/browser-only-markdown-to-pdf/"
+    ]
+  },
+  {
+    "pageKey": "github-readme-to-pdf",
+    "locale": "tr",
+    "topic": "Converting GitHub README.md documents into PDF files",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "github readme pdf yapma",
+    "secondaryKeywords": [
+      "github readme pdf dönüştür",
+      "readme.md pdf yapma",
+      "github dokümanı pdf indir"
+    ],
+    "longTailQueries": [
+      "resimli github readme dosyasını pdfye dönüştürme",
+      "giriş yapmadan github readmeyi pdf kaydetme",
+      "github reposundaki readme.mdyi pdf yazdırma"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/readme-pdf-print-themes/",
+      "/blog/browser-only-markdown-to-pdf/"
+    ]
+  },
+  {
+    "pageKey": "github-readme-to-pdf",
+    "locale": "fr",
+    "topic": "Converting GitHub README.md documents into PDF files",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "readme github en pdf",
+    "secondaryKeywords": [
+      "exporter readme github en pdf",
+      "sauvegarder readme.md en pdf",
+      "documentation github pdf"
+    ],
+    "longTailQueries": [
+      "comment convertir un readme github en pdf avec les images",
+      "télécharger le readme github en pdf sans compte",
+      "imprimer un fichier readme.md de github"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/readme-pdf-print-themes/",
+      "/blog/browser-only-markdown-to-pdf/"
+    ]
+  },
+  {
+    "pageKey": "github-readme-to-pdf",
+    "locale": "pt",
+    "topic": "Converting GitHub README.md documents into PDF files",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "readme do github para pdf",
+    "secondaryKeywords": [
+      "exportar readme github em pdf",
+      "baixar readme.md em pdf",
+      "documentacao github em pdf"
+    ],
+    "longTailQueries": [
+      "como converter um readme do github em pdf com imagens",
+      "exportar readme do github em pdf sem login",
+      "imprimir readme.md de repositorio github"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/readme-pdf-print-themes/",
+      "/blog/browser-only-markdown-to-pdf/"
+    ]
+  },
+  {
+    "pageKey": "readme-pdf-print-themes",
+    "locale": "en",
+    "topic": "Markdown PDF print themes: Clean, Business, Academic, Dark",
+    "searchIntent": "Informational & Commercial Investigation",
+    "primaryKeyword": "markdown pdf print themes",
+    "secondaryKeywords": [
+      "clean vs business theme",
+      "academic markdown pdf",
+      "dark mode markdown pdf print"
+    ],
+    "longTailQueries": [
+      "best print theme for markdown documentation",
+      "how to print dark mode markdown as pdf",
+      "academic styling for github readme pdf"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/github-readme-to-pdf/",
+      "/blog/markdown-tables-to-pdf/"
+    ]
+  },
+  {
+    "pageKey": "readme-pdf-print-themes",
+    "locale": "es",
+    "topic": "Markdown PDF print themes: Clean, Business, Academic, Dark",
+    "searchIntent": "Informational & Commercial Investigation",
+    "primaryKeyword": "temas de impresion markdown pdf",
+    "secondaryKeywords": [
+      "tema academic vs clean",
+      "estilos impresion markdown",
+      "modo oscuro markdown a pdf"
+    ],
+    "longTailQueries": [
+      "mejor tema de impresion para documentacion markdown",
+      "cómo imprimir markdown en modo oscuro a pdf",
+      "estilo academico para readme de github"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/github-readme-to-pdf/",
+      "/blog/markdown-tables-to-pdf/"
+    ]
+  },
+  {
+    "pageKey": "readme-pdf-print-themes",
+    "locale": "ja",
+    "topic": "Markdown PDF print themes: Clean, Business, Academic, Dark",
+    "searchIntent": "Informational & Commercial Investigation",
+    "primaryKeyword": "markdown pdf 印刷テーマ",
+    "secondaryKeywords": [
+      "academicテーマ markdown",
+      "印刷スタイル markdown",
+      "ダークモード pdf印刷"
+    ],
+    "longTailQueries": [
+      "markdownドキュメントに最適な印刷テーマ",
+      "ダークモードのmarkdownをきれいにpdf印刷する方法",
+      "学術的なmarkdown pdfレイアウト"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/github-readme-to-pdf/",
+      "/blog/markdown-tables-to-pdf/"
+    ]
+  },
+  {
+    "pageKey": "readme-pdf-print-themes",
+    "locale": "ko",
+    "topic": "Markdown PDF print themes: Clean, Business, Academic, Dark",
+    "searchIntent": "Informational & Commercial Investigation",
+    "primaryKeyword": "마크다운 pdf 인쇄 테마",
+    "secondaryKeywords": [
+      "비즈니스 인쇄 테마 마크다운",
+      "학술 논문 마크다운 테마",
+      "다크 모드 마크다운 인쇄"
+    ],
+    "longTailQueries": [
+      "마크다운 문서에 가장 어울리는 인쇄 테마 추천",
+      "다크 모드 마크다운을 가독성 있게 인쇄하는 방법",
+      "깃허브 리드미 학술 스타일 pdf"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/github-readme-to-pdf/",
+      "/blog/markdown-tables-to-pdf/"
+    ]
+  },
+  {
+    "pageKey": "readme-pdf-print-themes",
+    "locale": "zh",
+    "topic": "Markdown PDF print themes: Clean, Business, Academic, Dark",
+    "searchIntent": "Informational & Commercial Investigation",
+    "primaryKeyword": "markdown pdf 打印主题",
+    "secondaryKeywords": [
+      "学术论文风格 markdown pdf",
+      "商务风格 markdown 打印",
+      "深色模式 markdown pdf 打印"
+    ],
+    "longTailQueries": [
+      "适合技术文档的最佳 markdown 打印排版主题",
+      "如何将深色模式 markdown 清晰打印为 pdf",
+      "学术论文格式的 github readme pdf"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/github-readme-to-pdf/",
+      "/blog/markdown-tables-to-pdf/"
+    ]
+  },
+  {
+    "pageKey": "readme-pdf-print-themes",
+    "locale": "ru",
+    "topic": "Markdown PDF print themes: Clean, Business, Academic, Dark",
+    "searchIntent": "Informational & Commercial Investigation",
+    "primaryKeyword": "темы печати markdown в pdf",
+    "secondaryKeywords": [
+      "стили оформления markdown pdf",
+      "академический стиль markdown",
+      "печать темного markdown в pdf"
+    ],
+    "longTailQueries": [
+      "лучшая тема оформления для технической документации в pdf",
+      "как распечатать темный markdown в читаемый pdf",
+      "академическое оформление markdown"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/github-readme-to-pdf/",
+      "/blog/markdown-tables-to-pdf/"
+    ]
+  },
+  {
+    "pageKey": "readme-pdf-print-themes",
+    "locale": "tr",
+    "topic": "Markdown PDF print themes: Clean, Business, Academic, Dark",
+    "searchIntent": "Informational & Commercial Investigation",
+    "primaryKeyword": "markdown pdf baskı temaları",
+    "secondaryKeywords": [
+      "akademik markdown teması",
+      "iş raporu markdown stili",
+      "karanlık mod markdown yazdırma"
+    ],
+    "longTailQueries": [
+      "markdown dokümantasyonu için en iyi baskı teması",
+      "karanlık mod markdownı pdf olarak düzgün basma",
+      "akademik görünümlü markdown pdf"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/github-readme-to-pdf/",
+      "/blog/markdown-tables-to-pdf/"
+    ]
+  },
+  {
+    "pageKey": "readme-pdf-print-themes",
+    "locale": "fr",
+    "topic": "Markdown PDF print themes: Clean, Business, Academic, Dark",
+    "searchIntent": "Informational & Commercial Investigation",
+    "primaryKeyword": "thèmes impression markdown pdf",
+    "secondaryKeywords": [
+      "style académique markdown",
+      "thème professionnel markdown pdf",
+      "mode sombre impression markdown"
+    ],
+    "longTailQueries": [
+      "meilleur thème d impression pour la documentation markdown",
+      "imprimer un markdown en mode sombre vers pdf",
+      "mise en page académique pour readme github"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/github-readme-to-pdf/",
+      "/blog/markdown-tables-to-pdf/"
+    ]
+  },
+  {
+    "pageKey": "readme-pdf-print-themes",
+    "locale": "pt",
+    "topic": "Markdown PDF print themes: Clean, Business, Academic, Dark",
+    "searchIntent": "Informational & Commercial Investigation",
+    "primaryKeyword": "temas de impressao markdown pdf",
+    "secondaryKeywords": [
+      "tema academico markdown",
+      "estilos profissionais markdown pdf",
+      "modo escuro impressao markdown"
+    ],
+    "longTailQueries": [
+      "melhor tema de impressao para documentacao markdown",
+      "como imprimir markdown modo escuro em pdf legivel",
+      "estilo academico para readme github"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/github-readme-to-pdf/",
+      "/blog/markdown-tables-to-pdf/"
+    ]
+  },
+  {
+    "pageKey": "readme-to-pdf-use-cases",
+    "locale": "en",
+    "topic": "Real-world documentation use cases: runbooks, course packs, client specs",
+    "searchIntent": "Informational & Problem-solving",
+    "primaryKeyword": "markdown to pdf use cases",
+    "secondaryKeywords": [
+      "documentation to pdf",
+      "runbooks to pdf",
+      "course notes markdown pdf",
+      "client handoff docs"
+    ],
+    "longTailQueries": [
+      "how to turn course notes into a printable pdf",
+      "distribute client documentation as pdf from markdown",
+      "archive github documentation offline as pdf"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/multi-file-markdown-book/",
+      "/blog/github-readme-to-pdf/"
+    ]
+  },
+  {
+    "pageKey": "readme-to-pdf-use-cases",
+    "locale": "es",
+    "topic": "Real-world documentation use cases: runbooks, course packs, client specs",
+    "searchIntent": "Informational & Problem-solving",
+    "primaryKeyword": "casos de uso markdown a pdf",
+    "secondaryKeywords": [
+      "manuales en pdf",
+      "apuntes markdown a pdf",
+      "documentacion para clientes",
+      "runbooks a pdf"
+    ],
+    "longTailQueries": [
+      "cómo convertir apuntes de clase a pdf imprimible",
+      "entregar documentacion a clientes desde markdown",
+      "archivar documentacion de github en pdf offline"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/multi-file-markdown-book/",
+      "/blog/github-readme-to-pdf/"
+    ]
+  },
+  {
+    "pageKey": "readme-to-pdf-use-cases",
+    "locale": "ja",
+    "topic": "Real-world documentation use cases: runbooks, course packs, client specs",
+    "searchIntent": "Informational & Problem-solving",
+    "primaryKeyword": "markdown pdf 活用事例",
+    "secondaryKeywords": [
+      "社内マニュアル pdf",
+      "講義ノート markdown pdf",
+      "クライアント納品ドキュメント",
+      "runbook pdf化"
+    ],
+    "longTailQueries": [
+      "講義ノートをきれいに印刷できるpdfにする方法",
+      "markdownから顧客向け納品用pdfを作成する",
+      "githubのドキュメントをオフライン保管用にpdf化"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/multi-file-markdown-book/",
+      "/blog/github-readme-to-pdf/"
+    ]
+  },
+  {
+    "pageKey": "readme-to-pdf-use-cases",
+    "locale": "ko",
+    "topic": "Real-world documentation use cases: runbooks, course packs, client specs",
+    "searchIntent": "Informational & Problem-solving",
+    "primaryKeyword": "마크다운 pdf 활용 사례",
+    "secondaryKeywords": [
+      "운영 매뉴얼 pdf 제작",
+      "강의 노트 마크다운 pdf",
+      "고객 납품용 기술 문서",
+      "런북 pdf화"
+    ],
+    "longTailQueries": [
+      "수업 필기 마크다운을 깔끔한 pdf로 인쇄하는 법",
+      "마크다운으로 고객 전달용 기술 문서 만들기",
+      "깃허브 프로젝트 문서를 오프라인 pdf로 영구 보관"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/multi-file-markdown-book/",
+      "/blog/github-readme-to-pdf/"
+    ]
+  },
+  {
+    "pageKey": "readme-to-pdf-use-cases",
+    "locale": "zh",
+    "topic": "Real-world documentation use cases: runbooks, course packs, client specs",
+    "searchIntent": "Informational & Problem-solving",
+    "primaryKeyword": "markdown 转 pdf 应用场景",
+    "secondaryKeywords": [
+      "技术手册导出 pdf",
+      "课程讲义 markdown 打印",
+      "交付客户技术文档",
+      "运维操作手册 pdf"
+    ],
+    "longTailQueries": [
+      "如何将课堂笔记整理为可打印的 pdf 教材",
+      "使用 markdown 生成交付客户的标准技术文档",
+      "将 github 文档离线归档保存为 pdf"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/multi-file-markdown-book/",
+      "/blog/github-readme-to-pdf/"
+    ]
+  },
+  {
+    "pageKey": "readme-to-pdf-use-cases",
+    "locale": "ru",
+    "topic": "Real-world documentation use cases: runbooks, course packs, client specs",
+    "searchIntent": "Informational & Problem-solving",
+    "primaryKeyword": "сценарии использования markdown в pdf",
+    "secondaryKeywords": [
+      "инструкции и регламенты в pdf",
+      "учебные конспекты markdown в pdf",
+      "документация для клиентов",
+      "ранбуки в pdf"
+    ],
+    "longTailQueries": [
+      "как превратить конспекты лекций в аккуратный печатный pdf",
+      "подготовка документации для заказчика из markdown",
+      "архивация документации с github в pdf для чтения офлайн"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/multi-file-markdown-book/",
+      "/blog/github-readme-to-pdf/"
+    ]
+  },
+  {
+    "pageKey": "readme-to-pdf-use-cases",
+    "locale": "tr",
+    "topic": "Real-world documentation use cases: runbooks, course packs, client specs",
+    "searchIntent": "Informational & Problem-solving",
+    "primaryKeyword": "markdown pdf kullanım senaryoları",
+    "secondaryKeywords": [
+      "operasyon kılavuzunu pdf yapma",
+      "ders notları markdown pdf",
+      "müşteri teslim dokümanları",
+      "teknik el kitabı pdf"
+    ],
+    "longTailQueries": [
+      "ders notlarını basılabilir temiz bir pdfye dönüştürme",
+      "müşteriye teslim edilecek dokümanı markdowndan pdf yapma",
+      "github dokümanlarını çevrimdışı pdf olarak arşivleme"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/multi-file-markdown-book/",
+      "/blog/github-readme-to-pdf/"
+    ]
+  },
+  {
+    "pageKey": "readme-to-pdf-use-cases",
+    "locale": "fr",
+    "topic": "Real-world documentation use cases: runbooks, course packs, client specs",
+    "searchIntent": "Informational & Problem-solving",
+    "primaryKeyword": "cas d utilisation markdown en pdf",
+    "secondaryKeywords": [
+      "manuels techniques en pdf",
+      "notes de cours markdown pdf",
+      "documents de livraison client",
+      "runbooks en pdf"
+    ],
+    "longTailQueries": [
+      "comment transformer des notes de cours en pdf imprimable",
+      "produire une documentation client depuis markdown",
+      "archiver une documentation github hors ligne en pdf"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/multi-file-markdown-book/",
+      "/blog/github-readme-to-pdf/"
+    ]
+  },
+  {
+    "pageKey": "readme-to-pdf-use-cases",
+    "locale": "pt",
+    "topic": "Real-world documentation use cases: runbooks, course packs, client specs",
+    "searchIntent": "Informational & Problem-solving",
+    "primaryKeyword": "casos de uso markdown em pdf",
+    "secondaryKeywords": [
+      "manuais tecnicos em pdf",
+      "apostilas markdown em pdf",
+      "documentacao para clientes",
+      "runbooks em pdf"
+    ],
+    "longTailQueries": [
+      "como transformar anotacoes de estudo em pdf para impressao",
+      "entregar documentacao tecnica para clientes a partir de markdown",
+      "arquivar documentacao do github offline em pdf"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/multi-file-markdown-book/",
+      "/blog/github-readme-to-pdf/"
+    ]
+  },
+  {
+    "pageKey": "browser-only-markdown-to-pdf",
+    "locale": "en",
+    "topic": "Client-side privacy, File API processing, DOMPurify security",
+    "searchIntent": "Informational & Security / Privacy Evaluation",
+    "primaryKeyword": "private markdown to pdf",
+    "secondaryKeywords": [
+      "client-side markdown converter",
+      "browser-only pdf export",
+      "no upload markdown tool",
+      "DOMPurify markdown"
+    ],
+    "longTailQueries": [
+      "convert confidential markdown to pdf without uploading",
+      "how to export internal documentation as pdf safely",
+      "browser based markdown to pdf with no server leaks"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/github-readme-to-pdf/",
+      "/blog/multi-file-markdown-book/"
+    ]
+  },
+  {
+    "pageKey": "browser-only-markdown-to-pdf",
+    "locale": "es",
+    "topic": "Client-side privacy, File API processing, DOMPurify security",
+    "searchIntent": "Informational & Security / Privacy Evaluation",
+    "primaryKeyword": "markdown a pdf privado",
+    "secondaryKeywords": [
+      "convertidor markdown local",
+      "markdown sin subir archivos",
+      "seguridad markdown pdf",
+      "procesamiento en navegador"
+    ],
+    "longTailQueries": [
+      "convertir markdown confidencial a pdf sin subir a servidores",
+      "exportar documentacion interna a pdf de forma segura",
+      "herramienta markdown a pdf sin fugas de datos"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/github-readme-to-pdf/",
+      "/blog/multi-file-markdown-book/"
+    ]
+  },
+  {
+    "pageKey": "browser-only-markdown-to-pdf",
+    "locale": "ja",
+    "topic": "Client-side privacy, File API processing, DOMPurify security",
+    "searchIntent": "Informational & Security / Privacy Evaluation",
+    "primaryKeyword": "プライベート markdown pdf",
+    "secondaryKeywords": [
+      "クライアント側 markdown 変換",
+      "アップロード不要 pdf ツール",
+      "ブラウザ完結型 セキュリティ",
+      "DOMPurify サニタイズ"
+    ],
+    "longTailQueries": [
+      "社外秘のmarkdownをサーバーにアップロードせずpdf化",
+      "機密技術ドキュメントを安全にpdf変換する方法",
+      "通信漏洩のないブラウザ完結型markdownツール"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/github-readme-to-pdf/",
+      "/blog/multi-file-markdown-book/"
+    ]
+  },
+  {
+    "pageKey": "browser-only-markdown-to-pdf",
+    "locale": "ko",
+    "topic": "Client-side privacy, File API processing, DOMPurify security",
+    "searchIntent": "Informational & Security / Privacy Evaluation",
+    "primaryKeyword": "안전한 마크다운 pdf 변환",
+    "secondaryKeywords": [
+      "클라이언트 사이드 마크다운 변환",
+      "업로드 없는 pdf 변환기",
+      "브라우저 단독 보안",
+      "DOMPurify 안전 변환"
+    ],
+    "longTailQueries": [
+      "사내 기밀 마크다운 문서를 서버 전송 없이 pdf로 변환하기",
+      "보안 문서 마크다운 안전하게 pdf로 내보내기",
+      "서버 데이터 유출 없는 브라우저 단독 변환기"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/github-readme-to-pdf/",
+      "/blog/multi-file-markdown-book/"
+    ]
+  },
+  {
+    "pageKey": "browser-only-markdown-to-pdf",
+    "locale": "zh",
+    "topic": "Client-side privacy, File API processing, DOMPurify security",
+    "searchIntent": "Informational & Security / Privacy Evaluation",
+    "primaryKeyword": "私密安全 markdown 转 pdf",
+    "secondaryKeywords": [
+      "客户端本地 markdown 转换",
+      "无需上传文件的 pdf 工具",
+      "纯浏览器端数据安全",
+      "DOMPurify 防护"
+    ],
+    "longTailQueries": [
+      "如何在不上传到第三方服务器的情况下将机密 markdown 转换为 pdf",
+      "安全导出公司内部技术文档为 pdf",
+      "无数据泄露隐患的纯本地 markdown pdf 工具"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/github-readme-to-pdf/",
+      "/blog/multi-file-markdown-book/"
+    ]
+  },
+  {
+    "pageKey": "browser-only-markdown-to-pdf",
+    "locale": "ru",
+    "topic": "Client-side privacy, File API processing, DOMPurify security",
+    "searchIntent": "Informational & Security / Privacy Evaluation",
+    "primaryKeyword": "приватный конвертер markdown в pdf",
+    "secondaryKeywords": [
+      "локальный конвертер markdown",
+      "конвертация без загрузки на сервер",
+      "безопасность markdown pdf",
+      "обработка в браузере"
+    ],
+    "longTailQueries": [
+      "как безопасно конвертировать конфиденциальный markdown в pdf без загрузки",
+      "экспорт внутренней технической документации в pdf",
+      "конвертер markdown без передачи данных на сервер"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/github-readme-to-pdf/",
+      "/blog/multi-file-markdown-book/"
+    ]
+  },
+  {
+    "pageKey": "browser-only-markdown-to-pdf",
+    "locale": "tr",
+    "topic": "Client-side privacy, File API processing, DOMPurify security",
+    "searchIntent": "Informational & Security / Privacy Evaluation",
+    "primaryKeyword": "güvenli markdown pdf dönüştürücü",
+    "secondaryKeywords": [
+      "istemci tarafı markdown dönüştürücü",
+      "yükleme gerektirmeyen pdf aracı",
+      "tarayıcıda güvenli markdown",
+      "DOMPurify temizleme"
+    ],
+    "longTailQueries": [
+      "gizli markdown belgelerini sunucuya yüklemeden pdfye dönüştürme",
+      "şirket içi dokümanları güvenli bir şekilde pdf yapma",
+      "veri sızdırmayan tarayıcı tabanlı markdown aracı"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/github-readme-to-pdf/",
+      "/blog/multi-file-markdown-book/"
+    ]
+  },
+  {
+    "pageKey": "browser-only-markdown-to-pdf",
+    "locale": "fr",
+    "topic": "Client-side privacy, File API processing, DOMPurify security",
+    "searchIntent": "Informational & Security / Privacy Evaluation",
+    "primaryKeyword": "convertisseur markdown pdf privé",
+    "secondaryKeywords": [
+      "convertisseur markdown côté client",
+      "export pdf sans téléversement",
+      "sécurité traitement local markdown",
+      "nettoyage DOMPurify"
+    ],
+    "longTailQueries": [
+      "convertir du markdown confidentiel en pdf sans téléversement",
+      "exporter une documentation interne en pdf en toute sécurité",
+      "outil markdown sans fuite de données vers un serveur"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/github-readme-to-pdf/",
+      "/blog/multi-file-markdown-book/"
+    ]
+  },
+  {
+    "pageKey": "browser-only-markdown-to-pdf",
+    "locale": "pt",
+    "topic": "Client-side privacy, File API processing, DOMPurify security",
+    "searchIntent": "Informational & Security / Privacy Evaluation",
+    "primaryKeyword": "markdown para pdf privado seguro",
+    "secondaryKeywords": [
+      "conversor markdown cliente",
+      "exportacao pdf sem upload",
+      "seguranca markdown no navegador",
+      "higienizacao DOMPurify"
+    ],
+    "longTailQueries": [
+      "converter markdown confidencial em pdf sem enviar para servidores",
+      "exportar documentacao interna para pdf com seguranca",
+      "ferramenta markdown para pdf sem vazamento de dados"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/github-readme-to-pdf/",
+      "/blog/multi-file-markdown-book/"
+    ]
+  },
+  {
+    "pageKey": "markdown-code-blocks-to-pdf",
+    "locale": "en",
+    "topic": "Fenced code blocks, language tagging, monospace font legibility in print",
+    "searchIntent": "Informational & Technical Optimization",
+    "primaryKeyword": "markdown code blocks to pdf",
+    "secondaryKeywords": [
+      "code syntax in pdf",
+      "fenced code blocks print",
+      "avoid code line clipping in pdf",
+      "monospace print formatting"
+    ],
+    "longTailQueries": [
+      "how to stop long code lines from cutting off in pdf",
+      "best font width for markdown code blocks on A4 paper",
+      "clean monospace code formatting for printable documentation"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/markdown-tables-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-code-blocks-to-pdf",
+    "locale": "es",
+    "topic": "Fenced code blocks, language tagging, monospace font legibility in print",
+    "searchIntent": "Informational & Technical Optimization",
+    "primaryKeyword": "bloques de codigo markdown a pdf",
+    "secondaryKeywords": [
+      "sintaxis codigo en pdf",
+      "lineas largas codigo pdf",
+      "evitar cortes codigo imprimir",
+      "formato monoespaciado"
+    ],
+    "longTailQueries": [
+      "cómo evitar que las líneas de código se corten en pdf",
+      "ancho de línea recomendado para código en papel A4",
+      "formatear bloques de código limpios para imprimir"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/markdown-tables-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-code-blocks-to-pdf",
+    "locale": "ja",
+    "topic": "Fenced code blocks, language tagging, monospace font legibility in print",
+    "searchIntent": "Informational & Technical Optimization",
+    "primaryKeyword": "markdown コードブロック pdf 印刷",
+    "secondaryKeywords": [
+      "コードの折り返し pdf",
+      "シンタックスハイライト 印刷",
+      "コード行が途切れる pdf",
+      "等幅フォント 印刷"
+    ],
+    "longTailQueries": [
+      "pdf印刷でコードの右端が切れる問題の解決策",
+      "A4用紙で読みやすいmarkdownコードブロックの文字数",
+      "印刷に適した等幅コードのレイアウト設計"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/markdown-tables-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-code-blocks-to-pdf",
+    "locale": "ko",
+    "topic": "Fenced code blocks, language tagging, monospace font legibility in print",
+    "searchIntent": "Informational & Technical Optimization",
+    "primaryKeyword": "마크다운 코드 블록 pdf 변환",
+    "secondaryKeywords": [
+      "코드 블록 줄 바꿈 pdf",
+      "코드 줄 잘림 방지",
+      "마크다운 소스코드 인쇄",
+      "고정폭 글꼴 인쇄 레이아웃"
+    ],
+    "longTailQueries": [
+      "A4 용지에서 코드 블록이 오른쪽 여백을 벗어나지 않게 하는 법",
+      "마크다운 인쇄 시 읽기 편한 적정 코드 줄 너비",
+      "출력용 기술 문서의 깔끔한 소스코드 포맷팅"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/markdown-tables-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-code-blocks-to-pdf",
+    "locale": "zh",
+    "topic": "Fenced code blocks, language tagging, monospace font legibility in print",
+    "searchIntent": "Informational & Technical Optimization",
+    "primaryKeyword": "markdown 代码块 导出 pdf",
+    "secondaryKeywords": [
+      "代码块自动换行 pdf",
+      "避免代码超出页面边距",
+      "技术文档代码打印格式",
+      "等宽字体打印排版"
+    ],
+    "longTailQueries": [
+      "如何解决导出的 pdf 中长代码行被右边距截断的问题",
+      "A4 纸张打印 markdown 代码块的推荐字符行宽",
+      "面向印刷的工整等宽代码排版实践"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/markdown-tables-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-code-blocks-to-pdf",
+    "locale": "ru",
+    "topic": "Fenced code blocks, language tagging, monospace font legibility in print",
+    "searchIntent": "Informational & Technical Optimization",
+    "primaryKeyword": "блоки кода markdown в pdf",
+    "secondaryKeywords": [
+      "перенос строк кода в pdf",
+      "печать блоков кода без обрезки",
+      "моноширинный шрифт в pdf",
+      "оформление кода в markdown"
+    ],
+    "longTailQueries": [
+      "как предотвратить обрезку длинных строк кода в pdf на листе A4",
+      "оптимальная ширина строки для блоков кода в печатных документах",
+      "аккуратная верстка программного кода в markdown для печати"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/markdown-tables-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-code-blocks-to-pdf",
+    "locale": "tr",
+    "topic": "Fenced code blocks, language tagging, monospace font legibility in print",
+    "searchIntent": "Informational & Technical Optimization",
+    "primaryKeyword": "markdown kod bloklarını pdfye dönüştürme",
+    "secondaryKeywords": [
+      "kod bloklarında satır kaydırma",
+      "pdfde kodun kesilmesini önleme",
+      "monospace yazı tipi baskı",
+      "markdown kod formatı"
+    ],
+    "longTailQueries": [
+      "A4 kağıtta uzun kod satırlarının kesilmesini önleme yolları",
+      "markdown kod blokları için ideal satır uzunluğu",
+      "basılı dokümanlar için temiz kod biçimlendirme"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/markdown-tables-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-code-blocks-to-pdf",
+    "locale": "fr",
+    "topic": "Fenced code blocks, language tagging, monospace font legibility in print",
+    "searchIntent": "Informational & Technical Optimization",
+    "primaryKeyword": "blocs de code markdown en pdf",
+    "secondaryKeywords": [
+      "retour à la ligne code pdf",
+      "éviter le débordement de code pdf",
+      "formatage police à chasse fixe",
+      "code source imprimable"
+    ],
+    "longTailQueries": [
+      "comment empêcher les longues lignes de code d être coupées en pdf",
+      "largeur recommandée pour les blocs de code sur page A4",
+      "mise en page soignée du code informatique pour impression"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/markdown-tables-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-code-blocks-to-pdf",
+    "locale": "pt",
+    "topic": "Fenced code blocks, language tagging, monospace font legibility in print",
+    "searchIntent": "Informational & Technical Optimization",
+    "primaryKeyword": "blocos de codigo markdown em pdf",
+    "secondaryKeywords": [
+      "quebra de linha codigo pdf",
+      "evitar corte de codigo na impressao",
+      "formatacao monoespacada pdf",
+      "codigo fonte legivel em pdf"
+    ],
+    "longTailQueries": [
+      "como evitar que linhas longas de codigo sejam cortadas no pdf",
+      "largura ideal de caracteres para codigo em folha A4",
+      "formatacao limpa de codigo monoespacado para documentacao impressa"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/markdown-tables-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-tables-to-pdf",
+    "locale": "en",
+    "topic": "GitHub-flavored Markdown tables on fixed A4 and Letter pages",
+    "searchIntent": "Informational & Technical Optimization",
+    "primaryKeyword": "markdown tables to pdf",
+    "secondaryKeywords": [
+      "wide tables in pdf",
+      "gfm tables print formatting",
+      "table column width pdf",
+      "split markdown table across pages"
+    ],
+    "longTailQueries": [
+      "how to fit wide markdown tables onto an A4 pdf page",
+      "prevent markdown table columns from shrinking or clipping",
+      "format github markdown tables for print without horizontal scroll"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/markdown-code-blocks-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-tables-to-pdf",
+    "locale": "es",
+    "topic": "GitHub-flavored Markdown tables on fixed A4 and Letter pages",
+    "searchIntent": "Informational & Technical Optimization",
+    "primaryKeyword": "tablas markdown a pdf",
+    "secondaryKeywords": [
+      "tablas anchas en pdf",
+      "ancho de columnas tabla pdf",
+      "formato tablas impresion",
+      "paginacion tablas markdown"
+    ],
+    "longTailQueries": [
+      "cómo encajar tablas anchas de markdown en una página A4",
+      "evitar que las columnas de tablas markdown se deformen",
+      "diseñar tablas legibles en pdf sin desplazamiento horizontal"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/markdown-code-blocks-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-tables-to-pdf",
+    "locale": "ja",
+    "topic": "GitHub-flavored Markdown tables on fixed A4 and Letter pages",
+    "searchIntent": "Informational & Technical Optimization",
+    "primaryKeyword": "markdown 表 pdf 変換",
+    "secondaryKeywords": [
+      "横長の表 pdf",
+      "表の列幅 調整 markdown",
+      "表がはみ出る pdf 印刷",
+      "表の改ページ markdown"
+    ],
+    "longTailQueries": [
+      "A4サイズのpdfに収まるようにmarkdownの表を設計する方法",
+      "表の列が潰れたり途切れたりするのを防ぐコツ",
+      "横スクロールなしで印刷できるmarkdown表の書き方"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/markdown-code-blocks-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-tables-to-pdf",
+    "locale": "ko",
+    "topic": "GitHub-flavored Markdown tables on fixed A4 and Letter pages",
+    "searchIntent": "Informational & Technical Optimization",
+    "primaryKeyword": "마크다운 표 pdf 변환",
+    "secondaryKeywords": [
+      "넓은 표 pdf 맞추기",
+      "표 열 너비 조절 마크다운",
+      "표 여백 넘침 방지",
+      "표 페이지 분할 처리"
+    ],
+    "longTailQueries": [
+      "A4 용지에 맞게 넓은 마크다운 표를 최적화하는 방법",
+      "마크다운 표 열이 찌그러지거나 잘리는 현상 해결",
+      "가로 스크롤 없이 한눈에 들어오는 출력용 표 설계"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/markdown-code-blocks-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-tables-to-pdf",
+    "locale": "zh",
+    "topic": "GitHub-flavored Markdown tables on fixed A4 and Letter pages",
+    "searchIntent": "Informational & Technical Optimization",
+    "primaryKeyword": "markdown 表格 导出 pdf",
+    "secondaryKeywords": [
+      "超宽表格适应 a4 页面",
+      "markdown 表格列宽调整",
+      "避免表格超出页面边距",
+      "跨页打印表格优化"
+    ],
+    "longTailQueries": [
+      "如何将超宽的 markdown 表格整齐排版在 A4 尺寸的 pdf 页面中",
+      "防止表格列宽被压缩或内容被右侧截断",
+      "编写无需横向滚动条即可清晰打印的 gfm 表格"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/markdown-code-blocks-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-tables-to-pdf",
+    "locale": "ru",
+    "topic": "GitHub-flavored Markdown tables on fixed A4 and Letter pages",
+    "searchIntent": "Informational & Technical Optimization",
+    "primaryKeyword": "таблицы markdown в pdf",
+    "secondaryKeywords": [
+      "широкие таблицы в pdf",
+      "настройка ширины колонок таблицы",
+      "перенос таблиц между страницами",
+      "таблицы gfm для печати"
+    ],
+    "longTailQueries": [
+      "как уместить широкую таблицу markdown на странице формата A4",
+      "предотвращение сжатия и обрезки колонок таблицы при экспорте",
+      "подготовка удобных таблиц без горизонтальной прокрутки для печати"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/markdown-code-blocks-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-tables-to-pdf",
+    "locale": "tr",
+    "topic": "GitHub-flavored Markdown tables on fixed A4 and Letter pages",
+    "searchIntent": "Informational & Technical Optimization",
+    "primaryKeyword": "markdown tablolarını pdfye dönüştürme",
+    "secondaryKeywords": [
+      "geniş tabloları pdfye sığdırma",
+      "tablo sütun genişliği ayarlama",
+      "tabloların sayfaya taşmasını önleme",
+      "sayfa bölünmesinde tablolar"
+    ],
+    "longTailQueries": [
+      "geniş markdown tablolarını A4 sayfasına sığdırmanın yolları",
+      "tablo sütunlarının bozulmasını ve kesilmesini önleme",
+      "yatay kaydırmaya gerek kalmadan basılabilen tablolar oluşturma"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/markdown-code-blocks-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-tables-to-pdf",
+    "locale": "fr",
+    "topic": "GitHub-flavored Markdown tables on fixed A4 and Letter pages",
+    "searchIntent": "Informational & Technical Optimization",
+    "primaryKeyword": "tableaux markdown en pdf",
+    "secondaryKeywords": [
+      "tableaux larges sur page A4",
+      "ajuster largeur colonnes tableau pdf",
+      "éviter le débordement de tableau",
+      "pagination tableaux markdown"
+    ],
+    "longTailQueries": [
+      "comment adapter un tableau markdown large sur une feuille A4",
+      "empêcher les colonnes de tableaux d être compressées ou tronquées",
+      "concevoir des tableaux lisibles à l impression sans défilement horizontal"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/markdown-code-blocks-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-tables-to-pdf",
+    "locale": "pt",
+    "topic": "GitHub-flavored Markdown tables on fixed A4 and Letter pages",
+    "searchIntent": "Informational & Technical Optimization",
+    "primaryKeyword": "tabelas markdown em pdf",
+    "secondaryKeywords": [
+      "tabelas largas em folha A4",
+      "ajustar largura de colunas em tabela pdf",
+      "evitar que tabela transborde a margem",
+      "quebra de pagina em tabelas"
+    ],
+    "longTailQueries": [
+      "como encaixar tabelas largas de markdown em uma folha A4",
+      "evitar que colunas de tabelas fiquem esmagadas ou truncadas",
+      "criar tabelas legiveis para impressao sem barra de rolagem horizontal"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/markdown-code-blocks-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-table-of-contents-pdf",
+    "locale": "en",
+    "topic": "Automatic Table of Contents generation and heading hierarchy for PDF navigation",
+    "searchIntent": "Informational & Formatting Tutorial",
+    "primaryKeyword": "markdown pdf table of contents",
+    "secondaryKeywords": [
+      "generate toc for markdown",
+      "clickable pdf table of contents",
+      "markdown heading structure H1 H2",
+      "document navigation pdf"
+    ],
+    "longTailQueries": [
+      "how to automatically generate a table of contents for markdown pdf",
+      "best heading hierarchy for printable markdown documents",
+      "create clickable navigation links in a exported markdown pdf"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/multi-file-markdown-book/",
+      "/blog/markdown-code-blocks-to-pdf/"
+    ]
+  },
+  {
+    "pageKey": "markdown-table-of-contents-pdf",
+    "locale": "es",
+    "topic": "Automatic Table of Contents generation and heading hierarchy for PDF navigation",
+    "searchIntent": "Informational & Formatting Tutorial",
+    "primaryKeyword": "tabla de contenido markdown pdf",
+    "secondaryKeywords": [
+      "generar indice markdown",
+      "tabla de contenido clicable en pdf",
+      "estructura encabezados H1 H2",
+      "navegacion en documentos pdf"
+    ],
+    "longTailQueries": [
+      "cómo crear automáticamente una tabla de contenido para markdown en pdf",
+      "mejor estructura de encabezados para documentos imprimibles",
+      "añadir enlaces de navegacion internos en un pdf de markdown"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/multi-file-markdown-book/",
+      "/blog/markdown-code-blocks-to-pdf/"
+    ]
+  },
+  {
+    "pageKey": "markdown-table-of-contents-pdf",
+    "locale": "ja",
+    "topic": "Automatic Table of Contents generation and heading hierarchy for PDF navigation",
+    "searchIntent": "Informational & Formatting Tutorial",
+    "primaryKeyword": "markdown pdf 目次 生成",
+    "secondaryKeywords": [
+      "目次自動生成 markdown",
+      "クリック可能な目次リンク pdf",
+      "見出し構造 H1 H2 設計",
+      "pdf内ナビゲーション"
+    ],
+    "longTailQueries": [
+      "markdownから印刷用pdfの目次を自動生成する方法",
+      "印刷物で美しい階層を作る見出しレベルの設計ルール",
+      "書き出したpdfにクリック可能な目次リンクを付ける方法"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/multi-file-markdown-book/",
+      "/blog/markdown-code-blocks-to-pdf/"
+    ]
+  },
+  {
+    "pageKey": "markdown-table-of-contents-pdf",
+    "locale": "ko",
+    "topic": "Automatic Table of Contents generation and heading hierarchy for PDF navigation",
+    "searchIntent": "Informational & Formatting Tutorial",
+    "primaryKeyword": "마크다운 pdf 목차 만들기",
+    "secondaryKeywords": [
+      "마크다운 목차 자동 생성",
+      "클릭 가능한 pdf 목차 링크",
+      "헤딩 계층 구조 H1 H2 설계",
+      "pdf 문서 탐색 최적화"
+    ],
+    "longTailQueries": [
+      "마크다운 문서에서 인쇄용 pdf 목차를 자동으로 생성하는 방법",
+      "인쇄물 가독성을 높이는 이상적인 마크다운 헤딩 계층 규칙",
+      "pdf 내에서 원하는 절로 바로 이동하는 클릭 링크 구성하기"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/multi-file-markdown-book/",
+      "/blog/markdown-code-blocks-to-pdf/"
+    ]
+  },
+  {
+    "pageKey": "markdown-table-of-contents-pdf",
+    "locale": "zh",
+    "topic": "Automatic Table of Contents generation and heading hierarchy for PDF navigation",
+    "searchIntent": "Informational & Formatting Tutorial",
+    "primaryKeyword": "markdown pdf 目录生成",
+    "secondaryKeywords": [
+      "自动生成 markdown 目录",
+      "带可点击链接的 pdf 目录",
+      "标题层级结构 H1 H2 设计",
+      "结构化技术文档导航"
+    ],
+    "longTailQueries": [
+      "如何为导出的 markdown pdf 自动生成完整的章节目录",
+      "适合打印排版的规范 markdown 标题层级设计指南",
+      "在导出的 pdf 中创建可跳转的内嵌目录导航"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/multi-file-markdown-book/",
+      "/blog/markdown-code-blocks-to-pdf/"
+    ]
+  },
+  {
+    "pageKey": "markdown-table-of-contents-pdf",
+    "locale": "ru",
+    "topic": "Automatic Table of Contents generation and heading hierarchy for PDF navigation",
+    "searchIntent": "Informational & Formatting Tutorial",
+    "primaryKeyword": "оглавление markdown в pdf",
+    "secondaryKeywords": [
+      "автоматическое оглавление markdown",
+      "кликабельные ссылки в оглавлении pdf",
+      "иерархия заголовков H1 H2",
+      "навигация по документу в pdf"
+    ],
+    "longTailQueries": [
+      "как автоматически сгенерировать оглавление для печати markdown в pdf",
+      "правильная иерархия заголовков для удобных печатных документов",
+      "создание кликабельного оглавления в экспортированном файле pdf"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/multi-file-markdown-book/",
+      "/blog/markdown-code-blocks-to-pdf/"
+    ]
+  },
+  {
+    "pageKey": "markdown-table-of-contents-pdf",
+    "locale": "tr",
+    "topic": "Automatic Table of Contents generation and heading hierarchy for PDF navigation",
+    "searchIntent": "Informational & Formatting Tutorial",
+    "primaryKeyword": "markdown pdf içindekiler tablosu",
+    "secondaryKeywords": [
+      "otomatik içindekiler oluşturma",
+      "tıklanabilir pdf fihrist bağlantıları",
+      "başlık hiyerarşisi H1 H2",
+      "belge içi gezinti tasarımı"
+    ],
+    "longTailQueries": [
+      "markdown belgesinden baskıya hazır fihrist tablosu üretme",
+      "basılabilir belgeler için en uygun başlık hiyerarşisi kuralları",
+      "dışa aktarılan pdfte tıklanabilir içindekiler bağlantıları oluşturma"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/multi-file-markdown-book/",
+      "/blog/markdown-code-blocks-to-pdf/"
+    ]
+  },
+  {
+    "pageKey": "markdown-table-of-contents-pdf",
+    "locale": "fr",
+    "topic": "Automatic Table of Contents generation and heading hierarchy for PDF navigation",
+    "searchIntent": "Informational & Formatting Tutorial",
+    "primaryKeyword": "sommaire markdown en pdf",
+    "secondaryKeywords": [
+      "générer table des matières markdown",
+      "liens cliquables sommaire pdf",
+      "hiérarchie titres H1 H2",
+      "navigation interne document pdf"
+    ],
+    "longTailQueries": [
+      "comment générer automatiquement une table des matières pour un pdf markdown",
+      "meilleure hiérarchie de titres pour un document imprimable propre",
+      "créer des liens de navigation internes dans un pdf exporté"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/multi-file-markdown-book/",
+      "/blog/markdown-code-blocks-to-pdf/"
+    ]
+  },
+  {
+    "pageKey": "markdown-table-of-contents-pdf",
+    "locale": "pt",
+    "topic": "Automatic Table of Contents generation and heading hierarchy for PDF navigation",
+    "searchIntent": "Informational & Formatting Tutorial",
+    "primaryKeyword": "sumario markdown em pdf",
+    "secondaryKeywords": [
+      "gerar sumario automatico markdown",
+      "links clicaveis no sumario pdf",
+      "hierarquia de titulos H1 H2",
+      "navegacao interna em documentos pdf"
+    ],
+    "longTailQueries": [
+      "como gerar um sumario automatico para exportacao de markdown em pdf",
+      "melhor hierarquia de titulos para documentos tecnicos de impressao",
+      "criar links clicaveis de navegacao interna no pdf gerado"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/multi-file-markdown-book/",
+      "/blog/markdown-code-blocks-to-pdf/"
+    ]
+  },
+  {
+    "pageKey": "multi-file-markdown-book",
+    "locale": "en",
+    "topic": "Compiling multiple Markdown files into a single structured PDF book or ZIP export",
+    "searchIntent": "Transactional & Complex How-to",
+    "primaryKeyword": "multi-file markdown book to pdf",
+    "secondaryKeywords": [
+      "combine multiple markdown into one pdf",
+      "download markdown documentation as zip",
+      "github repository book builder",
+      "pdf book with chapters and cover"
+    ],
+    "longTailQueries": [
+      "how to merge multiple markdown files into one printable pdf book",
+      "export github documentation repository as individual chapter pdfs in a zip",
+      "build a technical documentation manual from github files in browser"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/github-readme-to-pdf/",
+      "/blog/markdown-table-of-contents-pdf/"
+    ]
+  },
+  {
+    "pageKey": "multi-file-markdown-book",
+    "locale": "es",
+    "topic": "Compiling multiple Markdown files into a single structured PDF book or ZIP export",
+    "searchIntent": "Transactional & Complex How-to",
+    "primaryKeyword": "libro markdown varios archivos a pdf",
+    "secondaryKeywords": [
+      "unir multiples archivos markdown en un pdf",
+      "descargar documentacion markdown en zip",
+      "crear libro desde repositorio github",
+      "pdf con portada capitulos e indice"
+    ],
+    "longTailQueries": [
+      "cómo unir varios archivos markdown en un único libro pdf con portada",
+      "exportar repositorio de documentacion en pdfs individuales comprimidos en zip",
+      "crear un manual técnico desde archivos de github en el navegador"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/github-readme-to-pdf/",
+      "/blog/markdown-table-of-contents-pdf/"
+    ]
+  },
+  {
+    "pageKey": "multi-file-markdown-book",
+    "locale": "ja",
+    "topic": "Compiling multiple Markdown files into a single structured PDF book or ZIP export",
+    "searchIntent": "Transactional & Complex How-to",
+    "primaryKeyword": "複数markdownファイル 結合 pdf 本",
+    "secondaryKeywords": [
+      "複数のmarkdownをひとつのpdfにまとめる",
+      "markdownドキュメントを一括zipダウンロード",
+      "githubリポジトリから電子書籍作成",
+      "表紙と目次付きのpdf冊子作成"
+    ],
+    "longTailQueries": [
+      "複数のmarkdownファイルをひとつの印刷用pdf本として製本する方法",
+      "githubリポジトリの全ドキュメントを章ごとの個別pdfにしてzip保存",
+      "ブラウザ上で完結するgithub技術ドキュメントの電子書籍化"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/github-readme-to-pdf/",
+      "/blog/markdown-table-of-contents-pdf/"
+    ]
+  },
+  {
+    "pageKey": "multi-file-markdown-book",
+    "locale": "ko",
+    "topic": "Compiling multiple Markdown files into a single structured PDF book or ZIP export",
+    "searchIntent": "Transactional & Complex How-to",
+    "primaryKeyword": "여러 마크다운 파일 하나의 pdf 책으로 만들기",
+    "secondaryKeywords": [
+      "여러 개의 md 파일을 하나의 pdf로 합치기",
+      "마크다운 문서를 챕터별 pdf zip으로 다운로드",
+      "깃허브 저장소로 기술 서적 전자책 만들기",
+      "표지와 목차가 있는 단권화 pdf 제작"
+    ],
+    "longTailQueries": [
+      "여러 개의 마크다운 파일을 표지와 목차가 포함된 인쇄용 pdf 책으로 합치는 법",
+      "깃허브 저장소 문서를 챕터별 개별 pdf로 묶어 zip으로 일괄 다운로드하기",
+      "설치 없이 브라우저에서 깃허브 문서로 기술 매뉴얼 단행본 만들기"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/github-readme-to-pdf/",
+      "/blog/markdown-table-of-contents-pdf/"
+    ]
+  },
+  {
+    "pageKey": "multi-file-markdown-book",
+    "locale": "zh",
+    "topic": "Compiling multiple Markdown files into a single structured PDF book or ZIP export",
+    "searchIntent": "Transactional & Complex How-to",
+    "primaryKeyword": "多文件 markdown 合并导出 pdf 图书",
+    "secondaryKeywords": [
+      "将多个 markdown 文件合并为一个完整 pdf",
+      "批量打包下载各章节独立 pdf 为 zip",
+      "从 github 仓库自动提取生成技术图书",
+      "带封面与总目录的专业电子书制作"
+    ],
+    "longTailQueries": [
+      "如何将多个独立的 markdown 章节文件合并排版为一本可打印的完整 pdf 技术书",
+      "将 github 仓库中的系列技术文档按章节导出为独立 pdf 并打包成 zip",
+      "免安装在浏览器中利用 github 仓库一键组装带封面的技术手册"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/github-readme-to-pdf/",
+      "/blog/markdown-table-of-contents-pdf/"
+    ]
+  },
+  {
+    "pageKey": "multi-file-markdown-book",
+    "locale": "ru",
+    "topic": "Compiling multiple Markdown files into a single structured PDF book or ZIP export",
+    "searchIntent": "Transactional & Complex How-to",
+    "primaryKeyword": "сборка книги из нескольких markdown файлов в pdf",
+    "secondaryKeywords": [
+      "объединить несколько файлов markdown в один pdf",
+      "скачать документацию в виде архива отдельных pdf",
+      "создание электронной книги из репозитория github",
+      "печать книги с обложкой и сводным оглавлением"
+    ],
+    "longTailQueries": [
+      "как объединить множество markdown-файлов в единую печатную книгу с обложкой",
+      "скачать документацию из репозитория github в виде zip-архива отдельных pdf-файлов",
+      "сборка полноценного руководства из файлов репозитория прямо в браузере"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/github-readme-to-pdf/",
+      "/blog/markdown-table-of-contents-pdf/"
+    ]
+  },
+  {
+    "pageKey": "multi-file-markdown-book",
+    "locale": "tr",
+    "topic": "Compiling multiple Markdown files into a single structured PDF book or ZIP export",
+    "searchIntent": "Transactional & Complex How-to",
+    "primaryKeyword": "çok dosyalı markdown kitabını pdf yapma",
+    "secondaryKeywords": [
+      "birden fazla markdown dosyasını tek pdfte birleştirme",
+      "bölümleri ayrı pdf olarak zip halinde indirme",
+      "github deposundan dokümantasyon kitabı oluşturma",
+      "kapak sayfası ve fihrist içeren profesyonel pdf"
+    ],
+    "longTailQueries": [
+      "birden fazla markdown dosyasını kapaklı ve fihristli tek bir pdf kitapta birleştirme",
+      "github deposundaki tüm dokümanları bağımsız bölümler halinde zip olarak indirme",
+      "tarayıcıda kurulumsuz github dosyalarından teknik kitap dizgisi yapma"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/github-readme-to-pdf/",
+      "/blog/markdown-table-of-contents-pdf/"
+    ]
+  },
+  {
+    "pageKey": "multi-file-markdown-book",
+    "locale": "fr",
+    "topic": "Compiling multiple Markdown files into a single structured PDF book or ZIP export",
+    "searchIntent": "Transactional & Complex How-to",
+    "primaryKeyword": "créer un livre markdown multi fichiers en pdf",
+    "secondaryKeywords": [
+      "fusionner plusieurs fichiers markdown en un seul pdf",
+      "télécharger la documentation en zip de pdfs",
+      "créer un livre depuis un dépôt github",
+      "livre pdf avec couverture et chapitres"
+    ],
+    "longTailQueries": [
+      "comment rassembler plusieurs fichiers markdown en un livre pdf imprimable avec couverture",
+      "télécharger une documentation github sous forme de chapitres pdf dans un zip",
+      "concevoir un manuel technique depuis des fichiers github directement dans le navigateur"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/github-readme-to-pdf/",
+      "/blog/markdown-table-of-contents-pdf/"
+    ]
+  },
+  {
+    "pageKey": "multi-file-markdown-book",
+    "locale": "pt",
+    "topic": "Compiling multiple Markdown files into a single structured PDF book or ZIP export",
+    "searchIntent": "Transactional & Complex How-to",
+    "primaryKeyword": "livro markdown multiplos arquivos em pdf",
+    "secondaryKeywords": [
+      "juntar multiplos arquivos markdown em um unico pdf",
+      "baixar documentacao completa em zip de pdfs",
+      "compilador de livros a partir de repositorio github",
+      "livro em pdf com capa capitulos e sumario"
+    ],
+    "longTailQueries": [
+      "como unir multiplos arquivos markdown em um livro pdf para impressao com capa e sumario",
+      "exportar repositorio de documentacao do github em pdfs individuais dentro de um arquivo zip",
+      "compilar manual tecnico completo a partir de arquivos do github direto no navegador"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/github-readme-to-pdf/",
+      "/blog/markdown-table-of-contents-pdf/"
+    ]
+  }
+]
