@@ -15,18 +15,20 @@ This document provides a verified, factual deployment and indexing checklist for
   PUBLIC_SITE_URL=https://md2pdf.ladestack.in npm run build:release
   ```
 - [ ] Confirm that `build:release` passes with:
-  - 99/99 HTML pages verified
-  - 99 sitemap URLs verified
-  - 990 reciprocal hreflang alternates (10 per URL including x-default) verified
-  - 99 JSON-LD structured data blocks verified
+  - 216/216 HTML pages verified
+  - 216 sitemap URLs verified
+  - 2,160 reciprocal hreflang alternates (10 per URL including x-default) verified
+  - 216 JSON-LD structured data blocks verified
 - [ ] Verify that `dist/robots.txt` outputs:
   ```text
   User-agent: *
   Allow: /
 
   Sitemap: https://md2pdf.ladestack.in/sitemap.xml
+  # AI agent and LLM discovery
+  # llms.txt: https://md2pdf.ladestack.in/llms.txt
   ```
-- [ ] Verify that `dist/sitemap.xml` is present, valid XML, and contains all 99 indexable URLs.
+- [ ] Verify that `dist/sitemap.xml` is present, valid XML, and contains all 216 indexable URLs.
 
 ---
 
@@ -43,7 +45,7 @@ This document provides a verified, factual deployment and indexing checklist for
    - In the left sidebar, navigate to **Indexing > Sitemaps**.
    - In the "Add a new sitemap" input, enter `sitemap.xml`.
    - Click **Submit**.
-   - Verify that the status turns to **Success** and that 99 discovered URLs are reported.
+   - Verify that the status turns to **Success** and that 216 discovered URLs are reported.
 5. **Inspect Key URLs (URL Inspection Tool)**:
    - Inspect `https://md2pdf.ladestack.in/` (Home).
    - Inspect `https://md2pdf.ladestack.in/about/` (About page).

@@ -318,11 +318,13 @@ export function articleJsonLd({ post, locale, path, site }) {
   const data = post?.data ?? post;
   const url = absoluteUrl(site, canonicalPath(path));
   const language = localeMeta(locale).htmlLang;
+  const image = site?.origin ? absoluteUrl(site, DEFAULT_OG_IMAGE_PATH) : null;
   return {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     headline: data.title,
     description: data.description,
+    ...(image ? { image } : {}),
     datePublished: data.pubDate.toISOString(),
     dateModified: (data.updatedDate ?? data.pubDate).toISOString(),
     author: { '@type': 'Person', name: data.author },
@@ -494,7 +496,9 @@ ${urls.join('\n')}
 export function buildRobotsTxt(site) {
   const lines = ['User-agent: *', 'Allow: /', ''];
   if (site?.origin) {
-    lines.push(`Sitemap: ${absoluteUrl(site, '/sitemap.xml')}`, '');
+    lines.push(`Sitemap: ${absoluteUrl(site, '/sitemap.xml')}`);
+    lines.push('# AI agent and LLM discovery');
+    lines.push(`# llms.txt: ${absoluteUrl(site, '/llms.txt')}`, '');
   } else {
     lines.push('# PUBLIC_SITE_URL is not configured; sitemap publication is disabled.', '');
   }

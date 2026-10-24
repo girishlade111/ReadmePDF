@@ -213,6 +213,7 @@ describe('JSON-LD builders', () => {
     assert.equal(json.dateModified, post.data.updatedDate.toISOString());
     assert.equal(json.publisher.name, 'LadeStack');
     assert.equal(json.url, `${ORIGIN}/ru/blog/${post.data.translationKey}/`);
+    assert.equal(json.image, `${ORIGIN}/og/md2pdf.png`);
   });
 
   it('uses the accurate content language in JSON-LD, not the hreflang grouping', () => {
