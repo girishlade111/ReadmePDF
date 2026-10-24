@@ -4,3 +4,6 @@ dist-seo/
 .astro/
 *.log
 scratch/
+
+.vercel
+.env*
