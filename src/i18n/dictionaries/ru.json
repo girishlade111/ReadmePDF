@@ -415,5 +415,14 @@
   "history.type.book": "PDF-книга",
   "history.type.export": "Экспорт создан",
   "history.privacy.badge": "Только локально в браузере",
-  "history.privacy.note": "История хранится исключительно в этом профиле браузера и никогда не отправляется на серверы."
+  "history.privacy.note": "История хранится локально в профиле браузера без шифрования и не передаётся на серверы. Очистка данных сайта удаляет историю.",
+  "history.storage.reliabilityBtn": "Повысить надёжность локальной истории",
+  "history.storage.persistedGranted": "Постоянное хранение разрешено: браузер не удалит историю при нехватке места.",
+  "history.storage.persistedDenied": "Браузер отклонил постоянное хранение: история сохраняется в рамках лимитов браузера.",
+  "history.storage.persistedActive": "Постоянное хранилище активно",
+  "history.storage.persistenceNote": "Постоянное хранение снижает риск вытеснения, но очистка данных сайта удалит локальную историю.",
+  "history.type.printDialog": "Окно печати",
+  "history.type.cancelled": "Отменено",
+  "history.printDialogDesc": "Вызвано системное окно печати",
+  "history.conflictNotice": "Внимание: документ был изменён в другой вкладке."
 }

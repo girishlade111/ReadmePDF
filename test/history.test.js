@@ -327,20 +327,20 @@ describe('IndexedDB Local History & Data Management', () => {
     assert.equal(all.entries.length, 1);
   });
 
-  test('21. addHistoryEntry limits retention to max entries (pruning older items)', async () => {
-    for (let i = 1; i <= 6; i++) {
+  test('21. addHistoryEntry does not silently prune entries when 151+ manual snapshots are saved', async () => {
+    for (let i = 1; i <= 155; i++) {
       await addHistoryEntry({
         recordType: 'manual',
         sourceType: 'manual',
-        title: `Item ${i}`,
-        content: `Content ${i}`,
+        title: `Manual Snapshot ${i}`,
+        content: `Content revision ${i}`,
         createdAt: new Date(Date.now() + i * 1000).toISOString(),
         updatedAt: new Date(Date.now() + i * 1000).toISOString(),
-      }, { factory: mockFactory, maxEntries: 4 });
+      }, { factory: mockFactory });
     }
 
-    const all = await listHistoryEntries({}, { factory: mockFactory });
-    assert.ok(all.entries.length <= 4);
+    const all = await listHistoryEntries({ limit: 200 }, { factory: mockFactory });
+    assert.equal(all.entries.length, 155); // Never silently pruned!
   });
 
   test('22. addHistoryEntry for local file upload sets source local-file', async () => {
@@ -680,8 +680,8 @@ describe('IndexedDB Local History & Data Management', () => {
     let list = await listHistoryEntries({}, { factory: mockFactory });
     assert.equal(list.entries.length, 2);
 
-    // Test Replace Mode
-    await importHistoryBackup(backupData, { factory: mockFactory, mode: 'replace' });
+    // Test Replace Mode (requires explicit confirmation)
+    await importHistoryBackup(backupData, { factory: mockFactory, mode: 'replace', confirmed: true });
     list = await listHistoryEntries({}, { factory: mockFactory });
     assert.equal(list.entries.length, 1);
     assert.equal(list.entries[0].title, 'Imported Entry');

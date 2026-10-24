@@ -41,14 +41,18 @@ export const EXPORT_TYPES = Object.freeze([
 
 export const EXPORT_STATUSES = Object.freeze([
   'completed',
+  'success',
   'download-initiated',
   'failed',
+  'cancelled',
+  'print-dialog-requested',
 ]);
 
 export const DEFAULT_PREFERENCES = Object.freeze({
   autoSaveEnabled: true,
   autoSaveDelay: 1000,
-  maxEntries: 150,
+  maxEntries: null, // Durable retention: never silently prune entries based on numeric limits
+  retentionPolicy: 'durable-manual-cleanup',
   privacyNoticeDismissed: false,
 });
 
@@ -133,6 +137,9 @@ export function validateWorkspace(value) {
   if (ws.recordType !== undefined && typeof ws.recordType !== 'string') {
     throw new Error('Workspace recordType must be a string.');
   }
+  if (ws.revision !== undefined && (!Number.isInteger(ws.revision) || ws.revision < 0)) {
+    throw new Error('Workspace revision must be a non-negative integer.');
+  }
 }
 
 /**
@@ -153,5 +160,9 @@ export function validateExportRecord(value) {
   }
   if (typeof rec.generatedAt !== 'string' || Number.isNaN(Date.parse(rec.generatedAt))) {
     throw new Error('Export record generatedAt must be a valid ISO date string.');
+  }
+  const status = rec.generationStatus || rec.status;
+  if (status !== undefined && typeof status === 'string' && !EXPORT_STATUSES.includes(status)) {
+    throw new Error(`Export record status must be one of: ${EXPORT_STATUSES.join(', ')}.`);
   }
 }

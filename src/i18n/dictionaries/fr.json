@@ -415,5 +415,14 @@
   "history.type.book": "Livre PDF",
   "history.type.export": "Export généré",
   "history.privacy.badge": "Uniquement local au navigateur",
-  "history.privacy.note": "L'historique est stocké exclusivement dans ce profil de navigateur et n'est jamais envoyé à nos serveurs."
+  "history.privacy.note": "L'historique est stocké localement sans chiffrement dans ce profil et n'est jamais envoyé aux serveurs. Effacer les données du site le supprime.",
+  "history.storage.reliabilityBtn": "Améliorer la fiabilité de l'historique local",
+  "history.storage.persistedGranted": "Persistance accordée : le navigateur évitera de purger l'historique en cas de mémoire faible.",
+  "history.storage.persistedDenied": "Persistance refusée par le navigateur : l'historique local reste actif dans les limites du navigateur.",
+  "history.storage.persistedActive": "Persistance du stockage active",
+  "history.storage.persistenceNote": "La persistance réduit le risque d'éviction, mais vider les données du site efface l'historique.",
+  "history.type.printDialog": "Boîte d'impression",
+  "history.type.cancelled": "Annulé",
+  "history.printDialogDesc": "Boîte d'impression système demandée",
+  "history.conflictNotice": "Attention : le document a été modifié dans un autre onglet."
 }

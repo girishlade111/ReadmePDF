@@ -524,6 +524,7 @@ const jsonLd = homeJsonLd({
         hasUnsavedConverterWork: conv?.hasUnsavedWork,
         onRestoreBook: book?.restoreBookSnapshot,
         onAutoSaveToggle: (enabled) => conv?.autoSave?.setEnabled(enabled),
+        onClearAll: () => conv?.autoSave?.cancelPending(),
       });
     </script>
   </body>

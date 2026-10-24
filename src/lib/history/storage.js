@@ -119,7 +119,12 @@ export async function isStoragePersisted() {
  * Requests persistent storage from the browser.
  * Must be triggered by direct user interaction.
  *
- * @returns {Promise<{ requested: boolean; granted: boolean }>}
+ * @returns {Promise<{
+ *   requested: boolean;
+ *   granted: boolean;
+ *   status: 'granted' | 'denied' | 'already-granted' | 'unsupported' | 'error';
+ *   message: string;
+ * }>}
  */
 export async function requestPersistentStorage() {
   if (
@@ -127,13 +132,68 @@ export async function requestPersistentStorage() {
     !navigator.storage ||
     typeof navigator.storage.persist !== 'function'
   ) {
-    return { requested: false, granted: false };
+    return {
+      requested: false,
+      granted: false,
+      status: 'unsupported',
+      message: 'Persistent storage API is not supported in this browser.',
+    };
   }
 
   try {
+    const alreadyPersisted = typeof navigator.storage.persisted === 'function'
+      ? await navigator.storage.persisted()
+      : false;
+
+    if (alreadyPersisted) {
+      return {
+        requested: true,
+        granted: true,
+        status: 'already-granted',
+        message: 'Storage persistence is already active for this origin.',
+      };
+    }
+
     const granted = await navigator.storage.persist();
-    return { requested: true, granted: Boolean(granted) };
-  } catch {
-    return { requested: true, granted: false };
+    return {
+      requested: true,
+      granted: Boolean(granted),
+      status: granted ? 'granted' : 'denied',
+      message: granted
+        ? 'Storage persistence granted by browser.'
+        : 'Browser denied persistent storage. History remains saved locally, subject to browser storage limits.',
+    };
+  } catch (err) {
+    return {
+      requested: true,
+      granted: false,
+      status: 'error',
+      message: err?.message || 'Failed to request persistent storage.',
+    };
   }
+}
+
+/**
+ * Checks overall local storage reliability and persistence status.
+ *
+ * @returns {Promise<{
+ *   supported: boolean;
+ *   persisted: boolean;
+ *   usageFormatted: string;
+ *   quotaFormatted: string;
+ *   percent: number;
+ * }>}
+ */
+export async function checkStorageReliability() {
+  const persisted = await isStoragePersisted();
+  const estimate = await getStorageEstimate();
+  const supported = isIndexedDBSupported();
+
+  return {
+    supported,
+    persisted,
+    usageFormatted: estimate.usageFormatted,
+    quotaFormatted: estimate.quotaFormatted,
+    percent: estimate.percent,
+  };
 }

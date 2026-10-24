@@ -16,10 +16,12 @@ import {
   getPreference,
   getStorageEstimate,
   importHistoryBackup,
+  isStoragePersisted,
   listExportRecords,
   listHistoryEntries,
   pinHistoryEntry,
   renameHistoryEntry,
+  requestPersistentStorage,
   setPreference,
 } from '../lib/history/index.js';
 import { t } from '../i18n/client.js';
@@ -89,6 +91,10 @@ export function initHistoryUi(callbacks = {}) {
   );
   const storageText = document.getElementById('history-storage-text');
   const storageBar = document.getElementById('history-storage-bar');
+  const persistBtn = /** @type {HTMLButtonElement | null} */ (
+    document.getElementById('history-persist-btn')
+  );
+  const persistStatus = document.getElementById('history-persist-status');
   const confirmModal = document.getElementById('history-confirm-modal');
   const confirmTitle = document.getElementById('history-confirm-title');
   const confirmDesc = document.getElementById('history-confirm-desc');
@@ -102,7 +108,52 @@ export function initHistoryUi(callbacks = {}) {
   let lastActiveElement = null;
   let confirmCallback = null;
 
-  // 1. Drawer open & close handlers
+  // 1. Persistence reliability handler
+  async function checkPersistenceState() {
+    if (!persistBtn) return;
+    try {
+      const persisted = await isStoragePersisted();
+      if (persisted) {
+        persistBtn.textContent = t('history.storage.persistedActive') || 'Storage persistence active';
+        persistBtn.disabled = true;
+      } else {
+        persistBtn.textContent = t('history.storage.reliabilityBtn') || 'Improve local history reliability';
+        persistBtn.disabled = false;
+      }
+    } catch {
+      // Non-fatal
+    }
+  }
+
+  if (persistBtn) {
+    persistBtn.addEventListener('click', async () => {
+      persistBtn.disabled = true;
+      try {
+        const res = await requestPersistentStorage();
+        if (persistStatus) {
+          persistStatus.hidden = false;
+          if (res.status === 'already-granted' || res.granted) {
+            persistStatus.textContent = t('history.storage.persistedGranted') ||
+              'Persistence granted: browser will avoid clearing history under storage pressure. (Note: clearing site data still removes history).';
+          } else if (res.status === 'denied') {
+            persistStatus.textContent = t('history.storage.persistedDenied') ||
+              'Browser denied persistence. History remains saved locally, subject to browser storage limits.';
+          } else {
+            persistStatus.textContent = res.message;
+          }
+        }
+        await checkPersistenceState();
+      } catch (err) {
+        if (persistStatus) {
+          persistStatus.hidden = false;
+          persistStatus.textContent = 'Failed to request persistence: ' + (err?.message || err);
+        }
+        persistBtn.disabled = false;
+      }
+    });
+  }
+
+  // 2. Drawer open & close handlers
   function openDrawer() {
     lastActiveElement = document.activeElement;
     drawer.hidden = false;
@@ -112,6 +163,7 @@ export function initHistoryUi(callbacks = {}) {
     document.body.classList.add('history-drawer-open');
 
     refreshStorageInfo();
+    checkPersistenceState();
     loadEntries();
 
     if (closeBtn) closeBtn.focus();
@@ -226,12 +278,17 @@ export function initHistoryUi(callbacks = {}) {
 
       try {
         const text = await file.text();
-        const res = await importHistoryBackup(text, { mode: 'merge' });
+        const res = await importHistoryBackup(text, {
+          mode: 'merge',
+          conflictStrategy: 'keep-existing',
+        });
         loadEntries();
         refreshStorageInfo();
-        alert(
-          `Import complete: ${res.importedEntries} entries, ${res.importedExports} exports imported (${res.skipped} skipped).`,
-        );
+
+        const message = res.conflicts > 0
+          ? `Import complete: ${res.importedEntries} entries, ${res.importedExports} exports imported (${res.conflicts} existing records preserved without overwrite).`
+          : `Import complete: ${res.importedEntries} entries, ${res.importedExports} exports imported.`;
+        alert(message);
       } catch (err) {
         alert('Import failed: ' + (err?.message || err));
       } finally {
@@ -247,6 +304,11 @@ export function initHistoryUi(callbacks = {}) {
         t('history.confirm.clearTitle'),
         t('history.confirm.clearDesc'),
         async () => {
+          if (callbacks.onClearAll) {
+            try {
+              callbacks.onClearAll();
+            } catch {}
+          }
           await clearAllHistory();
           loadEntries();
           refreshStorageInfo();
@@ -300,6 +362,7 @@ export function initHistoryUi(callbacks = {}) {
           sort: currentSort,
           search: searchQuery,
           limit: 100,
+          excludeContent: true,
         });
         entries = res.entries;
 
@@ -434,18 +497,25 @@ export function initHistoryUi(callbacks = {}) {
     card.className = 'history-card history-card--export';
     card.setAttribute('data-id', item.id);
 
-    const typeLabel = t('history.type.export');
+    const isPrintDialog = item.status === 'print-dialog-requested' || item.generationStatus === 'print-dialog-requested';
+    const isCancelled = item.status === 'cancelled' || item.generationStatus === 'cancelled';
+    const typeLabel = isPrintDialog
+      ? (t('history.type.printDialog') || 'Print Dialog')
+      : (isCancelled ? (t('history.type.cancelled') || 'Cancelled') : (t('history.type.export') || 'Export'));
     const timeFormatted = formatRelativeTime(item.generatedAt);
     const sizeFormatted = item.fileSize ? `${Math.round(item.fileSize / 1024 * 10) / 10} KB` : '';
+    const metaText = isPrintDialog
+      ? (t('history.printDialogDesc') || 'Native print dialog requested')
+      : (item.suggestedFilename || item.exportType);
 
     card.innerHTML = `
       <div class="history-card__header">
-        <span class="history-card__badge history-card__badge--export">${typeLabel}</span>
+        <span class="history-card__badge history-card__badge--export${isPrintDialog ? ' history-card__badge--print' : ''}">${escapeHtml(typeLabel)}</span>
         <span class="history-card__time">${timeFormatted}</span>
       </div>
       <div class="history-card__body">
         <h4 class="history-card__title">${escapeHtml(item.documentTitle)}</h4>
-        <p class="history-card__meta">${escapeHtml(item.suggestedFilename || item.exportType)}</p>
+        <p class="history-card__meta">${escapeHtml(metaText)}</p>
         ${sizeFormatted ? `<span class="history-card__size">${sizeFormatted} (${item.chapterCount || 1} doc)</span>` : ''}
       </div>
       <div class="history-card__actions">

@@ -198,9 +198,9 @@ describe('locale registry and path mapping', () => {
 });
 
 describe('dictionary parity and translation quality', () => {
-  it('ships the same non-empty 417 keys in every locale', () => {
+  it('ships the same non-empty 426 keys in every locale', () => {
     const expected = Object.keys(english).sort();
-    assert.equal(expected.length, 417);
+    assert.equal(expected.length, 426);
     for (const [locale, messages] of allDictionaries) {
       assert.deepEqual(Object.keys(messages).sort(), expected, `${locale} key parity`);
       for (const key of expected) {

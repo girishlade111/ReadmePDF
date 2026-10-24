@@ -3,7 +3,7 @@
  *
  * Implements hardened JSON backup serialization and strict schema
  * validation with guards against prototype pollution, code injection,
- * and malformed/abusive data structures.
+ * malicious data structures, duplicate ID collisions, and silent overwrites.
  */
 
 import {
@@ -23,6 +23,7 @@ export const MAX_BACKUP_BYTES = 25 * 1024 * 1024; // 25 MB max import size
 
 /**
  * Checks for prototype pollution patterns recursively.
+ * Rejects objects with custom prototype chains or dangerous property names.
  *
  * @param {unknown} value
  * @param {number} [depth]
@@ -36,7 +37,13 @@ export function isSafeStructure(value, depth = 0) {
     return value.every((item) => isSafeStructure(item, depth + 1));
   }
 
-  for (const key of Object.keys(value)) {
+  // Guard against custom prototype injection
+  const proto = Object.getPrototypeOf(value);
+  if (proto !== null && proto !== Object.prototype) {
+    return false;
+  }
+
+  for (const key of Object.getOwnPropertyNames(value)) {
     if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
       return false;
     }
@@ -52,6 +59,7 @@ export function isSafeStructure(value, depth = 0) {
  * @param {{ db?: IDBDatabase; factory?: IDBFactory }} [options]
  * @returns {Promise<{
  *   format: string;
+ *   version: number;
  *   schemaVersion: number;
  *   exportedAt: string;
  *   entries: any[];
@@ -80,7 +88,7 @@ export async function exportHistoryBackup(options = {}) {
             const rawPrefs = prefsReq.result || [];
             const safePrefs = {};
             for (const item of rawPrefs) {
-              // Exclude any credentials or sensitive tokens if ever introduced
+              // Exclude any sensitive tokens if ever introduced
               if (item.key && !item.key.includes('token') && !item.key.includes('auth')) {
                 safePrefs[item.key] = item.value;
               }
@@ -134,11 +142,13 @@ export function downloadBackupFile(backupData, filename = 'md2pdf-history-backup
 }
 
 /**
- * Validates and imports a history backup JSON string or object.
+ * Validates and imports a history backup JSON string or object with conflict safety.
  *
  * @param {string | object} input
  * @param {{
  *   mode?: 'merge' | 'replace';
+ *   conflictStrategy?: 'keep-existing' | 'create-copy' | 'replace';
+ *   confirmed?: boolean;
  *   db?: IDBDatabase;
  *   factory?: IDBFactory;
  * }} [options]
@@ -146,17 +156,28 @@ export function downloadBackupFile(backupData, filename = 'md2pdf-history-backup
  *   success: boolean;
  *   importedEntries: number;
  *   importedExports: number;
+ *   importedWorkspaces: number;
+ *   conflicts: number;
  *   skipped: number;
  *   errors: string[];
  * }>}
  */
 export async function importHistoryBackup(input, options = {}) {
   const mode = options.mode || 'merge';
+  const conflictStrategy = options.conflictStrategy || (mode === 'replace' ? 'replace' : 'keep-existing');
   const errors = [];
+
+  if (mode === 'replace' && options.confirmed !== true) {
+    throw new Error('Destructive Replace All mode requires explicit confirmation (confirmed: true).');
+  }
 
   let data;
   if (typeof input === 'string') {
-    if (new Blob([input]).size > MAX_BACKUP_BYTES) {
+    const byteSize = typeof Blob !== 'undefined'
+      ? new Blob([input]).size
+      : (typeof Buffer !== 'undefined' ? Buffer.byteLength(input, 'utf8') : input.length);
+
+    if (byteSize > MAX_BACKUP_BYTES) {
       throw new Error(`Backup file exceeds maximum allowed size of ${MAX_BACKUP_BYTES / (1024 * 1024)} MB.`);
     }
     try {
@@ -188,8 +209,41 @@ export async function importHistoryBackup(input, options = {}) {
   const exportsToImport = Array.isArray(data.exports) ? data.exports : [];
   const workspacesToImport = Array.isArray(data.workspaces) ? data.workspaces : [];
 
+  // Pre-validate entries and exports before touching database
+  const validEntries = [];
+  for (const rawEntry of entriesToImport) {
+    try {
+      validateHistoryEntry(rawEntry);
+      validEntries.push({ ...rawEntry });
+    } catch (err) {
+      errors.push(`Entry validation failed (${rawEntry?.id || 'unknown'}): ${err?.message || err}`);
+    }
+  }
+
+  const validExports = [];
+  for (const rawExport of exportsToImport) {
+    try {
+      validateExportRecord(rawExport);
+      validExports.push({ ...rawExport });
+    } catch (err) {
+      errors.push(`Export validation failed (${rawExport?.id || 'unknown'}): ${err?.message || err}`);
+    }
+  }
+
+  const validWorkspaces = [];
+  for (const rawWs of workspacesToImport) {
+    try {
+      validateWorkspace(rawWs);
+      validWorkspaces.push({ ...rawWs });
+    } catch (err) {
+      errors.push(`Workspace validation failed (${rawWs?.workspaceId || rawWs?.id || 'unknown'}): ${err?.message || err}`);
+    }
+  }
+
   let importedEntries = 0;
   let importedExports = 0;
+  let importedWorkspaces = 0;
+  let conflicts = 0;
   let skipped = 0;
 
   const db = options.db || (await openDatabase({ factory: options.factory }));
@@ -207,48 +261,104 @@ export async function importHistoryBackup(input, options = {}) {
           stores[STORES.WORKSPACES].clear();
         }
 
-        // 1. Import history entries
-        for (const rawEntry of entriesToImport) {
-          try {
-            validateHistoryEntry(rawEntry);
-            const entry = { ...rawEntry };
-            // Ensure ID is safe and won't conflict inappropriately
-            if (!entry.id) {
-              entry.id = `hist_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
+        // Fetch existing entry IDs to detect collisions accurately
+        const getEntriesReq = stores[STORES.ENTRIES].getAll();
+        const getExportsReq = stores[STORES.EXPORTS].getAll();
+        const getWorkspacesReq = stores[STORES.WORKSPACES].getAll();
+
+        let loads = 3;
+        const onLoaded = () => {
+          if (--loads !== 0) return;
+
+          const existingEntryIds = new Set((getEntriesReq.result || []).map((e) => e.id));
+          const existingExportIds = new Set((getExportsReq.result || []).map((e) => e.id));
+          const existingWorkspaceIds = new Set((getWorkspacesReq.result || []).map((w) => w.workspaceId || w.id));
+
+          // 1. Process History Entries
+          for (const entry of validEntries) {
+            const hasConflict = existingEntryIds.has(entry.id);
+
+            if (hasConflict) {
+              conflicts++;
+              if (conflictStrategy === 'keep-existing') {
+                skipped++;
+                continue; // Preserve existing data without overwrite
+              } else if (conflictStrategy === 'create-copy') {
+                const copyEntry = {
+                  ...entry,
+                  id: `hist_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`,
+                  title: `${entry.title} (Imported Copy)`,
+                };
+                stores[STORES.ENTRIES].put(copyEntry);
+                existingEntryIds.add(copyEntry.id);
+                importedEntries++;
+              } else if (conflictStrategy === 'replace') {
+                stores[STORES.ENTRIES].put(entry);
+                importedEntries++;
+              }
+            } else {
+              stores[STORES.ENTRIES].put(entry);
+              existingEntryIds.add(entry.id);
+              importedEntries++;
             }
-            stores[STORES.ENTRIES].put(entry);
-            importedEntries++;
-          } catch (err) {
-            skipped++;
-            errors.push(`Entry error (${rawEntry?.id || 'unknown'}): ${err?.message || err}`);
           }
-        }
 
-        // 2. Import export records
-        for (const rawExport of exportsToImport) {
-          try {
-            validateExportRecord(rawExport);
-            const exp = { ...rawExport };
-            if (!exp.id) {
-              exp.id = `exp_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
+          // 2. Process Export Records
+          for (const exp of validExports) {
+            const hasConflict = existingExportIds.has(exp.id);
+            if (hasConflict) {
+              conflicts++;
+              if (conflictStrategy === 'keep-existing') {
+                skipped++;
+                continue;
+              } else if (conflictStrategy === 'create-copy') {
+                const copyExp = {
+                  ...exp,
+                  id: `exp_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`,
+                  title: `${exp.title || exp.documentTitle || 'Export'} (Copy)`,
+                };
+                stores[STORES.EXPORTS].put(copyExp);
+                existingExportIds.add(copyExp.id);
+                importedExports++;
+              } else if (conflictStrategy === 'replace') {
+                stores[STORES.EXPORTS].put(exp);
+                importedExports++;
+              }
+            } else {
+              stores[STORES.EXPORTS].put(exp);
+              existingExportIds.add(exp.id);
+              importedExports++;
             }
-            stores[STORES.EXPORTS].put(exp);
-            importedExports++;
-          } catch (err) {
-            skipped++;
-            errors.push(`Export error (${rawExport?.id || 'unknown'}): ${err?.message || err}`);
           }
-        }
 
-        // 3. Import workspaces if safe
-        for (const rawWs of workspacesToImport) {
-          try {
-            validateWorkspace(rawWs);
-            stores[STORES.WORKSPACES].put(rawWs);
-          } catch {}
-        }
+          // 3. Process Workspaces
+          for (const ws of validWorkspaces) {
+            const wsId = ws.workspaceId || ws.id;
+            const hasConflict = existingWorkspaceIds.has(wsId);
+            if (hasConflict) {
+              if (conflictStrategy === 'replace') {
+                stores[STORES.WORKSPACES].put(ws);
+                importedWorkspaces++;
+              } else {
+                skipped++;
+              }
+            } else {
+              stores[STORES.WORKSPACES].put(ws);
+              existingWorkspaceIds.add(wsId);
+              importedWorkspaces++;
+            }
+          }
 
-        resolve();
+          resolve();
+        };
+
+        getEntriesReq.onsuccess = onLoaded;
+        getExportsReq.onsuccess = onLoaded;
+        getWorkspacesReq.onsuccess = onLoaded;
+
+        getEntriesReq.onerror = () => reject(getEntriesReq.error);
+        getExportsReq.onerror = () => reject(getExportsReq.error);
+        getWorkspacesReq.onerror = () => reject(getWorkspacesReq.error);
       });
     },
   );
@@ -257,6 +367,8 @@ export async function importHistoryBackup(input, options = {}) {
     success: errors.length === 0,
     importedEntries,
     importedExports,
+    importedWorkspaces,
+    conflicts,
     skipped,
     errors,
   };

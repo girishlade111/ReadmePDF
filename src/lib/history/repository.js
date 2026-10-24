@@ -30,19 +30,27 @@ async function resolveDb(options = {}) {
 // ---------------------------------------------------------------------------
 
 /**
- * Saves the current active workspace draft (e.g. single document editor).
+ * Saves the current active workspace draft (e.g. single document editor)
+ * with optimistic concurrency and revision verification.
  *
  * @param {{
- *   id: string;
+ *   id?: string;
+ *   workspaceId?: string;
  *   recordType: 'converter' | 'book';
  *   title?: string;
  *   content?: string;
+ *   markdown?: string;
  *   metadata?: Record<string, any>;
  *   updatedAt?: string;
  *   revision?: number;
  * }} workspace
- * @param {{ db?: IDBDatabase; factory?: IDBFactory }} [options]
- * @returns {Promise<void>}
+ * @param {{
+ *   expectedRevision?: number;
+ *   rejectIfMissing?: boolean;
+ *   db?: IDBDatabase;
+ *   factory?: IDBFactory;
+ * }} [options]
+ * @returns {Promise<any>} The committed workspace record.
  */
 export async function saveActiveWorkspace(workspace, options = {}) {
   validateWorkspace(workspace);
@@ -51,25 +59,67 @@ export async function saveActiveWorkspace(workspace, options = {}) {
 
   const wsId = workspace.workspaceId || workspace.id;
   const content = workspace.content ?? workspace.markdown ?? '';
-  const record = {
-    ...workspace,
-    id: wsId,
-    workspaceId: wsId,
-    title: workspace.title || 'Untitled Draft',
-    content,
-    markdown: content,
-    metadata: workspace.metadata || {},
-    updatedAt: now,
-    revision: (workspace.revision ?? 0) + 1,
-  };
+
+  let committedRecord = null;
 
   await runTransaction(db, STORES.WORKSPACES, 'readwrite', (stores) => {
     return new Promise((resolve, reject) => {
-      const req = stores[STORES.WORKSPACES].put(record);
-      req.onsuccess = () => resolve();
-      req.onerror = () => reject(req.error);
+      const store = stores[STORES.WORKSPACES];
+      const getReq = store.get(wsId);
+
+      getReq.onsuccess = () => {
+        const existing = getReq.result;
+
+        // Concurrency revision validation
+        if (options.expectedRevision !== undefined && existing) {
+          if (existing.revision !== options.expectedRevision) {
+            const conflictErr = new Error(
+              `Concurrency conflict: workspace "${wsId}" has revision ${existing.revision}, expected ${options.expectedRevision}.`,
+            );
+            /** @type {any} */ (conflictErr).code = 'REVISION_CONFLICT';
+            /** @type {any} */ (conflictErr).currentRevision = existing.revision;
+            /** @type {any} */ (conflictErr).expectedRevision = options.expectedRevision;
+            /** @type {any} */ (conflictErr).currentRecord = existing;
+            return reject(conflictErr);
+          }
+        }
+
+        if (options.rejectIfMissing && !existing) {
+          const missingErr = new Error(
+            `Workspace "${wsId}" has been deleted in another session.`,
+          );
+          /** @type {any} */ (missingErr).code = 'WORKSPACE_DELETED';
+          return reject(missingErr);
+        }
+
+        const nextRevision = (existing?.revision ?? workspace.revision ?? 0) + 1;
+        const record = {
+          ...workspace,
+          id: wsId,
+          workspaceId: wsId,
+          title: workspace.title || 'Untitled Draft',
+          content,
+          markdown: content,
+          metadata: workspace.metadata || {},
+          updatedAt: now,
+          revision: nextRevision,
+        };
+
+        validateWorkspace(record);
+
+        const putReq = store.put(record);
+        putReq.onsuccess = () => {
+          committedRecord = record;
+          resolve(record);
+        };
+        putReq.onerror = () => reject(putReq.error);
+      };
+
+      getReq.onerror = () => reject(getReq.error);
     });
   });
+
+  return committedRecord;
 }
 
 /**
@@ -195,26 +245,9 @@ export async function addHistoryEntry(entry, options = {}) {
           updateReq.onsuccess = () => resolve(duplicateFound.id);
           updateReq.onerror = () => reject(updateReq.error);
         } else {
+          // Durable storage: never prune user entries or snapshots based on numeric limits
           const putReq = stores[STORES.ENTRIES].put(record);
-          putReq.onsuccess = () => {
-            if (options.maxEntries && typeof options.maxEntries === 'number') {
-              const allReq = stores[STORES.ENTRIES].getAll();
-              allReq.onsuccess = () => {
-                const all = allReq.result || [];
-                if (all.length > options.maxEntries) {
-                  all.sort((a, b) => new Date(a.updatedAt).getTime() - new Date(b.updatedAt).getTime());
-                  const toDelete = all.slice(0, all.length - options.maxEntries);
-                  toDelete.forEach((item) => {
-                    if (!item.pinned) stores[STORES.ENTRIES].delete(item.id);
-                  });
-                }
-                resolve(record);
-              };
-              allReq.onerror = () => resolve(record);
-            } else {
-              resolve(record);
-            }
-          };
+          putReq.onsuccess = () => resolve(record);
           putReq.onerror = () => reject(putReq.error);
         }
       };
@@ -222,7 +255,7 @@ export async function addHistoryEntry(entry, options = {}) {
       cursorReq.onerror = () => {
         // Fallback to normal insert if cursor fails
         const putReq = stores[STORES.ENTRIES].put(record);
-        putReq.onsuccess = () => resolve(record.id);
+        putReq.onsuccess = () => resolve(record);
         putReq.onerror = () => reject(putReq.error);
       };
     });
@@ -317,15 +350,17 @@ export async function listHistoryEntries(params = {}) {
         }
 
         // 2. Search query filter
-        const query = search.trim().toLowerCase();
+        const query = (search || '').trim().slice(0, 100).toLowerCase();
         if (query) {
           items = items.filter((item) => {
             const titleMatch = item.title?.toLowerCase().includes(query);
-            const contentMatch = item.content?.toLowerCase().includes(query);
             const repoMatch = item.metadata?.repo?.toLowerCase().includes(query);
             const ownerMatch = item.metadata?.owner?.toLowerCase().includes(query);
             const fileMatch = item.metadata?.fileName?.toLowerCase().includes(query);
-            return titleMatch || contentMatch || repoMatch || ownerMatch || fileMatch;
+            if (titleMatch || repoMatch || ownerMatch || fileMatch) return true;
+            // Bound search within document body to prevent memory lockups on large books
+            const contentSample = typeof item.content === 'string' ? item.content.slice(0, 50000).toLowerCase() : '';
+            return contentSample.includes(query);
           });
         }
 
@@ -352,7 +387,18 @@ export async function listHistoryEntries(params = {}) {
         // 4. Pagination
         const paginated = items.slice(offset, offset + limit);
 
-        resolve({ entries: paginated, total });
+        // 5. Lazy content projection if requested to minimize memory overhead
+        const resultEntries = params.excludeContent
+          ? paginated.map((item) => {
+              const { content, markdown, chapters, ...summary } = item;
+              return {
+                ...summary,
+                contentPreview: typeof content === 'string' ? content.slice(0, 160) : '',
+              };
+            })
+          : paginated;
+
+        resolve({ entries: resultEntries, total });
       };
 
       req.onerror = () => reject(req.error);
@@ -519,14 +565,27 @@ export async function addExportRecord(record, options = {}) {
       ? record.id
       : `exp_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
 
+  let normalizedStatus = record.status || record.generationStatus || 'completed';
+  if (normalizedStatus === 'print' || normalizedStatus === 'print-dialog') normalizedStatus = 'print-dialog-requested';
+  if (!['completed', 'success', 'download-initiated', 'failed', 'cancelled', 'print-dialog-requested'].includes(normalizedStatus)) {
+    normalizedStatus = 'completed';
+  }
+
+  // Sanitize metadata to never store binary payloads in export logs
+  const cleanMetadata = { ...(record.metadata || {}) };
+  delete cleanMetadata.pdfBinary;
+  delete cleanMetadata.zipBinary;
+  delete cleanMetadata.binary;
+  delete cleanMetadata.data;
+
   const item = {
     id,
     sourceWorkspaceId: record.sourceWorkspaceId || '',
     title: (record.title || record.documentTitle || 'Exported Document').trim(),
     documentTitle: (record.title || record.documentTitle || 'Exported Document').trim(),
     exportType: (record.exportType === 'book-zip' || record.type === 'book-zip') ? 'individual-pdf-zip' : (record.exportType || record.type || 'single-pdf'),
-    format: record.format || 'pdf',
-    status: record.status || record.generationStatus || 'success',
+    format: record.format || (normalizedStatus === 'print-dialog-requested' ? 'print' : 'pdf'),
+    status: normalizedStatus,
     fileCount: Number(record.fileCount ?? record.chapterCount ?? 1),
     totalBytes: Number(record.totalBytes ?? record.fileSize ?? 0),
     suggestedFilename: record.suggestedFilename || '',
@@ -534,9 +593,9 @@ export async function addExportRecord(record, options = {}) {
     chapterCount: Number(record.fileCount ?? record.chapterCount ?? 1),
     pageCount: Number(record.pageCount) || 0,
     sourceType: record.sourceType || 'converter',
-    generationStatus: record.status || record.generationStatus || 'success',
+    generationStatus: normalizedStatus,
     generatedAt: record.generatedAt || now,
-    metadata: record.metadata || {},
+    metadata: cleanMetadata,
   };
 
   validateExportRecord(item);
@@ -648,6 +707,108 @@ export async function setPreference(key, value, options = {}) {
     return new Promise((resolve, reject) => {
       const req = stores[STORES.PREFERENCES].put({ key, value, updatedAt: new Date().toISOString() });
       req.onsuccess = () => resolve();
+      req.onerror = () => reject(req.error);
+    });
+  });
+}
+
+// ---------------------------------------------------------------------------
+// 5. STORAGE MONITORING & NON-DESTRUCTIVE CLEANUP
+// ---------------------------------------------------------------------------
+
+/**
+ * Non-destructive storage pressure assessment.
+ * Reports counts and estimated storage without deleting any user records.
+ *
+ * @param {{ db?: IDBDatabase; factory?: IDBFactory }} [options]
+ * @returns {Promise<{
+ *   totalEntries: number;
+ *   pinnedCount: number;
+ *   manualCount: number;
+ *   importCount: number;
+ *   bookCount: number;
+ *   approxBytes: number;
+ * }>}
+ */
+export async function checkStoragePressure(options = {}) {
+  const db = await resolveDb(options);
+  return runTransaction(db, STORES.ENTRIES, 'readonly', (stores) => {
+    return new Promise((resolve, reject) => {
+      const req = stores[STORES.ENTRIES].getAll();
+      req.onsuccess = () => {
+        const items = req.result || [];
+        let pinnedCount = 0;
+        let manualCount = 0;
+        let importCount = 0;
+        let bookCount = 0;
+        let approxBytes = 0;
+
+        for (const item of items) {
+          if (item.pinned) pinnedCount++;
+          if (item.recordType === 'manual') manualCount++;
+          if (item.recordType === 'local-file' || item.recordType === 'github-readme' || item.recordType === 'github-repository') importCount++;
+          if (item.recordType === 'book-builder' || item.sourceType === 'book') bookCount++;
+          approxBytes += Number(item.contentSize || (item.content ? item.content.length : 0));
+        }
+
+        resolve({
+          totalEntries: items.length,
+          pinnedCount,
+          manualCount,
+          importCount,
+          bookCount,
+          approxBytes,
+        });
+      };
+      req.onerror = () => reject(req.error);
+    });
+  });
+}
+
+/**
+ * Optional user-initiated cleanup of stale temporary auto-saves.
+ * NEVER deletes user manual versions, imported files, book snapshots, or pinned items.
+ * Requires explicit options.confirm === true.
+ *
+ * @param {{
+ *   olderThanMs?: number;
+ *   confirm?: boolean;
+ *   db?: IDBDatabase;
+ *   factory?: IDBFactory;
+ * }} [options]
+ * @returns {Promise<{ deleted: number }>}
+ */
+export async function cleanupTemporaryDrafts(options = {}) {
+  if (!options.confirm) {
+    throw new Error('Cleanup requires explicit user confirmation (confirm: true).');
+  }
+
+  const db = await resolveDb(options);
+  const cutoffTime = options.olderThanMs ? Date.now() - options.olderThanMs : Date.now() - (7 * 24 * 60 * 60 * 1000);
+
+  return runTransaction(db, STORES.ENTRIES, 'readwrite', (stores) => {
+    return new Promise((resolve, reject) => {
+      const req = stores[STORES.ENTRIES].openCursor();
+      let deleted = 0;
+
+      req.onsuccess = (e) => {
+        const cursor = e.target.result;
+        if (cursor) {
+          const item = cursor.value;
+          // ONLY ever delete unpinned auto-saves older than cutoff.
+          // NEVER touch manual versions, imports, or book snapshots!
+          const isTemporary = item.recordType === 'auto-save' || item.sourceType === 'auto-save';
+          const isOld = new Date(item.updatedAt || item.createdAt).getTime() < cutoffTime;
+
+          if (isTemporary && !item.pinned && isOld) {
+            cursor.delete();
+            deleted++;
+          }
+          cursor.continue();
+        } else {
+          resolve({ deleted });
+        }
+      };
       req.onerror = () => reject(req.error);
     });
   });

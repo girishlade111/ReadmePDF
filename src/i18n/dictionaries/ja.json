@@ -415,5 +415,14 @@
   "history.type.book": "PDF書籍",
   "history.type.export": "出力記録",
   "history.privacy.badge": "ブラウザローカル専用",
-  "history.privacy.note": "履歴はこのブラウザプロファイル内のみに保存され、サーバーへ送信されることはありません。"
+  "history.privacy.note": "履歴はこのブラウザプロファイル内に暗号化されずに保存され、サーバーには送信されません。ブラウザデータを削除すると履歴も消去されます。",
+  "history.storage.reliabilityBtn": "ローカル履歴の信頼性を向上",
+  "history.storage.persistedGranted": "永続化が許可されました: ブラウザのストレージ不足時にも削除されにくくなります。",
+  "history.storage.persistedDenied": "ブラウザにより永続化が拒否されました: 履歴はブラウザの制限内でローカルに保持されます。",
+  "history.storage.persistedActive": "ストレージ永続化が有効",
+  "history.storage.persistenceNote": "永続化により自動削除リスクが低減しますが、サイトデータを消去すると履歴も削除されます。",
+  "history.type.printDialog": "印刷ダイアログ",
+  "history.type.cancelled": "キャンセル済み",
+  "history.printDialogDesc": "システムの印刷ダイアログを呼び出しました",
+  "history.conflictNotice": "警告: 別のタブでドキュメントが更新されました。"
 }

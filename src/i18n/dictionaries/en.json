@@ -415,5 +415,14 @@
   "history.type.book": "PDF Book",
   "history.type.export": "Export Generated",
   "history.privacy.badge": "Browser-Local Only",
-  "history.privacy.note": "History is stored exclusively in this browser profile and is never sent to our servers."
+  "history.privacy.note": "History is stored unencrypted in this browser profile and is never sent to our servers. Clearing browser site data removes local history.",
+  "history.storage.reliabilityBtn": "Improve local history reliability",
+  "history.storage.persistedGranted": "Persistence granted: browser will avoid clearing history under storage pressure.",
+  "history.storage.persistedDenied": "Browser denied persistence: local history remains active, subject to browser limits.",
+  "history.storage.persistedActive": "Storage persistence active",
+  "history.storage.persistenceNote": "Storage persistence reduces eviction risk, but clearing browser data still removes local history.",
+  "history.type.printDialog": "Print Dialog",
+  "history.type.cancelled": "Cancelled",
+  "history.printDialogDesc": "Native print dialog requested",
+  "history.conflictNotice": "Warning: document was modified in another tab."
 }

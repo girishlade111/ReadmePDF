@@ -1262,12 +1262,24 @@ export function initBookExplorer() {
         }
       }
       setExportProgress(0, '');
-      if (error?.code !== 'CANCELLED' && !controller.signal.aborted) {
+      if (error?.code === 'CANCELLED' || controller.signal.aborted) {
+        addExportRecord({
+          type: 'individual-pdf-zip',
+          format: 'zip',
+          title: snapshot?.repo?.full_name || (repoSource ? `${repoSource.owner}/${repoSource.repo}` : 'Book Export'),
+          status: 'cancelled',
+          generationStatus: 'cancelled',
+          metadata: {
+            reason: 'User cancelled export operation',
+          },
+        }).catch(() => {});
+      } else {
         addExportRecord({
           type: 'individual-pdf-zip',
           format: 'zip',
           title: snapshot?.repo?.full_name || (repoSource ? `${repoSource.owner}/${repoSource.repo}` : 'Book Export'),
           status: 'failed',
+          generationStatus: 'failed',
           metadata: {
             error: error?.message || 'Export failed',
           },
@@ -1306,10 +1318,11 @@ export function initBookExplorer() {
       setBuildStatus(t('book.print.opened'), '');
       addExportRecord({
         type: 'combined-book-print',
-        format: 'pdf',
+        format: 'print',
+        status: 'print-dialog-requested',
+        generationStatus: 'print-dialog-requested',
         title: repoSource ? `${repoSource.owner}/${repoSource.repo} Book` : 'Documentation Book',
         fileCount: orderedPaths.length,
-        status: 'success',
         metadata: {
           theme: selectedTheme(),
           chapters: [...orderedPaths],
@@ -1317,6 +1330,17 @@ export function initBookExplorer() {
       }).catch(() => {});
     } catch (error) {
       setBuildStatus(bookErrorMessage(error, t), 'error');
+      addExportRecord({
+        type: 'combined-book-print',
+        format: 'print',
+        status: 'failed',
+        generationStatus: 'failed',
+        title: repoSource ? `${repoSource.owner}/${repoSource.repo} Book` : 'Documentation Book',
+        fileCount: orderedPaths.length,
+        metadata: {
+          error: error?.message || 'Print dialog failed',
+        },
+      }).catch(() => {});
     }
   }
 
@@ -1326,6 +1350,7 @@ export function initBookExplorer() {
     if (!entry) return;
     const bookUrlInput = $('book-url');
     if (entry.metadata?.repoSource && bookUrlInput) {
+      repoSource = entry.metadata.repoSource;
       bookUrlInput.value = `https://github.com/${entry.metadata.repoSource.owner}/${entry.metadata.repoSource.repo}`;
     }
     if (entry.metadata?.theme) {
@@ -1335,10 +1360,23 @@ export function initBookExplorer() {
         applyTheme();
       }
     }
-    if (entry.metadata?.masterToc !== undefined && masterTocToggle) {
-      masterTocToggle.checked = Boolean(entry.metadata.masterToc);
+    if (entry.metadata?.title && titleInput) {
+      titleInput.value = entry.metadata.title;
     }
-    const paths = entry.metadata?.orderedPaths || (Array.isArray(entry.chapters) ? entry.chapters.map(c => c.path) : []);
+    if (entry.metadata?.subtitle && subtitleInput) {
+      subtitleInput.value = entry.metadata.subtitle;
+    }
+    if (entry.metadata?.includeCover !== undefined && coverToggle) {
+      coverToggle.checked = Boolean(entry.metadata.includeCover);
+    } else if (entry.metadata?.cover !== undefined && coverToggle) {
+      coverToggle.checked = Boolean(entry.metadata.cover);
+    }
+    if (entry.metadata?.includeToc !== undefined && tocToggle) {
+      tocToggle.checked = Boolean(entry.metadata.includeToc);
+    } else if (entry.metadata?.masterToc !== undefined && tocToggle) {
+      tocToggle.checked = Boolean(entry.metadata.masterToc);
+    }
+    const paths = entry.metadata?.orderedPaths || (Array.isArray(entry.chapters) ? entry.chapters.map((c) => c.path) : []);
     if (paths.length) {
       orderedPaths.length = 0;
       paths.forEach((p) => orderedPaths.push(p));

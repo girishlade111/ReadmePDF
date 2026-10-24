@@ -415,5 +415,14 @@
   "history.type.book": "PDF Kitap",
   "history.type.export": "Dışa Aktarma Oluşturuldu",
   "history.privacy.badge": "Yalnızca Tarayıcıda Yerel",
-  "history.privacy.note": "Geçmiş yalnızca bu tarayıcı profilinde saklanır ve asla sunucularımıza gönderilmez."
+  "history.privacy.note": "Geçmiş bu tarayıcı profilinde şifrelenmeden yerel olarak saklanır ve sunuculara iletilmez. Site verilerini temizlemek geçmişi siler.",
+  "history.storage.reliabilityBtn": "Yerel geçmiş güvenilirliğini artır",
+  "history.storage.persistedGranted": "Kalıcılık verildi: tarayıcı depolama baskısı altında geçmişi silmekten kaçınacaktır.",
+  "history.storage.persistedDenied": "Tarayıcı kalıcılığı reddetti: yerel geçmiş tarayıcı limitleri dahilinde saklanır.",
+  "history.storage.persistedActive": "Depolama kalıcılığı aktif",
+  "history.storage.persistenceNote": "Kalıcılık silinme riskini azaltır ancak site verilerini temizlemek geçmişi de siler.",
+  "history.type.printDialog": "Yazdırma Penceresi",
+  "history.type.cancelled": "İptal Edildi",
+  "history.printDialogDesc": "Sistem yazdırma penceresi çağrıldı",
+  "history.conflictNotice": "Uyarı: Belge başka bir sekmede değiştirildi."
 }

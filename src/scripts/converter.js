@@ -105,25 +105,31 @@ export function initConverter() {
 
   const autoSave = new AutoSaveController({
     intervalMs: 1000,
-    onSave: async (content) => {
+    workspaceId: 'converter-active',
+    onSave: async (content, meta) => {
       if (!content || !content.trim()) return;
       const title = repoCtx
         ? `${repoCtx.owner}/${repoCtx.repo}`
         : (firstHeading(content) || 'Untitled Document');
-      await saveActiveWorkspace({
+      return await saveActiveWorkspace({
         workspaceId: 'converter-active',
+        id: 'converter-active',
         title,
+        content,
         markdown: content,
-        type: 'converter',
+        recordType: 'converter',
         metadata: {
           repoCtx: repoCtx || null,
           toc: tocToggle?.checked ?? true,
           theme: document.querySelector('input[name="theme"]:checked')?.value || 'clean',
         },
-      });
+      }, { expectedRevision: meta?.expectedRevision });
     },
     onStatusChange: (status) => {
       updateAutoSaveIndicator(status);
+    },
+    onConflict: (_dirtyContent, _conflictInfo) => {
+      setStatus(t('history.conflictNotice') || 'Warning: draft was modified in another tab.', 'warn');
     },
   });
 
@@ -137,8 +143,9 @@ export function initConverter() {
   // Restore active workspace if input is initially empty
   getActiveWorkspace('converter-active')
     .then((saved) => {
-      if (saved && saved.markdown && !mdInput.value.trim()) {
-        mdInput.value = saved.markdown;
+      if (saved && (saved.markdown || saved.content) && !mdInput.value.trim()) {
+        const restoredText = saved.markdown || saved.content || '';
+        mdInput.value = restoredText;
         if (saved.metadata?.repoCtx) {
           repoCtx = saved.metadata.repoCtx;
           if (urlInput) urlInput.value = `https://github.com/${repoCtx.owner}/${repoCtx.repo}`;
@@ -157,6 +164,7 @@ export function initConverter() {
         }
         renderMeta();
         scheduleRender();
+        autoSave.reset(restoredText, saved.revision || 0);
         updateAutoSaveIndicator('saved');
         setStatus(t('history.restoredNotice') || 'Workspace restored from last session', 'ok');
       }
@@ -190,6 +198,7 @@ export function initConverter() {
   initSubnav();
 
   clearBtn.addEventListener('click', () => {
+    autoSave.cancelPending();
     mdInput.value = '';
     repoCtx = null;
     clearActiveWorkspace('converter-active').catch(() => {});
@@ -414,9 +423,10 @@ export function initConverter() {
       const currentTheme = document.querySelector('input[name="theme"]:checked')?.value || 'clean';
       addExportRecord({
         type: 'single-pdf',
-        format: 'pdf',
+        format: 'print',
+        status: 'print-dialog-requested',
+        generationStatus: 'print-dialog-requested',
         title: repoCtx ? `${repoCtx.owner}/${repoCtx.repo}` : (firstHeading(mdInput.value) || 'Markdown Document'),
-        status: 'success',
         metadata: {
           theme: currentTheme,
           toc: tocToggle?.checked ?? true,
@@ -427,9 +437,10 @@ export function initConverter() {
       setStatus(friendlyPrintError(error, t), 'error');
       addExportRecord({
         type: 'single-pdf',
-        format: 'pdf',
-        title: repoCtx ? `${repoCtx.owner}/${repoCtx.repo}` : (firstHeading(mdInput.value) || 'Markdown Document'),
+        format: 'print',
         status: 'failed',
+        generationStatus: 'failed',
+        title: repoCtx ? `${repoCtx.owner}/${repoCtx.repo}` : (firstHeading(mdInput.value) || 'Markdown Document'),
         metadata: {
           error: error?.message || 'Print failed',
         },
@@ -461,7 +472,8 @@ export function initConverter() {
     }
     renderMeta();
     scheduleRender();
-    autoSave.recordChange(mdInput.value);
+    autoSave.reset(mdInput.value, entry.revision || 0);
+    updateAutoSaveIndicator('saved');
     setStatus(t('history.restoredNotice') || 'Restored snapshot from history', 'ok');
     const converterSec = document.getElementById('converter');
     if (converterSec) {
