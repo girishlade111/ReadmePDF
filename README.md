@@ -212,13 +212,13 @@ Without `PUBLIC_SITE_URL`, pages use root-relative canonicals, the sitemap is om
 ### Release build (MODE B)
 
 ```bash
-PUBLIC_SITE_URL=https://your-real-domain.example npm run build:release
+PUBLIC_SITE_URL=https://md2pdf.ladestack.in npm run build:release
 ```
 
 On Windows PowerShell:
 
 ```powershell
-$env:PUBLIC_SITE_URL = "https://your-real-domain.example"
+$env:PUBLIC_SITE_URL = "https://md2pdf.ladestack.in"
 npm run build:release
 ```
 
@@ -231,9 +231,9 @@ The command rejects missing, HTTP, loopback/IP, single-label, reserved-TLD, `exa
 | Behavior | MODE A — `npm run build` | MODE B — `npm run build:release` |
 | -------- | ------------------------ | -------------------------------- |
 | `PUBLIC_SITE_URL` | Optional | Required, public HTTPS |
-| Canonicals | Root-relative, self-referencing | 45 absolute self-canonicals |
+| Canonicals | Root-relative, self-referencing | 99 absolute self-canonicals |
 | hreflang | Omitted (requires absolute URLs) | 10 links per page, including `x-default` |
-| `sitemap.xml` | Omitted | 45 URLs, 450 alternates |
+| `sitemap.xml` | Omitted | 99 URLs, 990 alternates |
 | `robots.txt` | No `Sitemap:` directive | Absolute `Sitemap:` directive |
 | JSON-LD | Local-safe | Rejects non-origin deployment URLs |
 | Artifact verification | Astro build only | Full page/SEO/artifact inventory |

@@ -143,7 +143,7 @@ Replace `$SITE_URL` with the real HTTPS origin. Do not use the synthetic
 `release-gate.md2pdf.dev` origin as if it were production.
 
 ```bash
-SITE_URL="https://your-real-domain.example"
+SITE_URL="https://md2pdf.ladestack.in"
 
 curl -sSI "$SITE_URL/" | grep -iE \
   '^(strict-transport-security|content-security-policy|x-content-type-options|referrer-policy|x-frame-options|permissions-policy|cross-origin-opener-policy|cross-origin-resource-policy):'

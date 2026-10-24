@@ -12,7 +12,7 @@ This document provides a verified, factual deployment and indexing checklist for
 - [ ] Ensure DNS A/AAAA and CNAME records are propagated and SSL/TLS is active with HSTS readiness.
 - [ ] Build release artifacts using the exact authoritative origin:
   ```bash
-  PUBLIC_SITE_URL=https://your-verified-domain.com npm run build:release
+  PUBLIC_SITE_URL=https://md2pdf.ladestack.in npm run build:release
   ```
 - [ ] Confirm that `build:release` passes with:
   - 99/99 HTML pages verified
@@ -24,7 +24,7 @@ This document provides a verified, factual deployment and indexing checklist for
   User-agent: *
   Allow: /
 
-  Sitemap: https://your-verified-domain.com/sitemap.xml
+  Sitemap: https://md2pdf.ladestack.in/sitemap.xml
   ```
 - [ ] Verify that `dist/sitemap.xml` is present, valid XML, and contains all 99 indexable URLs.
 
@@ -36,7 +36,7 @@ This document provides a verified, factual deployment and indexing checklist for
    - Access [https://search.google.com/search-console/](https://search.google.com/search-console/) with the owner account (`admin@ladestack.in`).
 2. **Add Property**:
    - Prefer the **Domain property** (`ladestack.in` or `md2pdf.ladestack.in`) via DNS TXT verification.
-   - Alternatively, add the **URL prefix property** (`https://your-verified-domain.com/`).
+   - Alternatively, add the **URL prefix property** (`https://md2pdf.ladestack.in/`).
 3. **Verify Ownership**:
    - DNS TXT record (recommended) or HTML file / meta tag if using URL prefix.
 4. **Submit Sitemap**:
@@ -45,9 +45,9 @@ This document provides a verified, factual deployment and indexing checklist for
    - Click **Submit**.
    - Verify that the status turns to **Success** and that 99 discovered URLs are reported.
 5. **Inspect Key URLs (URL Inspection Tool)**:
-   - Inspect `https://your-verified-domain.com/` (Home).
-   - Inspect `https://your-verified-domain.com/about/` (About page).
-   - Inspect `https://your-verified-domain.com/blog/` (Journal index).
+   - Inspect `https://md2pdf.ladestack.in/` (Home).
+   - Inspect `https://md2pdf.ladestack.in/about/` (About page).
+   - Inspect `https://md2pdf.ladestack.in/blog/` (Journal index).
    - Click **Test Live URL** to confirm Googlebot can fetch the HTML without blockers.
    - Click **Request Indexing** for the primary homepage.
 6. **Verify International Targeting & Hreflang**:
@@ -61,13 +61,13 @@ This document provides a verified, factual deployment and indexing checklist for
    - Access [https://www.bing.com/webmasters/](https://www.bing.com/webmasters/).
 2. **Import or Add Site**:
    - Fast track: **Import from Google Search Console** (synchronizes verified properties and sitemaps automatically).
-   - Manual track: Add `https://your-verified-domain.com/` and verify via CNAME, XML file, or DNS TXT.
+   - Manual track: Add `https://md2pdf.ladestack.in/` and verify via CNAME, XML file, or DNS TXT.
 3. **Submit Sitemap**:
    - Navigate to **Sitemaps > Submit sitemap**.
-   - Enter `https://your-verified-domain.com/sitemap.xml`.
+   - Enter `https://md2pdf.ladestack.in/sitemap.xml`.
    - Confirm status changes to **Processing** and then **Success**.
 4. **URL Inspection**:
-   - Test `https://your-verified-domain.com/` with the **URL Inspection tool** to verify crawlability and meta tags.
+   - Test `https://md2pdf.ladestack.in/` with the **URL Inspection tool** to verify crawlability and meta tags.
 
 ---
 

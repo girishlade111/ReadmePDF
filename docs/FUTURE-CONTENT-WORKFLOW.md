@@ -72,9 +72,13 @@ npm test
 All tests must pass with 0 failures.
 
 ### Step 5: Test Release Build
-Run a simulated release build with a test origin:
+Run a simulated release build with a test origin (or the official production origin):
 ```bash
+# Test release build:
 PUBLIC_SITE_URL=https://release-gate.md2pdf.dev npm run build:release
+
+# Production release build:
+PUBLIC_SITE_URL=https://md2pdf.ladestack.in npm run build:release
 ```
 Confirm that:
 - HTML route generation succeeds.
