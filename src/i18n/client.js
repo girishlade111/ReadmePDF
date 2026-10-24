@@ -60,7 +60,9 @@ export function t(key, vars) {
   if (!initialized) initClientI18n();
   const localized = translateFrom(active.messages, key, vars);
   if (localized !== key) return localized;
-  return translateFrom(en, key, vars);
+  const fallback = translateFrom(en, key, vars);
+  if (fallback !== key) return fallback;
+  return '';
 }
 
 /**

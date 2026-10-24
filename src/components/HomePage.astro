@@ -34,7 +34,7 @@ const jsonLd = homeJsonLd({
 ---
 
 <!doctype html>
-<html lang={meta.htmlLang}>
+<html lang={meta.htmlLang} data-theme="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -43,13 +43,6 @@ const jsonLd = homeJsonLd({
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2310b981'/%3E%3Ctext x='16' y='22' font-size='16' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='800'%3EM%3C/text%3E%3C/svg%3E"
     />
     <meta name="theme-color" content="#07080b" />
-    <script is:inline>
-      (() => {
-        const stored = localStorage.getItem('md2pdf-theme');
-        const isDark = stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches);
-        if (isDark) document.documentElement.dataset.theme = 'dark';
-      })();
-    </script>
     <SeoHead
       title={t('meta.home.title')}
       description={t('meta.home.description')}
@@ -114,9 +107,9 @@ const jsonLd = homeJsonLd({
                     <span class="step-badge">2</span>
                     <h3 class="heading-md">{t('home.converter.step2')}</h3>
                   </div>
-                  <div id="autosave-indicator" class="autosave-indicator" title={t('history.autoSave')} aria-live="polite">
+                  <div id="autosave-indicator" class="autosave-indicator" title={t('history.autoSave.label')} aria-live="polite">
                     <span id="autosave-dot" class="autosave-dot"></span>
-                    <span id="autosave-status" class="autosave-status">{t('history.autoSaveOff')}</span>
+                    <span id="autosave-status" class="autosave-status">{t('history.status.saved')}</span>
                   </div>
                 </div>
                 <div class="row file-upload-row">
@@ -144,9 +137,9 @@ const jsonLd = homeJsonLd({
                     <Icon name="x" size={15} />
                     <span>{t('home.converter.clear')}</span>
                   </button>
-                  <button id="save-version-btn" class="btn btn--secondary" type="button" title={t('history.saveVersion')}>
+                  <button id="save-version-btn" class="btn btn--secondary" type="button" title={t('history.action.saveVersion')}>
                     <Icon name="bookmark" size={15} />
-                    <span>{t('history.saveVersion')}</span>
+                    <span>{t('history.action.saveVersion')}</span>
                   </button>
                   <button id="open-history-btn" class="btn btn--secondary" type="button" data-open-history title={t('history.title')}>
                     <Icon name="clock" size={15} />
@@ -214,9 +207,11 @@ const jsonLd = homeJsonLd({
                 </button>
               </div>
               <p class="hint no-print print-hint">{t('home.converter.printHint')}</p>
-              <article id="sheet" class="sheet theme-clean">
-                <div id="preview-doc" class="doc"></div>
-              </article>
+              <div class="preview-scroll-container">
+                <article id="sheet" class="sheet theme-clean">
+                  <div id="preview-doc" class="doc"></div>
+                </article>
+              </div>
             </section>
           </div>
         </div>
@@ -387,9 +382,9 @@ const jsonLd = homeJsonLd({
                     <Icon name="layers" size={16} />
                     <span>{t('home.book.build')}</span>
                   </button>
-                  <button id="book-save-snapshot-btn" class="btn btn--secondary" type="button" title={t('history.saveBookSnapshot')}>
+                  <button id="book-save-snapshot-btn" class="btn btn--secondary" type="button" title={t('history.action.saveVersion')}>
                     <Icon name="bookmark" size={16} />
-                    <span>{t('history.saveBookSnapshot')}</span>
+                    <span>{t('history.action.saveVersion')}</span>
                   </button>
                   <button id="book-history-btn" class="btn btn--secondary" type="button" data-open-history title={t('history.title')}>
                     <Icon name="clock" size={16} />
@@ -478,10 +473,12 @@ const jsonLd = homeJsonLd({
                 {t('home.book.back')}
               </button>
             </div>
-            <article id="book-sheet" class="sheet book-sheet theme-clean">
-              <div id="book-output" class="doc book-output"></div>
-              <article id="book-preview" class="doc book-preview" hidden></article>
-            </article>
+            <div class="book-preview-scroll-container">
+              <article id="book-sheet" class="sheet book-sheet theme-clean">
+                <div id="book-output" class="doc book-output"></div>
+                <article id="book-preview" class="doc book-preview" hidden></article>
+              </article>
+            </div>
           </section>
         </div>
       </section>

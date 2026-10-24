@@ -77,29 +77,29 @@ export function initConverter() {
     switch (status) {
       case 'saving':
         autosaveDot.classList.add('saving');
-        autosaveStatus.textContent = t('history.statusSaving') || 'Saving...';
+        autosaveStatus.textContent = t('history.status.saving') || 'Saving...';
         break;
       case 'saved':
         autosaveDot.classList.add('saved');
-        autosaveStatus.textContent = t('history.statusSaved') || 'Saved locally';
+        autosaveStatus.textContent = t('history.status.saved') || 'Saved locally';
         break;
       case 'unsaved':
         autosaveDot.classList.add('unsaved');
-        autosaveStatus.textContent = t('history.statusUnsaved') || 'Unsaved changes';
+        autosaveStatus.textContent = t('history.status.unsaved') || 'Unsaved changes';
         break;
       case 'storage-unavailable':
         autosaveDot.classList.add('error');
-        autosaveStatus.textContent = t('history.statusUnavailable') || 'Storage unavailable';
+        autosaveStatus.textContent = t('history.status.unavailable') || 'Storage unavailable';
         break;
       case 'error':
         autosaveDot.classList.add('error');
-        autosaveStatus.textContent = t('history.statusFailed') || 'Save failed';
+        autosaveStatus.textContent = t('history.status.failed') || 'Save failed';
         break;
       case 'disabled':
-        autosaveStatus.textContent = t('history.autoSaveOff') || 'Autosave paused';
+        autosaveStatus.textContent = t('history.autoSave.off') || 'Autosave paused';
         break;
       default:
-        autosaveStatus.textContent = t('history.statusIdle') || 'Local ready';
+        autosaveStatus.textContent = t('history.status.saved') || 'Local ready';
     }
   }
 
@@ -212,6 +212,7 @@ export function initConverter() {
     mdInput.value = t('converter.sample');
     repoCtx = null;
     renderMeta();
+    resetPreviewScroll();
     setStatus(t('converter.status.sampleLoaded'), 'ok');
     scheduleRender();
     autoSave.recordChange(mdInput.value);
@@ -255,6 +256,31 @@ export function initConverter() {
     }),
   );
 
+  // Internal preview TOC anchor navigation: smoothly scroll within the bounded preview container
+  previewEl.addEventListener('click', (e) => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    const hash = a.getAttribute('href');
+    if (!hash || hash === '#') return;
+    const rawId = hash.slice(1);
+    let target = null;
+    try {
+      target = previewEl.querySelector(`[id="${CSS.escape(rawId)}"]`) ||
+               previewEl.querySelector(`[id="${CSS.escape(decodeURIComponent(rawId))}"]`);
+    } catch {
+      target = previewEl.querySelector(`[id="${rawId}"]`);
+    }
+    if (target) {
+      e.preventDefault();
+      const scrollWrap = previewEl.closest('.preview-scroll-container') || previewEl;
+      const targetTop = target.offsetTop;
+      scrollWrap.scrollTo({
+        top: Math.max(0, targetTop - 20),
+        behavior: 'smooth',
+      });
+    }
+  });
+
   // Broken-image placeholder: never fail the whole export.
   previewEl.addEventListener(
     'error',
@@ -271,6 +297,11 @@ export function initConverter() {
     true,
   );
 
+  function resetPreviewScroll() {
+    const scrollWrap = previewEl.closest('.preview-scroll-container');
+    if (scrollWrap) scrollWrap.scrollTop = 0;
+  }
+
   async function onFetch() {
     const url = urlInput.value.trim();
     if (!url) {
@@ -284,6 +315,7 @@ export function initConverter() {
       repoCtx = { owner: res.owner, repo: res.repo, branch: res.branch, readmePath: res.path };
       mdInput.value = res.markdown;
       renderMeta(res);
+      resetPreviewScroll();
       setStatus(
         t('converter.status.loaded', {
           owner: res.owner,
@@ -329,6 +361,7 @@ export function initConverter() {
       mdInput.value = await f.text();
       repoCtx = null; // uploaded files have no repo base; relative images can't resolve
       renderMeta();
+      resetPreviewScroll();
       setStatus(t('converter.status.fileLoaded', { name: f.name }), 'ok');
       scheduleRender();
       autoSave.recordChange(mdInput.value);

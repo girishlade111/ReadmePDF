@@ -10,6 +10,22 @@ import { LOCALE_META, assertLocale } from './config.js';
 const PLACEHOLDER = /\{([a-zA-Z0-9_.-]+)\}/g;
 const PLURAL_SUFFIX = /\.(zero|one|two|few|many|other)$/;
 
+/**
+ * Historical and UI key aliases to canonical dictionary keys.
+ * Protects against raw translation key leaks when legacy or camelCase keys are referenced.
+ */
+export const KEY_ALIASES = Object.freeze({
+  'history.statusSaving': 'history.status.saving',
+  'history.statusSaved': 'history.status.saved',
+  'history.statusUnsaved': 'history.status.unsaved',
+  'history.statusUnavailable': 'history.status.unavailable',
+  'history.statusFailed': 'history.status.failed',
+  'history.autoSaveOff': 'history.autoSave.off',
+  'history.autoSave': 'history.autoSave.label',
+  'history.saveVersion': 'history.action.saveVersion',
+  'history.saveBookSnapshot': 'history.action.saveVersion',
+});
+
 /** @param {unknown} value */
 export function isDictionary(value) {
   return Boolean(value) && typeof value === 'object' && !Array.isArray(value);
@@ -39,7 +55,8 @@ export function interpolate(template, vars = {}) {
  * @param {Record<string, unknown>} [vars]
  */
 export function translateFrom(dictionary, key, vars) {
-  const value = dictionary?.[key];
+  const resolved = KEY_ALIASES[key] ?? key;
+  const value = dictionary?.[resolved];
   if (typeof value !== 'string') return key;
   return interpolate(value, vars);
 }

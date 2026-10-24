@@ -11,49 +11,49 @@
    ========================================================================== */
 
 :root {
-  /* ---- Color System: Light Mode Default ---------------------------------- */
-  --bg-canvas: #ffffff;
-  --bg-surface: #ffffff;
-  --bg-elevated: #fbfbfc;
-  --bg-subtle: #f4f4f7;
-  --bg-overlay: rgba(255, 255, 255, 0.88);
+  /* ---- Color System: Default Dark Theme (Signature Arounda Palette) ------ */
+  --bg-canvas: #000000;
+  --bg-surface: #0a0a0c;
+  --bg-elevated: #121216;
+  --bg-subtle: #1a1a20;
+  --bg-overlay: rgba(0, 0, 0, 0.86);
 
-  --text-primary: #000000;
-  --text-secondary: #27272a;
-  --text-muted: #52525b;
+  --text-primary: #ffffff;
+  --text-secondary: #d4d4d8;
+  --text-muted: #a1a1aa;
   --text-tertiary: #71717a;
-  --text-inverse: #ffffff;
+  --text-inverse: #000000;
 
-  --border-subtle: #e5e5e8;
-  --border-medium: #d4d4d8;
-  --border-strong: #a1a1aa;
-  --border-glass: rgba(0, 0, 0, 0.08);
+  --border-subtle: rgba(255, 255, 255, 0.10);
+  --border-medium: rgba(255, 255, 255, 0.18);
+  --border-strong: rgba(255, 255, 255, 0.32);
+  --border-glass: rgba(255, 255, 255, 0.14);
 
   /* Brand Accents (Exact Arounda Palette) */
-  --accent-brand: #FC3B00;
-  --accent-brand-hover: #e03500;
-  --accent-brand-subtle: rgba(252, 59, 0, 0.08);
-  --accent-brand-glow: rgba(255, 97, 41, 0.25);
-  --accent-brand-text: #c72e00;
+  --accent-brand: #FF6129;
+  --accent-brand-hover: #FC3B00;
+  --accent-brand-subtle: rgba(255, 97, 41, 0.15);
+  --accent-brand-glow: rgba(252, 59, 0, 0.38);
+  --accent-brand-text: #FF7145;
 
-  --accent-secondary: #FF6129;
-  --accent-secondary-subtle: rgba(255, 97, 41, 0.08);
+  --accent-secondary: #FF7145;
+  --accent-secondary-subtle: rgba(255, 113, 69, 0.14);
 
-  --accent-tertiary: #FF7145;
-  --accent-tertiary-subtle: rgba(255, 113, 69, 0.10);
+  --accent-tertiary: #FC3B00;
+  --accent-tertiary-subtle: rgba(252, 59, 0, 0.15);
 
   /* Status Colors */
   --status-success: #10b981;
-  --status-warn: #f59e0b;
-  --status-error: #ef4444;
-  --status-error-subtle: rgba(239, 68, 68, 0.08);
+  --status-warn: #fbbf24;
+  --status-error: #f87171;
+  --status-error-subtle: rgba(248, 113, 113, 0.14);
 
   /* Elevation / Shadows */
-  --shadow-subtle: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
-  --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.03);
-  --shadow-elevated: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
-  --shadow-modal: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
-  --shadow-glow: 0 0 24px -4px rgba(252, 59, 0, 0.28);
+  --shadow-subtle: 0 1px 2px 0 rgba(0, 0, 0, 0.6);
+  --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.6), 0 1px 2px -1px rgba(0, 0, 0, 0.5);
+  --shadow-elevated: 0 4px 8px -1px rgba(0, 0, 0, 0.8), 0 2px 4px -2px rgba(0, 0, 0, 0.6);
+  --shadow-modal: 0 20px 25px -5px rgba(0, 0, 0, 0.9), 0 8px 10px -6px rgba(0, 0, 0, 0.7);
+  --shadow-glow: 0 0 32px -4px rgba(252, 59, 0, 0.42);
 
   /* Typography Stacks (Helvetica Neue from spec) */
   --font-sans: 'Helvetica Neue', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;

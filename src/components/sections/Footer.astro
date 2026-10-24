@@ -1,6 +1,5 @@
 ---
 import Icon from '../ui/Icon.astro';
-import ThemeToggle from '../ui/ThemeToggle.astro';
 import LanguageSwitcher from '../LanguageSwitcher.astro';
 import { localeHref } from '../../i18n/config.js';
 import { translator } from '../../i18n/index.js';
@@ -105,7 +104,6 @@ const isHomePage = path === '/' || path === `/${locale}/` || path === `/${locale
         </div>
         <div class="site-footer__controls">
           <LanguageSwitcher locale={locale} path={path} />
-          <ThemeToggle />
         </div>
       </div>
     </div>

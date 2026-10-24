@@ -1,6 +1,5 @@
 ---
 import LanguageSwitcher from '../LanguageSwitcher.astro';
-import ThemeToggle from '../ui/ThemeToggle.astro';
 import Icon from '../ui/Icon.astro';
 import { localeHref } from '../../i18n/config.js';
 import { translator } from '../../i18n/index.js';
@@ -57,10 +56,6 @@ const navLinks = [
     <div class="site-header__right">
       <div class="site-header__tool">
         <LanguageSwitcher locale={locale} path={path} />
-      </div>
-
-      <div class="site-header__tool">
-        <ThemeToggle />
       </div>
 
       <div class="site-header__tool">
