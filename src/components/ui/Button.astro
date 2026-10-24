@@ -1,0 +1,173 @@
+---
+interface Props {
+  variant?: 'primary' | 'secondary' | 'tertiary' | 'outline' | 'ghost';
+  size?: 'sm' | 'md' | 'lg';
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  class?: string;
+  id?: string;
+  disabled?: boolean;
+  target?: string;
+  rel?: string;
+  'aria-label'?: string;
+}
+
+const {
+  variant = 'primary',
+  size = 'md',
+  href,
+  type = 'button',
+  class: className = '',
+  id,
+  disabled = false,
+  target,
+  rel,
+  'aria-label': ariaLabel,
+  ...rest
+} = Astro.props;
+
+const classes = [
+  'ui-btn',
+  `ui-btn--${variant}`,
+  `ui-btn--${size}`,
+  className,
+].filter(Boolean).join(' ');
+---
+
+{
+  href ? (
+    <a
+      href={href}
+      class={classes}
+      id={id}
+      target={target}
+      rel={rel}
+      aria-label={ariaLabel}
+      {...rest}
+    >
+      <slot />
+    </a>
+  ) : (
+    <button
+      type={type}
+      class={classes}
+      id={id}
+      disabled={disabled}
+      aria-label={ariaLabel}
+      {...rest}
+    >
+      <slot />
+    </button>
+  )
+}
+
+<style>
+  .ui-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sp-2);
+    font-family: var(--font-sans);
+    font-weight: 500;
+    line-height: 1;
+    text-decoration: none;
+    border-radius: var(--r-md);
+    cursor: pointer;
+    transition: all var(--trans-fast);
+    border: 1px solid transparent;
+    user-select: none;
+    white-space: nowrap;
+  }
+
+  .ui-btn:focus-visible {
+    outline: 2px solid var(--border-focus);
+    outline-offset: 2px;
+  }
+
+  .ui-btn:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+
+  .ui-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  /* Sizes */
+  .ui-btn--sm {
+    height: 32px;
+    padding: 0 var(--sp-3);
+    font-size: 13px;
+    border-radius: var(--r-sm);
+  }
+
+  .ui-btn--md {
+    height: 40px;
+    padding: 0 var(--sp-4);
+    font-size: 14px;
+    border-radius: var(--r-md);
+  }
+
+  .ui-btn--lg {
+    height: 48px;
+    padding: 0 var(--sp-6);
+    font-size: 15px;
+    border-radius: var(--r-lg);
+  }
+
+  /* Variants */
+  .ui-btn--primary {
+    background: var(--accent-brand);
+    color: #ffffff;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
+  }
+
+  .ui-btn--primary:hover:not(:disabled) {
+    background: var(--accent-brand-hover);
+    box-shadow: 0 0 18px -2px var(--accent-brand-glow);
+  }
+
+  .ui-btn--secondary {
+    background: var(--bg-surface);
+    color: var(--text-primary);
+    border-color: var(--border-subtle);
+    box-shadow: var(--shadow-subtle);
+  }
+
+  .ui-btn--secondary:hover:not(:disabled) {
+    background: var(--bg-elevated);
+    border-color: var(--border-medium);
+  }
+
+  .ui-btn--tertiary {
+    background: var(--bg-elevated);
+    color: var(--text-secondary);
+  }
+
+  .ui-btn--tertiary:hover:not(:disabled) {
+    background: var(--bg-subtle);
+    color: var(--text-primary);
+  }
+
+  .ui-btn--outline {
+    background: transparent;
+    color: var(--text-primary);
+    border-color: var(--border-medium);
+  }
+
+  .ui-btn--outline:hover:not(:disabled) {
+    background: var(--bg-elevated);
+    border-color: var(--text-secondary);
+  }
+
+  .ui-btn--ghost {
+    background: transparent;
+    color: var(--text-secondary);
+  }
+
+  .ui-btn--ghost:hover:not(:disabled) {
+    background: var(--bg-elevated);
+    color: var(--text-primary);
+  }
+</style>

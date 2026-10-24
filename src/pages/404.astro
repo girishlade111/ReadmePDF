@@ -1,0 +1,111 @@
+---
+import '../styles/app.css';
+import Header from '../components/sections/Header.astro';
+import Footer from '../components/sections/Footer.astro';
+import Button from '../components/ui/Button.astro';
+import Icon from '../components/ui/Icon.astro';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2310b981' rx='6'/%3E%3Ctext x='16' y='23' font-size='17' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'%3EM%3C/text%3E%3C/svg%3E"
+    />
+    <meta name="theme-color" content="#07080b" />
+    <title>404 — Page Not Found · md2pdf</title>
+    <meta name="robots" content="noindex" />
+    <script is:inline>
+      (() => {
+        const stored = localStorage.getItem('md2pdf-theme');
+        const isDark = stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        if (isDark) document.documentElement.dataset.theme = 'dark';
+      })();
+    </script>
+  </head>
+  <body>
+    <Header locale="en" path="/404" />
+
+    <main id="top" class="error-page">
+      <div class="error-container">
+        <span class="error-badge">404 Error</span>
+        <h1 class="error-title">Document Not Found</h1>
+        <p class="error-desc">
+          The documentation page or file path you requested does not exist or has been moved. Use the links below to return to the converter tools.
+        </p>
+
+        <div class="error-actions">
+          <Button href="/" variant="primary" size="lg">
+            <Icon name="file-text" size={18} />
+            <span>Go to Converter</span>
+          </Button>
+          <Button href="/#book" variant="secondary" size="lg">
+            <Icon name="book-open" size={18} />
+            <span>Doc Book Builder</span>
+          </Button>
+          <Button href="/blog/" variant="ghost" size="lg">
+            <span>Read Journal</span>
+            <Icon name="arrow-right" size={16} />
+          </Button>
+        </div>
+      </div>
+    </main>
+
+    <Footer locale="en" path="/404" />
+  </body>
+</html>
+
+<style>
+  .error-page {
+    min-height: calc(100vh - var(--header-height) - 200px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--sp-20) var(--container-gutter);
+    background: var(--bg-canvas);
+  }
+
+  .error-container {
+    max-width: 580px;
+    text-align: center;
+  }
+
+  .error-badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent-brand);
+    background: var(--accent-brand-subtle);
+    padding: 4px 12px;
+    border-radius: var(--r-full);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    margin-bottom: var(--sp-4);
+  }
+
+  .error-title {
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    margin: 0 0 var(--sp-4);
+  }
+
+  .error-desc {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin: 0 0 var(--sp-8);
+  }
+
+  .error-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--sp-3);
+  }
+</style>

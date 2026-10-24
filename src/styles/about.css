@@ -4,7 +4,8 @@
    ========================================================================== */
 
 .about-hero {
-  background: var(--canvas-warm);
+  background: var(--bg-canvas);
+  border-bottom: 1px solid var(--border-subtle);
   padding: var(--sp-section) 0 calc(var(--sp-section) + 8px);
 }
 
@@ -30,7 +31,7 @@
 }
 
 .about-main {
-  background: var(--canvas);
+  background: var(--bg-canvas);
 }
 
 .about-split {
@@ -61,8 +62,10 @@
 .about-card {
   min-width: 0;
   padding: var(--sp-xxxl);
-  background: var(--canvas);
-  border-radius: var(--r-md);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-card);
 }
 
 .about-card--plain {

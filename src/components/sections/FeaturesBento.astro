@@ -1,0 +1,583 @@
+---
+import Card from '../ui/Card.astro';
+import Badge from '../ui/Badge.astro';
+import Icon from '../ui/Icon.astro';
+import { translator } from '../../i18n/index.js';
+
+interface Props {
+  locale?: string;
+}
+
+const { locale = 'en' } = Astro.props;
+const t = translator(locale);
+---
+
+<section class="bento-section" id="features">
+  <div class="bento-container">
+    <div class="bento-header">
+      <Badge variant="brand" size="md">Core Architecture</Badge>
+      <h2 class="bento-title">Engineered for Technical Accuracy</h2>
+      <p class="bento-lead">
+        From GitHub URL parsing to embedded CJK font rendering, every stage is built for zero data leakage, high print fidelity, and deterministic output.
+      </p>
+    </div>
+
+    <div class="bento-grid">
+      <!-- Feature 1: Large Span - GitHub Auto-Discovery -->
+      <Card variant="interactive" padding="lg" class="bento-card bento-card--col-2">
+        <div class="bento-card__meta">
+          <span class="bento-card__icon"><Icon name="github" size={20} /></span>
+          <Badge variant="subtle" size="sm">GitHub Import</Badge>
+        </div>
+        <h3 class="bento-card__title">Deep GitHub Auto-Discovery</h3>
+        <p class="bento-card__desc">
+          Accepts any GitHub URL format: full repo links, subfolder paths, tree views, blob files, or raw URLs. Automatically queries the GitHub API, probes 10 standard README filenames, and rewrites relative images and links to raw GitHub content.
+        </p>
+
+        <!-- Mini Visual: URL to Resolved Tree -->
+        <div class="bento-visual bento-visual--github" aria-hidden="true">
+          <div class="mini-browser-bar">
+            <span class="mini-browser-dot"></span>
+            <span class="mini-browser-url">github.com/astral-sh/uv</span>
+            <span class="mini-browser-badge">main (resolved)</span>
+          </div>
+          <div class="mini-tree-list">
+            <div class="mini-tree-item is-readme">
+              <Icon name="file-text" size={14} />
+              <span>README.md</span>
+              <span class="mini-tag mini-tag--green">Auto-detected</span>
+            </div>
+            <div class="mini-tree-item">
+              <Icon name="folder" size={14} />
+              <span>docs/</span>
+            </div>
+            <div class="mini-tree-item is-sub">
+              <Icon name="file-text" size={14} />
+              <span>getting-started.md</span>
+              <span class="mini-tag">Chapter</span>
+            </div>
+          </div>
+        </div>
+      </Card>
+
+      <!-- Feature 2: 100% In-Browser Privacy -->
+      <Card variant="interactive" padding="lg" class="bento-card">
+        <div class="bento-card__meta">
+          <span class="bento-card__icon"><Icon name="shield" size={20} /></span>
+          <Badge variant="brand" size="sm">Zero Telemetry</Badge>
+        </div>
+        <h3 class="bento-card__title">100% Client-Side Privacy</h3>
+        <p class="bento-card__desc">
+          No login, no user accounts, and zero application backend. All markdown parsing, HTML sanitization via DOMPurify, and PDF compilation run entirely in browser memory.
+        </p>
+
+        <!-- Mini Visual: Shield Lock -->
+        <div class="bento-visual bento-visual--privacy" aria-hidden="true">
+          <div class="privacy-badge">
+            <div class="privacy-badge__shield">
+              <Icon name="shield" size={32} />
+            </div>
+            <div class="privacy-badge__pulse"></div>
+          </div>
+          <div class="privacy-metrics">
+            <div class="privacy-metric">
+              <span class="privacy-metric__num">0 B</span>
+              <span class="privacy-metric__lbl">Uploaded to Server</span>
+            </div>
+            <div class="privacy-metric">
+              <span class="privacy-metric__num">100%</span>
+              <span class="privacy-metric__lbl">Local DOM Memory</span>
+            </div>
+          </div>
+        </div>
+      </Card>
+
+      <!-- Feature 3: Multi-Chapter Documentation Book -->
+      <Card variant="interactive" padding="lg" class="bento-card">
+        <div class="bento-card__meta">
+          <span class="bento-card__icon"><Icon name="book-open" size={20} /></span>
+          <Badge variant="subtle" size="sm">Book Builder</Badge>
+        </div>
+        <h3 class="bento-card__title">Multi-Chapter Doc Books</h3>
+        <p class="bento-card__desc">
+          Scan entire repositories via Git Trees API. Select up to 30 markdown files with tri-state directory checkboxes, reorder chapters, and generate automated cover pages and tables of contents.
+        </p>
+
+        <!-- Mini Visual: Chapter Sequence -->
+        <div class="bento-visual bento-visual--book" aria-hidden="true">
+          <div class="book-mini-stack">
+            <div class="book-mini-item">
+              <span class="book-mini-index">01</span>
+              <span>Overview & Architecture</span>
+              <Icon name="check" size={13} class="book-mini-check" />
+            </div>
+            <div class="book-mini-item">
+              <span class="book-mini-index">02</span>
+              <span>Installation & Quickstart</span>
+              <Icon name="check" size={13} class="book-mini-check" />
+            </div>
+            <div class="book-mini-item">
+              <span class="book-mini-index">03</span>
+              <span>API Reference & Config</span>
+              <Icon name="check" size={13} class="book-mini-check" />
+            </div>
+          </div>
+        </div>
+      </Card>
+
+      <!-- Feature 4: Multilingual CJK & Unicode Fonts -->
+      <Card variant="interactive" padding="lg" class="bento-card">
+        <div class="bento-card__meta">
+          <span class="bento-card__icon"><Icon name="globe" size={20} /></span>
+          <Badge variant="subtle" size="sm">Font Engine</Badge>
+        </div>
+        <h3 class="bento-card__title">Multilingual Font Embedding</h3>
+        <p class="bento-card__desc">
+          PDFs embed standalone TTF fonts directly in output files. Full typography support for Latin, Cyrillic, Turkish, and CJK (Chinese, Japanese, Korean) via embedded Noto Sans CJK.
+        </p>
+
+        <!-- Mini Visual: Font Glyphs -->
+        <div class="bento-visual bento-visual--fonts" aria-hidden="true">
+          <div class="font-glyphs-grid">
+            <div class="font-glyph-card">
+              <span class="font-glyph-char">Aa</span>
+              <span class="font-glyph-name">Latin</span>
+            </div>
+            <div class="font-glyph-card">
+              <span class="font-glyph-char">Дд</span>
+              <span class="font-glyph-name">Cyrillic</span>
+            </div>
+            <div class="font-glyph-card font-glyph-card--accent">
+              <span class="font-glyph-char">文</span>
+              <span class="font-glyph-name">CJK SC</span>
+            </div>
+            <div class="font-glyph-card">
+              <span class="font-glyph-char">あ</span>
+              <span class="font-glyph-name">Kana</span>
+            </div>
+          </div>
+        </div>
+      </Card>
+
+      <!-- Feature 5: 4 Print-Perfect Themes & ZIP Export -->
+      <Card variant="interactive" padding="lg" class="bento-card bento-card--col-2">
+        <div class="bento-card__meta">
+          <span class="bento-card__icon"><Icon name="palette" size={20} /></span>
+          <Badge variant="subtle" size="sm">Export & Print</Badge>
+        </div>
+        <h3 class="bento-card__title">4 Print Themes & Bulk ZIP Export</h3>
+        <p class="bento-card__desc">
+          Choose between <strong>Clean</strong>, <strong>Business</strong>, <strong>Academic</strong>, and <strong>Dark</strong> themes with print margin optimization. Print single documents or books directly, or export a packaged ZIP containing individual chapter PDFs with deterministic naming.
+        </p>
+
+        <!-- Mini Visual: Theme Swatches + ZIP Package -->
+        <div class="bento-visual bento-visual--themes" aria-hidden="true">
+          <div class="mini-swatches-grid">
+            <div class="mini-swatch is-clean">
+              <div class="mini-swatch__header">Clean</div>
+              <div class="mini-swatch__line"></div>
+              <div class="mini-swatch__code"></div>
+            </div>
+            <div class="mini-swatch is-business">
+              <div class="mini-swatch__header">Business</div>
+              <div class="mini-swatch__line"></div>
+              <div class="mini-swatch__code"></div>
+            </div>
+            <div class="mini-swatch is-academic">
+              <div class="mini-swatch__header">Academic</div>
+              <div class="mini-swatch__line"></div>
+              <div class="mini-swatch__code"></div>
+            </div>
+            <div class="mini-swatch is-dark">
+              <div class="mini-swatch__header">Dark</div>
+              <div class="mini-swatch__line"></div>
+              <div class="mini-swatch__code"></div>
+            </div>
+          </div>
+          <div class="mini-zip-download">
+            <Icon name="download" size={16} />
+            <span>md2pdf-archive.zip (Chapters 1–12)</span>
+          </div>
+        </div>
+      </Card>
+    </div>
+  </div>
+</section>
+
+<style>
+  .bento-section {
+    padding: var(--sp-20) 0;
+    background: var(--bg-canvas);
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .bento-container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-gutter);
+  }
+
+  .bento-header {
+    max-width: 680px;
+    margin: 0 auto var(--sp-12);
+    text-align: center;
+  }
+
+  .bento-title {
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    margin: var(--sp-3) 0 var(--sp-4);
+  }
+
+  .bento-lead {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  .bento-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--sp-6);
+  }
+
+  .bento-card--col-2 {
+    grid-column: span 2;
+  }
+
+  .bento-card__meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--sp-4);
+  }
+
+  .bento-card__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: var(--r-md);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-primary);
+  }
+
+  .bento-card__title {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin: 0 0 var(--sp-2);
+  }
+
+  .bento-card__desc {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin: 0 0 var(--sp-6);
+  }
+
+  /* Mini Visual: GitHub */
+  .bento-visual--github {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--r-md);
+    padding: var(--sp-3);
+  }
+
+  .mini-browser-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-surface);
+    padding: 6px 10px;
+    border-radius: var(--r-sm);
+    border: 1px solid var(--border-subtle);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    margin-bottom: var(--sp-3);
+  }
+
+  .mini-browser-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: var(--r-full);
+    background: var(--accent-brand);
+  }
+
+  .mini-browser-url {
+    color: var(--text-secondary);
+    flex-grow: 1;
+  }
+
+  .mini-browser-badge {
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: var(--r-full);
+    background: var(--accent-brand-subtle);
+    color: var(--accent-brand-text);
+    font-weight: 600;
+  }
+
+  .mini-tree-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+  }
+
+  .mini-tree-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    color: var(--text-secondary);
+  }
+
+  .mini-tree-item.is-readme {
+    background: var(--bg-surface);
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .mini-tree-item.is-sub {
+    margin-left: 18px;
+  }
+
+  .mini-tag {
+    margin-left: auto;
+    font-size: 10px;
+    padding: 1px 6px;
+    border-radius: 4px;
+    background: var(--bg-subtle);
+    color: var(--text-muted);
+  }
+
+  .mini-tag--green {
+    background: var(--accent-brand-subtle);
+    color: var(--accent-brand-text);
+  }
+
+  /* Mini Visual: Privacy */
+  .bento-visual--privacy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--sp-4);
+    background: var(--bg-elevated);
+    border-radius: var(--r-md);
+    padding: var(--sp-4);
+  }
+
+  .privacy-badge {
+    position: relative;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .privacy-badge__shield {
+    color: var(--accent-brand);
+    z-index: 1;
+  }
+
+  .privacy-badge__pulse {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--r-full);
+    background: var(--accent-brand);
+    opacity: 0.15;
+    animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+
+  @keyframes ping {
+    75%, 100% {
+      transform: scale(1.6);
+      opacity: 0;
+    }
+  }
+
+  .privacy-metrics {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    border-top: 1px solid var(--border-subtle);
+    padding-top: var(--sp-3);
+  }
+
+  .privacy-metric {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .privacy-metric__num {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+  }
+
+  .privacy-metric__lbl {
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  /* Mini Visual: Book */
+  .bento-visual--book {
+    background: var(--bg-elevated);
+    border-radius: var(--r-md);
+    padding: var(--sp-3);
+  }
+
+  .book-mini-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .book-mini-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-surface);
+    padding: 6px 10px;
+    border-radius: var(--r-sm);
+    border: 1px solid var(--border-subtle);
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+
+  .book-mini-index {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+  }
+
+  .book-mini-check {
+    margin-left: auto;
+    color: var(--accent-brand);
+  }
+
+  /* Mini Visual: Fonts */
+  .font-glyphs-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+  }
+
+  .font-glyph-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--r-sm);
+    padding: var(--sp-3) var(--sp-1);
+    height: 72px;
+  }
+
+  .font-glyph-card--accent {
+    border-color: var(--accent-brand);
+    background: var(--accent-brand-subtle);
+  }
+
+  .font-glyph-char {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .font-glyph-card--accent .font-glyph-char {
+    color: var(--accent-brand-text);
+  }
+
+  .font-glyph-name {
+    font-size: 10px;
+    color: var(--text-muted);
+  }
+
+  /* Mini Visual: Themes & ZIP */
+  .bento-visual--themes {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+  }
+
+  .mini-swatches-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--sp-3);
+  }
+
+  .mini-swatch {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--r-sm);
+    padding: 8px;
+    font-size: 11px;
+  }
+
+  .mini-swatch__header {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .mini-swatch__line {
+    height: 4px;
+    background: var(--border-medium);
+    border-radius: 2px;
+    margin-bottom: 4px;
+    width: 80%;
+  }
+
+  .mini-swatch__code {
+    height: 12px;
+    background: var(--bg-subtle);
+    border-radius: 2px;
+  }
+
+  .mini-swatch.is-dark {
+    background: #11131a;
+    border-color: #272a38;
+  }
+  .mini-swatch.is-dark .mini-swatch__header {
+    color: #f8fafc;
+  }
+
+  .mini-zip-download {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-surface);
+    border: 1px dashed var(--border-medium);
+    border-radius: var(--r-sm);
+    padding: 8px 12px;
+    font-size: 12px;
+    font-family: var(--font-mono);
+    color: var(--text-secondary);
+  }
+
+  @media (max-width: 900px) {
+    .bento-grid {
+      grid-template-columns: 1fr;
+    }
+    .bento-card--col-2 {
+      grid-column: span 1;
+    }
+  }
+</style>

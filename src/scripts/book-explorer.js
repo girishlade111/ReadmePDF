@@ -36,6 +36,7 @@ import { assembleBook, renderDocumentPreview } from '../lib/pdf/assembly.js';
 import { printDocument } from '../lib/print.js';
 import { sanitizeHtml } from '../lib/sanitize.js';
 import { initClientI18n, t, tn, clientBookLabels, clientLocale } from '../i18n/client.js';
+import { addHistoryEntry, addExportRecord } from '../lib/history/index.js';
 
 export const MAX_BOOK_FILES = BOOK_FETCH_LIMITS.maxFiles;
 
@@ -1210,6 +1211,19 @@ export function initBookExplorer() {
       if (exportCloseBtn) exportCloseBtn.hidden = false;
       if (exportRetryBtn) exportRetryBtn.hidden = true;
       setExportProgress(100, '100%');
+      addExportRecord({
+        type: 'individual-pdf-zip',
+        format: 'zip',
+        title: snapshot?.repo?.full_name || (repoSource ? `${repoSource.owner}/${repoSource.repo}` : 'Book Export'),
+        fileCount: result.files.length,
+        totalBytes: result.totalBytes,
+        status: result.failures.length ? 'partial' : 'success',
+        metadata: {
+          zipName: result.zipName,
+          theme: selectedTheme(),
+          failures: result.failures.map((f) => f.path),
+        },
+      }).catch(() => {});
 
       const summary = t('home.book.exportDone', {
         files: tn('common.files', result.files.length),
@@ -1248,6 +1262,17 @@ export function initBookExplorer() {
         }
       }
       setExportProgress(0, '');
+      if (error?.code !== 'CANCELLED' && !controller.signal.aborted) {
+        addExportRecord({
+          type: 'individual-pdf-zip',
+          format: 'zip',
+          title: snapshot?.repo?.full_name || (repoSource ? `${repoSource.owner}/${repoSource.repo}` : 'Book Export'),
+          status: 'failed',
+          metadata: {
+            error: error?.message || 'Export failed',
+          },
+        }).catch(() => {});
+      }
       if (exportRetryBtn) exportRetryBtn.hidden = false;
       if (exportCloseBtn) exportCloseBtn.hidden = false;
     } finally {
@@ -1279,6 +1304,17 @@ export function initBookExplorer() {
     try {
       printDocument({ mode: 'book', book: builtBook });
       setBuildStatus(t('book.print.opened'), '');
+      addExportRecord({
+        type: 'combined-book-print',
+        format: 'pdf',
+        title: repoSource ? `${repoSource.owner}/${repoSource.repo} Book` : 'Documentation Book',
+        fileCount: orderedPaths.length,
+        status: 'success',
+        metadata: {
+          theme: selectedTheme(),
+          chapters: [...orderedPaths],
+        },
+      }).catch(() => {});
     } catch (error) {
       setBuildStatus(bookErrorMessage(error, t), 'error');
     }
@@ -1286,7 +1322,39 @@ export function initBookExplorer() {
 
   // Expose a tiny read-only surface for debugging and for future integration
   // without letting external code mutate selection state.
+  async function restoreBookSnapshot(entry) {
+    if (!entry) return;
+    const bookUrlInput = $('book-url');
+    if (entry.metadata?.repoSource && bookUrlInput) {
+      bookUrlInput.value = `https://github.com/${entry.metadata.repoSource.owner}/${entry.metadata.repoSource.repo}`;
+    }
+    if (entry.metadata?.theme) {
+      const r = document.querySelector(`input[name="book-theme"][value="${entry.metadata.theme}"]`);
+      if (r) {
+        r.checked = true;
+        applyTheme();
+      }
+    }
+    if (entry.metadata?.masterToc !== undefined && masterTocToggle) {
+      masterTocToggle.checked = Boolean(entry.metadata.masterToc);
+    }
+    const paths = entry.metadata?.orderedPaths || (Array.isArray(entry.chapters) ? entry.chapters.map(c => c.path) : []);
+    if (paths.length) {
+      orderedPaths.length = 0;
+      paths.forEach((p) => orderedPaths.push(p));
+      renderChapterList();
+      syncBuildButton();
+      syncExportButton();
+    }
+    setBuildStatus(t('history.restoredNotice') || 'Book snapshot restored', 'ok');
+    const bookSec = document.getElementById('book');
+    if (bookSec) {
+      bookSec.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
   return {
+    restoreBookSnapshot,
     get state() {
       return {
         owner: discovery?.owner ?? null,

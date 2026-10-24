@@ -1,0 +1,118 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  class?: string;
+  id?: string;
+}
+
+const { class: className = '', id = 'theme-toggle-btn' } = Astro.props;
+---
+
+<button
+  type="button"
+  id={id}
+  class={`theme-toggle ${className}`}
+  aria-label="Toggle theme"
+  title="Toggle dark / light theme"
+>
+  <span class="theme-toggle__icon theme-toggle__sun">
+    <Icon name="sun" size={17} />
+  </span>
+  <span class="theme-toggle__icon theme-toggle__moon">
+    <Icon name="moon" size={17} />
+  </span>
+</button>
+
+<style>
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--r-md);
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-surface);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--trans-fast);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .theme-toggle:hover {
+    background: var(--bg-elevated);
+    color: var(--text-primary);
+    border-color: var(--border-medium);
+  }
+
+  .theme-toggle:focus-visible {
+    outline: 2px solid var(--border-focus);
+    outline-offset: 2px;
+  }
+
+  .theme-toggle__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform var(--trans-base), opacity var(--trans-base);
+  }
+
+  /* Light mode: show moon, hide sun */
+  :root:not([data-theme='dark']) .theme-toggle__sun {
+    display: none;
+  }
+  :root:not([data-theme='dark']) .theme-toggle__moon {
+    display: inline-flex;
+  }
+
+  /* Dark mode: show sun, hide moon */
+  [data-theme='dark'] .theme-toggle__sun {
+    display: inline-flex;
+  }
+  [data-theme='dark'] .theme-toggle__moon {
+    display: none;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) .theme-toggle__sun {
+      display: inline-flex;
+    }
+    :root:not([data-theme='light']) .theme-toggle__moon {
+      display: none;
+    }
+  }
+</style>
+
+<script is:inline>
+  (() => {
+    function getPreferredTheme() {
+      const stored = localStorage.getItem('md2pdf-theme');
+      if (stored === 'dark' || stored === 'light') return stored;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    function setTheme(theme) {
+      document.documentElement.dataset.theme = theme;
+      localStorage.setItem('md2pdf-theme', theme);
+      const metaTheme = document.querySelector('meta[name="theme-color"]');
+      if (metaTheme) {
+        metaTheme.setAttribute('content', theme === 'dark' ? '#07080b' : '#fcfcfd');
+      }
+    }
+
+    // Initialize immediate toggle listener
+    document.addEventListener('DOMContentLoaded', () => {
+      const btns = document.querySelectorAll('.theme-toggle');
+      btns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const current = document.documentElement.dataset.theme || getPreferredTheme();
+          const next = current === 'dark' ? 'light' : 'dark';
+          setTheme(next);
+        });
+      });
+    });
+  })();
+</script>

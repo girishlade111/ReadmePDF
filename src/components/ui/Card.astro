@@ -1,0 +1,79 @@
+---
+interface Props {
+  variant?: 'default' | 'elevated' | 'glass' | 'interactive';
+  padding?: 'none' | 'sm' | 'md' | 'lg';
+  class?: string;
+  id?: string;
+}
+
+const {
+  variant = 'default',
+  padding = 'md',
+  class: className = '',
+  id,
+} = Astro.props;
+
+const classes = [
+  'ui-card',
+  `ui-card--${variant}`,
+  `ui-card--p-${padding}`,
+  className,
+].filter(Boolean).join(' ');
+---
+
+<div class={classes} id={id}>
+  <slot />
+</div>
+
+<style>
+  .ui-card {
+    position: relative;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--r-xl);
+    overflow: hidden;
+    transition: all var(--trans-base);
+  }
+
+  /* Padding */
+  .ui-card--p-none {
+    padding: 0;
+  }
+  .ui-card--p-sm {
+    padding: var(--sp-4);
+  }
+  .ui-card--p-md {
+    padding: var(--sp-6);
+  }
+  .ui-card--p-lg {
+    padding: var(--sp-8);
+  }
+
+  /* Variants */
+  .ui-card--default {
+    box-shadow: var(--shadow-card);
+  }
+
+  .ui-card--elevated {
+    background: var(--bg-elevated);
+    box-shadow: var(--shadow-elevated);
+  }
+
+  .ui-card--glass {
+    background: var(--bg-overlay);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-color: var(--border-glass);
+  }
+
+  .ui-card--interactive {
+    box-shadow: var(--shadow-card);
+    cursor: pointer;
+  }
+
+  .ui-card--interactive:hover {
+    transform: translateY(-2px);
+    border-color: var(--border-medium);
+    box-shadow: var(--shadow-elevated);
+  }
+</style>

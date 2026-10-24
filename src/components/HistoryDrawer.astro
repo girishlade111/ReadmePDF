@@ -1,0 +1,549 @@
+---
+/**
+ * md2pdf — Accessible Client-Side History Drawer Component
+ *
+ * Provides the interactive UI shell for browsing saved drafts,
+ * versioned documents, GitHub imports, book snapshots, and export logs.
+ */
+import Icon from './ui/Icon.astro';
+import { translator } from '../i18n/index.js';
+
+interface Props {
+  locale?: string;
+}
+
+const { locale = 'en' } = Astro.props;
+const t = translator(locale);
+---
+
+<!-- History Backdrop -->
+<div id="history-backdrop" class="history-backdrop" hidden aria-hidden="true"></div>
+
+<!-- History Drawer Panel -->
+<aside
+  id="history-drawer"
+  class="history-drawer"
+  role="dialog"
+  aria-modal="true"
+  aria-label={t('history.title')}
+  hidden
+>
+  <div class="history-drawer__header">
+    <div class="history-drawer__header-top">
+      <div class="history-drawer__title-wrap">
+        <Icon name="clock" size={20} class="history-drawer__icon" />
+        <h2 class="history-drawer__title">{t('history.title')}</h2>
+      </div>
+      <button
+        type="button"
+        id="history-close-btn"
+        class="history-drawer__close"
+        aria-label="Close history"
+      >
+        <Icon name="x" size={18} />
+      </button>
+    </div>
+
+    <!-- Storage quota bar -->
+    <div class="history-storage">
+      <div class="history-storage__bar-bg">
+        <div id="history-storage-bar" class="history-storage__bar" style="width: 0%"></div>
+      </div>
+      <p id="history-storage-text" class="history-storage__text">
+        {t('history.status.saved')}
+      </p>
+    </div>
+
+    <!-- Search & Filter Controls -->
+    <div class="history-controls">
+      <div class="history-search-wrap">
+        <Icon name="search" size={15} class="history-search-icon" />
+        <input
+          type="search"
+          id="history-search"
+          class="field field--search history-search-input"
+          placeholder={t('history.searchPlaceholder')}
+          autocomplete="off"
+          spellcheck="false"
+        />
+      </div>
+
+      <div class="history-filter-bar">
+        <div class="history-filter-tabs" role="tablist">
+          <button type="button" class="history-tab is-active" data-history-filter="all">
+            {t('history.filter.all')}
+          </button>
+          <button type="button" class="history-tab" data-history-filter="markdown">
+            {t('history.filter.markdown')}
+          </button>
+          <button type="button" class="history-tab" data-history-filter="github">
+            {t('history.filter.github')}
+          </button>
+          <button type="button" class="history-tab" data-history-filter="books">
+            {t('history.filter.books')}
+          </button>
+          <button type="button" class="history-tab" data-history-filter="exports">
+            {t('history.filter.exports')}
+          </button>
+        </div>
+
+        <select id="history-sort" class="field history-sort-select" aria-label="Sort history">
+          <option value="newest">{t('history.sort.newest')}</option>
+          <option value="oldest">{t('history.sort.oldest')}</option>
+          <option value="opened">{t('history.sort.opened')}</option>
+          <option value="pinned">{t('history.sort.pinned')}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scrollable List Container -->
+  <div class="history-drawer__content">
+    <div id="history-list" class="history-list"></div>
+    <div id="history-empty" class="history-empty" hidden>
+      <Icon name="archive" size={36} class="history-empty__icon" />
+      <p>{t('history.empty')}</p>
+    </div>
+  </div>
+
+  <!-- Drawer Footer Actions -->
+  <div class="history-drawer__footer">
+    <div class="history-drawer__footer-top">
+      <label class="history-autosave-label">
+        <input type="checkbox" id="history-autosave-toggle" checked />
+        <span class="history-autosave-text">{t('history.autoSave.label')}</span>
+      </label>
+
+      <div class="history-footer-actions">
+        <button
+          type="button"
+          id="history-export-backup-btn"
+          class="btn btn--xs btn--tertiary"
+          title={t('history.action.exportBackup')}
+        >
+          <Icon name="download" size={13} />
+          <span>{t('history.action.exportBackup')}</span>
+        </button>
+        <button
+          type="button"
+          id="history-import-backup-btn"
+          class="btn btn--xs btn--tertiary"
+          title={t('history.action.importBackup')}
+        >
+          <Icon name="upload" size={13} />
+          <span>{t('history.action.importBackup')}</span>
+        </button>
+        <input
+          type="file"
+          id="history-import-file"
+          accept=".json,application/json"
+          style="display: none;"
+        />
+        <button
+          type="button"
+          id="history-clear-all-btn"
+          class="btn btn--xs btn--tertiary btn--danger"
+          title={t('history.action.clear')}
+        >
+          {t('history.action.clear')}
+        </button>
+      </div>
+    </div>
+
+    <!-- Privacy notice -->
+    <div class="history-privacy">
+      <span class="history-privacy__badge">{t('history.privacy.badge')}</span>
+      <span class="history-privacy__text">{t('history.privacy.note')}</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Confirmation Modal -->
+<div id="history-confirm-modal" class="history-confirm-modal" hidden role="dialog" aria-modal="true">
+  <div class="history-confirm-box">
+    <h3 id="history-confirm-title" class="heading-md">Confirm Action</h3>
+    <p id="history-confirm-desc" class="history-confirm-text">Are you sure?</p>
+    <div class="history-confirm-actions">
+      <button type="button" id="history-confirm-cancel" class="btn btn--secondary">
+        {t('history.confirm.cancel')}
+      </button>
+      <button type="button" id="history-confirm-ok" class="btn btn--primary btn--danger">
+        {t('history.confirm.proceed')}
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Drawer & Backdrop styles */
+  .history-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(2px);
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  .history-backdrop.is-open {
+    opacity: 1;
+  }
+
+  .history-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 480px;
+    max-width: 100vw;
+    background: var(--bg-surface, #ffffff);
+    color: var(--text-primary, #1e293b);
+    box-shadow: -8px 0 32px rgba(0, 0, 0, 0.18);
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .history-drawer.is-open {
+    transform: translateX(0);
+  }
+
+  .history-drawer__header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-subtle, #e2e8f0);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .history-drawer__header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .history-drawer__title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .history-drawer__title {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .history-drawer__close {
+    background: none;
+    border: none;
+    padding: 6px;
+    cursor: pointer;
+    color: var(--text-muted, #64748b);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s ease;
+  }
+  .history-drawer__close:hover {
+    background: var(--bg-surface-hover, #f1f5f9);
+    color: var(--text-primary, #0f172a);
+  }
+
+  /* Storage indicator */
+  .history-storage {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .history-storage__bar-bg {
+    height: 4px;
+    background: var(--border-subtle, #e2e8f0);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .history-storage__bar {
+    height: 100%;
+    background: var(--accent-brand, #10b981);
+    transition: width 0.3s ease;
+  }
+  .history-storage__text {
+    font-size: 11px;
+    color: var(--text-muted, #64748b);
+    margin: 0;
+  }
+
+  /* Controls */
+  .history-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .history-search-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  :global(.history-search-icon) {
+    position: absolute;
+    left: 10px;
+    color: var(--text-muted, #94a3b8);
+    pointer-events: none;
+  }
+  .history-search-input {
+    width: 100%;
+    padding-left: 32px;
+    font-size: 13px;
+    height: 36px;
+  }
+
+  .history-filter-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .history-filter-tabs {
+    display: flex;
+    gap: 4px;
+    background: var(--bg-canvas, #f8fafc);
+    padding: 3px;
+    border-radius: 6px;
+    border: 1px solid var(--border-subtle, #e2e8f0);
+  }
+
+  .history-tab {
+    background: none;
+    border: none;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-muted, #64748b);
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .history-tab:hover {
+    color: var(--text-primary, #0f172a);
+  }
+  .history-tab.is-active {
+    background: var(--bg-surface, #ffffff);
+    color: var(--text-primary, #0f172a);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  }
+
+  .history-sort-select {
+    font-size: 12px;
+    height: 28px;
+    padding: 2px 8px;
+  }
+
+  /* Content List */
+  .history-drawer__content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  :global(.history-list) {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  :global(.history-card) {
+    background: var(--bg-canvas, #f8fafc);
+    border: 1px solid var(--border-subtle, #e2e8f0);
+    border-radius: 8px;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: all 0.15s ease;
+  }
+  :global(.history-card:hover) {
+    border-color: var(--border-medium, #cbd5e1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+  :global(.history-card.is-pinned) {
+    border-left: 3px solid var(--accent-brand, #10b981);
+  }
+
+  :global(.history-card__header) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  :global(.history-card__badge) {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: #e2e8f0;
+    color: #475569;
+  }
+  :global(.history-card__badge--github) {
+    background: #dbeafe;
+    color: #1e40af;
+  }
+  :global(.history-card__badge--book) {
+    background: #fef3c7;
+    color: #92400e;
+  }
+  :global(.history-card__badge--export) {
+    background: #d1fae5;
+    color: #065f46;
+  }
+  :global(.history-card__time) {
+    font-size: 11px;
+    color: var(--text-muted, #94a3b8);
+  }
+
+  :global(.history-card__title) {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 0 2px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  :global(.history-card__meta) {
+    font-size: 12px;
+    color: var(--text-muted, #64748b);
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  :global(.history-card__size) {
+    font-size: 11px;
+    color: var(--text-muted, #94a3b8);
+    display: block;
+    margin-top: 2px;
+  }
+
+  :global(.history-card__actions) {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 4px;
+  }
+
+  /* Empty state */
+  .history-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 16px;
+    text-align: center;
+    color: var(--text-muted, #94a3b8);
+    gap: 12px;
+  }
+
+  /* Footer */
+  .history-drawer__footer {
+    padding: 14px 20px;
+    border-top: 1px solid var(--border-subtle, #e2e8f0);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: var(--bg-surface, #ffffff);
+  }
+
+  .history-drawer__footer-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .history-autosave-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+  .history-footer-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .btn--danger {
+    color: #ef4444;
+  }
+  .btn--danger:hover {
+    background: #fee2e2;
+  }
+
+  .history-privacy {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: var(--text-muted, #64748b);
+    background: var(--bg-canvas, #f8fafc);
+    padding: 6px 10px;
+    border-radius: 6px;
+  }
+  .history-privacy__badge {
+    font-weight: 700;
+    color: var(--accent-brand, #10b981);
+    white-space: nowrap;
+  }
+
+  /* Confirmation modal */
+  .history-confirm-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1050;
+    padding: 16px;
+  }
+  .history-confirm-box {
+    background: var(--bg-surface, #ffffff);
+    padding: 20px;
+    border-radius: 12px;
+    max-width: 360px;
+    width: 100%;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .history-confirm-text {
+    font-size: 13px;
+    color: var(--text-muted, #64748b);
+    margin: 0;
+  }
+  .history-confirm-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  @media (max-width: 640px) {
+    .history-drawer {
+      width: 100vw;
+    }
+  }
+</style>

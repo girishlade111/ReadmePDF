@@ -1,0 +1,255 @@
+/* =============================================================================
+   md2pdf — Unified Design System Tokens
+   Palette inspired by Arounda Agency:
+     - #FF6129 (Warm Coral Orange)
+     - #FC3B00 (Intense Vivid Flame Red-Orange)
+     - #FF7145 (Soft Sunset Coral / Light Tangerine)
+     - #000000 (Pure Black)
+     - #FFFFFF (Pure White)
+   Typography: Helvetica Neue (Regular, Medium, Semibold, Bold)
+   Single source of truth for colors, typography, spacing, radii, and motion.
+   ========================================================================== */
+
+:root {
+  /* ---- Color System: Light Mode Default ---------------------------------- */
+  --bg-canvas: #ffffff;
+  --bg-surface: #ffffff;
+  --bg-elevated: #fbfbfc;
+  --bg-subtle: #f4f4f7;
+  --bg-overlay: rgba(255, 255, 255, 0.88);
+
+  --text-primary: #000000;
+  --text-secondary: #27272a;
+  --text-muted: #52525b;
+  --text-tertiary: #71717a;
+  --text-inverse: #ffffff;
+
+  --border-subtle: #e5e5e8;
+  --border-medium: #d4d4d8;
+  --border-strong: #a1a1aa;
+  --border-glass: rgba(0, 0, 0, 0.08);
+
+  /* Brand Accents (Exact Arounda Palette) */
+  --accent-brand: #FC3B00;
+  --accent-brand-hover: #e03500;
+  --accent-brand-subtle: rgba(252, 59, 0, 0.08);
+  --accent-brand-glow: rgba(255, 97, 41, 0.25);
+  --accent-brand-text: #c72e00;
+
+  --accent-secondary: #FF6129;
+  --accent-secondary-subtle: rgba(255, 97, 41, 0.08);
+
+  --accent-tertiary: #FF7145;
+  --accent-tertiary-subtle: rgba(255, 113, 69, 0.10);
+
+  /* Status Colors */
+  --status-success: #10b981;
+  --status-warn: #f59e0b;
+  --status-error: #ef4444;
+  --status-error-subtle: rgba(239, 68, 68, 0.08);
+
+  /* Elevation / Shadows */
+  --shadow-subtle: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+  --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.03);
+  --shadow-elevated: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+  --shadow-modal: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+  --shadow-glow: 0 0 24px -4px rgba(252, 59, 0, 0.28);
+
+  /* Typography Stacks (Helvetica Neue from spec) */
+  --font-sans: 'Helvetica Neue', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', Consolas, SFMono-Regular, Menlo, Monaco, monospace;
+  --font-display: 'Helvetica Neue', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Spacing Scale (4px/8px based) */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+  --sp-16: 64px;
+  --sp-20: 80px;
+  --sp-24: 96px;
+
+  /* Radius Scale */
+  --r-none: 0;
+  --r-xs: 4px;
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --r-xl: 20px;
+  --r-2xl: 28px;
+  --r-full: 9999px;
+
+  /* Motion & Transitions */
+  --trans-fast: 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  --trans-base: 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  --trans-smooth: 320ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Containers */
+  --container-max: 1280px;
+  --container-prose: 720px;
+  --container-gutter: 24px;
+  --header-height: 68px;
+
+  /* Backward Compatibility Aliases for App & Print Styles */
+  --canvas: var(--bg-surface);
+  --canvas-soft: var(--bg-elevated);
+  --canvas-tint: var(--bg-subtle);
+  --canvas-warm: var(--bg-subtle);
+  --ink: var(--text-primary);
+  --ink-deep: var(--text-primary);
+  --link: var(--accent-brand);
+  --hairline: var(--border-subtle);
+  --divider: var(--border-subtle);
+  --field-border: var(--border-medium);
+  --primary: var(--accent-brand);
+  --primary-pressed: var(--accent-brand-hover);
+  --on-primary: var(--text-inverse);
+  --error: var(--status-error);
+  --disabled-ink: var(--text-tertiary);
+  --focus: var(--accent-brand);
+  --accent-gold: var(--accent-secondary);
+  --accent-gold-soft: var(--accent-secondary-subtle);
+  --band-teal: var(--bg-subtle);
+  --band-forest: var(--bg-elevated);
+  --sp-xs: var(--sp-2);
+  --sp-sm: var(--sp-3);
+  --sp-md: var(--sp-4);
+  --sp-lg: var(--sp-5);
+  --sp-xl: var(--sp-6);
+  --sp-xxl: var(--sp-8);
+  --sp-xxxl: var(--sp-12);
+  --sp-section: var(--sp-16);
+  --sp-gutter: var(--sp-20);
+}
+
+/* ---- Dark Mode: Signature Arounda Ambient Warm Gradient on Pitch Black --- */
+[data-theme='dark'] {
+  --bg-canvas: #000000;
+  --bg-surface: #0a0a0c;
+  --bg-elevated: #121216;
+  --bg-subtle: #1a1a20;
+  --bg-overlay: rgba(0, 0, 0, 0.86);
+
+  --text-primary: #ffffff;
+  --text-secondary: #d4d4d8;
+  --text-muted: #a1a1aa;
+  --text-tertiary: #71717a;
+  --text-inverse: #000000;
+
+  --border-subtle: rgba(255, 255, 255, 0.10);
+  --border-medium: rgba(255, 255, 255, 0.18);
+  --border-strong: rgba(255, 255, 255, 0.32);
+  --border-glass: rgba(255, 255, 255, 0.14);
+
+  /* Exact Arounda Swatches */
+  --accent-brand: #FF6129;
+  --accent-brand-hover: #FC3B00;
+  --accent-brand-subtle: rgba(255, 97, 41, 0.15);
+  --accent-brand-glow: rgba(252, 59, 0, 0.38);
+  --accent-brand-text: #FF7145;
+
+  --accent-secondary: #FF7145;
+  --accent-secondary-subtle: rgba(255, 113, 69, 0.14);
+
+  --accent-tertiary: #FC3B00;
+  --accent-tertiary-subtle: rgba(252, 59, 0, 0.15);
+
+  --status-success: #10b981;
+  --status-warn: #fbbf24;
+  --status-error: #f87171;
+  --status-error-subtle: rgba(248, 113, 113, 0.14);
+
+  --shadow-subtle: 0 1px 2px 0 rgba(0, 0, 0, 0.6);
+  --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.6), 0 1px 2px -1px rgba(0, 0, 0, 0.5);
+  --shadow-elevated: 0 4px 8px -1px rgba(0, 0, 0, 0.8), 0 2px 4px -2px rgba(0, 0, 0, 0.6);
+  --shadow-modal: 0 20px 25px -5px rgba(0, 0, 0, 0.9), 0 8px 10px -6px rgba(0, 0, 0, 0.7);
+  --shadow-glow: 0 0 32px -4px rgba(252, 59, 0, 0.42);
+
+  --canvas: var(--bg-surface);
+  --canvas-soft: var(--bg-elevated);
+  --canvas-tint: var(--bg-subtle);
+  --canvas-warm: var(--bg-subtle);
+  --ink: var(--text-primary);
+  --ink-deep: var(--text-primary);
+  --hairline: var(--border-subtle);
+  --divider: var(--border-subtle);
+  --field-border: var(--border-medium);
+  --disabled-ink: var(--text-tertiary);
+  --band-teal: var(--bg-subtle);
+  --band-forest: var(--bg-elevated);
+}
+
+/* System dark preference fallback when no explicit attribute is set */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg-canvas: #000000;
+    --bg-surface: #0a0a0c;
+    --bg-elevated: #121216;
+    --bg-subtle: #1a1a20;
+    --bg-overlay: rgba(0, 0, 0, 0.86);
+
+    --text-primary: #ffffff;
+    --text-secondary: #d4d4d8;
+    --text-muted: #a1a1aa;
+    --text-tertiary: #71717a;
+    --text-inverse: #000000;
+
+    --border-subtle: rgba(255, 255, 255, 0.10);
+    --border-medium: rgba(255, 255, 255, 0.18);
+    --border-strong: rgba(255, 255, 255, 0.32);
+    --border-glass: rgba(255, 255, 255, 0.14);
+
+    --accent-brand: #FF6129;
+    --accent-brand-hover: #FC3B00;
+    --accent-brand-subtle: rgba(255, 97, 41, 0.15);
+    --accent-brand-glow: rgba(252, 59, 0, 0.38);
+    --accent-brand-text: #FF7145;
+
+    --accent-secondary: #FF7145;
+    --accent-secondary-subtle: rgba(255, 113, 69, 0.14);
+
+    --accent-tertiary: #FC3B00;
+    --accent-tertiary-subtle: rgba(252, 59, 0, 0.15);
+
+    --status-success: #10b981;
+    --status-warn: #fbbf24;
+    --status-error: #f87171;
+    --status-error-subtle: rgba(248, 113, 113, 0.14);
+
+    --shadow-subtle: 0 1px 2px 0 rgba(0, 0, 0, 0.6);
+    --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.6), 0 1px 2px -1px rgba(0, 0, 0, 0.5);
+    --shadow-elevated: 0 4px 8px -1px rgba(0, 0, 0, 0.8), 0 2px 4px -2px rgba(0, 0, 0, 0.6);
+    --shadow-modal: 0 20px 25px -5px rgba(0, 0, 0, 0.9), 0 8px 10px -6px rgba(0, 0, 0, 0.7);
+    --shadow-glow: 0 0 32px -4px rgba(252, 59, 0, 0.42);
+
+    --canvas: var(--bg-surface);
+    --canvas-soft: var(--bg-elevated);
+    --canvas-tint: var(--bg-subtle);
+    --canvas-warm: var(--bg-subtle);
+    --ink: var(--text-primary);
+    --ink-deep: var(--text-primary);
+    --hairline: var(--border-subtle);
+    --divider: var(--border-subtle);
+    --field-border: var(--border-medium);
+    --disabled-ink: var(--text-tertiary);
+    --band-teal: var(--bg-subtle);
+    --band-forest: var(--bg-elevated);
+  }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

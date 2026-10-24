@@ -1,0 +1,202 @@
+---
+import Badge from '../ui/Badge.astro';
+import Card from '../ui/Card.astro';
+import Icon from '../ui/Icon.astro';
+import { localeHref } from '../../i18n/config.js';
+import { translator } from '../../i18n/index.js';
+
+interface Props {
+  locale?: string;
+}
+
+const { locale = 'en' } = Astro.props;
+const t = translator(locale);
+
+const homeHref = localeHref(locale, '/');
+const blogHref = localeHref(locale, '/blog/');
+const aboutHref = localeHref(locale, '/about/');
+
+const sections = [
+  {
+    title: 'Core Workflows',
+    links: [
+      { label: 'GitHub README to PDF Converter', href: '#converter' },
+      { label: 'Multi-Chapter Documentation Book Builder', href: '#book' },
+      { label: 'Live Split-View Preview Sheet', href: '#converter' },
+      { label: 'Print Isolation & Themes Preview', href: '#themes' },
+    ],
+  },
+  {
+    title: 'Architecture & Engine',
+    links: [
+      { label: 'Features & Technical Architecture', href: '#features' },
+      { label: 'Deterministic 3-Step Flow Pipeline', href: '#how' },
+      { label: 'Real-World Use Cases & Scenarios', href: '#use-cases' },
+      { label: 'Frequently Asked Questions (FAQ)', href: '#faq' },
+    ],
+  },
+  {
+    title: 'Journal & Practical Guides',
+    links: [
+      { label: 'The md2pdf Journal Index', href: blogHref },
+      { label: 'GitHub README to PDF Guide', href: localeHref(locale, '/blog/github-readme-to-pdf/') },
+      { label: 'Multi-File Markdown Books', href: localeHref(locale, '/blog/multi-file-markdown-book/') },
+      { label: 'Multilingual CJK Fonts & Embedding', href: localeHref(locale, '/blog/multilingual-markdown-pdf-fonts/') },
+    ],
+  },
+  {
+    title: 'Project & Legal',
+    links: [
+      { label: 'About md2pdf & Founder Girish Lade', href: aboutHref },
+      { label: 'LadeStack Ecosystem', href: 'https://ladestack.in', external: true },
+      { label: 'GitHub Open Source Repository', href: 'https://github.com/girishlade111/ReadmePDF', external: true },
+      { label: '100% In-Browser Privacy Guarantee', href: '#privacy' },
+    ],
+  },
+];
+---
+
+<section class="sitemap-section" id="sitemap">
+  <div class="sitemap-container">
+    <div class="sitemap-header">
+      <Badge variant="brand" size="md">Index & Navigation</Badge>
+      <h2 class="sitemap-title">Human-Readable Sitemap</h2>
+      <p class="sitemap-lead">
+        Comprehensive index of all tools, features, technical guides, documentation, and project links.
+      </p>
+    </div>
+
+    <div class="sitemap-grid">
+      {
+        sections.map((section) => (
+          <Card variant="default" padding="md" class="sitemap-card">
+            <h3 class="sitemap-group-title">{section.title}</h3>
+            <ul class="sitemap-list">
+              {section.links.map((link) => (
+                <li>
+                  <a
+                    href={link.href}
+                    class="sitemap-link"
+                    target={link.external ? '_blank' : undefined}
+                    rel={link.external ? 'noopener noreferrer' : undefined}
+                  >
+                    <span>{link.label}</span>
+                    {link.external ? (
+                      <Icon name="external-link" size={13} class="sitemap-ext-icon" />
+                    ) : (
+                      <Icon name="chevron-right" size={13} class="sitemap-arrow-icon" />
+                    )}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </Card>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .sitemap-section {
+    padding: var(--sp-20) 0;
+    background: var(--bg-canvas);
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .sitemap-container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-gutter);
+  }
+
+  .sitemap-header {
+    max-width: 680px;
+    margin: 0 auto var(--sp-12);
+    text-align: center;
+  }
+
+  .sitemap-title {
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    margin: var(--sp-3) 0 var(--sp-4);
+  }
+
+  .sitemap-lead {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  .sitemap-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--sp-6);
+  }
+
+  .sitemap-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sitemap-group-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 var(--sp-4);
+    padding-bottom: var(--sp-2);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .sitemap-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+  }
+
+  .sitemap-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13.5px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color var(--trans-fast);
+    line-height: 1.4;
+  }
+
+  .sitemap-link:hover {
+    color: var(--accent-brand);
+  }
+
+  .sitemap-ext-icon,
+  .sitemap-arrow-icon {
+    color: var(--text-tertiary);
+    flex-shrink: 0;
+    margin-left: 6px;
+    transition: transform var(--trans-fast), color var(--trans-fast);
+  }
+
+  .sitemap-link:hover .sitemap-arrow-icon {
+    transform: translateX(2px);
+    color: var(--accent-brand);
+  }
+
+  @media (max-width: 990px) {
+    .sitemap-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 520px) {
+    .sitemap-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

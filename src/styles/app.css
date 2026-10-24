@@ -1,9 +1,7 @@
+@import './tokens.css';
+
 /* =============================================================================
-   md2pdf — design system (Oracle-derived)
-   -----------------------------------------------------------------------------
-   A six-rung warm neutral ladder carries nearly every surface. Chromatic colour
-   appears only at whole-band scale. Depth comes from tonal steps, never shadows.
-   Two display registers: Georgia (product display) + Inter (everything else).
+   md2pdf — design system
    ========================================================================== */
 
 /* ---- Font faces: Inter variable (Oracle Sans substitute), self-hosted ------ */
@@ -31,41 +29,40 @@
 /* ---- Tokens --------------------------------------------------------------- */
 :root {
   /* brand & accent */
-  --brand-mark: #c74634;
-  --primary: #312d2a;
-  --primary-pressed: #47423e;
-  --on-primary: #ffffff;
-  --accent-gold: #f0cc71;
-  --accent-gold-soft: #f7e0a1;
+  --brand-mark: var(--accent-brand);
+  --primary: var(--accent-brand);
+  --primary-pressed: var(--accent-brand-hover);
+  --on-primary: var(--text-inverse);
+  --accent-gold: var(--accent-secondary);
+  --accent-gold-soft: var(--accent-secondary-subtle);
 
   /* surface ladder */
-  --canvas: #ffffff;
-  --canvas-soft: #fbf9f8;
-  --canvas-tint: #f5f4f2;
-  --canvas-warm: #f1efed;
-  --hairline: #e4e1dd;
-  --divider: #e9e7e4;
-  --field-border: #d4cfca;
-  --ink-deep: #211e1c;
+  --canvas: var(--bg-canvas);
+  --canvas-soft: var(--bg-surface);
+  --canvas-tint: var(--bg-elevated);
+  --canvas-warm: var(--bg-subtle);
+  --hairline: var(--border-subtle);
+  --divider: var(--border-subtle);
+  --field-border: var(--border-medium);
+  --ink-deep: var(--text-primary);
 
   /* text */
-  --ink: #161513;
-  --link: #006b8f;
+  --ink: var(--text-primary);
+  --link: var(--accent-brand);
 
   /* semantic */
-  --focus: #227e9e;
-  --error: #d63b25;
-  --disabled-ink: #aea8a2;
+  --focus: var(--accent-brand);
+  --error: var(--status-error);
+  --disabled-ink: var(--text-tertiary);
 
   /* band colour */
-  --band-teal: #d6e5e5;
-  --band-forest: #33553c;
+  --band-teal: var(--bg-subtle);
+  --band-forest: var(--bg-elevated);
 
   /* type families */
-  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --font-display: Georgia, 'Times New Roman', Times, serif;
-  --font-mono: Consolas, 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo,
-    monospace;
+  --font-sans: 'Helvetica Neue', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Helvetica Neue', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', Consolas, ui-monospace, SFMono-Regular, Menlo, monospace;
 
   /* spacing */
   --sp-xs: 10px;
@@ -403,9 +400,8 @@ a {
 
 /* ---- Masthead ------------------------------------------------------------- */
 .masthead {
-  background: var(--canvas);
-  color: var(--ink);
-  height: var(--masthead-h);
+  background: transparent;
+  color: var(--text-primary);
   display: flex;
   align-items: center;
 }
@@ -503,14 +499,10 @@ a {
 
 /* ---- Product sub-navigation ------------------------------------------------ */
 .subnav {
-  position: sticky;
-  top: 0;
-  z-index: 40;
-  background: var(--ink-deep);
-  color: var(--on-primary);
-  height: var(--subnav-h);
+  background: transparent;
+  color: var(--text-primary);
   display: flex;
-  align-items: stretch;
+  align-items: center;
 }
 
 .subnav__inner {
@@ -2416,3 +2408,66 @@ textarea.field {
     scroll-behavior: auto;
   }
 }
+
+/* ---- Autosave Indicator & Actions ---------------------------------------- */
+.autosave-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: var(--bg-surface);
+  padding: 3px 8px;
+  border-radius: var(--r-full);
+  border: 1px solid var(--border-subtle);
+  user-select: none;
+}
+
+.autosave-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  transition: background var(--trans-fast), box-shadow var(--trans-fast);
+}
+
+.autosave-dot.saving {
+  background: #f59e0b;
+  box-shadow: 0 0 6px rgba(245, 158, 11, 0.5);
+  animation: pulse-dot 1.2s infinite ease-in-out;
+}
+
+.autosave-dot.saved {
+  background: #10b981;
+  box-shadow: 0 0 6px rgba(16, 185, 129, 0.4);
+}
+
+.autosave-dot.unsaved {
+  background: #f59e0b;
+}
+
+.autosave-dot.error {
+  background: #ef4444;
+  box-shadow: 0 0 6px rgba(239, 68, 68, 0.4);
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.tool-actions-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  margin-top: var(--sp-3);
+}
+
+.book-row-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  margin-top: var(--sp-2);
+}
+

@@ -11,6 +11,26 @@ import {
 } from '../lib/markdown.js';
 import { printDocument } from '../lib/print.js';
 import { initClientI18n, t } from '../i18n/client.js';
+import {
+  AutoSaveController,
+  saveActiveWorkspace,
+  getActiveWorkspace,
+  clearActiveWorkspace,
+  addHistoryEntry,
+  addExportRecord,
+  getPreference,
+} from '../lib/history/index.js';
+
+/**
+ * Extracts the first Markdown heading for title fallback.
+ * @param {string} text
+ * @returns {string}
+ */
+export function firstHeading(text) {
+  if (!text) return '';
+  const match = text.match(/^#+\s+(.+)$/m);
+  return match ? match[1].trim() : '';
+}
 
 /**
  * Repo context line shown under the URL field.
@@ -24,7 +44,7 @@ export function repoMetaLabel(context) {
 }
 
 export function initConverter() {
-  if (typeof document === 'undefined' || document.body.dataset.md2pdfInit) return;
+  if (typeof document === 'undefined' || document.body.dataset.md2pdfInit) return null;
   document.body.dataset.md2pdfInit = '1';
   initClientI18n();
   const $ = (id) => document.getElementById(id);
@@ -40,6 +60,9 @@ export function initConverter() {
   const printBtn = $('print-btn');
   const clearBtn = $('clear-btn');
   const sampleBtn = $('sample-btn');
+  const saveVersionBtn = $('save-version-btn');
+  const autosaveDot = $('autosave-dot');
+  const autosaveStatus = $('autosave-status');
   const darkWarn = $('dark-warn');
   const themeInputs = [...document.querySelectorAll('input[name="theme"]')];
   const printTriggers = [...document.querySelectorAll('[data-print]')];
@@ -47,6 +70,98 @@ export function initConverter() {
   /** Repo context for relative-path resolution; null = paste/upload mode. */
   let repoCtx = null;
   let renderTimer = 0;
+
+  function updateAutoSaveIndicator(status) {
+    if (!autosaveDot || !autosaveStatus) return;
+    autosaveDot.className = 'autosave-dot';
+    switch (status) {
+      case 'saving':
+        autosaveDot.classList.add('saving');
+        autosaveStatus.textContent = t('history.statusSaving') || 'Saving...';
+        break;
+      case 'saved':
+        autosaveDot.classList.add('saved');
+        autosaveStatus.textContent = t('history.statusSaved') || 'Saved locally';
+        break;
+      case 'unsaved':
+        autosaveDot.classList.add('unsaved');
+        autosaveStatus.textContent = t('history.statusUnsaved') || 'Unsaved changes';
+        break;
+      case 'storage-unavailable':
+        autosaveDot.classList.add('error');
+        autosaveStatus.textContent = t('history.statusUnavailable') || 'Storage unavailable';
+        break;
+      case 'error':
+        autosaveDot.classList.add('error');
+        autosaveStatus.textContent = t('history.statusFailed') || 'Save failed';
+        break;
+      case 'disabled':
+        autosaveStatus.textContent = t('history.autoSaveOff') || 'Autosave paused';
+        break;
+      default:
+        autosaveStatus.textContent = t('history.statusIdle') || 'Local ready';
+    }
+  }
+
+  const autoSave = new AutoSaveController({
+    intervalMs: 1000,
+    onSave: async (content) => {
+      if (!content || !content.trim()) return;
+      const title = repoCtx
+        ? `${repoCtx.owner}/${repoCtx.repo}`
+        : (firstHeading(content) || 'Untitled Document');
+      await saveActiveWorkspace({
+        workspaceId: 'converter-active',
+        title,
+        markdown: content,
+        type: 'converter',
+        metadata: {
+          repoCtx: repoCtx || null,
+          toc: tocToggle?.checked ?? true,
+          theme: document.querySelector('input[name="theme"]:checked')?.value || 'clean',
+        },
+      });
+    },
+    onStatusChange: (status) => {
+      updateAutoSaveIndicator(status);
+    },
+  });
+
+  // Restore saved preference
+  getPreference('autosave_enabled', true)
+    .then((enabled) => {
+      autoSave.setEnabled(Boolean(enabled));
+    })
+    .catch(() => {});
+
+  // Restore active workspace if input is initially empty
+  getActiveWorkspace('converter-active')
+    .then((saved) => {
+      if (saved && saved.markdown && !mdInput.value.trim()) {
+        mdInput.value = saved.markdown;
+        if (saved.metadata?.repoCtx) {
+          repoCtx = saved.metadata.repoCtx;
+          if (urlInput) urlInput.value = `https://github.com/${repoCtx.owner}/${repoCtx.repo}`;
+        }
+        if (saved.metadata?.theme) {
+          const r = document.querySelector(`input[name="theme"][value="${saved.metadata.theme}"]`);
+          if (r) {
+            r.checked = true;
+            sheetEl.classList.remove('theme-clean', 'theme-business', 'theme-academic', 'theme-dark');
+            sheetEl.classList.add(`theme-${saved.metadata.theme}`);
+            if (darkWarn) darkWarn.hidden = saved.metadata.theme !== 'dark';
+          }
+        }
+        if (saved.metadata?.toc !== undefined && tocToggle) {
+          tocToggle.checked = Boolean(saved.metadata.toc);
+        }
+        renderMeta();
+        scheduleRender();
+        updateAutoSaveIndicator('saved');
+        setStatus(t('history.restoredNotice') || 'Workspace restored from last session', 'ok');
+      }
+    })
+    .catch(() => {});
 
   setStatus('', '');
   renderMeta();
@@ -57,8 +172,14 @@ export function initConverter() {
     if (e.key === 'Enter') onFetch();
   });
   fileInput.addEventListener('change', onFile);
-  mdInput.addEventListener('input', scheduleRender);
-  tocToggle.addEventListener('change', scheduleRender);
+  mdInput.addEventListener('input', () => {
+    scheduleRender();
+    autoSave.recordChange(mdInput.value);
+  });
+  tocToggle.addEventListener('change', () => {
+    scheduleRender();
+    autoSave.recordChange(mdInput.value);
+  });
   printBtn.addEventListener('click', () => printSingle());
   printTriggers.forEach((el) =>
     el.addEventListener('click', (e) => {
@@ -67,27 +188,64 @@ export function initConverter() {
     }),
   );
   initSubnav();
+
   clearBtn.addEventListener('click', () => {
     mdInput.value = '';
     repoCtx = null;
+    clearActiveWorkspace('converter-active').catch(() => {});
     renderMeta();
     setStatus('', '');
     scheduleRender();
+    updateAutoSaveIndicator('idle');
   });
+
   sampleBtn.addEventListener('click', () => {
     mdInput.value = t('converter.sample');
     repoCtx = null;
     renderMeta();
     setStatus(t('converter.status.sampleLoaded'), 'ok');
     scheduleRender();
+    autoSave.recordChange(mdInput.value);
   });
+
+  if (saveVersionBtn) {
+    saveVersionBtn.addEventListener('click', async () => {
+      const content = mdInput.value;
+      if (!content.trim()) {
+        setStatus(t('history.emptyNotice') || 'Cannot save empty document', 'error');
+        return;
+      }
+      const title = repoCtx
+        ? `${repoCtx.owner}/${repoCtx.repo}`
+        : (firstHeading(content) || 'Untitled Snapshot');
+      try {
+        await addHistoryEntry({
+          type: 'markdown',
+          source: 'manual-save',
+          title,
+          markdown: content,
+          metadata: {
+            repoCtx: repoCtx || null,
+            toc: tocToggle?.checked ?? true,
+            theme: document.querySelector('input[name="theme"]:checked')?.value || 'clean',
+          },
+        });
+        setStatus(t('history.versionSavedNotice') || 'Snapshot saved to local history', 'ok');
+      } catch (err) {
+        setStatus(t('history.saveFailedNotice') || 'Failed to save snapshot', 'error');
+      }
+    });
+  }
+
   themeInputs.forEach((r) =>
     r.addEventListener('change', () => {
       sheetEl.classList.remove('theme-clean', 'theme-business', 'theme-academic', 'theme-dark');
       sheetEl.classList.add(`theme-${document.querySelector('input[name="theme"]:checked').value}`);
       darkWarn.hidden = document.querySelector('input[name="theme"]:checked').value !== 'dark';
+      autoSave.recordChange(mdInput.value);
     }),
   );
+
   // Broken-image placeholder: never fail the whole export.
   previewEl.addEventListener(
     'error',
@@ -126,6 +284,21 @@ export function initConverter() {
         'ok',
       );
       scheduleRender();
+      autoSave.recordChange(mdInput.value);
+      // Save snapshot to history
+      addHistoryEntry({
+        type: 'github',
+        source: 'github-readme',
+        title: `${res.owner}/${res.repo} (${res.path})`,
+        markdown: res.markdown,
+        metadata: {
+          owner: res.owner,
+          repo: res.repo,
+          branch: res.branch,
+          path: res.path,
+          rawUrl: res.rawUrl,
+        },
+      }).catch(() => {});
     } catch (e) {
       repoCtx = null;
       renderMeta();
@@ -149,6 +322,19 @@ export function initConverter() {
       renderMeta();
       setStatus(t('converter.status.fileLoaded', { name: f.name }), 'ok');
       scheduleRender();
+      autoSave.recordChange(mdInput.value);
+      // Save snapshot to history
+      addHistoryEntry({
+        type: 'markdown',
+        source: 'local-file',
+        title: f.name,
+        markdown: mdInput.value,
+        metadata: {
+          fileName: f.name,
+          size: f.size,
+          toc: tocToggle?.checked ?? true,
+        },
+      }).catch(() => {});
     } catch {
       setStatus(t('converter.status.fileReadError'), 'error');
     } finally {
@@ -225,11 +411,73 @@ export function initConverter() {
     try {
       printDocument({ mode: 'single' });
       setStatus(t('converter.print.opened'), '');
+      const currentTheme = document.querySelector('input[name="theme"]:checked')?.value || 'clean';
+      addExportRecord({
+        type: 'single-pdf',
+        format: 'pdf',
+        title: repoCtx ? `${repoCtx.owner}/${repoCtx.repo}` : (firstHeading(mdInput.value) || 'Markdown Document'),
+        status: 'success',
+        metadata: {
+          theme: currentTheme,
+          toc: tocToggle?.checked ?? true,
+          headings: extractHeadings(mdInput.value).length,
+        },
+      }).catch(() => {});
     } catch (error) {
       setStatus(friendlyPrintError(error, t), 'error');
+      addExportRecord({
+        type: 'single-pdf',
+        format: 'pdf',
+        title: repoCtx ? `${repoCtx.owner}/${repoCtx.repo}` : (firstHeading(mdInput.value) || 'Markdown Document'),
+        status: 'failed',
+        metadata: {
+          error: error?.message || 'Print failed',
+        },
+      }).catch(() => {});
     }
   }
 
+  function restoreConverterEntry(entry) {
+    if (!entry) return;
+    mdInput.value = entry.markdown || '';
+    if (entry.metadata?.repoCtx) {
+      repoCtx = entry.metadata.repoCtx;
+      if (urlInput) urlInput.value = `https://github.com/${repoCtx.owner}/${repoCtx.repo}`;
+    } else {
+      repoCtx = null;
+      if (urlInput) urlInput.value = '';
+    }
+    if (entry.metadata?.theme) {
+      const r = document.querySelector(`input[name="theme"][value="${entry.metadata.theme}"]`);
+      if (r) {
+        r.checked = true;
+        sheetEl.classList.remove('theme-clean', 'theme-business', 'theme-academic', 'theme-dark');
+        sheetEl.classList.add(`theme-${entry.metadata.theme}`);
+        if (darkWarn) darkWarn.hidden = entry.metadata.theme !== 'dark';
+      }
+    }
+    if (entry.metadata?.toc !== undefined && tocToggle) {
+      tocToggle.checked = Boolean(entry.metadata.toc);
+    }
+    renderMeta();
+    scheduleRender();
+    autoSave.recordChange(mdInput.value);
+    setStatus(t('history.restoredNotice') || 'Restored snapshot from history', 'ok');
+    const converterSec = document.getElementById('converter');
+    if (converterSec) {
+      converterSec.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  function hasUnsavedWork() {
+    return autoSave.hasPendingChanges();
+  }
+
+  return {
+    restoreConverterEntry,
+    hasUnsavedWork,
+    autoSave,
+  };
 }
 
 /**

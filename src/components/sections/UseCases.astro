@@ -1,0 +1,550 @@
+---
+import Card from '../ui/Card.astro';
+import Badge from '../ui/Badge.astro';
+import Icon from '../ui/Icon.astro';
+
+interface Props {
+  locale?: string;
+}
+
+const { locale = 'en' } = Astro.props;
+
+const useCases = [
+  {
+    id: 'offline',
+    title: 'Offline Reading & Travel',
+    kicker: 'Air-Gapped & Offline',
+    desc: 'Download and archive complex repository documentation into readable, paginated PDFs for flights, commutes, e-readers, or air-gapped development environments where internet access is unavailable or restricted.',
+    points: [
+      'Retains internal heading links and relative images offline',
+      'High-contrast typography tuned for physical reading & tablets',
+      'Table of contents enables quick chapter navigation',
+    ],
+    badge: 'Archival Ready',
+  },
+  {
+    id: 'client',
+    title: 'Client Handover & Deliverables',
+    kicker: 'Agency & Consulting',
+    desc: 'Deliver software projects to non-technical stakeholders and clients with professional, branded PDF documentation rather than raw GitHub repository URLs.',
+    points: [
+      'Automated cover page with title, subtitle, and date',
+      'Clean table and code formatting that looks executive-ready',
+      'Single-click batch ZIP export for client deliverables',
+    ],
+    badge: 'Client Ready',
+  },
+  {
+    id: 'onboarding',
+    title: 'Team Onboarding & Runbooks',
+    kicker: 'Engineering Teams',
+    desc: 'Turn fragmented repository guides, architecture notes, and deployment runbooks into a single consolidated, sequenced onboarding handbook for new hires.',
+    points: [
+      'Assemble multiple markdown files into one cohesive book',
+      'Custom chapter ordering: overview → setup → architecture',
+      'Standardized print layout across all engineering repos',
+    ],
+    badge: 'Team Handbook',
+  },
+  {
+    id: 'private',
+    title: 'Confidential Notes & Specs',
+    kicker: 'Zero-Telemetry Privacy',
+    desc: 'Convert proprietary code documentation, API specs, and private markdown notes into PDFs with absolute confidence. All compilation occurs inside local browser memory.',
+    points: [
+      'Zero server upload — text never traverses the internet',
+      'DOMPurify sanitization ensures safe, clean output',
+      'No account registration or token generation required',
+    ],
+    badge: 'Confidential',
+  },
+];
+---
+
+<section class="use-cases-section" id="use-cases">
+  <div class="use-cases-container">
+    <div class="use-cases-header">
+      <Badge variant="brand" size="md">Real-World Workflows</Badge>
+      <h2 class="use-cases-title">Built for Real Documentation Needs</h2>
+      <p class="use-cases-lead">
+        Whether you are boarding a 14-hour flight or handing over an enterprise software deliverable, md2pdf turns Markdown into publication-grade documents.
+      </p>
+    </div>
+
+    <!-- Tabbed Interface -->
+    <div class="use-cases-tabs" role="tablist" aria-label="Use case categories">
+      {
+        useCases.map((uc, i) => (
+          <button
+            type="button"
+            role="tab"
+            class={`use-cases-tab-btn ${i === 0 ? 'is-active' : ''}`}
+            id={`tab-btn-${uc.id}`}
+            aria-selected={i === 0 ? 'true' : 'false'}
+            aria-controls={`tab-panel-${uc.id}`}
+            data-target={uc.id}
+          >
+            <span class="tab-btn-title">{uc.title}</span>
+            <span class="tab-btn-sub">{uc.kicker}</span>
+          </button>
+        ))
+      }
+    </div>
+
+    <!-- Tab Panels -->
+    <div class="use-cases-panels">
+      {
+        useCases.map((uc, i) => (
+          <div
+            role="tabpanel"
+            id={`tab-panel-${uc.id}`}
+            aria-labelledby={`tab-btn-${uc.id}`}
+            class={`use-cases-panel ${i === 0 ? 'is-active' : ''}`}
+            hidden={i !== 0}
+          >
+            <Card variant="default" padding="lg" class="use-case-card">
+              <div class="use-case-content">
+                <Badge variant="brand" size="sm">{uc.badge}</Badge>
+                <h3 class="use-case-heading">{uc.title}</h3>
+                <p class="use-case-desc">{uc.desc}</p>
+                <ul class="use-case-points">
+                  {uc.points.map((pt) => (
+                    <li>
+                      <Icon name="check" size={16} class="use-case-check" />
+                      <span>{pt}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div class="use-case-actions">
+                  <a href="#converter" class="use-case-cta">
+                    <span>Try with this workflow</span>
+                    <Icon name="arrow-right" size={15} />
+                  </a>
+                </div>
+              </div>
+
+              <!-- Visual Representation -->
+              <div class="use-case-visual" aria-hidden="true">
+                {uc.id === 'offline' && (
+                  <div class="uc-vis uc-vis--offline">
+                    <div class="uc-device">
+                      <div class="uc-device__screen">
+                        <div class="uc-screen__header">
+                          <span class="uc-screen__dot"></span>
+                          <span>offline_manual.pdf</span>
+                          <span class="uc-offline-badge">AIRPLANE MODE</span>
+                        </div>
+                        <div class="uc-screen__lines">
+                          <div class="uc-line uc-line--h"></div>
+                          <div class="uc-line"></div>
+                          <div class="uc-line uc-line--short"></div>
+                          <div class="uc-box"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                {uc.id === 'client' && (
+                  <div class="uc-vis uc-vis--client">
+                    <div class="uc-binder">
+                      <div class="uc-binder__cover">
+                        <div class="uc-binder__seal">
+                          <Icon name="check" size={20} />
+                        </div>
+                        <div class="uc-binder__title">Project Deliverable</div>
+                        <div class="uc-binder__sub">v2.4 Final Client Build</div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                {uc.id === 'onboarding' && (
+                  <div class="uc-vis uc-vis--onboarding">
+                    <div class="uc-chapters-card">
+                      <div class="uc-ch-row">
+                        <span class="uc-ch-num">1</span>
+                        <span>Architecture & Tech Stack</span>
+                        <span class="uc-ch-status">Done</span>
+                      </div>
+                      <div class="uc-ch-row">
+                        <span class="uc-ch-num">2</span>
+                        <span>Local Environment Setup</span>
+                        <span class="uc-ch-status">Done</span>
+                      </div>
+                      <div class="uc-ch-row is-active">
+                        <span class="uc-ch-num">3</span>
+                        <span>Production Deploy Runbook</span>
+                        <span class="uc-ch-status">Review</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                {uc.id === 'private' && (
+                  <div class="uc-vis uc-vis--private">
+                    <div class="uc-shield-box">
+                      <div class="uc-shield-icon">
+                        <Icon name="shield" size={40} />
+                      </div>
+                      <span class="uc-shield-title">100% In-Browser Isolation</span>
+                      <span class="uc-shield-desc">No network packets emitted</span>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </Card>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .use-cases-section {
+    padding: var(--sp-20) 0;
+    background: var(--bg-canvas);
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .use-cases-container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-gutter);
+  }
+
+  .use-cases-header {
+    max-width: 680px;
+    margin: 0 auto var(--sp-12);
+    text-align: center;
+  }
+
+  .use-cases-title {
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    margin: var(--sp-3) 0 var(--sp-4);
+  }
+
+  .use-cases-lead {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  /* Tabs Navigation */
+  .use-cases-tabs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--sp-3);
+    margin-bottom: var(--sp-8);
+  }
+
+  .use-cases-tab-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: var(--sp-4) var(--sp-5);
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--r-lg);
+    cursor: pointer;
+    text-align: left;
+    transition: all var(--trans-fast);
+  }
+
+  .use-cases-tab-btn:hover {
+    background: var(--bg-elevated);
+    border-color: var(--border-medium);
+  }
+
+  .use-cases-tab-btn.is-active {
+    background: var(--bg-elevated);
+    border-color: var(--accent-brand);
+    box-shadow: 0 0 0 1px var(--accent-brand);
+  }
+
+  .tab-btn-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+  }
+
+  .tab-btn-sub {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  /* Panels */
+  .use-case-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    gap: var(--sp-10);
+    align-items: center;
+    min-height: 380px;
+  }
+
+  .use-case-heading {
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin: var(--sp-3) 0 var(--sp-4);
+  }
+
+  .use-case-desc {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin: 0 0 var(--sp-6);
+  }
+
+  .use-case-points {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--sp-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+  }
+
+  .use-case-points li {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+
+  .use-case-check {
+    color: var(--accent-brand);
+    flex-shrink: 0;
+  }
+
+  .use-case-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent-brand);
+    text-decoration: none;
+    transition: gap var(--trans-fast);
+  }
+
+  .use-case-cta:hover {
+    gap: var(--sp-3);
+  }
+
+  /* Visuals */
+  .use-case-visual {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--r-lg);
+    padding: var(--sp-6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 280px;
+  }
+
+  .uc-device {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-medium);
+    border-radius: var(--r-md);
+    width: 240px;
+    padding: var(--sp-3);
+    box-shadow: var(--shadow-elevated);
+  }
+
+  .uc-screen__header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border-subtle);
+    padding-bottom: 6px;
+    margin-bottom: var(--sp-3);
+  }
+
+  .uc-screen__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: var(--r-full);
+    background: var(--accent-brand);
+  }
+
+  .uc-offline-badge {
+    margin-left: auto;
+    font-size: 9px;
+    padding: 1px 4px;
+    background: var(--bg-subtle);
+    border-radius: 2px;
+  }
+
+  .uc-line {
+    height: 6px;
+    background: var(--bg-subtle);
+    border-radius: 3px;
+    margin-bottom: 6px;
+  }
+  .uc-line--h { width: 50%; height: 10px; background: var(--text-primary); opacity: 0.3; }
+  .uc-line--short { width: 70%; }
+  .uc-box {
+    height: 48px;
+    background: var(--bg-elevated);
+    border-radius: 4px;
+    margin-top: 8px;
+  }
+
+  /* Binder */
+  .uc-binder {
+    background: #ffffff;
+    color: #111827;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    width: 220px;
+    padding: var(--sp-8) var(--sp-4);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+    text-align: center;
+  }
+
+  .uc-binder__seal {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--accent-brand);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--sp-4);
+    box-shadow: 0 0 12px var(--accent-brand-glow);
+  }
+
+  .uc-binder__title {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .uc-binder__sub {
+    font-size: 11px;
+    color: #6b7280;
+  }
+
+  /* Onboarding */
+  .uc-chapters-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .uc-ch-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+
+  .uc-ch-row.is-active {
+    border-color: var(--accent-brand);
+    background: var(--bg-surface);
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .uc-ch-num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  .uc-ch-status {
+    margin-left: auto;
+    font-size: 10px;
+    color: var(--accent-brand);
+    font-weight: 600;
+  }
+
+  /* Shield Box */
+  .uc-shield-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .uc-shield-icon {
+    color: var(--accent-brand);
+    margin-bottom: var(--sp-3);
+  }
+
+  .uc-shield-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .uc-shield-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 860px) {
+    .use-cases-tabs {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .use-case-card {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .use-cases-tabs {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script is:inline>
+  (() => {
+    const tabs = document.querySelectorAll('.use-cases-tab-btn');
+    const panels = document.querySelectorAll('.use-cases-panel');
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const targetId = tab.getAttribute('data-target');
+
+        // Deactivate all
+        tabs.forEach((t) => {
+          t.classList.remove('is-active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        panels.forEach((p) => {
+          p.classList.remove('is-active');
+          p.setAttribute('hidden', '');
+        });
+
+        // Activate selected
+        tab.classList.add('is-active');
+        tab.setAttribute('aria-selected', 'true');
+        const activePanel = document.getElementById(`tab-panel-${targetId}`);
+        if (activePanel) {
+          activePanel.classList.add('is-active');
+          activePanel.removeAttribute('hidden');
+        }
+      });
+    });
+  })();
+</script>

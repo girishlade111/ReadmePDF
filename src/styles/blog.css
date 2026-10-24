@@ -52,7 +52,8 @@
 
 /* ---- Blog index hero ------------------------------------------------------- */
 .blog-hero {
-  background: var(--canvas-warm);
+  background: var(--bg-canvas);
+  border-bottom: 1px solid var(--border-subtle);
   padding: var(--sp-section) 0 calc(var(--sp-section) + 8px);
 }
 
@@ -79,8 +80,10 @@
   gap: var(--sp-section);
   align-items: stretch;
   padding: 40px;
-  background: var(--canvas-warm);
-  border-radius: var(--r-md);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-card);
 }
 
 .blog-featured__body {
@@ -209,8 +212,17 @@
   flex-direction: column;
   min-width: 0;
   padding: var(--sp-xxxl);
-  background: var(--canvas);
-  border-radius: var(--r-md);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-card);
+  transition: all var(--trans-base);
+}
+
+.blog-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-medium);
+  box-shadow: var(--shadow-elevated);
 }
 
 .blog-card .blog-tags {
@@ -285,7 +297,8 @@
 
 /* ---- Article hero ---------------------------------------------------------- */
 .post-hero {
-  background: var(--canvas-warm);
+  background: var(--bg-canvas);
+  border-bottom: 1px solid var(--border-subtle);
   padding: var(--sp-section) 0 calc(var(--sp-section) - 4px);
 }
 
@@ -303,15 +316,15 @@
   font-size: 13px;
   font-weight: 400;
   line-height: 20px;
-  color: var(--ink);
-  opacity: 0.68;
+  color: var(--text-muted);
 }
 
 .breadcrumbs a {
-  color: var(--ink);
+  color: var(--text-secondary);
 }
 
 .breadcrumbs a:hover {
+  color: var(--accent-brand);
   text-decoration: underline;
 }
 
@@ -320,22 +333,26 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  color: var(--text-primary);
+  font-weight: 500;
 }
 
 .post-hero h1 {
   font-family: var(--font-display);
   font-size: 48px;
-  font-weight: 400;
+  font-weight: 700;
   line-height: 1.12;
-  letter-spacing: 0;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
   margin: var(--sp-md) 0 var(--sp-lg);
   max-width: 1040px;
 }
 
 .post-hero .lead {
   max-width: 840px;
-  font-size: 22px;
-  line-height: 32px;
+  font-size: 20px;
+  line-height: 30px;
+  color: var(--text-muted);
 }
 
 .post-meta {
@@ -344,7 +361,7 @@
 
 /* ---- Article layout -------------------------------------------------------- */
 .post-main {
-  background: var(--canvas);
+  background: var(--bg-canvas);
 }
 
 .post-layout {

@@ -1,0 +1,251 @@
+---
+import Badge from '../ui/Badge.astro';
+import Icon from '../ui/Icon.astro';
+import { translator } from '../../i18n/index.js';
+
+interface Props {
+  locale?: string;
+}
+
+const { locale = 'en' } = Astro.props;
+const t = translator(locale);
+---
+
+<section class="how-section band band--soft" id="how">
+  <div class="how-container">
+    <div class="how-header">
+      <Badge variant="brand" size="md">Deterministic Flow</Badge>
+      <h2 class="how-title">{t('home.how.title')}</h2>
+      <p class="how-lead">{t('home.how.lead')}</p>
+    </div>
+
+    <!-- Step Flow Diagram (SVG + Cards) -->
+    <div class="how-flow">
+      <!-- Step 1 -->
+      <div class="how-step-card">
+        <div class="how-step-badge">
+          <span class="how-step-num">01</span>
+        </div>
+        <div class="how-step-visual" aria-hidden="true">
+          <svg viewBox="0 0 160 100" class="how-step-svg">
+            <rect x="20" y="20" width="120" height="60" rx="8" fill="var(--bg-surface)" stroke="var(--border-subtle)" stroke-width="1.5" />
+            <path d="M40 40h40M40 50h60M40 60h30" stroke="var(--accent-brand)" stroke-width="2" stroke-linecap="round" />
+            <circle cx="115" cy="40" r="10" fill="var(--accent-brand-subtle)" stroke="var(--accent-brand)" stroke-width="1.5" />
+            <path d="m112 40 2 2 4-4" stroke="var(--accent-brand)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </div>
+        <h3 class="how-step-title">{t('home.how.step1.title')}</h3>
+        <p class="how-step-desc">
+          Paste a GitHub repo URL, branch path, or paste Markdown directly. md2pdf resolves default branches, auto-discovers READMEs, and parses GitHub Flavored Markdown in milliseconds.
+        </p>
+        <a href="#converter" class="how-step-link">
+          <span>{t('home.how.step1.link')}</span>
+          <Icon name="arrow-right" size={14} />
+        </a>
+      </div>
+
+      <!-- Arrow Connector -->
+      <div class="how-arrow" aria-hidden="true">
+        <svg viewBox="0 0 40 24" class="how-arrow-svg">
+          <path d="M0 12h32m-8-8 8 8-8 8" fill="none" stroke="var(--accent-brand)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="how-step-card">
+        <div class="how-step-badge">
+          <span class="how-step-num">02</span>
+        </div>
+        <div class="how-step-visual" aria-hidden="true">
+          <svg viewBox="0 0 160 100" class="how-step-svg">
+            <rect x="20" y="15" width="120" height="70" rx="8" fill="var(--bg-surface)" stroke="var(--border-subtle)" stroke-width="1.5" />
+            <rect x="35" y="30" width="20" height="20" rx="4" fill="var(--accent-brand-subtle)" stroke="var(--accent-brand)" stroke-width="1.5" />
+            <rect x="65" y="30" width="20" height="20" rx="4" fill="var(--bg-elevated)" stroke="var(--border-subtle)" stroke-width="1.5" />
+            <rect x="95" y="30" width="20" height="20" rx="4" fill="var(--bg-elevated)" stroke="var(--border-subtle)" stroke-width="1.5" />
+            <line x1="35" y1="65" x2="125" y2="65" stroke="var(--border-medium)" stroke-width="1.5" stroke-dasharray="3 3" />
+          </svg>
+        </div>
+        <h3 class="how-step-title">{t('home.how.step2.title')}</h3>
+        <p class="how-step-desc">
+          Filter files through the searchable tree, sequence chapters, add titles, and choose from Clean, Business, Academic, or Dark print themes.
+        </p>
+        <a href="#themes" class="how-step-link">
+          <span>{t('home.how.step2.link')}</span>
+          <Icon name="arrow-right" size={14} />
+        </a>
+      </div>
+
+      <!-- Arrow Connector -->
+      <div class="how-arrow" aria-hidden="true">
+        <svg viewBox="0 0 40 24" class="how-arrow-svg">
+          <path d="M0 12h32m-8-8 8 8-8 8" fill="none" stroke="var(--accent-brand)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="how-step-card">
+        <div class="how-step-badge">
+          <span class="how-step-num">03</span>
+        </div>
+        <div class="how-step-visual" aria-hidden="true">
+          <svg viewBox="0 0 160 100" class="how-step-svg">
+            <rect x="30" y="20" width="100" height="60" rx="6" fill="var(--bg-surface)" stroke="var(--border-subtle)" stroke-width="1.5" />
+            <path d="M45 35h50M45 45h70M45 55h40" stroke="var(--text-secondary)" stroke-width="2" stroke-linecap="round" opacity="0.4" />
+            <circle cx="115" cy="65" r="14" fill="var(--accent-brand)" />
+            <path d="M115 58v10M111 64l4 4 4-4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+          </svg>
+        </div>
+        <h3 class="how-step-title">{t('home.how.step3.title')}</h3>
+        <p class="how-step-desc">
+          Trigger isolated browser print to save a pixel-perfect PDF, or click Export to download a zipped archive of all selected chapter PDFs with self-hosted font embedding.
+        </p>
+        <a href="#book" class="how-step-link">
+          <span>{t('home.how.step3.link')}</span>
+          <Icon name="arrow-right" size={14} />
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .how-section {
+    padding: var(--sp-20) 0;
+    background: var(--bg-surface);
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .how-container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-gutter);
+  }
+
+  .how-header {
+    max-width: 680px;
+    margin: 0 auto var(--sp-12);
+    text-align: center;
+  }
+
+  .how-title {
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    margin: var(--sp-3) 0 var(--sp-4);
+  }
+
+  .how-lead {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  .how-flow {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: var(--sp-4);
+  }
+
+  .how-step-card {
+    flex: 1;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--r-xl);
+    padding: var(--sp-8) var(--sp-6);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: all var(--trans-base);
+  }
+
+  .how-step-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--border-medium);
+    box-shadow: var(--shadow-elevated);
+  }
+
+  .how-step-badge {
+    position: absolute;
+    top: var(--sp-6);
+    right: var(--sp-6);
+  }
+
+  .how-step-num {
+    font-family: var(--font-mono);
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--accent-brand);
+    opacity: 0.35;
+  }
+
+  .how-step-visual {
+    margin-bottom: var(--sp-6);
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .how-step-svg {
+    width: 100%;
+    max-width: 160px;
+    height: auto;
+  }
+
+  .how-step-title {
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin: 0 0 var(--sp-3);
+  }
+
+  .how-step-desc {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin: 0 0 var(--sp-6);
+    flex-grow: 1;
+  }
+
+  .how-step-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent-brand);
+    text-decoration: none;
+    transition: gap var(--trans-fast);
+  }
+
+  .how-step-link:hover {
+    gap: 10px;
+  }
+
+  .how-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    opacity: 0.5;
+  }
+
+  .how-arrow-svg {
+    width: 32px;
+    height: 20px;
+  }
+
+  @media (max-width: 900px) {
+    .how-flow {
+      flex-direction: column;
+      gap: var(--sp-6);
+    }
+    .how-arrow {
+      display: none;
+    }
+  }
+</style>

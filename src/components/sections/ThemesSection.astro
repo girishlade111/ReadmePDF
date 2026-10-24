@@ -1,0 +1,225 @@
+---
+import Badge from '../ui/Badge.astro';
+import Card from '../ui/Card.astro';
+import { translator } from '../../i18n/index.js';
+
+interface Props {
+  locale?: string;
+}
+
+const { locale = 'en' } = Astro.props;
+const t = translator(locale);
+
+const themes = [
+  {
+    key: 'clean',
+    title: t('theme.clean'),
+    desc: t('home.themes.clean'),
+    tag: 'Default',
+  },
+  {
+    key: 'business',
+    title: t('theme.business'),
+    desc: t('home.themes.business'),
+    tag: 'Executive',
+  },
+  {
+    key: 'academic',
+    title: t('theme.academic'),
+    desc: t('home.themes.academic'),
+    tag: 'Formal',
+  },
+  {
+    key: 'dark',
+    title: t('theme.dark'),
+    desc: t('home.themes.dark'),
+    tag: 'OLED / Screen',
+  },
+];
+---
+
+<section class="themes-section band band--tint" id="themes">
+  <div class="themes-container">
+    <div class="themes-header">
+      <Badge variant="brand" size="md">Print Optimization</Badge>
+      <h2 class="themes-title">{t('home.themes.title')}</h2>
+      <p class="themes-lead">{t('home.themes.lead')}</p>
+    </div>
+
+    <div class="themes-grid theme-cards">
+      {
+        themes.map((theme) => (
+          <Card variant="default" padding="md" class={`theme-card theme-card--${theme.key}`}>
+            <div class="theme-card__head">
+              <h3 class="theme-card__title heading-sm">{theme.title}</h3>
+              <Badge variant="subtle" size="sm">{theme.tag}</Badge>
+            </div>
+            <p class="theme-card__desc body-loose">{theme.desc}</p>
+            
+            <div class={`swatch swatch--${theme.key}`} aria-hidden="true">
+              <div class="swatch__title">README</div>
+              <div class="swatch__line"></div>
+              <div class="swatch__line swatch__line--short"></div>
+              <div class="swatch__code"></div>
+            </div>
+          </Card>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .themes-section {
+    padding: var(--sp-20) 0;
+    background: var(--bg-canvas);
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .themes-container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-gutter);
+  }
+
+  .themes-header {
+    max-width: 680px;
+    margin: 0 auto var(--sp-12);
+    text-align: center;
+  }
+
+  .themes-title {
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    margin: var(--sp-3) 0 var(--sp-4);
+  }
+
+  .themes-lead {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  .themes-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--sp-6);
+  }
+
+  .theme-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 260px;
+    transition: all var(--trans-base);
+  }
+
+  .theme-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--border-medium);
+    box-shadow: var(--shadow-elevated);
+  }
+
+  .theme-card__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--sp-2);
+  }
+
+  .theme-card__title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  .theme-card__desc {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin: 0 0 var(--sp-6);
+    flex-grow: 1;
+  }
+
+  /* Swatches */
+  .swatch {
+    background: #ffffff;
+    color: #111827;
+    border: 1px solid #e5e7eb;
+    border-radius: var(--r-md);
+    padding: var(--sp-4);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .swatch__title {
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: #111827;
+  }
+
+  .swatch__line {
+    height: 4px;
+    background: #e5e7eb;
+    border-radius: 2px;
+    margin-bottom: 4px;
+  }
+
+  .swatch__line--short {
+    width: 65%;
+  }
+
+  .swatch__code {
+    height: 14px;
+    background: #f3f4f6;
+    border-radius: 3px;
+    margin-top: 6px;
+  }
+
+  /* Swatch theme variations */
+  .swatch--business {
+    border-left: 3px solid #1e3a8a;
+  }
+  .swatch--business .swatch__title {
+    font-family: serif;
+    color: #1e3a8a;
+  }
+
+  .swatch--academic {
+    border-top: 2px solid #374151;
+  }
+  .swatch--academic .swatch__title {
+    font-family: Georgia, serif;
+    font-style: italic;
+  }
+
+  .swatch--dark {
+    background: #11131a;
+    border-color: #272a38;
+  }
+  .swatch--dark .swatch__title {
+    color: #f8fafc;
+  }
+  .swatch--dark .swatch__line {
+    background: #272a38;
+  }
+  .swatch--dark .swatch__code {
+    background: #1c1f2b;
+  }
+
+  @media (max-width: 990px) {
+    .themes-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 520px) {
+    .themes-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

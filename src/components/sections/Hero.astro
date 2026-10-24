@@ -1,0 +1,569 @@
+---
+import Button from '../ui/Button.astro';
+import Badge from '../ui/Badge.astro';
+import Icon from '../ui/Icon.astro';
+import { translator } from '../../i18n/index.js';
+
+interface Props {
+  locale?: string;
+}
+
+const { locale = 'en' } = Astro.props;
+const t = translator(locale);
+---
+
+<section class="hero-section" id="hero">
+  <!-- Subtle background spotlight and grid -->
+  <div class="hero-spotlight" aria-hidden="true"></div>
+  <div class="hero-grid-pattern" aria-hidden="true"></div>
+
+  <div class="hero-container">
+    <div class="hero-content">
+      <!-- Kicker Pill -->
+      <div class="hero-kicker-wrap">
+        <Badge variant="brand" size="md" class="hero-badge">
+          <span class="hero-badge__dot" aria-hidden="true"></span>
+          <span>{t('home.hero.kicker')}</span>
+        </Badge>
+      </div>
+
+      <!-- Main Headline -->
+      <h1 class="hero-title">
+        <span class="hero-title__gradient">{t('home.hero.titleLine1')}</span>
+        <br />
+        <span class="hero-title__sub">{t('home.hero.titleLine2')}</span>
+      </h1>
+
+      <!-- Supporting Lead Paragraph -->
+      <p class="hero-lead">
+        {t('home.hero.lead')}
+      </p>
+
+      <!-- Primary Action Buttons -->
+      <div class="hero-actions">
+        <Button href="#converter" variant="primary" size="lg" class="hero-btn-primary">
+          <Icon name="file-text" size={18} />
+          <span>{t('home.hero.primary')}</span>
+        </Button>
+        <Button href="#book" variant="secondary" size="lg">
+          <Icon name="book-open" size={18} />
+          <span>{t('nav.book')}</span>
+        </Button>
+        <Button href="#how" variant="ghost" size="lg">
+          <span>{t('home.hero.secondary')}</span>
+          <Icon name="arrow-right" size={16} />
+        </Button>
+      </div>
+
+      <!-- Micro trust indicators -->
+      <div class="hero-trust">
+        <span class="hero-trust__item">
+          <Icon name="shield" size={15} />
+          <span>Zero Server Uploads</span>
+        </span>
+        <span class="hero-trust__divider" aria-hidden="true">·</span>
+        <span class="hero-trust__item">
+          <Icon name="zap" size={15} />
+          <span>Instant Client-Side Compile</span>
+        </span>
+        <span class="hero-trust__divider" aria-hidden="true">·</span>
+        <span class="hero-trust__item">
+          <Icon name="globe" size={15} />
+          <span>9 Locales + CJK Fonts</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- Signature Visual: Dual-Pane Window Mockup -->
+    <div class="hero-mockup-wrap">
+      <div class="hero-window">
+        <!-- Window titlebar -->
+        <div class="hero-window__bar">
+          <div class="hero-window__traffic" aria-hidden="true">
+            <span class="traffic-dot traffic-dot--red"></span>
+            <span class="traffic-dot traffic-dot--yellow"></span>
+            <span class="traffic-dot traffic-dot--green"></span>
+          </div>
+          <div class="hero-window__title">
+            <Icon name="file-text" size={13} />
+            <span>github.com/facebook/react/README.md — md2pdf live engine</span>
+          </div>
+          <div class="hero-window__actions">
+            <span class="hero-window__pill">Print Ready</span>
+          </div>
+        </div>
+
+        <!-- Dual pane container -->
+        <div class="hero-window__body">
+          <!-- Left Pane: Markdown Source -->
+          <div class="hero-pane hero-pane--source">
+            <div class="hero-pane__header">
+              <span class="hero-pane__badge">Markdown Source</span>
+              <span class="hero-pane__path">README.md</span>
+            </div>
+            <pre class="hero-pane__code"><code><span class="tok-h"># React</span> <span class="tok-tag">[![npm](badge.svg)]()</span>
+
+React is a JavaScript library for building
+user interfaces.
+
+<span class="tok-h2">## Installation</span>
+<span class="tok-code">```bash
+npm install react react-dom
+```</span>
+
+<span class="tok-h2">## Features</span>
+| Feature | Client-Side | Server |
+|---------|:-----------:|:------:|
+| Components | <span class="tok-kw">Yes</span> | <span class="tok-kw">Yes</span> |
+| Hooks | <span class="tok-kw">Yes</span> | <span class="tok-kw">Yes</span> |
+| Suspense | <span class="tok-kw">Yes</span> | <span class="tok-kw">Yes</span> |</code></pre>
+          </div>
+
+          <!-- Divider / Transformation Indicator -->
+          <div class="hero-window__divider" aria-hidden="true">
+            <div class="hero-transform-badge">
+              <Icon name="arrow-right" size={14} />
+            </div>
+          </div>
+
+          <!-- Right Pane: Rendered & Paginated PDF Preview -->
+          <div class="hero-pane hero-pane--pdf">
+            <div class="hero-pane__header">
+              <span class="hero-pane__badge hero-pane__badge--pdf">PDF Preview (Clean Theme)</span>
+              <span class="hero-pane__page">Page 1 of 1</span>
+            </div>
+            <div class="hero-pdf-sheet">
+              <div class="hero-pdf__header">
+                <span>README.pdf</span>
+                <span class="hero-pdf__date">A4 · 300 DPI</span>
+              </div>
+              <h2 class="hero-pdf__title">React</h2>
+              <p class="hero-pdf__desc">React is a JavaScript library for building user interfaces.</p>
+              
+              <h3 class="hero-pdf__section">Installation</h3>
+              <div class="hero-pdf__codeblock">
+                <code>$ npm install react react-dom</code>
+              </div>
+
+              <h3 class="hero-pdf__section">Features</h3>
+              <table class="hero-pdf__table">
+                <thead>
+                  <tr>
+                    <th>Feature</th>
+                    <th>Client</th>
+                    <th>Server</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Components</td>
+                    <td><span class="hero-pdf__check">✓</span></td>
+                    <td><span class="hero-pdf__check">✓</span></td>
+                  </tr>
+                  <tr>
+                    <td>Hooks</td>
+                    <td><span class="hero-pdf__check">✓</span></td>
+                    <td><span class="hero-pdf__check">✓</span></td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div class="hero-pdf__footer">
+                <span>md2pdf · Free Client-Side Export</span>
+                <span>1</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-section {
+    position: relative;
+    padding: var(--sp-16) 0 var(--sp-20);
+    overflow: hidden;
+    background: var(--bg-canvas);
+  }
+
+  .hero-section::before {
+    content: '';
+    position: absolute;
+    top: -60px;
+    right: -80px;
+    width: 520px;
+    height: 520px;
+    border-radius: var(--r-full);
+    background: radial-gradient(circle, rgba(252, 59, 0, 0.18) 0%, rgba(255, 97, 41, 0.10) 40%, rgba(255, 113, 69, 0.04) 60%, transparent 75%);
+    filter: blur(48px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hero-spotlight {
+    position: absolute;
+    top: -160px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1000px;
+    height: 580px;
+    background: radial-gradient(circle at 55% 30%, rgba(252, 59, 0, 0.22) 0%, rgba(255, 97, 41, 0.14) 35%, rgba(255, 113, 69, 0.05) 60%, transparent 80%);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.9;
+  }
+
+  .hero-grid-pattern {
+    position: absolute;
+    inset: 0;
+    background-size: 32px 32px;
+    background-image: 
+      linear-gradient(to right, var(--border-subtle) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--border-subtle) 1px, transparent 1px);
+    mask-image: radial-gradient(ellipse 60% 50% at 50% 20%, #000 60%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 60% 50% at 50% 20%, #000 60%, transparent 100%);
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hero-container {
+    position: relative;
+    z-index: 1;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-gutter);
+  }
+
+  .hero-content {
+    max-width: 860px;
+    margin: 0 auto var(--sp-12);
+    text-align: center;
+  }
+
+  .hero-kicker-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: var(--sp-5);
+  }
+
+  .hero-badge {
+    padding: 6px 14px;
+    font-size: 13px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+
+  .hero-badge__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: var(--r-full);
+    background: var(--accent-brand);
+    box-shadow: 0 0 8px var(--accent-brand);
+  }
+
+  .hero-title {
+    font-size: clamp(34px, 5.5vw, 62px);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.035em;
+    color: var(--text-primary);
+    margin: 0 0 var(--sp-6);
+  }
+
+  .hero-title__gradient {
+    color: var(--text-primary);
+  }
+
+  .hero-title__sub {
+    color: var(--text-secondary);
+    font-weight: 600;
+  }
+
+  .hero-lead {
+    font-size: clamp(17px, 2vw, 20px);
+    line-height: 1.55;
+    color: var(--text-muted);
+    max-width: 680px;
+    margin: 0 auto var(--sp-8);
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--sp-3);
+    margin-bottom: var(--sp-8);
+  }
+
+  .hero-btn-primary {
+    box-shadow: 0 4px 14px var(--accent-brand-glow);
+  }
+
+  .hero-trust {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--sp-3);
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .hero-trust__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .hero-trust__divider {
+    color: var(--border-medium);
+  }
+
+  /* Mockup Application Window */
+  .hero-mockup-wrap {
+    max-width: 1040px;
+    margin: 0 auto;
+    perspective: 1000px;
+  }
+
+  .hero-window {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--r-xl);
+    box-shadow: var(--shadow-modal), 0 0 0 1px var(--border-subtle);
+    overflow: hidden;
+    transition: transform var(--trans-smooth), box-shadow var(--trans-smooth);
+  }
+
+  .hero-window:hover {
+    box-shadow: var(--shadow-modal), 0 0 30px -4px var(--accent-brand-glow);
+  }
+
+  .hero-window__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--sp-3) var(--sp-4);
+    background: var(--bg-elevated);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .hero-window__traffic {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .traffic-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: var(--r-full);
+  }
+  .traffic-dot--red { background: #ff5f56; }
+  .traffic-dot--yellow { background: #ffbd2e; }
+  .traffic-dot--green { background: #27c93f; }
+
+  .hero-window__title {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+  }
+
+  .hero-window__pill {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: var(--r-full);
+    background: var(--accent-brand-subtle);
+    color: var(--accent-brand);
+  }
+
+  .hero-window__body {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    min-height: 380px;
+  }
+
+  .hero-pane {
+    padding: var(--sp-5);
+    overflow: hidden;
+  }
+
+  .hero-pane--source {
+    background: var(--bg-surface);
+  }
+
+  .hero-pane__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--sp-4);
+    padding-bottom: var(--sp-2);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .hero-pane__badge {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+  }
+
+  .hero-pane__badge--pdf {
+    color: var(--accent-brand-text);
+  }
+
+  .hero-pane__path,
+  .hero-pane__page {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    font-family: var(--font-mono);
+  }
+
+  .hero-pane__code {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin: 0;
+    white-space: pre-wrap;
+  }
+
+  .tok-h { color: var(--accent-brand); font-weight: 700; }
+  .tok-h2 { color: var(--accent-secondary); font-weight: 600; }
+  .tok-tag { color: var(--text-tertiary); }
+  .tok-kw { color: var(--accent-brand); font-weight: 600; }
+  .tok-code { color: var(--accent-secondary); }
+
+  .hero-window__divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-elevated);
+    width: 38px;
+    border-left: 1px solid var(--border-subtle);
+    border-right: 1px solid var(--border-subtle);
+  }
+
+  .hero-transform-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: var(--r-full);
+    background: var(--accent-brand);
+    color: #ffffff;
+    box-shadow: 0 0 10px var(--accent-brand-glow);
+  }
+
+  .hero-pane--pdf {
+    background: var(--bg-elevated);
+  }
+
+  /* Paper Sheet Simulation */
+  .hero-pdf-sheet {
+    background: #ffffff;
+    color: #111827;
+    border-radius: var(--r-sm);
+    padding: var(--sp-5);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    font-family: var(--font-sans);
+    font-size: 11.5px;
+    line-height: 1.5;
+  }
+
+  .hero-pdf__header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: #9ca3af;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 4px;
+    margin-bottom: var(--sp-3);
+  }
+
+  .hero-pdf__title {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 0 4px;
+    color: #111827;
+  }
+
+  .hero-pdf__desc {
+    font-size: 11px;
+    color: #4b5563;
+    margin: 0 0 var(--sp-3);
+  }
+
+  .hero-pdf__section {
+    font-size: 12px;
+    font-weight: 600;
+    margin: var(--sp-3) 0 4px;
+    color: #1f2937;
+  }
+
+  .hero-pdf__codeblock {
+    background: #f3f4f6;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: #111827;
+    margin-bottom: var(--sp-3);
+  }
+
+  .hero-pdf__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+    margin-bottom: var(--sp-3);
+  }
+
+  .hero-pdf__table th,
+  .hero-pdf__table td {
+    padding: 4px 6px;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: left;
+  }
+
+  .hero-pdf__table th {
+    font-weight: 600;
+    color: #374151;
+    background: #f9fafb;
+  }
+
+  .hero-pdf__check {
+    color: var(--accent-brand);
+    font-weight: bold;
+  }
+
+  .hero-pdf__footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 9.5px;
+    color: #9ca3af;
+    border-top: 1px solid #e5e7eb;
+    padding-top: 6px;
+    margin-top: var(--sp-4);
+  }
+
+  @media (max-width: 820px) {
+    .hero-window__body {
+      grid-template-columns: 1fr;
+    }
+    .hero-window__divider {
+      display: none;
+    }
+    .hero-pane--source {
+      border-bottom: 1px solid var(--border-subtle);
+    }
+  }
+</style>

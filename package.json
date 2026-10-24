@@ -9,7 +9,7 @@
     "build": "astro build",
     "build:release": "node scripts/build-release.mjs",
     "preview": "astro preview",
-    "test": "node --test test/github.test.js test/markdown.test.js test/integration.test.js test/features.test.js test/urls.test.js test/references.test.js test/discovery.test.js test/content.test.js test/selection.test.js test/assembly.test.js test/security.test.js test/print.test.js test/book-ui.test.js test/book-controller-races.test.js test/i18n.test.js test/seo.test.js test/export.test.js test/pdf-fonts.test.js test/release.test.js"
+    "test": "node --test test/github.test.js test/markdown.test.js test/integration.test.js test/features.test.js test/urls.test.js test/references.test.js test/discovery.test.js test/content.test.js test/selection.test.js test/assembly.test.js test/security.test.js test/print.test.js test/book-ui.test.js test/book-controller-races.test.js test/i18n.test.js test/seo.test.js test/export.test.js test/pdf-fonts.test.js test/release.test.js test/history.test.js"
   },
   "engines": {
     "node": ">=22.23.4",

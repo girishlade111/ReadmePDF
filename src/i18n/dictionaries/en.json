@@ -5,7 +5,6 @@
   "meta.blog.description": "Practical guides for turning Markdown and GitHub READMEs into clean, print-ready PDFs — tables, code, books, themes, and real workflows.",
   "meta.about.title": "About md2pdf — built by Girish Lade",
   "meta.about.description": "Why md2pdf exists: a free, browser-only Markdown to PDF tool by LadeStack, built by Girish Lade. No uploads, no accounts, no server-side renderer.",
-
   "common.files.one": "{count} file",
   "common.files.few": "{count} files",
   "common.files.many": "{count} files",
@@ -26,16 +25,13 @@
   "common.failedFiles.few": "{count} failed files",
   "common.failedFiles.many": "{count} failed files",
   "common.failedFiles.other": "{count} failed files",
-
   "lang.label": "Language",
   "lang.switch": "Change language",
   "lang.current": "Current language: {language}",
-
   "theme.clean": "Clean",
   "theme.business": "Business",
   "theme.academic": "Academic",
   "theme.dark": "Dark",
-
   "tags.GitHub": "GitHub",
   "tags.README": "README",
   "tags.PDF": "PDF",
@@ -45,7 +41,6 @@
   "tags.Use Cases": "Use Cases",
   "tags.Documentation": "Documentation",
   "tags.Workflow": "Workflow",
-
   "nav.sectionAria": "Section",
   "nav.footerAria": "Footer",
   "nav.converter": "Converter",
@@ -56,7 +51,6 @@
   "nav.about": "About",
   "nav.privacy": "Privacy",
   "nav.github": "GitHub",
-
   "a11y.github": "md2pdf on GitHub",
   "a11y.ladestack": "LadeStack",
   "a11y.linkedin": "Girish Lade on LinkedIn",
@@ -77,9 +71,7 @@
   "a11y.toc": "Table of contents",
   "a11y.onThisPage": "On this page",
   "a11y.guideOverview": "Guide overview",
-
   "footer.credit": "© 2026 LadeStack · md2pdf is free to use and built by Girish Lade.",
-
   "home.tagline": "by LadeStack · free · no login · client-side",
   "home.hero.kicker": "Free · No login · Nothing uploaded",
   "home.hero.titleLine1": "Your Markdown,",
@@ -87,7 +79,6 @@
   "home.hero.lead": "Paste Markdown, drop a file, or fetch a public GitHub README. md2pdf renders it with your chosen print theme and opens your browser's PDF dialog — all on your device.",
   "home.hero.primary": "Start converting",
   "home.hero.secondary": "How it works",
-
   "home.converter.title": "Converter",
   "home.converter.lead": "Three ways in — a repository URL, a Markdown file, or the keyboard. The preview is the document.",
   "home.converter.step1": "1 · GitHub repo URL",
@@ -104,7 +95,6 @@
   "home.converter.previewTitle": "Live preview",
   "home.converter.print": "Download / Print PDF",
   "home.converter.printHint": "Export uses your browser's print-to-PDF (100% client-side). Choose “Save as PDF” in the print dialog.",
-
   "home.book.title": "Documentation book",
   "home.book.lead": "Point at a repository, choose the Markdown files that belong together, and print one paginated book — cover, master contents, and every chapter in the order you set.",
   "home.book.step1": "1 · Repository",
@@ -163,10 +153,8 @@
   "home.book.exportFontsFailed": "The PDF fonts could not be downloaded. Check your connection and try again.",
   "home.book.exportPreparing": "Preparing the export…",
   "home.book.exportTooLarge": "The ZIP would exceed the 128 MB limit. Select fewer or smaller files.",
-
   "home.statement.lead": "Zero uploads. Zero accounts.",
   "home.statement.body": "The only network call the tool makes is an anonymous read of the public README you asked for. Everything else — rendering, sanitising, printing — happens on your machine.",
-
   "home.how.title": "How it works",
   "home.how.lead": "Three steps, no account, no server-side renderer.",
   "home.how.step1.title": "Give it a repository",
@@ -179,14 +167,12 @@
   "home.how.step3.body": "Hit export, choose “Save as PDF”, and you have a clean, paginated document — no watermark, no upload.",
   "home.how.step3.link": "Read the privacy note",
   "home.how.stepLabel": "Step {number}",
-
   "home.themes.title": "Four print themes",
   "home.themes.lead": "Each theme is a print stylesheet, not a colour swap — pick the register your document wants.",
   "home.themes.clean": "Neutral sans, the default for specs and READMEs.",
   "home.themes.business": "Serif headings and a dark code block for reports.",
   "home.themes.academic": "Justified serif pages for long-form prose.",
   "home.themes.dark": "Screen-first; auto-lightens for print so nothing is lost.",
-
   "home.features.title": "What it handles",
   "home.features.lead": "The unglamorous details that make a README printable.",
   "home.features.fetching": "Fetching",
@@ -207,7 +193,6 @@
   "home.features.render3.body": "Tables, task lists, strikethrough and fenced code all render.",
   "home.features.render4.title": "Sanitised output.",
   "home.features.render4.body": "Scripts, styles, frames and forms are stripped before anything reaches the page.",
-
   "home.privacy.title": "Private by construction",
   "home.privacy.lead": "There is no backend to upload to. Your Markdown is read, rendered and printed on your own device — the only bytes that leave are the public README files you asked for.",
   "home.privacy.product": "Product",
@@ -221,7 +206,6 @@
   "home.privacy.moreTools": "More free tools",
   "home.privacy.about": "About md2pdf",
   "home.privacy.backTop": "Back to top",
-
   "converter.status.emptyUrl": "Paste a GitHub repo URL first, e.g. https://github.com/owner/repo",
   "converter.status.fetching": "Fetching README from GitHub…",
   "converter.status.loaded": "Loaded {owner}/{repo} @ {branch} — preview updated.",
@@ -244,7 +228,6 @@
   "converter.errors.fetchFailed": "Fetch failed: {message}. You can still paste Markdown manually.",
   "converter.errors.printUnavailable": "This browser could not open the print dialog. Use your browser menu to print instead.",
   "converter.errors.printFailed": "Could not open the print dialog: {message}. Use your browser menu to print instead.",
-
   "book.initialOutput": "Scan a repository above to find its Markdown files.",
   "book.status.emptyUrl": "Paste a GitHub repository URL first, e.g. https://github.com/owner/repo",
   "book.status.resolving": "Resolving repository, branch, and commit…",
@@ -345,7 +328,6 @@
   "book.warnings.treeEntries": "GitHub returned more than {max} tree entries. A bounded folder-by-folder scan was used instead.",
   "book.warnings.treeTruncated": "GitHub truncated the recursive tree listing. A bounded folder-by-folder scan was used to fill the gaps.",
   "book.warnings.firstFiles": "Only the first {max} Markdown files are listed. Narrow the URL to a folder for a complete list.",
-
   "assembly.coverAria": "Book cover",
   "assembly.coverEyebrow": "md2pdf documentation book",
   "assembly.coverSourceFallback": "GitHub repository",
@@ -357,7 +339,6 @@
   "assembly.chapterAria": "Chapter {number}: {path}",
   "assembly.filePreview": "File preview",
   "assembly.filePreviewAria": "File preview: {path}",
-
   "blog.kicker": "The md2pdf Journal",
   "blog.title": "Make documentation travel well.",
   "blog.lead": "Practical guides for turning READMEs into documents people can print, sign, archive, and pass around — without an account or an upload.",
@@ -383,6 +364,56 @@
   "blog.ownBody": "Free, no login, and entirely client-side.",
   "blog.keepReading": "Keep reading",
   "blog.related": "Related guides",
-
-  "converter.sample": "# md2pdf — Sample README\n\nPaste a GitHub repo URL above, drop a `README.md`, or just type Markdown here.\n\n## Features\n\n- [x] GitHub URL fetch with image/badge path resolution\n- [x] Live GFM preview (tables, task lists, code)\n- [ ] Your next great README section\n\n## Table demo\n\n| Option | What it does |\n| ------ | ------------ |\n| Clean  | Neutral default |\n| Dark   | Screen-friendly (auto-lightens for print) |\n\n## Code demo\n\n```js\nconst msg = \"hello readme\";\nconsole.log(msg);\n```\n\n## Links & images\n\nA relative image like `docs/logo.png` resolves against the fetched repo.\nAn absolute badge like ![build](https://img.shields.io/badge/build-passing-brightgreen) is left untouched.\n\n### A fourth-level heading exists so TOC shows nesting\n\n#### Detail heading\n"
+  "converter.sample": "# md2pdf — Sample README\n\nPaste a GitHub repo URL above, drop a `README.md`, or just type Markdown here.\n\n## Features\n\n- [x] GitHub URL fetch with image/badge path resolution\n- [x] Live GFM preview (tables, task lists, code)\n- [ ] Your next great README section\n\n## Table demo\n\n| Option | What it does |\n| ------ | ------------ |\n| Clean  | Neutral default |\n| Dark   | Screen-friendly (auto-lightens for print) |\n\n## Code demo\n\n```js\nconst msg = \"hello readme\";\nconsole.log(msg);\n```\n\n## Links & images\n\nA relative image like `docs/logo.png` resolves against the fetched repo.\nAn absolute badge like ![build](https://img.shields.io/badge/build-passing-brightgreen) is left untouched.\n\n### A fourth-level heading exists so TOC shows nesting\n\n#### Detail heading\n",
+  "history.title": "History",
+  "history.desc": "Your work is saved locally in this browser. No account, no uploads.",
+  "history.searchPlaceholder": "Search saved history...",
+  "history.filter.all": "All",
+  "history.filter.markdown": "Markdown",
+  "history.filter.github": "GitHub",
+  "history.filter.books": "Books",
+  "history.filter.exports": "Exports",
+  "history.sort.newest": "Newest first",
+  "history.sort.oldest": "Oldest first",
+  "history.sort.opened": "Recently opened",
+  "history.sort.pinned": "Pinned first",
+  "history.empty": "No history yet",
+  "history.emptyFilter": "No matching history found",
+  "history.action.restore": "Restore",
+  "history.action.open": "Open",
+  "history.action.rename": "Rename",
+  "history.action.delete": "Delete",
+  "history.action.pin": "Pin",
+  "history.action.unpin": "Unpin",
+  "history.action.viewSource": "View Source",
+  "history.action.regenerate": "Regenerate",
+  "history.action.clear": "Clear History",
+  "history.action.exportBackup": "Export Backup",
+  "history.action.importBackup": "Import Backup",
+  "history.action.saveVersion": "Save Version",
+  "history.autoSave.label": "Auto-Save",
+  "history.autoSave.on": "Auto-Save is ON",
+  "history.autoSave.off": "Auto-Save is OFF",
+  "history.status.saving": "Saving...",
+  "history.status.saved": "Saved locally",
+  "history.status.unsaved": "Unsaved changes",
+  "history.status.failed": "Save failed",
+  "history.status.unavailable": "Storage unavailable",
+  "history.storage.title": "Storage",
+  "history.storage.usage": "{used} of {total} used ({percent}%)",
+  "history.confirm.deleteTitle": "Delete this entry?",
+  "history.confirm.deleteDesc": "This entry will be permanently removed from this browser.",
+  "history.confirm.clearTitle": "Clear all history?",
+  "history.confirm.clearDesc": "This will delete all saved history from this browser. This action cannot be undone.",
+  "history.confirm.restoreTitle": "Restore over unsaved work?",
+  "history.confirm.restoreDesc": "Your current editor has unsaved changes. Restoring this item will replace your active text.",
+  "history.confirm.proceed": "Confirm",
+  "history.confirm.cancel": "Cancel",
+  "history.type.manual": "Manual Save",
+  "history.type.upload": "Local Upload",
+  "history.type.github": "GitHub Import",
+  "history.type.book": "PDF Book",
+  "history.type.export": "Export Generated",
+  "history.privacy.badge": "Browser-Local Only",
+  "history.privacy.note": "History is stored exclusively in this browser profile and is never sent to our servers."
 }
