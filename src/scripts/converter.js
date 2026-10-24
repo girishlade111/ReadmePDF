@@ -439,7 +439,7 @@ export function initConverter() {
 
   function restoreConverterEntry(entry) {
     if (!entry) return;
-    mdInput.value = entry.markdown || '';
+    mdInput.value = entry.content || entry.markdown || '';
     if (entry.metadata?.repoCtx) {
       repoCtx = entry.metadata.repoCtx;
       if (urlInput) urlInput.value = `https://github.com/${repoCtx.owner}/${repoCtx.repo}`;

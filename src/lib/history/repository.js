@@ -50,12 +50,14 @@ export async function saveActiveWorkspace(workspace, options = {}) {
   const now = new Date().toISOString();
 
   const wsId = workspace.workspaceId || workspace.id;
+  const content = workspace.content ?? workspace.markdown ?? '';
   const record = {
     ...workspace,
     id: wsId,
     workspaceId: wsId,
     title: workspace.title || 'Untitled Draft',
-    content: workspace.content ?? '',
+    content,
+    markdown: content,
     metadata: workspace.metadata || {},
     updatedAt: now,
     revision: (workspace.revision ?? 0) + 1,
@@ -137,7 +139,7 @@ export async function addHistoryEntry(entry, options = {}) {
       ? entry.id
       : `hist_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
 
-  const content = entry.content ?? '';
+  const content = entry.content ?? entry.markdown ?? '';
   const contentSize = entry.contentSize ?? new Blob([content]).size;
 
   const record = {
@@ -147,6 +149,7 @@ export async function addHistoryEntry(entry, options = {}) {
     recordType: entry.recordType || 'manual',
     sourceType: entry.sourceType || 'manual',
     content,
+    markdown: content,
     contentSize,
     chapters: entry.chapters || [],
     metadata: entry.metadata || {},
