@@ -23,10 +23,6 @@ const isHomePage = path === '/' || path === `/${locale}/` || path === `/${locale
 const navLinks = [
   { label: t('nav.converter'), href: isHomePage ? '#converter' : `${homeHref}#converter`, id: 'converter' },
   { label: t('nav.book'), href: isHomePage ? '#book' : `${homeHref}#book`, id: 'book' },
-  { label: 'Features', href: isHomePage ? '#features' : `${homeHref}#features`, id: 'features' },
-  { label: t('nav.how'), href: isHomePage ? '#how' : `${homeHref}#how`, id: 'how' },
-  { label: 'Use Cases', href: isHomePage ? '#use-cases' : `${homeHref}#use-cases`, id: 'use-cases' },
-  { label: t('nav.themes'), href: isHomePage ? '#themes' : `${homeHref}#themes`, id: 'themes' },
   { label: t('nav.blog'), href: blogHref, id: 'blog', current: activeSection === 'blog' },
   { label: t('nav.about'), href: aboutHref, id: 'about', current: activeSection === 'about' },
 ];
