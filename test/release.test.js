@@ -220,23 +220,36 @@ describe('release origin policy', () => {
 });
 
 describe('source inventory', () => {
-  it('derives the real 99 routes and eight translation keys', async () => {
+  it('derives the real 216 routes and 21 translation keys', async () => {
     const { routes, keys } = await collectExpectedRoutes(REAL_CONTENT_DIR);
-    assert.equal(routes.length, 99);
+    assert.equal(routes.length, 216);
     assert.deepEqual(keys, [
       'browser-only-markdown-to-pdf',
+      'browser-print-markdown-pdf',
+      'chapter-sequencing-reordering-pdf',
+      'github-branch-tag-commit-pdf',
       'github-readme-to-pdf',
+      'github-repository-markdown-tree',
+      'live-markdown-preview-pdf',
       'markdown-code-blocks-to-pdf',
+      'markdown-editor-paste-pdf',
+      'markdown-file-search-filter',
+      'markdown-file-upload-to-pdf',
+      'markdown-folder-selection-book',
+      'markdown-pdf-cover-page',
+      'markdown-relative-images-links-pdf',
       'markdown-table-of-contents-pdf',
       'markdown-tables-to-pdf',
+      'markdown-zip-pdf-export',
       'multi-file-markdown-book',
+      'multilingual-markdown-pdf-fonts',
       'readme-pdf-print-themes',
       'readme-to-pdf-use-cases',
     ]);
     assert.equal(routes.filter((route) => route.kind === 'home').length, 9);
     assert.equal(routes.filter((route) => route.kind === 'blog').length, 9);
     assert.equal(routes.filter((route) => route.kind === 'about').length, 9);
-    assert.equal(routes.filter((route) => route.kind === 'article').length, 72);
+    assert.equal(routes.filter((route) => route.kind === 'article').length, 189);
   });
 });
 

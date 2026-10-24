@@ -1,64 +1,78 @@
 # md2pdf — Editorial Manifest & Verified Feature Inventory
 
-Last updated: 2026-10-23
+Last updated: 2026-10-24
 Product: **md2pdf**
 Brand: **LadeStack** (`https://ladestack.in`)
 Founder & Creator: **Girish Lade** (`admin@ladestack.in`)
 
 ---
 
-## 1. Verified Feature Inventory
+## 1. Verified Feature Inventory (20 Distinct Features + 1 Editorial Use-Cases Guide)
 
-Every feature below is implemented in client-side code and covered by automated regression tests in `test/`. No speculative or unverified capabilities are published.
+Every feature below is implemented in client-side code and covered by automated regression tests in `test/`. No speculative or unverified capabilities are published. Every single feature has its own dedicated, authoritative guide in all 9 supported languages.
 
 | Feature ID | Feature Name | Core Implementation Files | Description | Dedicated Guide |
 |---|---|---|---|---|
-| `feat-converter-browser` | Browser-Only Conversion & Privacy | `src/scripts/converter.js`, `src/lib/sanitize.js`, `src/lib/markdown.js` | 100% browser-based Markdown to PDF conversion. Uses markdown-it and DOMPurify. No accounts, no document uploads, no server rendering. | `browser-only-markdown-to-pdf` |
-| `feat-github-import` | Public GitHub README Import | `src/lib/github/urls.js`, `src/lib/github/content.js`, `src/lib/github/references.js` | Direct README fetch from public GitHub repos. Default-branch discovery (`main`/`master`), commit/branch/tag ref resolution, relative image rewriting to `raw.githubusercontent.com`. | `github-readme-to-pdf` |
-| `feat-code-blocks` | Monospace Code Blocks & Print Formatting | `src/styles/app.css`, `src/lib/markdown.js` | Preformatted fenced code blocks (`<pre><code>`), syntax language tags, print page-break containment, 80-90 character width guideline. | `markdown-code-blocks-to-pdf` |
-| `feat-table-of-contents` | Automatic Table of Contents | `src/lib/markdown.js` (`extractHeadings`, `buildTocHtml`, `injectHeadingIds`) | Auto-generated TOC for documents with 3+ headings (H1-H4). Generates unique anchor IDs for in-page navigation and clickable PDF bookmarks. | `markdown-table-of-contents-pdf` |
-| `feat-tables` | Markdown Tables to PDF | `src/styles/app.css`, `src/lib/markdown.js` | GitHub-flavored Markdown tables. Custom print styles for column widths, alignment (`:---`, `:---:`, `---:`), avoiding awkward cell splits across A4 pages. | `markdown-tables-to-pdf` |
-| `feat-book-builder` | Multi-File Documentation Book | `src/scripts/book-explorer.js`, `src/lib/selection.js`, `src/lib/pdf/assembly.js` | Git Trees API explorer, tri-state checkboxes, chapter reordering, custom cover page, master table of contents, and print isolation. | `multi-file-markdown-book` |
-| `feat-print-themes` | Four Curated Print Themes | `src/styles/app.css`, `src/styles/blog.css` | Clean (sans-serif neutral), Business (serif executive), Academic (justified formal), Dark (screen contrast with high-legibility print fallback). | `readme-pdf-print-themes` |
-| `feat-use-cases` | Developer & Team Documentation Workflows | `src/lib/pdf/export.js`, `src/lib/print.js` | Practical documentation publishing for developers, technical writers, course packs, runbooks, offline archiving, and RFC reviews. | `readme-to-pdf-use-cases` |
+| `feat-file-upload` | Local Markdown File Upload | `src/scripts/converter.js`, `src/lib/sanitize.js` | Direct client-side Markdown file ingestion via File API and drag-and-drop. Zero server transmission. | `markdown-file-upload-to-pdf` |
+| `feat-editor-paste` | Markdown Paste & Live Editing | `src/scripts/converter.js`, `src/lib/markdown.js` | In-browser textarea editing, sample loading, character/word counters, and instant PDF compilation. | `markdown-editor-paste-pdf` |
+| `feat-live-preview` | Live Split-Screen Markdown Preview | `src/scripts/converter.js`, `src/lib/markdown.js` | Synchronized side-by-side Markdown rendering, layout proofing, and DOMPurify sanitization. | `live-markdown-preview-pdf` |
+| `feat-github-import` | Public GitHub README Import | `src/lib/github/urls.js`, `src/lib/github/content.js` | Direct README fetch from public GitHub repos with default-branch discovery and relative asset rewriting. | `github-readme-to-pdf` |
+| `feat-repo-tree` | GitHub Repository Tree Exploration | `src/lib/github/discovery.js`, `src/scripts/book-explorer.js` | Recursive Git tree traversal, nested directory navigation, and Markdown file discovery. | `github-repository-markdown-tree` |
+| `feat-git-refs` | Branch, Tag & Commit Ref Pinning | `src/lib/github/references.js`, `src/lib/github/urls.js` | Branch switching, release tag targeting, and immutable commit SHA resolution for versioned docs. | `github-branch-tag-commit-pdf` |
+| `feat-file-search` | Markdown File Search & Path Filtering | `src/lib/selection.js`, `src/scripts/book-explorer.js` | Real-time in-memory path matching, directory subtree filtering, and fast selection. | `markdown-file-search-filter` |
+| `feat-tri-state` | Tri-State Folder Selection | `src/lib/selection.js`, `src/scripts/book-explorer.js` | Cascading directory checkboxes with checked, unchecked, and indeterminate partial states. | `markdown-folder-selection-book` |
+| `feat-chapter-order` | Chapter Sequencing & Reordering | `src/lib/selection.js`, `src/scripts/book-explorer.js` | Custom chapter queuing, up/down shifting, auto-sorting, and structural heading normalization. | `chapter-sequencing-reordering-pdf` |
+| `feat-book-builder` | Multi-File Combined PDF Book | `src/scripts/book-explorer.js`, `src/lib/pdf/assembly.js` | Stitching multi-chapter documentation into unified PDF volumes with continuous page numbering. | `multi-file-markdown-book` |
+| `feat-cover-page` | PDF Book Cover-Page Generation | `src/lib/pdf/assembly.js`, `src/styles/app.css` | Automatic title sheet synthesis with document title, subtitle, author, and generation timestamp. | `markdown-pdf-cover-page` |
+| `feat-table-of-contents` | Hierarchical Table of Contents | `src/lib/markdown.js`, `src/lib/pdf/assembly.js` | Auto-generated TOC for documents with 3+ headings (H1-H4) and clickable PDF bookmarks. | `markdown-table-of-contents-pdf` |
+| `feat-print-themes` | Four Curated Print Themes | `src/styles/app.css`, `src/styles/blog.css` | Clean (sans-serif), Business (serif), Academic (justified), and Dark (screen contrast with print fallback). | `readme-pdf-print-themes` |
+| `feat-code-blocks` | Monospace Code Blocks & Syntax | `src/styles/app.css`, `src/lib/markdown.js` | Fenced code blocks (`<pre><code>`), syntax language tags, print page-break containment. | `markdown-code-blocks-to-pdf` |
+| `feat-tables` | GFM Table Rendering & Scaling | `src/styles/app.css`, `src/lib/markdown.js` | GitHub-flavored Markdown tables with column alignments, responsive widths, and print border styles. | `markdown-tables-to-pdf` |
+| `feat-relative-assets` | Relative Images & Links Resolution | `src/lib/github/content.js`, `src/lib/pdf/assembly.js` | Computing relative paths, fetching raw assets client-side, and transforming relative links to PDF anchors. | `markdown-relative-images-links-pdf` |
+| `feat-zip-export` | Individual PDF ZIP Export | `src/lib/pdf/export.js`, `JSZip` | Compiling multiple Markdown files into standalone PDFs packaged into a single client-side ZIP file. | `markdown-zip-pdf-export` |
+| `feat-browser-print` | Native Browser Printing | `src/lib/print.js`, `src/styles/app.css` | Leveraging native browser print dialog, `@media print` CSS, and hardware-accelerated PDF rendering. | `browser-print-markdown-pdf` |
+| `feat-multilingual-fonts` | Multilingual Unicode Fonts | `src/lib/pdf/fonts.js`, `@pdf-lib/fontkit` | Full Unicode font embedding for CJK (Chinese, Japanese, Korean), Cyrillic, Turkish, and Latin accents. | `multilingual-markdown-pdf-fonts` |
+| `feat-converter-privacy` | Browser-First Privacy & Zero Uploads | `src/lib/sanitize.js`, `src/scripts/converter.js` | 100% browser-side processing, no accounts, zero tracking, strict DOMPurify HTML sanitization. | `browser-only-markdown-to-pdf` |
+| `feat-use-cases` | Developer & Team Documentation Workflows | `src/lib/pdf/export.js`, `src/lib/print.js` | Practical publishing workflows for developers, technical writers, course packs, and offline runbooks. | `readme-to-pdf-use-cases` |
 
 ---
 
-## 2. Article-to-Feature Mapping Matrix
+## 2. Complete Multilingual Matrix (21 Articles × 9 Locales = 189 Files)
 
-| Translation Key | Primary User Intent | Verified Implemented Capability | Associated Feature IDs | English Word Count / Structure |
-|---|---|---|---|---|
-| `browser-only-markdown-to-pdf` | Privacy, offline safety, data retention | Client-side File API upload, paste, sample, DOMPurify sanitization, network boundary transparency | `feat-converter-browser` | 120 lines, 7 H2s, 2 code blocks |
-| `github-readme-to-pdf` | Exporting GitHub README to PDF | URL parsing, branch discovery, relative link & image rewriting, print trigger | `feat-github-import` | 148 lines, 7 H2s, 4 code blocks |
-| `markdown-code-blocks-to-pdf` | Code formatting & legibility in PDF | Fenced code, language tags, line wraps, theme styling, page break controls | `feat-code-blocks` | 114 lines, 7 H2s, 3 code blocks |
-| `markdown-table-of-contents-pdf`| Document navigation & structure in PDF | Dynamic heading extraction, anchor generation, TOC toggle, H1-H4 hierarchy | `feat-table-of-contents` | 130 lines, 7 H2s, 2 code blocks |
-| `markdown-tables-to-pdf` | Wide tables formatting on A4/Letter | GFM tables, pipe syntax, column alignment, width management, header repetition | `feat-tables` | 113 lines, 7 H2s, 2 code blocks |
-| `multi-file-markdown-book` | Multi-file book compiling & ZIP export | Tree explorer, chapter reordering, cover metadata, master TOC, ZIP export of PDFs | `feat-book-builder` | 142 lines, 7 H2s, 2 code blocks |
-| `readme-pdf-print-themes` | Typography & aesthetic customization | Clean, Business, Academic, and Dark theme styling and print media queries | `feat-print-themes` | 134 lines, 6 H2s, 2 code blocks |
-| `readme-to-pdf-use-cases` | Documentation distribution & archival | Offline reading, student notes, runbooks, client handoffs, regulatory archives | `feat-use-cases` | 158 lines, 7 H2s, 3 code blocks |
-
----
-
-## 3. Multilingual Coverage Matrix
-
-Every article key exists in **all 9 supported languages** with 100% heading structure parity, identical code blocks, identical external URLs, and consistent metadata:
+Every article key exists in **all 9 supported languages** (`en`, `es`, `ja`, `ko`, `zh`, `ru`, `tr`, `fr`, `pt`) with 100% heading structure parity, identical code blocks, identical external URLs, and consistent metadata:
 
 | Translation Key | en | es | ja | ko | zh | ru | tr | fr | pt |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | `browser-only-markdown-to-pdf` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `browser-print-markdown-pdf` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `chapter-sequencing-reordering-pdf` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `github-branch-tag-commit-pdf` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `github-readme-to-pdf` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `github-repository-markdown-tree` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `live-markdown-preview-pdf` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `markdown-code-blocks-to-pdf` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `markdown-editor-paste-pdf` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `markdown-file-search-filter` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `markdown-file-upload-to-pdf` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `markdown-folder-selection-book` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `markdown-pdf-cover-page` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `markdown-relative-images-links-pdf` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `markdown-table-of-contents-pdf` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `markdown-tables-to-pdf` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `markdown-zip-pdf-export` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `multi-file-markdown-book` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `multilingual-markdown-pdf-fonts` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `readme-pdf-print-themes` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `readme-to-pdf-use-cases` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 
-Total published article files: **72 files** (8 keys × 9 locales).
+Total published article files: **189 files** (21 keys × 9 locales).
+Total static site routes: **216 routes** (27 static landing/about/blog pages + 189 article routes).
+Total sitemap URLs: **216 URLs** with **2,160 reciprocal alternates**.
 
 ---
 
-## 4. Editorial Review Status
+## 3. Editorial Review Status
 
-- **English (`en`)**: Primary authoritative source copy authored by Girish Lade. Reviewed against UI and source code limits.
-- **Localized Editions (`es`, `ja`, `ko`, `zh`, `ru`, `tr`, `fr`, `pt`)**: Full localized translations matching native search intent and verified against the automated structural parity test suite (`test/i18n.test.js`). Editorial review by native speakers is recommended as an ongoing quality practice.
+- **English (`en`)**: Primary authoritative source copy authored by Girish Lade for md2pdf / LadeStack. Reviewed against UI and source code capabilities.
+- **Localized Editions (`es`, `ja`, `ko`, `zh`, `ru`, `tr`, `fr`, `pt`)**: Full localized translations matching native search intent and verified against the automated structural parity test suite (`test/i18n.test.js`).
+- **Verdict**: `B. IMPLEMENTED — EDITORIAL REVIEW PENDING` (awaiting DNS resolution and final native editorial review for non-English locales).

@@ -34,11 +34,24 @@ const english = dictionary('en');
 const allDictionaries = LOCALES.map((locale) => [locale, dictionary(locale)]);
 const translationKeys = [
   'browser-only-markdown-to-pdf',
+  'browser-print-markdown-pdf',
+  'chapter-sequencing-reordering-pdf',
+  'github-branch-tag-commit-pdf',
   'github-readme-to-pdf',
+  'github-repository-markdown-tree',
+  'live-markdown-preview-pdf',
   'markdown-code-blocks-to-pdf',
+  'markdown-editor-paste-pdf',
+  'markdown-file-search-filter',
+  'markdown-file-upload-to-pdf',
+  'markdown-folder-selection-book',
+  'markdown-pdf-cover-page',
+  'markdown-relative-images-links-pdf',
   'markdown-table-of-contents-pdf',
   'markdown-tables-to-pdf',
+  'markdown-zip-pdf-export',
   'multi-file-markdown-book',
+  'multilingual-markdown-pdf-fonts',
   'readme-pdf-print-themes',
   'readme-to-pdf-use-cases',
 ];
@@ -249,7 +262,7 @@ describe('dictionary parity and translation quality', () => {
 });
 
 describe('blog inventory and translation structure', () => {
-  it('publishes exactly eight articles in each of the nine locales', () => {
+  it('publishes all 21 feature and guide articles in each of the nine locales', () => {
     const englishFiles = readdirSync(blogDir, { withFileTypes: true })
       .filter((entry) => entry.isFile() && entry.name.endsWith('.md'))
       .map((entry) => entry.name)

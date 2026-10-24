@@ -2077,5 +2077,2579 @@
       "/blog/github-readme-to-pdf/",
       "/blog/markdown-table-of-contents-pdf/"
     ]
+  },
+  {
+    "pageKey": "markdown-file-upload-to-pdf",
+    "locale": "en",
+    "topic": "Uploading local Markdown files for private in-browser PDF conversion",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "upload markdown to pdf",
+    "secondaryKeywords": [
+      "convert local markdown file to pdf",
+      "drag and drop markdown pdf",
+      "offline markdown file to pdf"
+    ],
+    "longTailQueries": [
+      "how to convert local markdown file to pdf without uploading to server",
+      "upload md file to pdf in browser",
+      "private local markdown file pdf conversion"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-file-upload-to-pdf",
+    "locale": "es",
+    "topic": "Uploading local Markdown files for private in-browser PDF conversion",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "subir markdown a pdf",
+    "secondaryKeywords": [
+      "convertir archivo markdown local a pdf",
+      "arrastrar y soltar markdown a pdf",
+      "markdown local a pdf privado"
+    ],
+    "longTailQueries": [
+      "cómo convertir archivo markdown local a pdf sin servidor",
+      "subir archivo md a pdf en navegador",
+      "conversión privada de markdown a pdf"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-file-upload-to-pdf",
+    "locale": "ja",
+    "topic": "Uploading local Markdown files for private in-browser PDF conversion",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "ローカル Markdown PDF アップロード",
+    "secondaryKeywords": [
+      "Markdown ファイル PDF 変換",
+      "ドラッグアンドドロップ Markdown PDF",
+      "ブラウザ内 ローカル Markdown 変換"
+    ],
+    "longTailQueries": [
+      "サーバーに送信せずローカルのMarkdownをPDFに変換する方法",
+      "ブラウザでMarkdownファイルを直接PDF化",
+      "プライベートなローカルMarkdown変換"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-file-upload-to-pdf",
+    "locale": "ko",
+    "topic": "Uploading local Markdown files for private in-browser PDF conversion",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "로컬 마크다운 파일 업로드 PDF 변환",
+    "secondaryKeywords": [
+      "마크다운 파일 PDF 변환",
+      "드래그앤드롭 마크다운 PDF",
+      "오프라인 마크다운 변환"
+    ],
+    "longTailQueries": [
+      "서버 업로드 없이 로컬 마크다운 파일을 PDF로 변환하는 방법",
+      "브라우저에서 직접 md 파일 PDF 변환",
+      "비공개 로컬 문서 마크다운 PDF"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-file-upload-to-pdf",
+    "locale": "zh",
+    "topic": "Uploading local Markdown files for private in-browser PDF conversion",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "上传本地 Markdown 转 PDF",
+    "secondaryKeywords": [
+      "本地 Markdown 文件转 PDF",
+      "拖拽上传 Markdown PDF",
+      "离线纯前端 Markdown 转 PDF"
+    ],
+    "longTailQueries": [
+      "如何在不上传到服务器的情况下将本地Markdown转为PDF",
+      "浏览器直接上传md文件生成PDF",
+      "隐私安全本地Markdown文档转PDF"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-file-upload-to-pdf",
+    "locale": "ru",
+    "topic": "Uploading local Markdown files for private in-browser PDF conversion",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "загрузка локального markdown в pdf",
+    "secondaryKeywords": [
+      "конвертировать файл markdown в pdf",
+      "перетаскивание markdown в pdf",
+      "локальный markdown в pdf без сервера"
+    ],
+    "longTailQueries": [
+      "как конвертировать локальный файл markdown в pdf без отправки на сервер",
+      "загрузить файл md в pdf в браузере",
+      "приватная конвертация markdown файлов"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-file-upload-to-pdf",
+    "locale": "tr",
+    "topic": "Uploading local Markdown files for private in-browser PDF conversion",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "yerel markdown dosyasını pdf e dönüştürme",
+    "secondaryKeywords": [
+      "markdown yükle pdf yap",
+      "sürükle bırak markdown pdf",
+      "sunucusuz markdown pdf dönüştürücü"
+    ],
+    "longTailQueries": [
+      "sunucuya yüklemeden yerel markdown dosyasını pdf e dönüştürme",
+      "tarayıcıda md dosyasını pdf yapma",
+      "gizli yerel markdown dosya dönüştürme"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-file-upload-to-pdf",
+    "locale": "fr",
+    "topic": "Uploading local Markdown files for private in-browser PDF conversion",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "téléverser markdown en pdf",
+    "secondaryKeywords": [
+      "convertir fichier markdown local en pdf",
+      "glisser déposer markdown en pdf",
+      "markdown local en pdf sans serveur"
+    ],
+    "longTailQueries": [
+      "comment convertir un fichier markdown local en pdf sans passer par un serveur",
+      "téléverser fichier md en pdf dans le navigateur",
+      "conversion privée de markdown local en pdf"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-file-upload-to-pdf",
+    "locale": "pt",
+    "topic": "Uploading local Markdown files for private in-browser PDF conversion",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "enviar arquivo markdown para pdf",
+    "secondaryKeywords": [
+      "converter arquivo markdown local em pdf",
+      "arrastar e soltar markdown em pdf",
+      "markdown local para pdf sem servidor"
+    ],
+    "longTailQueries": [
+      "como converter arquivo markdown local em pdf sem enviar para servidor",
+      "enviar arquivo md para pdf no navegador",
+      "conversão privada de arquivo markdown em pdf"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-editor-paste-pdf",
+    "locale": "en",
+    "topic": "Pasting and live editing Markdown text for instant PDF generation",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "paste markdown to pdf",
+    "secondaryKeywords": [
+      "markdown paste editor pdf",
+      "edit markdown and export to pdf",
+      "online markdown text to pdf"
+    ],
+    "longTailQueries": [
+      "paste raw markdown text and export to pdf",
+      "in-browser markdown editor with pdf export",
+      "quick markdown paste tool with instant pdf output"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-editor-paste-pdf",
+    "locale": "es",
+    "topic": "Pasting and live editing Markdown text for instant PDF generation",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "pegar markdown a pdf",
+    "secondaryKeywords": [
+      "editor markdown pegar y convertir a pdf",
+      "editar markdown y exportar a pdf",
+      "texto markdown a pdf online"
+    ],
+    "longTailQueries": [
+      "pegar texto markdown sin procesar y exportar a pdf",
+      "editor markdown en navegador con exportación a pdf",
+      "herramienta para pegar markdown y generar pdf al instante"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-editor-paste-pdf",
+    "locale": "ja",
+    "topic": "Pasting and live editing Markdown text for instant PDF generation",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "Markdown ペースト PDF 変換",
+    "secondaryKeywords": [
+      "Markdown エディタ PDF 出力",
+      "Markdown 編集 PDF 保存",
+      "オンライン Markdown テキスト PDF"
+    ],
+    "longTailQueries": [
+      "Markdownテキストを貼り付けて即座にPDF化する方法",
+      "ブラウザ内MarkdownエディタでPDF書き出し",
+      "テキスト貼り付けからPDFを作成するオンラインツール"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-editor-paste-pdf",
+    "locale": "ko",
+    "topic": "Pasting and live editing Markdown text for instant PDF generation",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "마크다운 붙여넣기 PDF 변환",
+    "secondaryKeywords": [
+      "마크다운 편집기 PDF 출력",
+      "마크다운 텍스트 편집 후 PDF 저장",
+      "온라인 마크다운 텍스트 PDF"
+    ],
+    "longTailQueries": [
+      "마크다운 텍스트를 바로 붙여넣어 PDF로 내보내는 방법",
+      "브라우저 마크다운 에디터 PDF 생성",
+      "텍스트 붙여넣기 즉시 마크다운 PDF 변환"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-editor-paste-pdf",
+    "locale": "zh",
+    "topic": "Pasting and live editing Markdown text for instant PDF generation",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "粘贴 Markdown 文本转 PDF",
+    "secondaryKeywords": [
+      "Markdown 编辑器实时转 PDF",
+      "编辑 Markdown 导出 PDF",
+      "在线纯文本 Markdown 转 PDF"
+    ],
+    "longTailQueries": [
+      "如何直接粘贴Markdown源码并导出为PDF",
+      "免安装浏览器Markdown在线编辑器转PDF",
+      "快速粘贴md文本一键生成排版PDF"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-editor-paste-pdf",
+    "locale": "ru",
+    "topic": "Pasting and live editing Markdown text for instant PDF generation",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "вставить markdown в pdf",
+    "secondaryKeywords": [
+      "редактор markdown с экспортом в pdf",
+      "редактировать markdown и скачать pdf",
+      "онлайн текст markdown в pdf"
+    ],
+    "longTailQueries": [
+      "вставить исходный текст markdown и экспортировать в pdf",
+      "редактор markdown в браузере с сохранением в pdf",
+      "инструмент для быстрой вставки markdown в pdf"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-editor-paste-pdf",
+    "locale": "tr",
+    "topic": "Pasting and live editing Markdown text for instant PDF generation",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "markdown yapıştır pdf yap",
+    "secondaryKeywords": [
+      "markdown düzenleyici pdf dışa aktar",
+      "markdown metnini düzenleyip pdf yapma",
+      "çevrimiçi markdown metin pdf"
+    ],
+    "longTailQueries": [
+      "markdown kodunu yapıştırıp doğrudan pdf olarak indirme",
+      "tarayıcı içi markdown editörü pdf çıktısı",
+      "hızlı markdown metin yapıştırma pdf oluşturucu"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-editor-paste-pdf",
+    "locale": "fr",
+    "topic": "Pasting and live editing Markdown text for instant PDF generation",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "coller markdown en pdf",
+    "secondaryKeywords": [
+      "éditeur markdown avec export pdf",
+      "modifier markdown et exporter en pdf",
+      "texte markdown en pdf en ligne"
+    ],
+    "longTailQueries": [
+      "coller du texte markdown brut et exporter en pdf",
+      "éditeur markdown dans le navigateur avec export pdf",
+      "outil rapide pour coller du markdown et générer un pdf"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-editor-paste-pdf",
+    "locale": "pt",
+    "topic": "Pasting and live editing Markdown text for instant PDF generation",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "colar markdown para pdf",
+    "secondaryKeywords": [
+      "editor markdown com exportação para pdf",
+      "editar markdown e salvar em pdf",
+      "texto markdown para pdf online"
+    ],
+    "longTailQueries": [
+      "colar texto markdown e exportar para pdf de imediato",
+      "editor markdown no navegador com saída em pdf",
+      "ferramenta rápida de colar texto markdown e gerar pdf"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "live-markdown-preview-pdf",
+    "locale": "en",
+    "topic": "Real-time synchronized Markdown preview and PDF layout proofing",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "live markdown preview pdf",
+    "secondaryKeywords": [
+      "real time markdown preview",
+      "split screen markdown pdf editor",
+      "markdown preview before pdf print"
+    ],
+    "longTailQueries": [
+      "synchronized split screen markdown preview with pdf proofing",
+      "see live markdown formatting before generating pdf",
+      "browser markdown real time layout preview"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "live-markdown-preview-pdf",
+    "locale": "es",
+    "topic": "Real-time synchronized Markdown preview and PDF layout proofing",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "vista previa en vivo markdown pdf",
+    "secondaryKeywords": [
+      "previsualización markdown en tiempo real",
+      "editor markdown pantalla dividida pdf",
+      "revisar diseño markdown antes de imprimir pdf"
+    ],
+    "longTailQueries": [
+      "vista previa sincronizada de markdown en pantalla dividida",
+      "ver formato markdown en directo antes de generar pdf",
+      "previsualizador markdown en tiempo real en navegador"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "live-markdown-preview-pdf",
+    "locale": "ja",
+    "topic": "Real-time synchronized Markdown preview and PDF layout proofing",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "Markdown リアルタイム プレビュー PDF",
+    "secondaryKeywords": [
+      "Markdown 同期プレビュー",
+      "分割画面 Markdown エディタ PDF",
+      "印刷前 Markdown レイアウト確認"
+    ],
+    "longTailQueries": [
+      "画面分割で同期するMarkdownリアルタイムプレビュー機能",
+      "PDF生成前にMarkdownのレイアウトをブラウザで確認",
+      "リアルタイム整形確認ができるMarkdown PDFツール"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "live-markdown-preview-pdf",
+    "locale": "ko",
+    "topic": "Real-time synchronized Markdown preview and PDF layout proofing",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "마크다운 실시간 미리보기 PDF",
+    "secondaryKeywords": [
+      "마크다운 동기화 미리보기",
+      "화면 분할 마크다운 에디터 PDF",
+      "PDF 인쇄 전 마크다운 조판 확인"
+    ],
+    "longTailQueries": [
+      "좌우 화면 분할 실시간 동기화 마크다운 미리보기 기능",
+      "PDF 생성 전 마크다운 서식을 즉시 확인하는 방법",
+      "브라우저 실시간 레이아웃 마크다운 뷰어"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "live-markdown-preview-pdf",
+    "locale": "zh",
+    "topic": "Real-time synchronized Markdown preview and PDF layout proofing",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "Markdown 实时预览转 PDF",
+    "secondaryKeywords": [
+      "Markdown 同步排版预览",
+      "双栏分屏 Markdown 编辑器 PDF",
+      "导出 PDF 前实时校对 Markdown"
+    ],
+    "longTailQueries": [
+      "左右分屏双向同步滚动的Markdown实时渲染预览",
+      "生成PDF前实时检查Markdown排版与样式",
+      "浏览器即时渲染Markdown排版校对工具"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "live-markdown-preview-pdf",
+    "locale": "ru",
+    "topic": "Real-time synchronized Markdown preview and PDF layout proofing",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "живой предпросмотр markdown pdf",
+    "secondaryKeywords": [
+      "синхронный просмотр markdown в реальном времени",
+      "редактор markdown с разделенным экраном pdf",
+      "проверка макета markdown перед печатью в pdf"
+    ],
+    "longTailQueries": [
+      "синхронизированный предпросмотр markdown на разделенном экране",
+      "проверка оформления markdown перед экспортом в pdf",
+      "просмотр верстки markdown в браузере в реальном времени"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "live-markdown-preview-pdf",
+    "locale": "tr",
+    "topic": "Real-time synchronized Markdown preview and PDF layout proofing",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "canlı markdown önizleme pdf",
+    "secondaryKeywords": [
+      "gerçek zamanlı markdown önizleme",
+      "bölünmüş ekran markdown editörü pdf",
+      "pdf yazdırmadan önce markdown düzenini kontrol etme"
+    ],
+    "longTailQueries": [
+      "senkronize bölünmüş ekranda canlı markdown önizleme yapma",
+      "pdf oluşturmadan önce biçimlendirmeyi canlı görme",
+      "tarayıcıda anlık markdown dizgi kontrolü"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "live-markdown-preview-pdf",
+    "locale": "fr",
+    "topic": "Real-time synchronized Markdown preview and PDF layout proofing",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "aperçu en direct markdown pdf",
+    "secondaryKeywords": [
+      "prévisualisation markdown en temps réel",
+      "éditeur markdown écran partagé pdf",
+      "vérifier mise en page markdown avant impression pdf"
+    ],
+    "longTailQueries": [
+      "aperçu synchronisé en écran partagé de markdown avec rendu pdf",
+      "visualiser le formatage markdown en direct avant export pdf",
+      "contrôle de mise en page markdown en temps réel dans le navigateur"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "live-markdown-preview-pdf",
+    "locale": "pt",
+    "topic": "Real-time synchronized Markdown preview and PDF layout proofing",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "visualização em tempo real markdown pdf",
+    "secondaryKeywords": [
+      "pré-visualização síncrona markdown",
+      "editor markdown tela dividida pdf",
+      "conferir diagramação markdown antes de gerar pdf"
+    ],
+    "longTailQueries": [
+      "visualização sincronizada em tela dividida de markdown para pdf",
+      "acompanhar formatação markdown em tempo real antes da conversão",
+      "revisão de leiaute markdown em tempo real no navegador"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "browser-print-markdown-pdf",
+    "locale": "en",
+    "topic": "Leveraging native browser print dialog for hardware-accelerated PDF output",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "browser print markdown to pdf",
+    "secondaryKeywords": [
+      "native browser print markdown",
+      "ctrl p markdown to pdf",
+      "browser print css markdown"
+    ],
+    "longTailQueries": [
+      "how to use native browser print to save markdown as pdf",
+      "perfect paged media css for markdown printing in chrome",
+      "browser print markdown with headers footers and custom margins"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "browser-print-markdown-pdf",
+    "locale": "es",
+    "topic": "Leveraging native browser print dialog for hardware-accelerated PDF output",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "imprimir markdown a pdf desde navegador",
+    "secondaryKeywords": [
+      "impresión nativa del navegador markdown",
+      "ctrl p markdown a pdf",
+      "css de impresión markdown navegador"
+    ],
+    "longTailQueries": [
+      "cómo utilizar el cuadro de impresión del navegador para guardar markdown en pdf",
+      "css de medios paginados para imprimir markdown en chrome",
+      "imprimir markdown con encabezados pies de página y márgenes"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "browser-print-markdown-pdf",
+    "locale": "ja",
+    "topic": "Leveraging native browser print dialog for hardware-accelerated PDF output",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "ブラウザ印刷 Markdown PDF 出力",
+    "secondaryKeywords": [
+      "ネイティブ ブラウザ印刷 Markdown",
+      "Ctrl P Markdown PDF 保存",
+      "印刷用 CSS Markdown"
+    ],
+    "longTailQueries": [
+      "ブラウザの標準印刷ダイアログでMarkdownをPDF保存する方法",
+      "ChromeでMarkdownを美しく印刷するためのページメディアCSS",
+      "ヘッダーとフッターを整えてブラウザからMarkdownをPDF化"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "browser-print-markdown-pdf",
+    "locale": "ko",
+    "topic": "Leveraging native browser print dialog for hardware-accelerated PDF output",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "브라우저 기본 인쇄 마크다운 PDF 변환",
+    "secondaryKeywords": [
+      "네이티브 브라우저 인쇄 마크다운",
+      "Ctrl P 마크다운 PDF 저장",
+      "마크다운 인쇄 전용 CSS"
+    ],
+    "longTailQueries": [
+      "브라우저 인쇄 대화상자를 사용하여 마크다운을 PDF로 저장하는 방법",
+      "Chrome에서 마크다운을 완벽하게 인쇄하기 위한 CSS 설정",
+      "머리글 바닥글 여백을 조절하여 브라우저에서 마크다운 PDF 출력"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "browser-print-markdown-pdf",
+    "locale": "zh",
+    "topic": "Leveraging native browser print dialog for hardware-accelerated PDF output",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "利用浏览器原生打印将 Markdown 导出为 PDF",
+    "secondaryKeywords": [
+      "浏览器原生打印 Markdown",
+      "Ctrl P 快捷键保存 Markdown 为 PDF",
+      "分页打印 CSS 样式 Markdown"
+    ],
+    "longTailQueries": [
+      "如何通过浏览器自带打印窗口直接另存Markdown为PDF",
+      "适用于Chrome的高精度分页打印CSS排版技巧",
+      "自定义页眉页脚与打印边距的Markdown浏览器输出方案"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "browser-print-markdown-pdf",
+    "locale": "ru",
+    "topic": "Leveraging native browser print dialog for hardware-accelerated PDF output",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "печать markdown в pdf через браузер",
+    "secondaryKeywords": [
+      "нативная печать браузера markdown",
+      "сохранить markdown в pdf через ctrl p",
+      "печатные стили css для markdown"
+    ],
+    "longTailQueries": [
+      "как использовать диалог печати браузера для сохранения markdown в pdf",
+      "правильная верстка страниц css для печати markdown в chrome",
+      "печать markdown с колонтитулами и настраиваемыми полями"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "browser-print-markdown-pdf",
+    "locale": "tr",
+    "topic": "Leveraging native browser print dialog for hardware-accelerated PDF output",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "tarayıcıdan markdown pdf yazdırma",
+    "secondaryKeywords": [
+      "tarayıcı yerel yazdırma markdown",
+      "ctrl p ile markdown pdf kaydetme",
+      "baskı css markdown"
+    ],
+    "longTailQueries": [
+      "tarayıcı yazdırma penceresini kullanarak markdown u pdf kaydetme",
+      "chrome da markdown yazdırmak için paged media css kuralları",
+      "üstbilgi altbilgi ve özel kenar boşluklarıyla markdown yazdırma"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "browser-print-markdown-pdf",
+    "locale": "fr",
+    "topic": "Leveraging native browser print dialog for hardware-accelerated PDF output",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "imprimer markdown en pdf via le navigateur",
+    "secondaryKeywords": [
+      "impression native navigateur markdown",
+      "enregistrer markdown en pdf avec ctrl p",
+      "css d impression paginée markdown"
+    ],
+    "longTailQueries": [
+      "comment utiliser la boîte d impression du navigateur pour enregistrer du markdown en pdf",
+      "css paged media pour une impression markdown impeccable sous chrome",
+      "imprimer markdown avec en-têtes pieds de page et marges calibrées"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "browser-print-markdown-pdf",
+    "locale": "pt",
+    "topic": "Leveraging native browser print dialog for hardware-accelerated PDF output",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "imprimir markdown para pdf pelo navegador",
+    "secondaryKeywords": [
+      "impressão nativa do navegador markdown",
+      "salvar markdown em pdf com ctrl p",
+      "css de mídia impressa markdown"
+    ],
+    "longTailQueries": [
+      "como usar o diálogo de impressão nativo para salvar markdown em pdf",
+      "regras de paged media css para imprimir markdown no chrome",
+      "impressão de markdown com cabeçalhos rodapés e margens ajustadas"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "github-repository-markdown-tree",
+    "locale": "en",
+    "topic": "Exploring GitHub repository file trees and multi-folder Markdown documentation",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "github repository markdown tree to pdf",
+    "secondaryKeywords": [
+      "explore github repo docs pdf",
+      "browse github markdown folders",
+      "multi folder github documentation pdf"
+    ],
+    "longTailQueries": [
+      "how to explore github repository tree and export all markdown to pdf",
+      "browse nested markdown folders in github repo for pdf compile",
+      "convert entire github docs folder hierarchy into pdf"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "github-repository-markdown-tree",
+    "locale": "es",
+    "topic": "Exploring GitHub repository file trees and multi-folder Markdown documentation",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "árbol de repositorio github markdown a pdf",
+    "secondaryKeywords": [
+      "explorar documentos repositorio github pdf",
+      "navegar carpetas markdown github",
+      "documentación multinivel github a pdf"
+    ],
+    "longTailQueries": [
+      "cómo explorar el árbol de un repositorio github y exportar markdown a pdf",
+      "navegar carpetas anidadas de markdown en github para compilar pdf",
+      "convertir jerarquía completa de carpetas docs de github a pdf"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "github-repository-markdown-tree",
+    "locale": "ja",
+    "topic": "Exploring GitHub repository file trees and multi-folder Markdown documentation",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "GitHub リポジトリツリー Markdown PDF 出力",
+    "secondaryKeywords": [
+      "GitHub リポジトリ ドキュメント探索",
+      "GitHub Markdown フォルダ 閲覧",
+      "階層フォルダ GitHub ドキュメント PDF"
+    ],
+    "longTailQueries": [
+      "GitHubリポジトリのディレクトリツリーを探索してMarkdownをPDFに一括変換",
+      "ネストしたMarkdownフォルダをブラウザで閲覧してPDF作成",
+      "GitHubのdocsフォルダ階層全体を1つのPDFにまとめる方法"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "github-repository-markdown-tree",
+    "locale": "ko",
+    "topic": "Exploring GitHub repository file trees and multi-folder Markdown documentation",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "GitHub 저장소 트리 마크다운 PDF 내보내기",
+    "secondaryKeywords": [
+      "GitHub 저장소 문서 탐색",
+      "GitHub 마크다운 폴더 열람",
+      "다단계 폴더 GitHub 문서 PDF"
+    ],
+    "longTailQueries": [
+      "GitHub 저장소 트리를 탐색하고 모든 마크다운을 PDF로 내보내는 방법",
+      "중첩된 마크다운 폴더를 브라우저에서 확인하여 PDF로 컴파일",
+      "GitHub docs 폴더 전체 구조를 깔끔한 PDF로 변환하기"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "github-repository-markdown-tree",
+    "locale": "zh",
+    "topic": "Exploring GitHub repository file trees and multi-folder Markdown documentation",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "探索 GitHub 仓库树批量导出 Markdown 为 PDF",
+    "secondaryKeywords": [
+      "浏览 GitHub 仓库技术文档",
+      "GitHub 多层级 Markdown 文件夹解析",
+      "跨目录 GitHub 项目文档生成 PDF"
+    ],
+    "longTailQueries": [
+      "如何解析并浏览GitHub仓库文件树并将Markdown导出为PDF",
+      "在浏览器端直接筛选嵌套文件夹中的Markdown技术指南",
+      "一键将GitHub仓库整个docs目录结构转为排版精美PDF"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "github-repository-markdown-tree",
+    "locale": "ru",
+    "topic": "Exploring GitHub repository file trees and multi-folder Markdown documentation",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "дерево репозитория github markdown в pdf",
+    "secondaryKeywords": [
+      "обзор документов репозитория github pdf",
+      "навигация по папкам markdown github",
+      "многоуровневая документация github в pdf"
+    ],
+    "longTailQueries": [
+      "как исследовать дерево файлов репозитория github и экспортировать markdown в pdf",
+      "просмотр вложенных папок с документацией в github для сборки pdf",
+      "конвертировать всю структуру каталога docs из github в pdf"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "github-repository-markdown-tree",
+    "locale": "tr",
+    "topic": "Exploring GitHub repository file trees and multi-folder Markdown documentation",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "github depo ağacı markdown pdf",
+    "secondaryKeywords": [
+      "github depo belgelerini keşfetme",
+      "github markdown klasörlerinde gezinme",
+      "çok klasörlü github dokümantasyonu pdf"
+    ],
+    "longTailQueries": [
+      "github depo ağacını inceleyip markdown belgelerini pdf olarak dışa aktarma",
+      "github deposundaki iç içe markdown klasörlerini tarayıp pdf yapma",
+      "tüm github docs klasör yapısını tek bir pdf e dönüştürme"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "github-repository-markdown-tree",
+    "locale": "fr",
+    "topic": "Exploring GitHub repository file trees and multi-folder Markdown documentation",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "arborescence github markdown en pdf",
+    "secondaryKeywords": [
+      "explorer documentation dépôt github",
+      "parcourir dossiers markdown github",
+      "documentation multi-niveaux github en pdf"
+    ],
+    "longTailQueries": [
+      "comment explorer l arborescence d un dépôt github et exporter les markdown en pdf",
+      "parcourir les dossiers imbriqués de markdown pour compiler un pdf",
+      "convertir toute la structure de dossiers docs d un dépôt github en pdf"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "github-repository-markdown-tree",
+    "locale": "pt",
+    "topic": "Exploring GitHub repository file trees and multi-folder Markdown documentation",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "árvore de repositório github markdown para pdf",
+    "secondaryKeywords": [
+      "explorar documentação repositório github",
+      "navegar pastas markdown github",
+      "documentação multi-níveis github em pdf"
+    ],
+    "longTailQueries": [
+      "como explorar a árvore de arquivos de repositórios github e gerar pdf",
+      "navegar por pastas aninhadas de markdown no github para compilar pdf",
+      "converter toda a hierarquia de pastas docs do github em pdf"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "github-branch-tag-commit-pdf",
+    "locale": "en",
+    "topic": "Pinning Git branches, release tags, and exact commit SHAs for versioned documentation",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "pin github branch tag commit markdown pdf",
+    "secondaryKeywords": [
+      "versioned github docs to pdf",
+      "github release tag markdown pdf",
+      "commit sha documentation export"
+    ],
+    "longTailQueries": [
+      "how to export markdown from specific github release tag to pdf",
+      "pin documentation to immutable git commit hash for audit pdf",
+      "convert documentation from maintenance branch in github to pdf"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "github-branch-tag-commit-pdf",
+    "locale": "es",
+    "topic": "Pinning Git branches, release tags, and exact commit SHAs for versioned documentation",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "fijar rama etiqueta commit github markdown pdf",
+    "secondaryKeywords": [
+      "documentación github versionada a pdf",
+      "etiqueta release github markdown pdf",
+      "exportar documentación por commit sha"
+    ],
+    "longTailQueries": [
+      "cómo exportar markdown de una etiqueta de versión de github a pdf",
+      "fijar documentación a un hash de commit inmutable para auditoría",
+      "convertir documentación de rama de soporte de github a pdf"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "github-branch-tag-commit-pdf",
+    "locale": "ja",
+    "topic": "Pinning Git branches, release tags, and exact commit SHAs for versioned documentation",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "GitHub ブランチ タグ コミット 指定 Markdown PDF",
+    "secondaryKeywords": [
+      "バージョン管理 GitHub ドキュメント PDF",
+      "GitHub リリースタグ Markdown PDF",
+      "コミットSHA ドキュメント 出力"
+    ],
+    "longTailQueries": [
+      "GitHubの特定リリースタグからMarkdownを取得してPDF化する方法",
+      "監査用に不変のGitコミットハッシュから正確なPDFマニュアルを生成",
+      "保守ブランチのドキュメントを指定してPDFに変換する手順"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "github-branch-tag-commit-pdf",
+    "locale": "ko",
+    "topic": "Pinning Git branches, release tags, and exact commit SHAs for versioned documentation",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "GitHub 브랜치 태그 커밋 고정 마크다운 PDF",
+    "secondaryKeywords": [
+      "버전별 GitHub 문서 PDF 변환",
+      "GitHub 릴리스 태그 마크다운 PDF",
+      "커밋 SHA 문서 내보내기"
+    ],
+    "longTailQueries": [
+      "특정 GitHub 릴리스 태그의 마크다운을 PDF로 내보내는 방법",
+      "감사용 불변 Git 커밋 해시 기반 정확한 PDF 매뉴얼 제작",
+      "GitHub 유지보수 브랜치의 기술 문서를 선별하여 PDF로 변환하기"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "github-branch-tag-commit-pdf",
+    "locale": "zh",
+    "topic": "Pinning Git branches, release tags, and exact commit SHAs for versioned documentation",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "锁定 GitHub 分支标签提交哈希导出 Markdown 为 PDF",
+    "secondaryKeywords": [
+      "版本化 GitHub 文档转 PDF",
+      "GitHub 发布标签 Tag 文档导出",
+      "指定 Commit SHA 导出不可变文档"
+    ],
+    "longTailQueries": [
+      "如何从指定的GitHub发布标签Tag中提取Markdown并导出为PDF",
+      "锁定不可变Git提交哈希生成合规审计专用技术文档",
+      "直接从GitHub长期维护分支精准拉取最新文档生成PDF"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "github-branch-tag-commit-pdf",
+    "locale": "ru",
+    "topic": "Pinning Git branches, release tags, and exact commit SHAs for versioned documentation",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "фиксация веток тегов коммитов github markdown pdf",
+    "secondaryKeywords": [
+      "версионная документация github в pdf",
+      "релизный тег github markdown в pdf",
+      "экспорт документации по sha коммита"
+    ],
+    "longTailQueries": [
+      "как экспортировать markdown из конкретного релиза github в pdf",
+      "зафиксировать документацию на хэше коммита для аудиторского pdf",
+      "конвертировать документацию из ветки поддержки github в pdf"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "github-branch-tag-commit-pdf",
+    "locale": "tr",
+    "topic": "Pinning Git branches, release tags, and exact commit SHAs for versioned documentation",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "github dal etiket commit sabitleme markdown pdf",
+    "secondaryKeywords": [
+      "sürümlü github dokümantasyonu pdf",
+      "github sürüm etiketi markdown pdf",
+      "commit sha doküman dışa aktarımı"
+    ],
+    "longTailQueries": [
+      "belirli bir github sürüm etiketinden markdown alıp pdf e dönüştürme",
+      "denetim için değişmez git commit özetine bağlı kalarak pdf üretme",
+      "github bakım dalındaki belgeleri doğrudan pdf olarak derleme"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "github-branch-tag-commit-pdf",
+    "locale": "fr",
+    "topic": "Pinning Git branches, release tags, and exact commit SHAs for versioned documentation",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "cibler branche tag commit github markdown pdf",
+    "secondaryKeywords": [
+      "documentation versionnée github en pdf",
+      "tag de version github markdown pdf",
+      "export documentation par commit sha"
+    ],
+    "longTailQueries": [
+      "comment exporter le markdown d un tag de version github en pdf",
+      "verrouiller la documentation sur un commit git immuable pour audit",
+      "convertir la documentation d une branche de maintenance github en pdf"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "github-branch-tag-commit-pdf",
+    "locale": "pt",
+    "topic": "Pinning Git branches, release tags, and exact commit SHAs for versioned documentation",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "fixar branch tag commit github markdown pdf",
+    "secondaryKeywords": [
+      "documentação versionada github em pdf",
+      "tag de lançamento github markdown pdf",
+      "exportação de documentação por commit sha"
+    ],
+    "longTailQueries": [
+      "como exportar markdown de uma tag de versão específica do github em pdf",
+      "vincular documentação a um hash de commit imutável para auditoria",
+      "converter documentação de branch de manutenção do github em pdf"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-file-search-filter",
+    "locale": "en",
+    "topic": "Searching and filtering Markdown files within extensive documentation repositories",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "search and filter markdown files pdf",
+    "secondaryKeywords": [
+      "markdown path filter",
+      "find markdown files in repository",
+      "filter markdown tree before pdf compile"
+    ],
+    "longTailQueries": [
+      "how to search and filter markdown files across large repository trees for pdf",
+      "real-time path filtering for multi-file markdown compilations",
+      "filter specific documentation chapters before exporting to pdf"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-file-search-filter",
+    "locale": "es",
+    "topic": "Searching and filtering Markdown files within extensive documentation repositories",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "buscar y filtrar archivos markdown pdf",
+    "secondaryKeywords": [
+      "filtro de ruta markdown",
+      "buscar archivos markdown en repositorio",
+      "filtrar árbol markdown antes de compilar pdf"
+    ],
+    "longTailQueries": [
+      "cómo buscar y filtrar archivos markdown en repositorios grandes para pdf",
+      "filtrado de rutas en tiempo real para compilaciones markdown",
+      "filtrar capítulos específicos de documentación antes de exportar a pdf"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-file-search-filter",
+    "locale": "ja",
+    "topic": "Searching and filtering Markdown files within extensive documentation repositories",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "Markdown ファイル 検索 絞り込み PDF",
+    "secondaryKeywords": [
+      "Markdown パスフィルター",
+      "リポジトリ内 Markdown ファイル 検索",
+      "コンパイル前 ドキュメント フィルタリング"
+    ],
+    "longTailQueries": [
+      "大規模リポジトリからMarkdownファイルをリアルタイム検索してPDF化",
+      "パス名によるリアルタイム絞り込みで必要なドキュメントのみを抽出",
+      "PDF書き出し前に対象の技術マニュアル章を検索フィルターで選択"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-file-search-filter",
+    "locale": "ko",
+    "topic": "Searching and filtering Markdown files within extensive documentation repositories",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "마크다운 파일 검색 및 필터링 PDF 변환",
+    "secondaryKeywords": [
+      "마크다운 경로 필터링",
+      "저장소 내 마크다운 파일 찾기",
+      "PDF 컴파일 전 문서 필터링"
+    ],
+    "longTailQueries": [
+      "대규모 저장소 트리에서 마크다운 파일을 실시간 검색하여 PDF로 추출하는 방법",
+      "다중 파일 컴파일을 위한 실시간 경로 기반 필터 기능",
+      "PDF 내보내기 전 원하는 기술 문서 챕터만 신속하게 검색하여 선택하기"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-file-search-filter",
+    "locale": "zh",
+    "topic": "Searching and filtering Markdown files within extensive documentation repositories",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "在文档树中搜索和过滤 Markdown 文件转 PDF",
+    "secondaryKeywords": [
+      "Markdown 路径实时过滤器",
+      "在代码仓库中快速查找 Markdown",
+      "编译 PDF 前筛选目标章节"
+    ],
+    "longTailQueries": [
+      "如何从大型复杂仓库中按路径即时搜索并筛选Markdown文档导出PDF",
+      "多层级文件树纯前端内存级极速路径匹配技术",
+      "在批量生成技术手册前按关键词精确圈选目标文档"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-file-search-filter",
+    "locale": "ru",
+    "topic": "Searching and filtering Markdown files within extensive documentation repositories",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "поиск и фильтрация файлов markdown pdf",
+    "secondaryKeywords": [
+      "фильтр путей markdown",
+      "найти файлы markdown в репозитории",
+      "фильтрация дерева документации перед сборкой pdf"
+    ],
+    "longTailQueries": [
+      "как искать и фильтровать файлы markdown в больших проектах для экспорта в pdf",
+      "мгновенная фильтрация по путям для объединения статей markdown",
+      "отбор определенных глав документации перед созданием pdf"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-file-search-filter",
+    "locale": "tr",
+    "topic": "Searching and filtering Markdown files within extensive documentation repositories",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "markdown dosyalarını arama ve filtreleme pdf",
+    "secondaryKeywords": [
+      "markdown yol filtresi",
+      "depoda markdown dosyalarını bulma",
+      "pdf derlemesi öncesi doküman filtreleme"
+    ],
+    "longTailQueries": [
+      "büyük depolarda markdown dosyalarını arayıp filtreleyerek pdf üretme",
+      "çok dosyalı derlemeler için gerçek zamanlı dosya yolu filtreleme",
+      "pdf dışa aktarımı öncesinde belirli teknik bölümleri filtreleyip seçme"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-file-search-filter",
+    "locale": "fr",
+    "topic": "Searching and filtering Markdown files within extensive documentation repositories",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "rechercher et filtrer fichiers markdown pdf",
+    "secondaryKeywords": [
+      "filtre de chemin markdown",
+      "trouver fichiers markdown dans dépôt",
+      "filtrer arborescence markdown avant compilation pdf"
+    ],
+    "longTailQueries": [
+      "comment rechercher et filtrer des fichiers markdown dans de grands dépôts pour pdf",
+      "filtrage de chemins en temps réel pour compilations documentaires",
+      "sélectionner des chapitres spécifiques par recherche avant export en pdf"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-file-search-filter",
+    "locale": "pt",
+    "topic": "Searching and filtering Markdown files within extensive documentation repositories",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "pesquisar e filtrar arquivos markdown pdf",
+    "secondaryKeywords": [
+      "filtro de caminho markdown",
+      "localizar arquivos markdown em repositório",
+      "filtrar árvore de documentação antes de compilar pdf"
+    ],
+    "longTailQueries": [
+      "como pesquisar e filtrar arquivos markdown em grandes árvores para gerar pdf",
+      "filtragem de caminhos em tempo real para compilações de múltiplos arquivos",
+      "selecionar capítulos específicos por busca antes de exportar para pdf"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-folder-selection-book",
+    "locale": "en",
+    "topic": "Tri-state folder selection controls for compiling multi-directory Markdown books",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "tri state folder selection markdown book pdf",
+    "secondaryKeywords": [
+      "select folder markdown to pdf",
+      "batch directory markdown compile",
+      "indeterminate checkbox markdown tree"
+    ],
+    "longTailQueries": [
+      "how to use tri-state folder selection to compile multi-directory markdown into a pdf book",
+      "select or deselect entire documentation folders for pdf book generation",
+      "cascading checkbox selection for technical documentation trees"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-folder-selection-book",
+    "locale": "es",
+    "topic": "Tri-state folder selection controls for compiling multi-directory Markdown books",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "selección de carpetas de tres estados libro markdown pdf",
+    "secondaryKeywords": [
+      "seleccionar carpeta markdown a pdf",
+      "compilar directorio markdown por lotes",
+      "casilla indeterminada árbol markdown"
+    ],
+    "longTailQueries": [
+      "cómo utilizar la selección de carpetas de tres estados para compilar libros markdown en pdf",
+      "seleccionar o desmarcar carpetas completas para generar libros pdf",
+      "lógica de casillas en cascada para árboles de documentación técnica"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-folder-selection-book",
+    "locale": "ja",
+    "topic": "Tri-state folder selection controls for compiling multi-directory Markdown books",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "3状態フォルダ選択 Markdown 書籍 PDF",
+    "secondaryKeywords": [
+      "フォルダ選択 Markdown PDF 変換",
+      "ディレクトリ単位 Markdown 一括コンパイル",
+      "中間状態チェックボックス Markdown ツリー"
+    ],
+    "longTailQueries": [
+      "3状態フォルダチェックボックスを使って複数ディレクトリのMarkdownをPDF本にまとめる方法",
+      "フォルダ単位で一括選択・解除して技術ドキュメント電子書籍を生成",
+      "階層ツリー連動カスケードチェックボックスの活用テクニック"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-folder-selection-book",
+    "locale": "ko",
+    "topic": "Tri-state folder selection controls for compiling multi-directory Markdown books",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "삼중 상태 폴더 선택 마크다운 전자책 PDF",
+    "secondaryKeywords": [
+      "폴더 단위 마크다운 PDF 선택",
+      "디렉터리 일괄 마크다운 컴파일",
+      "중간 상태 체크박스 문서 트리"
+    ],
+    "longTailQueries": [
+      "삼중 상태 폴더 선택을 활용하여 여러 디렉터리의 마크다운을 단일 PDF 책으로 엮는 방법",
+      "폴더 전체를 한 번에 켜고 끄며 기술 문서 전자책 제작하기",
+      "계층형 문서 트리를 위한 캐스케이딩 체크박스 선택 로직"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-folder-selection-book",
+    "locale": "zh",
+    "topic": "Tri-state folder selection controls for compiling multi-directory Markdown books",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "三态文件夹复选框编译 Markdown 电子书 PDF",
+    "secondaryKeywords": [
+      "目录级一键勾选 Markdown 转 PDF",
+      "批量目录 Markdown 编译成书",
+      "半选半开状态树形复选框"
+    ],
+    "longTailQueries": [
+      "如何利用三态文件夹复选框将跨目录的多篇Markdown快速编译为PDF电子书",
+      "一键全选或反选整套技术手册文件夹生成统一PDF",
+      "树形结构中智能双向级联复选框在技术文档导出中的应用"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-folder-selection-book",
+    "locale": "ru",
+    "topic": "Tri-state folder selection controls for compiling multi-directory Markdown books",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "трехпозиционный выбор папок книга markdown pdf",
+    "secondaryKeywords": [
+      "выбор папок markdown в pdf",
+      "пакетная компиляция каталогов markdown",
+      "неопределенный чекбокс дерево markdown"
+    ],
+    "longTailQueries": [
+      "как использовать трехпозиционные чекбоксы для сборки книги markdown в pdf",
+      "выбор или исключение целых папок с документацией для генерации книги pdf",
+      "каскадная логика выбора чекбоксов для дерева технической документации"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-folder-selection-book",
+    "locale": "tr",
+    "topic": "Tri-state folder selection controls for compiling multi-directory Markdown books",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "üç durumlu klasör seçimi markdown kitap pdf",
+    "secondaryKeywords": [
+      "klasör seçip markdown pdf yapma",
+      "toplu dizin markdown derleme",
+      "belirsiz onay kutusu markdown ağacı"
+    ],
+    "longTailQueries": [
+      "üç durumlu klasör seçimini kullanarak çok dizinli markdown belgelerini pdf kitaba dönüştürme",
+      "pdf kitap oluşturmak için tüm dokümantasyon klasörlerini tek tıkla seçme veya çıkarma",
+      "teknik belge ağaçları için kademeli onay kutusu seçim mantığı"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-folder-selection-book",
+    "locale": "fr",
+    "topic": "Tri-state folder selection controls for compiling multi-directory Markdown books",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "sélection de dossiers à trois états livre markdown pdf",
+    "secondaryKeywords": [
+      "sélectionner dossiers markdown en pdf",
+      "compiler répertoire markdown par lot",
+      "case indéterminée arborescence markdown"
+    ],
+    "longTailQueries": [
+      "comment utiliser la sélection à trois états pour compiler des dossiers markdown en livre pdf",
+      "sélectionner ou désélectionner des répertoires entiers pour créer un livre pdf",
+      "logique de cases en cascade pour arborescences documentaires techniques"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-folder-selection-book",
+    "locale": "pt",
+    "topic": "Tri-state folder selection controls for compiling multi-directory Markdown books",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "seleção de pastas em três estados livro markdown pdf",
+    "secondaryKeywords": [
+      "selecionar pasta markdown para pdf",
+      "compilação em lote de diretórios markdown",
+      "caixa indeterminada árvore markdown"
+    ],
+    "longTailQueries": [
+      "como usar seleção de pastas em três estados para compilar livro markdown em pdf",
+      "marcar ou desmarcar pastas completas para gerar livros técnicos em pdf",
+      "lógica de caixas de seleção em cascata para árvores de documentação"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "chapter-sequencing-reordering-pdf",
+    "locale": "en",
+    "topic": "Interactive sequencing and reordering of Markdown chapters for structured PDF books",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "reorder markdown chapters pdf book",
+    "secondaryKeywords": [
+      "sequence markdown documents pdf",
+      "change chapter order markdown",
+      "custom chapter hierarchy pdf"
+    ],
+    "longTailQueries": [
+      "how to sequence and reorder markdown chapters for customized pdf books",
+      "interactive chapter ordering controls before compiling documentation to pdf",
+      "organize reading flow of multi-file markdown documents in pdf"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "chapter-sequencing-reordering-pdf",
+    "locale": "es",
+    "topic": "Interactive sequencing and reordering of Markdown chapters for structured PDF books",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "reordenar capítulos markdown libro pdf",
+    "secondaryKeywords": [
+      "secuenciar documentos markdown pdf",
+      "cambiar orden capítulos markdown",
+      "jerarquía de capítulos personalizada pdf"
+    ],
+    "longTailQueries": [
+      "cómo ordenar y secuenciar capítulos markdown para libros pdf personalizados",
+      "controles interactivos de ordenación de capítulos antes de compilar pdf",
+      "organizar el flujo de lectura de documentos markdown en un manual pdf"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "chapter-sequencing-reordering-pdf",
+    "locale": "ja",
+    "topic": "Interactive sequencing and reordering of Markdown chapters for structured PDF books",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "Markdown 章順並び替え PDF 書籍",
+    "secondaryKeywords": [
+      "Markdown ドキュメント 順序設定",
+      "チャプター 順序変更 Markdown",
+      "カスタム章階層 PDF 作成"
+    ],
+    "longTailQueries": [
+      "Markdownの章順を自由に並び替えて論理的なPDF書籍を作成する方法",
+      "PDFコンパイル前にドキュメントの順序を直感的に調整するコントロール",
+      "複数ファイルの技術ドキュメントを読みやすい順番に編成する手順"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "chapter-sequencing-reordering-pdf",
+    "locale": "ko",
+    "topic": "Interactive sequencing and reordering of Markdown chapters for structured PDF books",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "마크다운 챕터 순서 재정렬 PDF 전자책",
+    "secondaryKeywords": [
+      "마크다운 문서 순서 배치",
+      "챕터 순서 변경 마크다운",
+      "맞춤형 장 계층 구조 PDF"
+    ],
+    "longTailQueries": [
+      "맞춤형 PDF 전자책 제작을 위해 마크다운 챕터 순서를 재배치하는 방법",
+      "PDF 컴파일 전 직관적인 대기열 조작을 통한 문서 순서 편집",
+      "다중 파일 마크다운 문서를 자연스러운 독서 흐름에 맞게 정렬하기"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "chapter-sequencing-reordering-pdf",
+    "locale": "zh",
+    "topic": "Interactive sequencing and reordering of Markdown chapters for structured PDF books",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "重排 Markdown 章节顺序定制 PDF 电子书",
+    "secondaryKeywords": [
+      "调整 Markdown 篇章次序",
+      "修改章节前后顺序 Markdown",
+      "自定义技术图书章节目录 PDF"
+    ],
+    "longTailQueries": [
+      "如何自由调整Markdown章节顺序编译逻辑严密的PDF技术手册",
+      "在正式生成PDF前通过直观界面上移下移排布文档次序",
+      "打破文件名默认排序按读者认知规律编撰多文件Markdown图书"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "chapter-sequencing-reordering-pdf",
+    "locale": "ru",
+    "topic": "Interactive sequencing and reordering of Markdown chapters for structured PDF books",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "изменение порядка глав markdown книга pdf",
+    "secondaryKeywords": [
+      "последовательность документов markdown pdf",
+      "изменить порядок глав markdown",
+      "настраиваемая иерархия глав pdf"
+    ],
+    "longTailQueries": [
+      "как настроить последовательность и порядок глав markdown для сборки книги pdf",
+      "интерактивное управление очередью файлов перед компиляцией в pdf",
+      "организация логичного чтения многостраничной документации в едином pdf"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "chapter-sequencing-reordering-pdf",
+    "locale": "tr",
+    "topic": "Interactive sequencing and reordering of Markdown chapters for structured PDF books",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "markdown bölümlerini yeniden sıralama pdf kitap",
+    "secondaryKeywords": [
+      "markdown belgelerini sıralama",
+      "bölüm sırasını değiştirme markdown",
+      "özel bölüm hiyerarşisi pdf"
+    ],
+    "longTailQueries": [
+      "özel pdf kitaplar için markdown bölümlerini mantıksal bir akışa göre sıralama",
+      "dokümanları pdf e dönüştürmeden önce bölüm sırasını pratik şekilde düzenleme",
+      "çok dosyalı markdown dokümanlarını ideal okuma düzeninde birleştirme"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "chapter-sequencing-reordering-pdf",
+    "locale": "fr",
+    "topic": "Interactive sequencing and reordering of Markdown chapters for structured PDF books",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "réorganiser chapitres markdown livre pdf",
+    "secondaryKeywords": [
+      "ordonner documents markdown pdf",
+      "modifier ordre chapitres markdown",
+      "hiérarchie de chapitres sur mesure pdf"
+    ],
+    "longTailQueries": [
+      "comment ordonner et séquencer des chapitres markdown pour des livres pdf sur mesure",
+      "commandes interactives pour ajuster l ordre des guides avant rendu pdf",
+      "structurer le fil de lecture de plusieurs fichiers markdown dans un manuel pdf"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "chapter-sequencing-reordering-pdf",
+    "locale": "pt",
+    "topic": "Interactive sequencing and reordering of Markdown chapters for structured PDF books",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "reordenar capítulos markdown livro pdf",
+    "secondaryKeywords": [
+      "sequenciar documentos markdown pdf",
+      "alterar ordem de capítulos markdown",
+      "hierarquia personalizada de capítulos pdf"
+    ],
+    "longTailQueries": [
+      "como ordenar e sequenciar capítulos markdown para livros pdf personalizados",
+      "controles visuais de ordenação de capítulos antes de compilar para pdf",
+      "estruturar o fluxo didático de múltiplos arquivos markdown em um volume pdf"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-pdf-cover-page",
+    "locale": "en",
+    "topic": "Automated synthesis and styling of professional PDF cover pages from Markdown metadata",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "generate markdown pdf cover page",
+    "secondaryKeywords": [
+      "pdf title page markdown",
+      "book cover page generator",
+      "professional documentation cover sheet"
+    ],
+    "longTailQueries": [
+      "how to automatically generate a professional cover page for markdown pdf books",
+      "custom title author and date cover sheet for technical documentation pdf",
+      "theme styled pdf cover page for markdown repositories"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-pdf-cover-page",
+    "locale": "es",
+    "topic": "Automated synthesis and styling of professional PDF cover pages from Markdown metadata",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "generar portada pdf para markdown",
+    "secondaryKeywords": [
+      "página de título pdf markdown",
+      "generador de portadas de libros pdf",
+      "portada profesional para documentación técnica"
+    ],
+    "longTailQueries": [
+      "cómo generar automáticamente una portada profesional para libros markdown en pdf",
+      "hoja de portada con título autor y fecha para documentación técnica",
+      "portada estilizada según el tema de impresión en md2pdf"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-pdf-cover-page",
+    "locale": "ja",
+    "topic": "Automated synthesis and styling of professional PDF cover pages from Markdown metadata",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "Markdown PDF 表紙 自動生成",
+    "secondaryKeywords": [
+      "PDF タイトルページ 作成",
+      "技術書 表紙 ジェネレーター",
+      "プロフェッショナル ドキュメント カバー"
+    ],
+    "longTailQueries": [
+      "MarkdownプロジェクトからプロフェッショナルなPDF表紙を自動生成する方法",
+      "タイトル 著者名 日時を明記した技術ドキュメント用カバーシート",
+      "印刷テーマに調和した洗練されたPDF表紙の作成テクニック"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-pdf-cover-page",
+    "locale": "ko",
+    "topic": "Automated synthesis and styling of professional PDF cover pages from Markdown metadata",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "마크다운 PDF 표지 자동 생성",
+    "secondaryKeywords": [
+      "PDF 타이틀 페이지 제작",
+      "전자책 표지 생성기",
+      "전문 기술 문서 커버 시트"
+    ],
+    "longTailQueries": [
+      "마크다운 프로젝트에서 출판물 수준의 품격을 갖춘 PDF 표지를 자동으로 만드는 방법",
+      "문서 제목 작성자 발행일자가 포함된 기술 문서 타이틀 페이지",
+      "인쇄 테마와 완벽하게 어우러지는 감각적인 PDF 커버 페이지 생성"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-pdf-cover-page",
+    "locale": "zh",
+    "topic": "Automated synthesis and styling of professional PDF cover pages from Markdown metadata",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "自动生成 Markdown PDF 电子书精装封面",
+    "secondaryKeywords": [
+      "PDF 扉页自动合成",
+      "技术图书封面生成器",
+      "包含作者与日期的正式封面页"
+    ],
+    "longTailQueries": [
+      "如何一键为Markdown项目自动合成专业排版的高清PDF电子书封面",
+      "自动提取仓库标题作者与版本日期排版正式扉页",
+      "与打印主题风格无缝融合的出版级PDF封面设计方案"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-pdf-cover-page",
+    "locale": "ru",
+    "topic": "Automated synthesis and styling of professional PDF cover pages from Markdown metadata",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "создание обложки pdf для markdown",
+    "secondaryKeywords": [
+      "титульная страница pdf markdown",
+      "генератор обложек для книг pdf",
+      "профессиональный титульный лист документации"
+    ],
+    "longTailQueries": [
+      "как автоматически сгенерировать красивую обложку для книги markdown в pdf",
+      "титульный лист с названием автором и датой для технической документации",
+      "оформление обложки pdf в едином стиле с выбранной темой"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-pdf-cover-page",
+    "locale": "tr",
+    "topic": "Automated synthesis and styling of professional PDF cover pages from Markdown metadata",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "markdown pdf kapak sayfası oluşturma",
+    "secondaryKeywords": [
+      "pdf başlık sayfası markdown",
+      "kitap kapağı oluşturucu",
+      "profesyonel teknik doküman kapağı"
+    ],
+    "longTailQueries": [
+      "markdown projelerinden otomatik olarak profesyonel pdf kapak sayfası oluşturma",
+      "başlık yazar ve tarih içeren teknik doküman başlık sayfası hazırlama",
+      "seçilen yazdırma temasına uygun şık pdf kitap kapağı üretimi"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-pdf-cover-page",
+    "locale": "fr",
+    "topic": "Automated synthesis and styling of professional PDF cover pages from Markdown metadata",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "créer page de couverture pdf markdown",
+    "secondaryKeywords": [
+      "page de titre pdf markdown",
+      "générateur de couverture de livre pdf",
+      "couverture professionnelle documentation technique"
+    ],
+    "longTailQueries": [
+      "comment générer automatiquement une page de couverture soignée pour un livre markdown pdf",
+      "page de titre avec nom du projet auteur et date pour guide technique",
+      "couverture de document pdf harmonisée avec le thème d impression"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-pdf-cover-page",
+    "locale": "pt",
+    "topic": "Automated synthesis and styling of professional PDF cover pages from Markdown metadata",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "gerar capa pdf para markdown",
+    "secondaryKeywords": [
+      "página de título pdf markdown",
+      "gerador de capas de livros pdf",
+      "folha de rosto profissional para documentação"
+    ],
+    "longTailQueries": [
+      "como gerar automaticamente uma folha de rosto elegante para livros markdown em pdf",
+      "capa com título autor e data de compilação para manuais técnicos",
+      "design de capa em pdf harmonizado com o tema tipográfico"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-relative-images-links-pdf",
+    "locale": "en",
+    "topic": "Resolving relative image paths and cross-document Markdown links for PDF conversion",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "resolve relative images links markdown pdf",
+    "secondaryKeywords": [
+      "markdown relative path image embed",
+      "cross document link internal pdf anchor",
+      "fix broken images in markdown pdf"
+    ],
+    "longTailQueries": [
+      "how md2pdf resolves relative image paths and cross-document links into pdf",
+      "embed github repository relative images directly into pdf without breaking",
+      "transform relative markdown links into clickable internal pdf bookmarks"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-relative-images-links-pdf",
+    "locale": "es",
+    "topic": "Resolving relative image paths and cross-document Markdown links for PDF conversion",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "resolver imágenes relativas y enlaces markdown pdf",
+    "secondaryKeywords": [
+      "incrustar imagen ruta relativa markdown",
+      "enlace entre documentos ancla interna pdf",
+      "corregir imágenes rotas en markdown pdf"
+    ],
+    "longTailQueries": [
+      "cómo resuelve md2pdf las rutas relativas de imágenes y enlaces entre documentos",
+      "incrustar imágenes relativas de repositorios github en pdf sin enlaces rotos",
+      "transformar enlaces relativos de markdown en saltos internos navegables en pdf"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-relative-images-links-pdf",
+    "locale": "ja",
+    "topic": "Resolving relative image paths and cross-document Markdown links for PDF conversion",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "Markdown 相対パス画像 リンク 解決 PDF",
+    "secondaryKeywords": [
+      "Markdown 相対パス画像埋め込み",
+      "ドキュメント間リンク PDF内部ジャンプ",
+      "Markdown PDF 画像リンク切れ 修正"
+    ],
+    "longTailQueries": [
+      "md2pdfが相対画像パスや文書間リンクを正確に解決してPDF化する仕組み",
+      "GitHubリポジトリの相対画像をリンク切れなくPDF内部に直接埋め込む方法",
+      "ファイル間リンクをクリック可能なPDF内部アンカーに変換する手順"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-relative-images-links-pdf",
+    "locale": "ko",
+    "topic": "Resolving relative image paths and cross-document Markdown links for PDF conversion",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "마크다운 상대 경로 이미지 및 링크 해결 PDF",
+    "secondaryKeywords": [
+      "마크다운 상대 경로 이미지 임베드",
+      "문서 간 파일 링크 PDF 내부 이동 앵커",
+      "마크다운 PDF 깨진 이미지 해결"
+    ],
+    "longTailQueries": [
+      "md2pdf가 마크다운 상대 경로 이미지와 문서 간 링크를 완벽히 복원하는 방법",
+      "GitHub 저장소의 상대 경로 이미지를 깨짐 없이 PDF 내부에 임베드하기",
+      "상대 경로 마크다운 링크를 클릭 가능한 PDF 내부 북마크로 변환하는 원리"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-relative-images-links-pdf",
+    "locale": "zh",
+    "topic": "Resolving relative image paths and cross-document Markdown links for PDF conversion",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "自动解析 Markdown 相对路径图片与跨文档超链接转 PDF",
+    "secondaryKeywords": [
+      "Markdown 相对路径图片内嵌",
+      "跨文档相对超链接重写为内部锚点",
+      "解决 Markdown 转 PDF 图片失效"
+    ],
+    "longTailQueries": [
+      "md2pdf如何在前端精准解析计算相对图片路径与跨章节Markdown超链接",
+      "将GitHub仓库中的相对路径配图无损提取并内嵌至高清PDF",
+      "把文档间的相对路径链接转化为PDF内部可点击跳转的书签目标"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-relative-images-links-pdf",
+    "locale": "ru",
+    "topic": "Resolving relative image paths and cross-document Markdown links for PDF conversion",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "обработка относительных путей картинок ссылок markdown pdf",
+    "secondaryKeywords": [
+      "встраивание картинок по относительному пути markdown",
+      "ссылки между файлами внутренние якоря pdf",
+      "исправление сломанных картинок в markdown pdf"
+    ],
+    "longTailQueries": [
+      "как md2pdf разрешает относительные пути к изображениям и ссылкам при конвертации",
+      "встраивание относительных изображений из github прямо в pdf без разрывов",
+      "преобразование ссылок между файлами markdown во внутренние переходы pdf"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-relative-images-links-pdf",
+    "locale": "tr",
+    "topic": "Resolving relative image paths and cross-document Markdown links for PDF conversion",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "markdown göreli resim yolları ve bağlantıları çözme pdf",
+    "secondaryKeywords": [
+      "göreli yoldaki resmi markdown pdf içine gömme",
+      "belgeler arası bağlantıyı dahili pdf köprüsüne dönüştürme",
+      "markdown pdf kırık resim düzeltme"
+    ],
+    "longTailQueries": [
+      "md2pdf göreli resim yollarını ve belgeler arası bağlantıları nasıl çözer",
+      "github deposundaki göreli resimleri kopmadan doğrudan pdf içine gömme",
+      "göreli markdown bağlantılarını tıklanabilir pdf içi bağlantılara dönüştürme"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-relative-images-links-pdf",
+    "locale": "fr",
+    "topic": "Resolving relative image paths and cross-document Markdown links for PDF conversion",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "résoudre images relatives et liens markdown pdf",
+    "secondaryKeywords": [
+      "incorporer image chemin relatif markdown",
+      "lien entre documents ancre interne pdf",
+      "corriger images manquantes markdown pdf"
+    ],
+    "longTailQueries": [
+      "comment md2pdf résout les chemins d images relatifs et les liens entre documents",
+      "intégrer des images relatives de dépôts github directement dans le pdf sans rupture",
+      "convertir des liens markdown relatifs en signets internes interactifs dans le pdf"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-relative-images-links-pdf",
+    "locale": "pt",
+    "topic": "Resolving relative image paths and cross-document Markdown links for PDF conversion",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "resolver imagens relativas e links markdown pdf",
+    "secondaryKeywords": [
+      "incorporar imagem de caminho relativo markdown",
+      "link entre documentos âncora interna pdf",
+      "corrigir imagens quebradas no markdown pdf"
+    ],
+    "longTailQueries": [
+      "como o md2pdf resolve caminhos relativos de imagens e referências entre documentos",
+      "embutir imagens relativas do github diretamente no pdf sem links quebrados",
+      "transformar links relativos em âncoras internas navegáveis dentro do pdf"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-zip-pdf-export",
+    "locale": "en",
+    "topic": "Batch converting multiple Markdown documents into individual standalone PDFs in a ZIP archive",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "batch markdown to individual pdfs zip",
+    "secondaryKeywords": [
+      "export markdown files as zip of pdfs",
+      "jszip browser pdf export",
+      "download multiple markdown pdfs in one zip"
+    ],
+    "longTailQueries": [
+      "how to convert multiple markdown files into individual standalone pdfs inside a single zip",
+      "batch export markdown documentation as zip archive using client-side jszip",
+      "download modular documentation pdfs without triggering multiple browser prompts"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-zip-pdf-export",
+    "locale": "es",
+    "topic": "Batch converting multiple Markdown documents into individual standalone PDFs in a ZIP archive",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "convertir markdown en pdfs individuales zip",
+    "secondaryKeywords": [
+      "exportar archivos markdown en zip de pdfs",
+      "jszip exportar pdf navegador",
+      "descargar multiples pdfs markdown en un solo zip"
+    ],
+    "longTailQueries": [
+      "cómo convertir múltiples archivos markdown en pdfs independientes dentro de un zip",
+      "exportar documentación por lotes en archivo zip mediante jszip en el navegador",
+      "descargar manuales modulares en pdf sin bloqueos de descarga en el navegador"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-zip-pdf-export",
+    "locale": "ja",
+    "topic": "Batch converting multiple Markdown documents into individual standalone PDFs in a ZIP archive",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "Markdown 個別 PDF 一括変換 ZIP 出力",
+    "secondaryKeywords": [
+      "Markdown ファイル群 ZIP 圧縮 PDF",
+      "JSZip ブラウザ PDF エクスポート",
+      "複数 Markdown を1つのZIPで一括保存"
+    ],
+    "longTailQueries": [
+      "複数のMarkdownファイルをそれぞれ独立したPDFとして変換し1つのZIPで保存する方法",
+      "JSZipを活用してブラウザ内で直接PDFファイルをZIPアーカイブに圧縮",
+      "ブラウザのダウンロード警告を出さずに複数の技術仕様書PDFを一括取得"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-zip-pdf-export",
+    "locale": "ko",
+    "topic": "Batch converting multiple Markdown documents into individual standalone PDFs in a ZIP archive",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "마크다운 개별 PDF 변환 후 단일 ZIP 일괄 다운로드",
+    "secondaryKeywords": [
+      "마크다운 파일 압축 ZIP PDF 내보내기",
+      "JSZip 브라우저 PDF 압축",
+      "여러 마크다운 문서를 하나의 ZIP으로 저장"
+    ],
+    "longTailQueries": [
+      "여러 마크다운 파일을 개별 독립형 PDF로 변환하여 단일 ZIP 파일로 묶어 다운로드하는 방법",
+      "브라우저 내부 JSZip을 활용한 클라이언트 사이드 일괄 PDF 압축 처리",
+      "브라우저 다중 다운로드 경고 없이 모듈별 기술 문서 PDF 한 번에 받기"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-zip-pdf-export",
+    "locale": "zh",
+    "topic": "Batch converting multiple Markdown documents into individual standalone PDFs in a ZIP archive",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "批量转换 Markdown 为独立 PDF 并打包单个 ZIP 导出",
+    "secondaryKeywords": [
+      "Markdown 多文件打包为 PDF 压缩包",
+      "纯前端 JSZip 浏览器本地打包 PDF",
+      "一键下载多个独立技术文档 PDF"
+    ],
+    "longTailQueries": [
+      "如何将多篇Markdown分别转换为独立PDF并在前端打包为一个ZIP压缩包下载",
+      "基于JSZip的纯浏览器无服务器端介入的PDF批量压缩打包方案",
+      "避免触发浏览器连续下载拦截一键极速打包获取全套技术文档"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-zip-pdf-export",
+    "locale": "ru",
+    "topic": "Batch converting multiple Markdown documents into individual standalone PDFs in a ZIP archive",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "пакетная конвертация markdown в отдельные pdf zip",
+    "secondaryKeywords": [
+      "экспорт файлов markdown в архив zip с pdf",
+      "jszip экспорт pdf в браузере",
+      "скачать несколько markdown pdf одним zip архивом"
+    ],
+    "longTailQueries": [
+      "как преобразовать несколько файлов markdown в отдельные pdf внутри одного zip архива",
+      "пакетный экспорт документации markdown в архив zip с помощью jszip в браузере",
+      "скачать модульные руководства в pdf без предупреждений браузера о загрузках"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-zip-pdf-export",
+    "locale": "tr",
+    "topic": "Batch converting multiple Markdown documents into individual standalone PDFs in a ZIP archive",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "markdown dosyalarını bağımsız pdf olarak zip indirme",
+    "secondaryKeywords": [
+      "markdown belgelerini zip pdf olarak dışa aktarma",
+      "jszip tarayıcıda pdf sıkıştırma",
+      "birden fazla markdown pdf ini tek zipte indirme"
+    ],
+    "longTailQueries": [
+      "çok sayıda markdown belgesini bağımsız pdf lere dönüştürüp tek bir zipte indirme",
+      "tarayıcı içi jszip kullanarak belgeleri sunucusuz zip arşivine paketleme",
+      "tarayıcı indirme uyarılarına takılmadan modüler teknik dokümanları topluca indirme"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-zip-pdf-export",
+    "locale": "fr",
+    "topic": "Batch converting multiple Markdown documents into individual standalone PDFs in a ZIP archive",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "convertir markdown en pdfs individuels dans un zip",
+    "secondaryKeywords": [
+      "exporter fichiers markdown en archive zip de pdfs",
+      "jszip export pdf dans navigateur",
+      "télécharger plusieurs pdf markdown en un seul zip"
+    ],
+    "longTailQueries": [
+      "comment convertir plusieurs fichiers markdown en pdfs distincts regroupés dans un zip",
+      "exportation par lots de guides markdown en archive zip via jszip côté client",
+      "télécharger des manuels modulaires en pdf sans déclencher de blocage de navigateur"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "markdown-zip-pdf-export",
+    "locale": "pt",
+    "topic": "Batch converting multiple Markdown documents into individual standalone PDFs in a ZIP archive",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "converter markdown em pdfs individuais em zip",
+    "secondaryKeywords": [
+      "exportar arquivos markdown em zip de pdfs",
+      "jszip exportação de pdf no navegador",
+      "baixar múltiplos pdfs markdown em um único zip"
+    ],
+    "longTailQueries": [
+      "como converter múltiplos arquivos markdown em pdfs avulsos dentro de um único zip",
+      "exportação em lote de documentações em arquivo compactado via jszip no navegador",
+      "baixar manuais técnicos em pdf sem múltiplos alertas de download do navegador"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "multilingual-markdown-pdf-fonts",
+    "locale": "en",
+    "topic": "Full Unicode font embedding via fontkit and pdf-lib to render multilingual characters without tofu",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "multilingual unicode fonts markdown pdf",
+    "secondaryKeywords": [
+      "cjk font embedding markdown pdf",
+      "prevent tofu missing glyphs in pdf",
+      "fontkit pdf-lib unicode font support"
+    ],
+    "longTailQueries": [
+      "how md2pdf embeds unicode fonts via fontkit and pdf-lib without missing glyphs",
+      "render chinese japanese korean cyrillic and turkish in markdown pdf without tofu",
+      "self-contained portable pdf with embedded multilingual vector fonts"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "multilingual-markdown-pdf-fonts",
+    "locale": "es",
+    "topic": "Full Unicode font embedding via fontkit and pdf-lib to render multilingual characters without tofu",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "fuentes unicode multilingues markdown pdf",
+    "secondaryKeywords": [
+      "incrustar fuentes cjk markdown pdf",
+      "evitar caracteres tofu glifos rotos pdf",
+      "soporte fuentes unicode con fontkit y pdf-lib"
+    ],
+    "longTailQueries": [
+      "cómo incrusta md2pdf fuentes unicode mediante fontkit y pdf-lib sin perder glifos",
+      "renderizar chino japonés coreano cirílico y turco en markdown pdf sin errores",
+      "documento pdf portátil autónomo con tipografías vectoriales multilingües"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "multilingual-markdown-pdf-fonts",
+    "locale": "ja",
+    "topic": "Full Unicode font embedding via fontkit and pdf-lib to render multilingual characters without tofu",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "Markdown 多言語 Unicode フォント埋め込み PDF",
+    "secondaryKeywords": [
+      "CJK フォント埋め込み Markdown PDF",
+      "豆腐文字 文字化け 防止 PDF",
+      "fontkit pdf-lib 日本語フォント対応"
+    ],
+    "longTailQueries": [
+      "md2pdfがfontkitとpdf-libを用いてUnicodeフォントを完全埋め込み文字化けを防ぐ仕組み",
+      "日本語 中国語 韓国語 キリル文字 トルコ語を豆腐文字なしでPDFレンダリング",
+      "ベクターフォントを埋め込んで環境に依存せず美しく表示できるPDF電子書籍"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "multilingual-markdown-pdf-fonts",
+    "locale": "ko",
+    "topic": "Full Unicode font embedding via fontkit and pdf-lib to render multilingual characters without tofu",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "다국어 유니코드 폰트 임베딩 마크다운 PDF",
+    "secondaryKeywords": [
+      "CJK 한글 폰트 임베딩 마크다운 PDF",
+      "두부 현상 글자 깨짐 방지 PDF",
+      "fontkit pdf-lib 유니코드 폰트 지원"
+    ],
+    "longTailQueries": [
+      "md2pdf가 fontkit과 pdf-lib를 활용하여 글자 깨짐 없이 유니코드 폰트를 임베드하는 방법",
+      "한글 한자 가나 키릴 자모 터키어를 두부 현상 없이 선명하게 PDF로 출력",
+      "외부 환경에 상관없이 언제 어디서나 동일하게 열람 가능한 자립형 다국어 PDF"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "multilingual-markdown-pdf-fonts",
+    "locale": "zh",
+    "topic": "Full Unicode font embedding via fontkit and pdf-lib to render multilingual characters without tofu",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "Markdown 转 PDF 嵌入多语言 Unicode 矢量字体杜绝豆腐块乱码",
+    "secondaryKeywords": [
+      "中日韩 CJK 字体原生长文本嵌入",
+      "杜绝 PDF 字符缺失方块乱码",
+      "fontkit 与 pdf-lib 纯前端字体解析"
+    ],
+    "longTailQueries": [
+      "md2pdf如何利用fontkit和pdf-lib在浏览器端直接嵌入多语言Unicode矢量字体",
+      "在Markdown转PDF中完美呈现中文日文韩文西里尔字母与土耳其重音符",
+      "生成零外部依赖、任何操作系统打开排版均完全一致的便携独立PDF"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "multilingual-markdown-pdf-fonts",
+    "locale": "ru",
+    "topic": "Full Unicode font embedding via fontkit and pdf-lib to render multilingual characters without tofu",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "встраивание многоязычных шрифтов unicode markdown pdf",
+    "secondaryKeywords": [
+      "встраивание шрифтов cjk markdown pdf",
+      "предотвращение выпадения символов тофу pdf",
+      "поддержка unicode шрифтов через fontkit и pdf-lib"
+    ],
+    "longTailQueries": [
+      "как md2pdf встраивает шрифты unicode через fontkit и pdf-lib без потери символов",
+      "отображение иероглифов cjk кириллицы и турецких букв в markdown pdf без артефактов",
+      "автономный портативный pdf документ со встроенными векторными шрифтами"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "multilingual-markdown-pdf-fonts",
+    "locale": "tr",
+    "topic": "Full Unicode font embedding via fontkit and pdf-lib to render multilingual characters without tofu",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "çok dilli unicode yazı tipi gömme markdown pdf",
+    "secondaryKeywords": [
+      "cjk yazı tipi gömme markdown pdf",
+      "tofu ve kayıp karakterleri önleme pdf",
+      "fontkit ve pdf-lib unicode yazı tipi desteği"
+    ],
+    "longTailQueries": [
+      "md2pdf in fontkit ve pdf-lib ile glif kaybı olmadan unicode fontları nasıl gömdüğü",
+      "markdown pdf te çince japonca korece kiril ve türkçe karakterleri bozulmadan basma",
+      "vektör yazı tipleri gömülü tamamen bağımsız ve taşınabilir pdf oluşturma"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "multilingual-markdown-pdf-fonts",
+    "locale": "fr",
+    "topic": "Full Unicode font embedding via fontkit and pdf-lib to render multilingual characters without tofu",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "incorporer polices unicode multilingues markdown pdf",
+    "secondaryKeywords": [
+      "incorporation polices cjk markdown pdf",
+      "éviter tofu et glyphes manquants pdf",
+      "support polices unicode fontkit et pdf-lib"
+    ],
+    "longTailQueries": [
+      "comment md2pdf incorpore des polices unicode via fontkit et pdf-lib sans glyphes manquants",
+      "afficher les idéogrammes cjk le cyrillique et le turc en markdown pdf sans anomalie",
+      "document pdf autonome et portable avec polices vectorielles multilingues intégrées"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
+  },
+  {
+    "pageKey": "multilingual-markdown-pdf-fonts",
+    "locale": "pt",
+    "topic": "Full Unicode font embedding via fontkit and pdf-lib to render multilingual characters without tofu",
+    "searchIntent": "Informational & How-to / Tutorial",
+    "primaryKeyword": "incorporar fontes unicode multilingues markdown pdf",
+    "secondaryKeywords": [
+      "incorporação de fontes cjk markdown pdf",
+      "evitar efeito tofu e caracteres corrompidos pdf",
+      "suporte a fontes unicode com fontkit e pdf-lib"
+    ],
+    "longTailQueries": [
+      "como o md2pdf incorpora fontes unicode via fontkit e pdf-lib sem glifos corrompidos",
+      "renderizar caracteres cjk cirílico e turco em markdown pdf com nitidez absoluta",
+      "documento pdf portátil e autossuficiente com fontes vetoriais multilíngues embutidas"
+    ],
+    "internalLinkTargets": [
+      "/",
+      "/blog/browser-only-markdown-to-pdf/",
+      "/blog/readme-pdf-print-themes/"
+    ]
   }
 ]
