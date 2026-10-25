@@ -158,8 +158,17 @@ async function runLiveVerification() {
   await cdp.send('Console.enable', {}, sessionId);
   await cdp.send('Runtime.enable', {}, sessionId);
 
+  async function waitForReady(targetSessionId, checkExpr = 'document.readyState === "complete" && Boolean(document.title)') {
+    for (let i = 0; i < 40; i++) {
+      const ready = await cdp.eval(targetSessionId, checkExpr);
+      if (ready) return true;
+      await new Promise(r => setTimeout(r, 200));
+    }
+    return false;
+  }
+
   // Wait for page to fully load
-  await new Promise(r => setTimeout(r, 2000));
+  await waitForReady(sessionId, 'document.readyState === "complete" && Boolean(document.title) && Boolean(document.getElementById("md-input"))');
 
   try {
     // 1. Page Title & Heading
@@ -268,7 +277,7 @@ async function runLiveVerification() {
     await check('7. Multilingual route (/es/)', async () => {
       const esTarget = await cdp.send('Target.createTarget', { url: `${TARGET_URL}/es/` });
       const esSession = await cdp.send('Target.attachToTarget', { targetId: esTarget.result.targetId, flatten: true });
-      await new Promise(r => setTimeout(r, 1200));
+      await waitForReady(esSession.result.sessionId, 'document.readyState === "complete" && Boolean(document.title)');
 
       const esTitle = await cdp.eval(esSession.result.sessionId, 'document.title');
       const esCanonical = await cdp.eval(esSession.result.sessionId, 'document.querySelector("link[rel=canonical]")?.href');
@@ -283,7 +292,7 @@ async function runLiveVerification() {
     await check('8. Blog collection page (/blog/)', async () => {
       const blogTarget = await cdp.send('Target.createTarget', { url: `${TARGET_URL}/blog/` });
       const blogSession = await cdp.send('Target.attachToTarget', { targetId: blogTarget.result.targetId, flatten: true });
-      await new Promise(r => setTimeout(r, 1200));
+      await waitForReady(blogSession.result.sessionId, 'document.readyState === "complete" && Boolean(document.title)');
 
       const articleCount = await cdp.eval(blogSession.result.sessionId, 'document.querySelectorAll("article, .blog-card, a[href*=\\"/blog/\\"]").length');
       await cdp.send('Target.closeTarget', { targetId: blogTarget.result.targetId });
@@ -297,7 +306,7 @@ async function runLiveVerification() {
     await check('9. About Us page (/about/)', async () => {
       const aboutTarget = await cdp.send('Target.createTarget', { url: `${TARGET_URL}/about/` });
       const aboutSession = await cdp.send('Target.attachToTarget', { targetId: aboutTarget.result.targetId, flatten: true });
-      await new Promise(r => setTimeout(r, 1200));
+      await waitForReady(aboutSession.result.sessionId, 'document.readyState === "complete" && Boolean(document.title)');
 
       const aboutTitle = await cdp.eval(aboutSession.result.sessionId, 'document.title');
       await cdp.send('Target.closeTarget', { targetId: aboutTarget.result.targetId });
@@ -331,6 +340,7 @@ async function runLiveVerification() {
   console.log(`============================================================\n`);
 
   if (failed > 0) process.exit(1);
+  process.exit(0);
 }
 
 runLiveVerification().catch(err => {
