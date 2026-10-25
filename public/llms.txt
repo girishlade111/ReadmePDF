@@ -18,17 +18,29 @@ md2pdf (developed by LadeStack, founded by Girish Lade) converts public GitHub r
 - **Browser-Local Storage**: IndexedDB auto-save (~1s debounce), automatic session restoration, versioned snapshots, full-text search, and JSON backup export/import.
 - **Multilingual Support**: Fully localized into 9 languages: English (`/`), Spanish (`/es/`), Japanese (`/ja/`), Korean (`/ko/`), Simplified Chinese (`/zh/`), Russian (`/ru/`), Turkish (`/tr/`), French (`/fr/`), and Brazilian Portuguese (`/pt/`).
 
-## Authoritative Guides & Articles
+## Authoritative Guides & Articles (All 21 Verified Capabilities)
 
 - [7 Practical Use Cases for Turning a README into a PDF](https://md2pdf.ladestack.in/blog/readme-to-pdf-use-cases/): Real-world workflows for client handoffs, release archives, course packs, engineering RFCs, and compliance snapshots.
 - [GitHub README to PDF Converter](https://md2pdf.ladestack.in/blog/github-readme-to-pdf/): Direct repository import, branch resolution, and relative asset rewriting.
 - [Multi-File Documentation Book Builder](https://md2pdf.ladestack.in/blog/multi-file-markdown-book/): Stitching multi-chapter Markdown handbooks with continuous page numbering.
 - [Curated Print Themes](https://md2pdf.ladestack.in/blog/readme-pdf-print-themes/): Choosing print stylesheets, typography, and page setups.
 - [Browser-First Privacy Architecture](https://md2pdf.ladestack.in/blog/browser-only-markdown-to-pdf/): Client-side security model and zero-upload guarantees.
-- [Markdown Code Blocks to PDF](https://md2pdf.ladestack.in/blog/markdown-code-blocks-to-pdf/): Monospace code styling and print page-break containment.
-- [Markdown Table of Contents](https://md2pdf.ladestack.in/blog/markdown-table-of-contents-pdf/): Auto-generating hierarchical TOCs for long documents.
-- [Markdown ZIP Export](https://md2pdf.ladestack.in/blog/markdown-zip-pdf-export/): Packaging individual chapter PDFs into client-side archives.
-- [Multilingual Unicode Fonts](https://md2pdf.ladestack.in/blog/multilingual-markdown-pdf-fonts/): Font embedding for Latin, Cyrillic, and CJK scripts.
+- [Native Browser Printing](https://md2pdf.ladestack.in/blog/browser-print-markdown-pdf/): Browser print dialog integration, @media print CSS isolation, and unclipped document printing.
+- [Chapter Sequencing and Reordering](https://md2pdf.ladestack.in/blog/chapter-sequencing-reordering-pdf/): Chapter queuing, custom sequence ordering, and hierarchical heading depth normalization.
+- [GitHub Branch, Tag, and Commit Pinning](https://md2pdf.ladestack.in/blog/github-branch-tag-commit-pdf/): Branch switching, release tag targeting, and immutable commit SHA resolution for versioned docs.
+- [GitHub Repository Tree Exploration](https://md2pdf.ladestack.in/blog/github-repository-markdown-tree/): Recursive Git tree traversal, directory trees, and Markdown discovery.
+- [Live Split-Screen Markdown Preview](https://md2pdf.ladestack.in/blog/live-markdown-preview-pdf/): Synchronized side-by-side editing, debounced layout proofing, and DOMPurify sanitization.
+- [Markdown Code Blocks to PDF](https://md2pdf.ladestack.in/blog/markdown-code-blocks-to-pdf/): Monospace code styling, language tagging, and print page-break containment.
+- [Markdown Paste & Live Editing](https://md2pdf.ladestack.in/blog/markdown-editor-paste-pdf/): In-browser textarea editing, sample templates, character/word counters, and instant PDF compilation.
+- [Markdown File Search & Path Filtering](https://md2pdf.ladestack.in/blog/markdown-file-search-filter/): In-memory path matching, directory filtering, and rapid file selection.
+- [Local Markdown File Upload](https://md2pdf.ladestack.in/blog/markdown-file-upload-to-pdf/): Client-side file drag-and-drop, multiple file intake, and zero server transmission.
+- [Tri-State Folder Selection](https://md2pdf.ladestack.in/blog/markdown-folder-selection-book/): Cascading directory checkboxes with checked, unchecked, and indeterminate states.
+- [PDF Book Cover-Page Generation](https://md2pdf.ladestack.in/blog/markdown-pdf-cover-page/): Automated title sheet synthesis with document title, subtitle, author, and timestamp.
+- [Relative Images and Links Resolution](https://md2pdf.ladestack.in/blog/markdown-relative-images-links-pdf/): Computing relative paths, fetching raw assets client-side, and transforming relative links to PDF anchors.
+- [Markdown Table of Contents](https://md2pdf.ladestack.in/blog/markdown-table-of-contents-pdf/): Auto-generating hierarchical TOCs for long documents with clickable PDF bookmarks.
+- [GFM Table Rendering and Scaling](https://md2pdf.ladestack.in/blog/markdown-tables-to-pdf/): GitHub-flavored Markdown tables with column alignments and print border styles.
+- [Individual PDF ZIP Export](https://md2pdf.ladestack.in/blog/markdown-zip-pdf-export/): Packaging individual chapter PDFs into client-side archives using JSZip.
+- [Multilingual Unicode Fonts](https://md2pdf.ladestack.in/blog/multilingual-markdown-pdf-fonts/): Font embedding for Latin, Cyrillic, Turkish, and CJK (Chinese, Japanese, Korean) scripts.
 - [About md2pdf](https://md2pdf.ladestack.in/about/): Project mission, founder Girish Lade, and LadeStack background.
 
 ## Key Links & Resources
@@ -36,3 +48,4 @@ md2pdf (developed by LadeStack, founded by Girish Lade) converts public GitHub r
 - Homepage & Interactive Converter: https://md2pdf.ladestack.in/
 - Technical Documentation Journal: https://md2pdf.ladestack.in/blog/
 - XML Sitemap: https://md2pdf.ladestack.in/sitemap.xml
+- Robots Configuration: https://md2pdf.ladestack.in/robots.txt

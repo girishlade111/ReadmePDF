@@ -239,6 +239,7 @@ export function aboutJsonLd({ locale, description, site, path }) {
   const url = absoluteUrl(site, canonicalPath(path));
   const home = absoluteUrl(site, localeHref(locale, '/'));
   const founderId = `${url}#founder`;
+  const breadcrumbId = `${url}#breadcrumb`;
   return {
     '@context': 'https://schema.org',
     '@graph': [
@@ -252,6 +253,7 @@ export function aboutJsonLd({ locale, description, site, path }) {
         isPartOf: { '@type': 'WebSite', name: PRODUCT_NAME, url: home },
         about: { '@id': founderId },
         mainEntity: { '@id': founderId },
+        breadcrumb: { '@id': breadcrumbId },
         publisher: organization(),
       },
       {
@@ -263,6 +265,24 @@ export function aboutJsonLd({ locale, description, site, path }) {
         sameAs: [
           'https://github.com/girishlade111',
           'https://www.linkedin.com/in/girish-lade/',
+        ],
+      },
+      {
+        '@type': 'BreadcrumbList',
+        '@id': breadcrumbId,
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: home,
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'About',
+            item: url,
+          },
         ],
       },
     ],
@@ -291,6 +311,23 @@ export function blogIndexJsonLd({ locale, description, site, path, posts }) {
     description,
     inLanguage: localeMeta(locale).htmlLang,
     isPartOf: { '@type': 'WebSite', name: PRODUCT_NAME, url: home },
+    breadcrumb: {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: home,
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Journal',
+          item: url,
+        },
+      ],
+    },
     mainEntity: {
       '@type': 'ItemList',
       numberOfItems: posts.length,
@@ -317,6 +354,8 @@ export function blogIndexJsonLd({ locale, description, site, path, posts }) {
 export function articleJsonLd({ post, locale, path, site }) {
   const data = post?.data ?? post;
   const url = absoluteUrl(site, canonicalPath(path));
+  const home = absoluteUrl(site, localeHref(locale, '/'));
+  const blog = absoluteUrl(site, localeHref(locale, '/blog/'));
   const language = localeMeta(locale).htmlLang;
   const image = site?.origin ? absoluteUrl(site, DEFAULT_OG_IMAGE_PATH) : null;
   return {
@@ -336,7 +375,30 @@ export function articleJsonLd({ post, locale, path, site }) {
     isPartOf: {
       '@type': 'Blog',
       name: 'The md2pdf Journal',
-      url: absoluteUrl(site, localeHref(locale, '/blog/')),
+      url: blog,
+    },
+    breadcrumb: {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: home,
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Journal',
+          item: blog,
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: data.title,
+          item: url,
+        },
+      ],
     },
   };
 }
@@ -494,11 +556,51 @@ ${urls.join('\n')}
 
 /** robots.txt with an absolute sitemap reference when the origin is known. */
 export function buildRobotsTxt(site) {
-  const lines = ['User-agent: *', 'Allow: /', ''];
+  const lines = [
+    'User-agent: *',
+    'Allow: /',
+    'Content-Signal: search=yes, ai-input=yes, ai-train=yes',
+    '',
+    '# AI search, citation, and browsing bots',
+    'User-agent: OAI-SearchBot',
+    'Allow: /',
+    '',
+    'User-agent: ChatGPT-User',
+    'Allow: /',
+    '',
+    'User-agent: Claude-SearchBot',
+    'Allow: /',
+    '',
+    'User-agent: Claude-User',
+    'Allow: /',
+    '',
+    'User-agent: PerplexityBot',
+    'Allow: /',
+    '',
+    'User-agent: Perplexity-User',
+    'Allow: /',
+    '',
+    '# Foundation model training bots (authorized for open public documentation)',
+    'User-agent: GPTBot',
+    'Allow: /',
+    '',
+    'User-agent: ClaudeBot',
+    'Allow: /',
+    '',
+    'User-agent: Google-Extended',
+    'Allow: /',
+    '',
+    'User-agent: Applebot-Extended',
+    'Allow: /',
+    '',
+    'User-agent: CCBot',
+    'Allow: /',
+    '',
+  ];
   if (site?.origin) {
     lines.push(`Sitemap: ${absoluteUrl(site, '/sitemap.xml')}`);
     lines.push('# AI agent and LLM discovery');
-    lines.push(`# llms.txt: ${absoluteUrl(site, '/llms.txt')}`, '');
+    lines.push(`llms.txt: ${absoluteUrl(site, '/llms.txt')}`, '');
   } else {
     lines.push('# PUBLIC_SITE_URL is not configured; sitemap publication is disabled.', '');
   }

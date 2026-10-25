@@ -179,7 +179,7 @@ describe('JSON-LD builders', () => {
     assert.equal(json['@graph'][1].offers.price, '0');
   });
 
-  it('builds a collection page with a full item list', () => {
+  it('builds a collection page with a full item list and breadcrumbs', () => {
     const json = blogIndexJsonLd({
       locale: 'ja',
       description: '説明',
@@ -197,9 +197,13 @@ describe('JSON-LD builders', () => {
       [1, 2],
     );
     assert.equal(json.mainEntity.itemListElement[0].url, `${ORIGIN}/ja/blog/a/`);
+    assert.equal(json.breadcrumb?.['@type'], 'BreadcrumbList');
+    assert.equal(json.breadcrumb?.itemListElement?.length, 2);
+    assert.equal(json.breadcrumb?.itemListElement[0].item, `${ORIGIN}/ja/`);
+    assert.equal(json.breadcrumb?.itemListElement[1].item, `${ORIGIN}/ja/blog/`);
   });
 
-  it('builds BlogPosting data with localized language and dates', () => {
+  it('builds BlogPosting data with localized language, dates, and breadcrumbs', () => {
     const post = mockPosts().find((entry) => entry.data.locale === 'ru');
     const json = articleJsonLd({
       post,
@@ -214,6 +218,11 @@ describe('JSON-LD builders', () => {
     assert.equal(json.publisher.name, 'LadeStack');
     assert.equal(json.url, `${ORIGIN}/ru/blog/${post.data.translationKey}/`);
     assert.equal(json.image, `${ORIGIN}/og/md2pdf.png`);
+    assert.equal(json.breadcrumb?.['@type'], 'BreadcrumbList');
+    assert.equal(json.breadcrumb?.itemListElement?.length, 3);
+    assert.equal(json.breadcrumb?.itemListElement[0].item, `${ORIGIN}/ru/`);
+    assert.equal(json.breadcrumb?.itemListElement[1].item, `${ORIGIN}/ru/blog/`);
+    assert.equal(json.breadcrumb?.itemListElement[2].item, `${ORIGIN}/ru/blog/${post.data.translationKey}/`);
   });
 
   it('uses the accurate content language in JSON-LD, not the hreflang grouping', () => {
@@ -310,6 +319,11 @@ describe('multilingual sitemap and robots', () => {
     assert.match(withSite, /^User-agent: \*$/m);
     assert.match(withSite, /^Allow: \/$/m);
     assert.match(withSite, /^Sitemap: https:\/\/example\.test\/sitemap\.xml$/m);
+    assert.match(withSite, /Content-Signal:/);
+    assert.match(withSite, /User-agent: OAI-SearchBot/);
+    assert.match(withSite, /User-agent: Claude-SearchBot/);
+    assert.match(withSite, /User-agent: PerplexityBot/);
+    assert.match(withSite, /llms\.txt: https:\/\/example\.test\/llms\.txt/);
     assert.ok(!buildRobotsTxt(null).includes('Sitemap:'));
     assert.match(buildRobotsTxt(null), /PUBLIC_SITE_URL/);
   });

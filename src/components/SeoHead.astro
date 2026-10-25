@@ -25,6 +25,9 @@ const ogImage = site ? seo.image : null;
 
 <title>{seo.title}</title>
 <meta name="description" content={seo.description} />
+<meta name="author" content="Girish Lade" />
+<meta name="publisher" content="LadeStack" />
+<meta name="theme-color" content="#07080b" />
 <meta name="robots" content="index, follow, max-image-preview:large" />
 <link rel="canonical" href={seo.canonical} />
 
@@ -45,11 +48,14 @@ const ogImage = site ? seo.image : null;
 {ogImage && <meta property="og:image" content={ogImage} />}
 {ogImage && <meta property="og:image:width" content="1200" />}
 {ogImage && <meta property="og:image:height" content="630" />}
-{ogImage && <meta property="og:image:alt" content="md2pdf — Markdown to PDF" />}
+{ogImage && <meta property="og:image:alt" content={seo.title} />}
 
 <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+<meta name="twitter:site" content="@ladestack" />
+<meta name="twitter:creator" content="@girishlade111" />
 <meta name="twitter:title" content={seo.title} />
 <meta name="twitter:description" content={seo.description} />
 {ogImage && <meta name="twitter:image" content={ogImage} />}
+{ogImage && <meta name="twitter:image:alt" content={seo.title} />}
 
 {jsonLd && <script type="application/ld+json" set:html={serializeJsonLd(jsonLd)} />}
