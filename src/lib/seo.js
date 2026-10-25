@@ -554,20 +554,33 @@ ${urls.join('\n')}
 `;
 }
 
-/** robots.txt with an absolute sitemap reference when the origin is known. */
+/**
+ * robots.txt generator.
+ *
+ * Adheres strictly to RFC 9309 (Robots Exclusion Protocol) for standard
+ * directives: User-agent, Allow, Disallow, and Sitemap.
+ *
+ * Also includes emerging draft extensions:
+ * - Content-Signal: search=yes, ai-input=yes, ai-train=yes (Cloudflare Content Signals Policy / IETF draft)
+ * - llms.txt: pointer to Markdown discovery manifest for AI agents
+ *
+ * NOTE: RFC 9309 standardizes User-agent, Allow, and Disallow. Content-Signal
+ * and llms.txt are non-standard emerging extensions which RFC 9309-compliant
+ * parsers ignore as unrecognized fields.
+ */
 export function buildRobotsTxt(site) {
+  // Emerging content-use preference expression (IETF draft / Cloudflare Content Signals Policy).
+  // search=yes : permits search indexing & citation
+  // ai-input=yes : permits retrieval-augmented generation (RAG) and answer synthesis
+  // ai-train=yes : permits model pre-training / fine-tuning on open documentation
   const signal = 'Content-Signal: search=yes, ai-input=yes, ai-train=yes';
   const lines = [
     'User-agent: *',
     'Allow: /',
     signal,
     '',
-    '# AI search, citation, and browsing bots',
+    '# AI search indexing & citation crawlers',
     'User-agent: OAI-SearchBot',
-    'Allow: /',
-    signal,
-    '',
-    'User-agent: ChatGPT-User',
     'Allow: /',
     signal,
     '',
@@ -575,11 +588,16 @@ export function buildRobotsTxt(site) {
     'Allow: /',
     signal,
     '',
-    'User-agent: Claude-User',
+    'User-agent: PerplexityBot',
     'Allow: /',
     signal,
     '',
-    'User-agent: PerplexityBot',
+    '# User-requested browsing & on-demand answer retrieval',
+    'User-agent: ChatGPT-User',
+    'Allow: /',
+    signal,
+    '',
+    'User-agent: Claude-User',
     'Allow: /',
     signal,
     '',
@@ -587,7 +605,7 @@ export function buildRobotsTxt(site) {
     'Allow: /',
     signal,
     '',
-    '# Foundation model training bots (authorized for open public documentation)',
+    '# Foundation model training crawlers (authorized for open public documentation)',
     'User-agent: GPTBot',
     'Allow: /',
     signal,
@@ -611,7 +629,7 @@ export function buildRobotsTxt(site) {
   ];
   if (site?.origin) {
     lines.push(`Sitemap: ${absoluteUrl(site, '/sitemap.xml')}`);
-    lines.push('# AI agent and LLM discovery');
+    lines.push('# Emerging AI discovery manifest (non-standard RFC 9309 directive)');
     lines.push(`llms.txt: ${absoluteUrl(site, '/llms.txt')}`, '');
   } else {
     lines.push('# PUBLIC_SITE_URL is not configured; sitemap publication is disabled.', '');
