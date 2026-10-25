@@ -258,9 +258,99 @@ console.log(`  Verified ${stats.jsonLdBlocks} JSON-LD structured data blocks.`);
 console.log(`  Found ${stats.breadcrumbLists} BreadcrumbList rich result schemas.`);
 
 // ---------------------------------------------------------------------------
-// 3. AUDIT SITEMAP.XML
+// 3. COMPLETE INTERNAL LINK AUDIT & CRAWL
 // ---------------------------------------------------------------------------
-console.log('\n▶ Step 3: Auditing sitemap.xml...');
+console.log('\n▶ Step 3: Crawling and validating all internal links across dist/...');
+
+const guideInboundLinks = new Map();
+for (const key of translationKeys) {
+  guideInboundLinks.set(key, 0);
+}
+
+for (const file of allHtmlFiles) {
+  const html = fs.readFileSync(file, 'utf8');
+  const route = '/' + path.relative(distDir, file).replace(/\\/g, '/').replace(/\/index\.html$/, '/').replace(/^index\.html$/, '');
+  const aTags = [...html.matchAll(/<a\b[^>]*href=["']([^"']*)["'][^>]*>/gi)];
+
+  for (const match of aTags) {
+    const rawHref = match[1].trim();
+    if (!rawHref || rawHref.startsWith('mailto:') || rawHref.startsWith('tel:') || rawHref.startsWith('javascript:')) {
+      continue;
+    }
+
+    // Skip purely external links
+    if (rawHref.startsWith('http://') || rawHref.startsWith('https://')) {
+      if (!rawHref.startsWith(origin) && !rawHref.startsWith('https://md2pdf.ladestack.in')) {
+        continue;
+      }
+    }
+
+    stats.internalLinksChecked += 1;
+
+    const cleanHref = rawHref.replace(origin, '').replace('https://md2pdf.ladestack.in', '');
+    const [targetPath, fragment] = cleanHref.split('#');
+
+    // Intra-page anchor check
+    if (!targetPath && fragment) {
+      const hasId = html.includes(`id="${fragment}"`) || html.includes(`id='${fragment}'`) || html.includes(`name="${fragment}"`);
+      if (!hasId) {
+        error(`${route}: broken intra-page anchor #${fragment}`);
+      }
+      continue;
+    }
+
+    // Resolve target file on disk
+    let resolvedFile;
+    if (targetPath.startsWith('/')) {
+      if (targetPath.endsWith('.html')) {
+        resolvedFile = path.join(distDir, targetPath);
+      } else {
+        const normalized = targetPath.endsWith('/') ? targetPath : targetPath + '/';
+        resolvedFile = path.join(distDir, normalized, 'index.html');
+      }
+    } else {
+      const currentDir = path.dirname(file);
+      resolvedFile = path.resolve(currentDir, targetPath);
+      if (!resolvedFile.endsWith('.html')) {
+        resolvedFile = path.join(resolvedFile, 'index.html');
+      }
+    }
+
+    if (!fs.existsSync(resolvedFile)) {
+      error(`${route}: broken internal link to "${rawHref}" (target file missing: ${path.relative(distDir, resolvedFile)})`);
+    } else if (fragment) {
+      const targetHtml = fs.readFileSync(resolvedFile, 'utf8');
+      const hasTargetId = targetHtml.includes(`id="${fragment}"`) || targetHtml.includes(`id='${fragment}'`) || targetHtml.includes(`name="${fragment}"`);
+      if (!hasTargetId) {
+        error(`${route}: broken fragment anchor "${rawHref}" in ${path.relative(distDir, resolvedFile)}`);
+      }
+    }
+
+    // Track guide reachability
+    for (const key of translationKeys) {
+      if (cleanHref.includes(`/blog/${key}/`)) {
+        guideInboundLinks.set(key, (guideInboundLinks.get(key) || 0) + 1);
+      }
+    }
+  }
+}
+
+// Verify no orphaned guides
+let orphanedGuides = 0;
+for (const [key, count] of guideInboundLinks.entries()) {
+  if (count === 0) {
+    orphanedGuides += 1;
+    warn(`Guide "${key}" has 0 inbound internal links.`);
+  }
+}
+
+console.log(`  Crawl complete: ${stats.internalLinksChecked} internal links verified.`);
+console.log(`  Orphaned guides detected: ${orphanedGuides}.`);
+
+// ---------------------------------------------------------------------------
+// 4. AUDIT SITEMAP.XML
+// ---------------------------------------------------------------------------
+console.log('\n▶ Step 4: Auditing sitemap.xml...');
 
 const sitemapFile = path.join(distDir, 'sitemap.xml');
 if (!fs.existsSync(sitemapFile)) {
@@ -294,9 +384,9 @@ if (!fs.existsSync(sitemapFile)) {
 }
 
 // ---------------------------------------------------------------------------
-// 4. AUDIT ROBOTS.TXT
+// 5. AUDIT ROBOTS.TXT
 // ---------------------------------------------------------------------------
-console.log('\n▶ Step 4: Auditing robots.txt...');
+console.log('\n▶ Step 5: Auditing robots.txt...');
 
 const robotsFile = path.join(distDir, 'robots.txt');
 if (!fs.existsSync(robotsFile)) {
@@ -330,9 +420,9 @@ if (!fs.existsSync(robotsFile)) {
 }
 
 // ---------------------------------------------------------------------------
-// 5. AUDIT LLMS.TXT
+// 6. AUDIT LLMS.TXT
 // ---------------------------------------------------------------------------
-console.log('\n▶ Step 5: Auditing llms.txt...');
+console.log('\n▶ Step 6: Auditing llms.txt...');
 
 const llmsFile = path.join(distDir, 'llms.txt');
 if (!fs.existsSync(llmsFile)) {
@@ -353,7 +443,7 @@ if (!fs.existsSync(llmsFile)) {
 }
 
 // ---------------------------------------------------------------------------
-// 6. COMPILE AUDIT RESULTS
+// 7. COMPILE AUDIT RESULTS
 // ---------------------------------------------------------------------------
 const durationMs = Date.now() - stats.startTime;
 const auditSummary = {

@@ -557,16 +557,20 @@ ${urls.join('\n')}
 /**
  * robots.txt generator.
  *
- * Adheres strictly to RFC 9309 (Robots Exclusion Protocol) for standard
- * directives: User-agent, Allow, Disallow, and Sitemap.
+ * Core robots.txt rules strictly follow RFC 9309 (Robots Exclusion Protocol):
+ * - User-agent: defines crawler target
+ * - Allow / Disallow: defines path access
  *
- * Also includes emerging draft extensions:
- * - Content-Signal: search=yes, ai-input=yes, ai-train=yes (Cloudflare Content Signals Policy / IETF draft)
- * - llms.txt: pointer to Markdown discovery manifest for AI agents
+ * Extensions included:
+ * - Sitemap: external discovery convention defined by Sitemaps.org (treated as
+ *   an other-field under RFC 9309 Section 2.2.1, widely parsed by web search engines).
+ * - Content-Signal: experimental content-use preference expression (Cloudflare
+ *   Content Signals Policy / IETF draft-content-signals-00).
+ * - llms.txt: informational pointer to Markdown documentation manifest for AI agents.
  *
- * NOTE: RFC 9309 standardizes User-agent, Allow, and Disallow. Content-Signal
- * and llms.txt are non-standard emerging extensions which RFC 9309-compliant
- * parsers ignore as unrecognized fields.
+ * NOTE: RFC 9309 core specification standardizes User-agent, Allow, and Disallow.
+ * Sitemap is an external extension from Sitemaps.org; Content-Signal and llms.txt are
+ * experimental drafts ignored as unrecognized fields by standard RFC 9309 parsers.
  */
 export function buildRobotsTxt(site) {
   // Emerging content-use preference expression (IETF draft / Cloudflare Content Signals Policy).
