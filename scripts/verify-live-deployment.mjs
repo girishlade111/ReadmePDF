@@ -155,19 +155,22 @@ async function runLiveVerification() {
   const session = await cdp.send('Target.attachToTarget', { targetId, flatten: true });
   const sessionId = session.result.sessionId;
 
+  await cdp.send('Page.enable', {}, sessionId);
   await cdp.send('Console.enable', {}, sessionId);
   await cdp.send('Runtime.enable', {}, sessionId);
 
   async function waitForReady(targetSessionId, checkExpr = 'document.readyState === "complete" && Boolean(document.title)') {
-    for (let i = 0; i < 40; i++) {
-      const ready = await cdp.eval(targetSessionId, checkExpr);
-      if (ready) return true;
+    for (let i = 0; i < 50; i++) {
+      try {
+        const ready = await cdp.eval(targetSessionId, checkExpr);
+        if (ready) return true;
+      } catch {}
       await new Promise(r => setTimeout(r, 200));
     }
     return false;
   }
 
-  // Wait for page to fully load
+  // Wait for page to fully load and hydrate
   await waitForReady(sessionId, 'document.readyState === "complete" && Boolean(document.title) && Boolean(document.getElementById("md-input"))');
 
   try {
@@ -210,8 +213,15 @@ async function runLiveVerification() {
     await check('4. IndexedDB origin storage on Vercel', async () => {
       const idbOk = await cdp.eval(sessionId, `
         new Promise((resolve, reject) => {
-          const req = indexedDB.open('md2pdf-history-db');
-          req.onerror = () => reject(req.error);
+          const req = indexedDB.open('md2pdf-history-db', 1);
+          req.onupgradeneeded = (e) => {
+            const db = e.target.result;
+            if (!db.objectStoreNames.contains('workspaces')) db.createObjectStore('workspaces', { keyPath: 'workspaceId' });
+            if (!db.objectStoreNames.contains('historyEntries')) db.createObjectStore('historyEntries', { keyPath: 'entryId' });
+            if (!db.objectStoreNames.contains('exportRecords')) db.createObjectStore('exportRecords', { keyPath: 'exportId' });
+            if (!db.objectStoreNames.contains('preferences')) db.createObjectStore('preferences', { keyPath: 'key' });
+          };
+          req.onerror = () => reject(req.error || new Error('DB open error'));
           req.onsuccess = () => {
             const db = req.result;
             const stores = Array.from(db.objectStoreNames);
@@ -233,28 +243,53 @@ async function runLiveVerification() {
     await check('5. Live workspace auto-save read/write in IndexedDB', async () => {
       const writeOk = await cdp.eval(sessionId, `
         new Promise((resolve, reject) => {
-          const req = indexedDB.open('md2pdf-history-db');
+          const req = indexedDB.open('md2pdf-history-db', 1);
+          req.onerror = () => reject(req.error || new Error('DB open failed in step 5'));
+          req.onupgradeneeded = (e) => {
+            const db = e.target.result;
+            if (!db.objectStoreNames.contains('workspaces')) db.createObjectStore('workspaces', { keyPath: 'workspaceId' });
+            if (!db.objectStoreNames.contains('historyEntries')) db.createObjectStore('historyEntries', { keyPath: 'entryId' });
+            if (!db.objectStoreNames.contains('exportRecords')) db.createObjectStore('exportRecords', { keyPath: 'exportId' });
+            if (!db.objectStoreNames.contains('preferences')) db.createObjectStore('preferences', { keyPath: 'key' });
+          };
           req.onsuccess = () => {
             const db = req.result;
-            const tx = db.transaction(['workspaces'], 'readwrite');
-            const store = tx.objectStore('workspaces');
-            store.put({
-              workspaceId: 'live-test',
-              recordType: 'converter',
-              title: 'Live Vercel Document',
-              content: '# Hello Vercel!',
-              updatedAt: Date.now()
-            });
-            tx.oncomplete = () => {
-              const readTx = db.transaction(['workspaces'], 'readonly');
-              const readReq = readTx.objectStore('workspaces').get('live-test');
-              readReq.onsuccess = () => {
-                const doc = readReq.result;
-                db.close();
-                resolve(doc && doc.content === '# Hello Vercel!');
+            try {
+              const tx = db.transaction(['workspaces'], 'readwrite');
+              const store = tx.objectStore('workspaces');
+              store.put({
+                workspaceId: 'live-test',
+                recordType: 'converter',
+                title: 'Live Vercel Document',
+                content: '# Hello Vercel!',
+                updatedAt: Date.now()
+              });
+              tx.oncomplete = () => {
+                try {
+                  const readTx = db.transaction(['workspaces'], 'readonly');
+                  const readReq = readTx.objectStore('workspaces').get('live-test');
+                  readReq.onsuccess = () => {
+                    const doc = readReq.result;
+                    db.close();
+                    resolve(doc && doc.content === '# Hello Vercel!');
+                  };
+                  readReq.onerror = () => {
+                    db.close();
+                    reject(readReq.error);
+                  };
+                } catch (readErr) {
+                  db.close();
+                  reject(readErr);
+                }
               };
-            };
-            tx.onerror = () => reject(tx.error);
+              tx.onerror = () => {
+                db.close();
+                reject(tx.error);
+              };
+            } catch (txErr) {
+              db.close();
+              reject(txErr);
+            }
           };
         })
       `);
@@ -277,6 +312,8 @@ async function runLiveVerification() {
     await check('7. Multilingual route (/es/)', async () => {
       const esTarget = await cdp.send('Target.createTarget', { url: `${TARGET_URL}/es/` });
       const esSession = await cdp.send('Target.attachToTarget', { targetId: esTarget.result.targetId, flatten: true });
+      await cdp.send('Page.enable', {}, esSession.result.sessionId);
+      await cdp.send('Runtime.enable', {}, esSession.result.sessionId);
       await waitForReady(esSession.result.sessionId, 'document.readyState === "complete" && Boolean(document.title)');
 
       const esTitle = await cdp.eval(esSession.result.sessionId, 'document.title');
@@ -292,6 +329,8 @@ async function runLiveVerification() {
     await check('8. Blog collection page (/blog/)', async () => {
       const blogTarget = await cdp.send('Target.createTarget', { url: `${TARGET_URL}/blog/` });
       const blogSession = await cdp.send('Target.attachToTarget', { targetId: blogTarget.result.targetId, flatten: true });
+      await cdp.send('Page.enable', {}, blogSession.result.sessionId);
+      await cdp.send('Runtime.enable', {}, blogSession.result.sessionId);
       await waitForReady(blogSession.result.sessionId, 'document.readyState === "complete" && Boolean(document.title)');
 
       const articleCount = await cdp.eval(blogSession.result.sessionId, 'document.querySelectorAll("article, .blog-card, a[href*=\\"/blog/\\"]").length');
@@ -306,6 +345,8 @@ async function runLiveVerification() {
     await check('9. About Us page (/about/)', async () => {
       const aboutTarget = await cdp.send('Target.createTarget', { url: `${TARGET_URL}/about/` });
       const aboutSession = await cdp.send('Target.attachToTarget', { targetId: aboutTarget.result.targetId, flatten: true });
+      await cdp.send('Page.enable', {}, aboutSession.result.sessionId);
+      await cdp.send('Runtime.enable', {}, aboutSession.result.sessionId);
       await waitForReady(aboutSession.result.sessionId, 'document.readyState === "complete" && Boolean(document.title)');
 
       const aboutTitle = await cdp.eval(aboutSession.result.sessionId, 'document.title');
