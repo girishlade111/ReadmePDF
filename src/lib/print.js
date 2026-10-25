@@ -7,7 +7,7 @@
  * sheet. A book is only printable when every selected chapter was fetched.
  */
 import { githubError } from './errors.js';
-import { assertBookComplete } from './pdf/assembly.js';
+import { assertBookComplete } from './pdf/validation.js';
 
 export const PRINT_MODES = Object.freeze({
   SINGLE: 'single',

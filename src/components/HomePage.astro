@@ -512,17 +512,72 @@ const jsonLd = homeJsonLd({
     <script type="application/json" id="md2pdf-i18n" set:html={serializeDictionary(locale)} />
     <script>
       import { initConverter } from '../scripts/converter.js';
-      import { initBookExplorer } from '../scripts/book-explorer.js';
-      import { initHistoryUi } from '../scripts/history-ui.js';
+
       const conv = initConverter();
-      const book = initBookExplorer();
-      initHistoryUi({
-        onRestoreConverter: conv?.restoreConverterEntry,
-        hasUnsavedConverterWork: conv?.hasUnsavedWork,
-        onRestoreBook: book?.restoreBookSnapshot,
-        onAutoSaveToggle: (enabled) => conv?.autoSave?.setEnabled(enabled),
-        onClearAll: () => conv?.autoSave?.cancelPending(),
-      });
+
+      let bookInstance = null;
+      let bookPromise = null;
+      function getBook() {
+        if (!bookPromise) {
+          bookPromise = import('../scripts/book-explorer.js').then((m) => {
+            bookInstance = m.initBookExplorer();
+            return bookInstance;
+          });
+        }
+        return bookPromise;
+      }
+
+      let historyPromise = null;
+      function getHistory() {
+        if (!historyPromise) {
+          historyPromise = import('../scripts/history-ui.js').then((m) => {
+            m.initHistoryUi({
+              onRestoreConverter: conv?.restoreConverterEntry,
+              hasUnsavedConverterWork: conv?.hasUnsavedWork,
+              onRestoreBook: async (entry) => {
+                const book = await getBook();
+                return book?.restoreBookSnapshot?.(entry);
+              },
+              onAutoSaveToggle: (enabled) => conv?.autoSave?.setEnabled(enabled),
+              onClearAll: () => conv?.autoSave?.cancelPending(),
+            });
+          });
+        }
+        return historyPromise;
+      }
+
+      // 1. User interaction triggers: History drawer buttons
+      document.addEventListener('click', (e) => {
+        if (e.target && e.target.closest && e.target.closest('[data-open-history], #header-history-btn, #open-history-btn, #book-history-btn')) {
+          getHistory();
+        }
+      }, { capture: true, passive: true });
+
+      // 2. User interaction triggers: Book Explorer section visibility or focus
+      const bookSection = document.getElementById('book');
+      if (bookSection && 'IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          if (entries.some((entry) => entry.isIntersecting)) {
+            observer.disconnect();
+            getBook();
+          }
+        }, { rootMargin: '300px' });
+        observer.observe(bookSection);
+      }
+      bookSection?.addEventListener('focusin', () => getBook(), { once: true, passive: true });
+
+      // 3. Idle fallback: hydrates background modules when main thread is idle
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => {
+          getHistory();
+          getBook();
+        }, { timeout: 3000 });
+      } else {
+        setTimeout(() => {
+          getHistory();
+          getBook();
+        }, 2000);
+      }
     </script>
   </body>
 </html>

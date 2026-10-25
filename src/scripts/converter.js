@@ -3,12 +3,6 @@
  * Only network calls: github.com / raw.githubusercontent.com via lib/github.js.
  */
 import { fetchReadme, rewriteRelativeUrls } from '../lib/github.js';
-import {
-  renderMarkdown,
-  extractHeadings,
-  buildTocHtml,
-  injectHeadingIds,
-} from '../lib/markdown.js';
 import { printDocument } from '../lib/print.js';
 import { initClientI18n, t } from '../i18n/client.js';
 import {
@@ -20,6 +14,14 @@ import {
   addExportRecord,
   getPreference,
 } from '../lib/history/index.js';
+
+let markdownModulePromise = null;
+function getMarkdownModule() {
+  if (!markdownModulePromise) {
+    markdownModulePromise = import('../lib/markdown.js');
+  }
+  return markdownModulePromise;
+}
 
 /**
  * Extracts the first Markdown heading for title fallback.
@@ -174,6 +176,14 @@ export function initConverter() {
   setStatus('', '');
   renderMeta();
   scheduleRender();
+
+  if (mdInput.value && mdInput.value.trim()) {
+    getMarkdownModule();
+  }
+  mdInput.addEventListener('focus', () => getMarkdownModule(), { once: true, passive: true });
+  fileInput.addEventListener('click', () => getMarkdownModule(), { once: true, passive: true });
+  sampleBtn.addEventListener('mouseenter', () => getMarkdownModule(), { once: true, passive: true });
+  fetchBtn.addEventListener('mouseenter', () => getMarkdownModule(), { once: true, passive: true });
 
   fetchBtn.addEventListener('click', onFetch);
   urlInput.addEventListener('keydown', (e) => {
@@ -406,6 +416,7 @@ export function initConverter() {
         effective = raw;
       }
     }
+    const { renderMarkdown, extractHeadings, buildTocHtml, injectHeadingIds } = await getMarkdownModule();
     const headings = extractHeadings(effective);
     const toc = tocToggle.checked ? buildTocHtml(headings) : '';
     try {
@@ -454,18 +465,22 @@ export function initConverter() {
       printDocument({ mode: 'single' });
       setStatus(t('converter.print.opened'), '');
       const currentTheme = document.querySelector('input[name="theme"]:checked')?.value || 'clean';
-      addExportRecord({
-        type: 'single-pdf',
-        format: 'print',
-        status: 'print-dialog-requested',
-        generationStatus: 'print-dialog-requested',
-        title: repoCtx ? `${repoCtx.owner}/${repoCtx.repo}` : (firstHeading(mdInput.value) || 'Markdown Document'),
-        metadata: {
-          theme: currentTheme,
-          toc: tocToggle?.checked ?? true,
-          headings: extractHeadings(mdInput.value).length,
-        },
-      }).catch(() => {});
+      getMarkdownModule()
+        .then(({ extractHeadings }) => {
+          addExportRecord({
+            type: 'single-pdf',
+            format: 'print',
+            status: 'print-dialog-requested',
+            generationStatus: 'print-dialog-requested',
+            title: repoCtx ? `${repoCtx.owner}/${repoCtx.repo}` : (firstHeading(mdInput.value) || 'Markdown Document'),
+            metadata: {
+              theme: currentTheme,
+              toc: tocToggle?.checked ?? true,
+              headings: extractHeadings(mdInput.value).length,
+            },
+          }).catch(() => {});
+        })
+        .catch(() => {});
     } catch (error) {
       setStatus(friendlyPrintError(error, t), 'error');
       addExportRecord({

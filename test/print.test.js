@@ -8,6 +8,7 @@ import {
   isBookPrintable,
   printDocument,
 } from '../src/lib/print.js';
+import { assertBookComplete } from '../src/lib/pdf/validation.js';
 
 function completeBook() {
   return {
@@ -161,6 +162,20 @@ describe('printDocument', () => {
     assert.throws(
       () => printDocument({ mode: 'single' }),
       (error) => error.code === 'PRINT_UNAVAILABLE',
+    );
+  });
+});
+
+describe('assertBookComplete isolation', () => {
+  it('validates complete books without importing renderer or assembly', () => {
+    assert.equal(assertBookComplete(completeBook()), true);
+    assert.throws(
+      () => assertBookComplete(null),
+      (error) => error.code === 'BOOK_INCOMPLETE',
+    );
+    assert.throws(
+      () => assertBookComplete({ documents: [] }),
+      (error) => error.code === 'EMPTY_BOOK',
     );
   });
 });
