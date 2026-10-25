@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-10-25T06:54:34.285Z",
+  "timestamp": "2026-10-25T09:09:57.462Z",
   "origin": "https://md2pdf.ladestack.in",
-  "durationMs": 1348,
+  "durationMs": 1123,
   "stats": {
     "htmlPages": 217,
     "indexablePages": 216,
@@ -10,7 +10,7 @@
     "jsonLdBlocks": 216,
     "breadcrumbLists": 207,
     "internalLinksChecked": 0,
-    "startTime": 1792911272937
+    "startTime": 1792919396339
   },
   "errorsCount": 0,
   "warningsCount": 0,
