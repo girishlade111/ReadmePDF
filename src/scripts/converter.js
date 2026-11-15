@@ -45,6 +45,19 @@ export function repoMetaLabel(context) {
   return `${context.owner}/${context.repo} @ ${context.branch} — ${path}`;
 }
 
+/**
+ * Print theme id from the checked radio in `root`, falling back to `clean`
+ * when the group has no selection -- a restored snapshot, a re-render, or
+ * markup that ships no `checked` attribute at all. Reading `.value`
+ * directly threw on those states.
+ *
+ * @param {ParentNode} root
+ * @returns {string}
+ */
+export function selectedTheme(root) {
+  return root.querySelector('input[name="theme"]:checked')?.value || 'clean';
+}
+
 export function initConverter() {
   if (typeof document === 'undefined' || document.body.dataset.md2pdfInit) return null;
   document.body.dataset.md2pdfInit = '1';
@@ -123,7 +136,7 @@ export function initConverter() {
         metadata: {
           repoCtx: repoCtx || null,
           toc: tocToggle?.checked ?? true,
-          theme: document.querySelector('input[name="theme"]:checked')?.value || 'clean',
+          theme: selectedTheme(document),
         },
       }, { expectedRevision: meta?.expectedRevision });
     },
@@ -247,7 +260,7 @@ export function initConverter() {
           metadata: {
             repoCtx: repoCtx || null,
             toc: tocToggle?.checked ?? true,
-            theme: document.querySelector('input[name="theme"]:checked')?.value || 'clean',
+            theme: selectedTheme(document),
           },
         });
         setStatus(t('history.versionSavedNotice') || 'Snapshot saved to local history', 'ok');
@@ -259,9 +272,10 @@ export function initConverter() {
 
   themeInputs.forEach((r) =>
     r.addEventListener('change', () => {
+      const theme = selectedTheme(document);
       sheetEl.classList.remove('theme-clean', 'theme-business', 'theme-academic', 'theme-dark');
-      sheetEl.classList.add(`theme-${document.querySelector('input[name="theme"]:checked').value}`);
-      darkWarn.hidden = document.querySelector('input[name="theme"]:checked').value !== 'dark';
+      sheetEl.classList.add(`theme-${theme}`);
+      darkWarn.hidden = theme !== 'dark';
       autoSave.recordChange(mdInput.value);
     }),
   );
@@ -464,7 +478,7 @@ export function initConverter() {
     try {
       printDocument({ mode: 'single' });
       setStatus(t('converter.print.opened'), '');
-      const currentTheme = document.querySelector('input[name="theme"]:checked')?.value || 'clean';
+      const currentTheme = selectedTheme(document);
       getMarkdownModule()
         .then(({ extractHeadings }) => {
           addExportRecord({

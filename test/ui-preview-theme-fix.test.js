@@ -7,6 +7,7 @@ import { KEY_ALIASES, translateFrom } from '../src/i18n/core.js';
 import { DICTIONARIES } from '../src/i18n/index.js';
 import { LOCALES } from '../src/i18n/config.js';
 import { t, initClientI18n, resetClientI18n } from '../src/i18n/client.js';
+import { selectedTheme } from '../src/scripts/converter.js';
 
 const homeAstro = readFileSync(new URL('../src/components/HomePage.astro', import.meta.url), 'utf8');
 const headerAstro = readFileSync(new URL('../src/components/sections/Header.astro', import.meta.url), 'utf8');
@@ -146,5 +147,25 @@ describe('Issue D: History Localization & Key Parity', () => {
     assert.equal(result, 'Saved locally');
     const unknown = t('completely.nonexistent.key');
     assert.equal(unknown, '', 'Unknown key should return empty string so || fallback operates');
+  });
+});
+
+describe('Issue #4: theme selection is read defensively', () => {
+  it('falls back to clean when no theme radio is checked', () => {
+    const dom = new JSDOM('<form><input type="radio" name="theme" value="dark"></form>');
+    assert.equal(selectedTheme(dom.window.document), 'clean');
+  });
+
+  it('returns the checked theme when one is selected', () => {
+    const dom = new JSDOM(
+      '<form><input type="radio" name="theme" value="clean">' +
+        '<input type="radio" name="theme" value="dark" checked></form>',
+    );
+    assert.equal(selectedTheme(dom.window.document), 'dark');
+  });
+
+  it('reads the theme through the helper in every converter call site', () => {
+    assert.ok(!converterJs.includes('.querySelector(\'input[name="theme"]:checked\').value'));
+    assert.match(converterJs, /theme:\s*selectedTheme\(document\)/);
   });
 });
