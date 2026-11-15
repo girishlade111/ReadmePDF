@@ -12,7 +12,24 @@ const TARGETS = [
   { name: 'Portuguese Article', url: 'https://md2pdf.ladestack.in/pt/blog/github-readme-to-pdf/' },
 ];
 
-const CHROME_PATH = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
+
+const CHROME_PATHS = [
+  process.env.CHROME_PATH || process.env.CHROME_BIN,
+  '/usr/bin/google-chrome',
+  '/usr/bin/google-chrome-stable',
+  '/usr/bin/chromium-browser',
+  '/usr/bin/chromium',
+  '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+  'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+  'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
+];
+
+function resolveChrome() {
+  for (const p of CHROME_PATHS) {
+    if (p && fs.existsSync(p)) return p;
+  }
+  return null;
+}
 
 class CDPClient {
   constructor(wsUrl) {
@@ -98,7 +115,12 @@ class CDPClient {
 
 async function run() {
   const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'md2pdf-perf-'));
-  const proc = spawn(CHROME_PATH, [
+  const chromeExe = resolveChrome();
+  if (!chromeExe) {
+    console.error('Chrome/Chromium executable not found. Set CHROME_PATH or CHROME_BIN env var, or install Google Chrome.');
+    process.exit(1);
+  }
+  const proc = spawn(chromeExe, [
     '--headless=new',
     '--remote-debugging-port=0',
     '--remote-debugging-address=127.0.0.1',
