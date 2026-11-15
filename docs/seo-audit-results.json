@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-10-25T11:34:34.145Z",
+  "timestamp": "2026-11-15T09:31:54.209Z",
   "origin": "https://md2pdf.ladestack.in",
-  "durationMs": 11169,
+  "durationMs": 3436,
   "stats": {
     "htmlPages": 217,
     "indexablePages": 216,
@@ -9,12 +9,31 @@
     "hreflangTags": 2160,
     "jsonLdBlocks": 216,
     "breadcrumbLists": 207,
-    "internalLinksChecked": 8601,
-    "startTime": 1792928062976
+    "internalLinksChecked": 12507,
+    "startTime": 1794735110773
   },
-  "errorsCount": 0,
+  "errorsCount": 18,
   "warningsCount": 0,
-  "errors": [],
+  "errors": [
+    "/404.html: broken internal link to \"/404\" (target file missing: 404\\index.html)",
+    "/404.html: broken internal link to \"/es/404\" (target file missing: es\\404\\index.html)",
+    "/404.html: broken internal link to \"/ja/404\" (target file missing: ja\\404\\index.html)",
+    "/404.html: broken internal link to \"/ko/404\" (target file missing: ko\\404\\index.html)",
+    "/404.html: broken internal link to \"/zh/404\" (target file missing: zh\\404\\index.html)",
+    "/404.html: broken internal link to \"/ru/404\" (target file missing: ru\\404\\index.html)",
+    "/404.html: broken internal link to \"/tr/404\" (target file missing: tr\\404\\index.html)",
+    "/404.html: broken internal link to \"/fr/404\" (target file missing: fr\\404\\index.html)",
+    "/404.html: broken internal link to \"/pt/404\" (target file missing: pt\\404\\index.html)",
+    "/404.html: broken internal link to \"/404\" (target file missing: 404\\index.html)",
+    "/404.html: broken internal link to \"/es/404\" (target file missing: es\\404\\index.html)",
+    "/404.html: broken internal link to \"/ja/404\" (target file missing: ja\\404\\index.html)",
+    "/404.html: broken internal link to \"/ko/404\" (target file missing: ko\\404\\index.html)",
+    "/404.html: broken internal link to \"/zh/404\" (target file missing: zh\\404\\index.html)",
+    "/404.html: broken internal link to \"/ru/404\" (target file missing: ru\\404\\index.html)",
+    "/404.html: broken internal link to \"/tr/404\" (target file missing: tr\\404\\index.html)",
+    "/404.html: broken internal link to \"/fr/404\" (target file missing: fr\\404\\index.html)",
+    "/404.html: broken internal link to \"/pt/404\" (target file missing: pt\\404\\index.html)"
+  ],
   "warnings": [],
-  "passed": true
+  "passed": false
 }
