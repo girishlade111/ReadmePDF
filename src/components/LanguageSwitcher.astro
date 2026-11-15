@@ -1,36 +1,262 @@
 ---
+import Icon from './ui/Icon.astro';
 import { localeMeta, localeOptions, localizedPathname } from '../i18n/config.js';
 import { translator } from '../i18n/index.js';
 
-const { locale = 'en', path = '/' } = Astro.props;
+interface Props {
+  locale?: string;
+  path?: string;
+  direction?: 'down' | 'up';
+}
+
+const { locale = 'en', path = '/', direction = 'down' } = Astro.props;
 const t = translator(locale);
 const meta = localeMeta(locale);
 const options = localeOptions();
 ---
 
-<label class="lang-switcher">
-  <span class="lang-switcher__label">{t('lang.label')}</span>
-  <select
-    class="lang-switcher__select"
-    data-language-switcher
+<div class={`lang-switcher ${direction === 'up' ? 'lang-switcher--up' : ''}`} data-language-switcher>
+  <button
+    type="button"
+    class="lang-switcher__btn"
+    aria-expanded="false"
+    aria-haspopup="listbox"
     aria-label={t('lang.switch')}
     title={t('lang.current', { language: meta.label })}
+    data-lang-trigger
   >
-    {options.map((option) => (
-      <option value={localizedPathname(path, option.locale)} selected={option.locale === locale}>
-        {option.label}
-      </option>
-    ))}
-  </select>
-</label>
+    <Icon name="languages" size={18} />
+  </button>
+
+  <div
+    class="lang-switcher__menu"
+    role="listbox"
+    aria-label={t('lang.label')}
+    tabindex="-1"
+    hidden
+  >
+    <div class="lang-switcher__header">
+      <span>{t('lang.label')}</span>
+    </div>
+    <div class="lang-switcher__list">
+      {options.map((option) => (
+        <a
+          href={localizedPathname(path, option.locale)}
+          class={`lang-switcher__option ${option.locale === locale ? 'is-selected' : ''}`}
+          role="option"
+          aria-selected={option.locale === locale ? 'true' : 'false'}
+          data-locale={option.locale}
+        >
+          <span class="lang-switcher__option-label">{option.label}</span>
+          {option.locale === locale && (
+            <span class="lang-switcher__check" aria-hidden="true">
+              <Icon name="check" size={14} />
+            </span>
+          )}
+        </a>
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  .lang-switcher {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .lang-switcher__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    border-radius: var(--r-md);
+    border: 1px solid var(--border-glass);
+    background: var(--bg-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--trans-fast);
+  }
+
+  .lang-switcher__btn svg {
+    pointer-events: none;
+  }
+
+  .lang-switcher__btn:hover,
+  .lang-switcher__btn[aria-expanded='true'],
+  .lang-switcher.is-open .lang-switcher__btn {
+    background: var(--bg-glass-hover);
+    border-color: var(--border-medium);
+    color: var(--accent-brand);
+    transform: translateY(-1px);
+  }
+
+  .lang-switcher__btn:focus-visible {
+    outline: 2px solid var(--accent-brand);
+    outline-offset: 2px;
+  }
+
+  .lang-switcher__menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    z-index: 500;
+    min-width: 175px;
+    background: rgba(14, 14, 18, 0.96);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--r-md);
+    box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    padding: 6px;
+    flex-direction: column;
+  }
+
+  .lang-switcher--up .lang-switcher__menu {
+    top: auto;
+    bottom: calc(100% + 8px);
+  }
+
+  .lang-switcher.is-open .lang-switcher__menu,
+  .lang-switcher__menu:not([hidden]) {
+    display: flex !important;
+    animation: menu-pop var(--trans-fast) ease-out;
+  }
+
+  .lang-switcher__menu[hidden] {
+    display: none !important;
+  }
+
+  @keyframes menu-pop {
+    from {
+      opacity: 0;
+      transform: scale(0.96) translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  .lang-switcher__header {
+    padding: 6px 10px 4px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-tertiary);
+    border-bottom: 1px solid var(--border-subtle);
+    margin-bottom: 4px;
+  }
+
+  .lang-switcher__list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    max-height: 280px;
+    overflow-y: auto;
+  }
+
+  .lang-switcher__option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 7px 10px;
+    border-radius: var(--r-sm);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: background var(--trans-fast), color var(--trans-fast);
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .lang-switcher__option:hover,
+  .lang-switcher__option:focus-visible {
+    background: rgba(255, 255, 255, 0.09);
+    color: var(--text-primary);
+    outline: none;
+  }
+
+  .lang-switcher__option.is-selected {
+    background: var(--accent-brand-subtle);
+    color: var(--accent-brand);
+    font-weight: 600;
+  }
+
+  .lang-switcher__check {
+    display: inline-flex;
+    align-items: center;
+    color: var(--accent-brand);
+  }
+</style>
 
 <script is:inline>
-  document.querySelectorAll('[data-language-switcher]').forEach((select) => {
-    select.addEventListener('change', () => {
-      const target = new URL(select.value, window.location.origin);
-      target.search = window.location.search;
-      target.hash = window.location.hash;
-      window.location.assign(target.href);
+  (() => {
+    if (window.__langSwitcherInitialized) return;
+    window.__langSwitcherInitialized = true;
+
+    function closeAllMenus() {
+      document.querySelectorAll('[data-language-switcher]').forEach((switcher) => {
+        switcher.classList.remove('is-open');
+        const trigger = switcher.querySelector('[data-lang-trigger]');
+        const menu = switcher.querySelector('.lang-switcher__menu');
+        trigger?.setAttribute('aria-expanded', 'false');
+        menu?.setAttribute('hidden', '');
+      });
+    }
+
+    document.addEventListener('click', (e) => {
+      const trigger = e.target.closest('[data-lang-trigger]');
+      if (trigger) {
+        e.preventDefault();
+        e.stopPropagation();
+        const switcher = trigger.closest('[data-language-switcher]');
+        if (!switcher) return;
+        const menu = switcher.querySelector('.lang-switcher__menu');
+        const isOpen = switcher.classList.contains('is-open') || trigger.getAttribute('aria-expanded') === 'true';
+
+        closeAllMenus();
+
+        if (!isOpen) {
+          switcher.classList.add('is-open');
+          trigger.setAttribute('aria-expanded', 'true');
+          menu?.removeAttribute('hidden');
+        }
+        return;
+      }
+
+      const option = e.target.closest('.lang-switcher__option');
+      if (option) {
+        if (window.location.search || window.location.hash) {
+          e.preventDefault();
+          const target = new URL(option.getAttribute('href'), window.location.origin);
+          target.search = window.location.search;
+          target.hash = window.location.hash;
+          window.location.assign(target.href);
+        }
+        closeAllMenus();
+        return;
+      }
+
+      if (!e.target.closest('[data-language-switcher]')) {
+        closeAllMenus();
+      }
     });
-  });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeAllMenus();
+      }
+    });
+  })();
 </script>
