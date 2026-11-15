@@ -149,11 +149,12 @@ const navLinks = [
     left: 0;
     right: 0;
     z-index: 100;
-    background: var(--bg-overlay);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--border-subtle);
+    background: rgba(10, 10, 12, 0.72);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border-bottom: 1px solid var(--border-glass);
     height: var(--header-height);
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.25);
     transition: background var(--trans-fast), border-color var(--trans-fast);
   }
 
@@ -227,10 +228,13 @@ const navLinks = [
     display: flex;
     align-items: center;
     gap: 4px;
-    background: var(--bg-elevated);
+    background: var(--bg-glass);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
     padding: 4px;
     border-radius: var(--r-full);
-    border: 1px solid var(--border-subtle);
+    border: 1px solid var(--border-glass);
+    box-shadow: var(--shadow-glass);
   }
 
   .site-nav__link {
@@ -240,27 +244,32 @@ const navLinks = [
     text-decoration: none;
     padding: 6px 14px;
     border-radius: var(--r-full);
+    border: 1px solid transparent;
     transition: all var(--trans-fast);
     white-space: nowrap;
   }
 
   .site-nav__link:hover {
     color: var(--text-primary);
-    background: var(--bg-surface);
+    background: var(--bg-glass-hover);
   }
 
   .site-nav__link.is-active {
     color: var(--accent-brand);
-    background: var(--bg-surface);
-    box-shadow: var(--shadow-subtle);
+    background: var(--bg-glass-active);
+    border-color: rgba(255, 97, 41, 0.32);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.12);
   }
 
   /* Language switcher style harmonization */
   :global(.lang-switcher__select) {
     height: 36px !important;
     border-radius: var(--r-md) !important;
-    border: 1px solid var(--border-subtle) !important;
-    background-color: var(--bg-surface) !important;
+    border: 1px solid var(--border-glass) !important;
+    background-color: var(--bg-glass) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
     color: var(--text-primary) !important;
     padding: 0 28px 0 12px !important;
     font-size: 13px !important;
@@ -275,7 +284,7 @@ const navLinks = [
   }
 
   :global(.lang-switcher__select:hover) {
-    background-color: var(--bg-elevated) !important;
+    background-color: var(--bg-glass-hover) !important;
     border-color: var(--border-medium) !important;
   }
 
@@ -293,8 +302,11 @@ const navLinks = [
     height: 36px;
     padding: 0 12px;
     border-radius: var(--r-md);
-    border: 1px solid var(--border-subtle);
-    background: var(--bg-surface);
+    border: 1px solid var(--border-glass);
+    background: var(--bg-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
     color: var(--text-primary);
     font-size: 13px;
     font-weight: 500;
@@ -304,7 +316,7 @@ const navLinks = [
   }
 
   .site-header__history-btn:hover {
-    background: var(--bg-elevated);
+    background: var(--bg-glass-hover);
     border-color: var(--border-medium);
     color: var(--accent-brand);
   }
@@ -321,8 +333,11 @@ const navLinks = [
     height: 36px;
     padding: 0 12px;
     border-radius: var(--r-md);
-    border: 1px solid var(--border-subtle);
-    background: var(--bg-surface);
+    border: 1px solid var(--border-glass);
+    background: var(--bg-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
     color: var(--text-primary);
     text-decoration: none;
     font-size: 13px;
@@ -331,7 +346,7 @@ const navLinks = [
   }
 
   .site-header__github:hover {
-    background: var(--bg-elevated);
+    background: var(--bg-glass-hover);
     border-color: var(--border-medium);
   }
 
@@ -348,8 +363,11 @@ const navLinks = [
     width: 38px;
     height: 38px;
     border-radius: var(--r-md);
-    border: 1px solid var(--border-subtle);
-    background: var(--bg-surface);
+    border: 1px solid var(--border-glass);
+    background: var(--bg-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
     color: var(--text-primary);
     cursor: pointer;
     padding: 0;
@@ -396,8 +414,10 @@ const navLinks = [
 
   .mobile-drawer__content {
     position: relative;
-    background: var(--bg-surface);
-    border-bottom: 1px solid var(--border-subtle);
+    background: rgba(10, 10, 12, 0.85);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid var(--border-glass);
     padding: var(--sp-6) var(--container-gutter);
     max-height: calc(100vh - var(--header-height));
     overflow-y: auto;
@@ -423,14 +443,14 @@ const navLinks = [
 
   .mobile-nav__link:hover,
   .mobile-nav__link.is-active {
-    background: var(--bg-elevated);
+    background: var(--bg-glass-hover);
     color: var(--text-primary);
   }
 
   .mobile-drawer__footer {
     margin-top: var(--sp-6);
     padding-top: var(--sp-4);
-    border-top: 1px solid var(--border-subtle);
+    border-top: 1px solid var(--border-glass);
   }
 
   .mobile-history-btn {
@@ -442,18 +462,20 @@ const navLinks = [
     padding: var(--sp-3);
     margin-bottom: var(--sp-2);
     border-radius: var(--r-md);
-    background: var(--bg-elevated);
+    background: var(--bg-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     color: var(--text-primary);
     font-size: 14px;
     font-family: var(--font-sans);
     font-weight: 500;
-    border: 1px solid var(--border-subtle);
+    border: 1px solid var(--border-glass);
     cursor: pointer;
     transition: all var(--trans-fast);
   }
 
   .mobile-history-btn:hover {
-    background: var(--bg-subtle);
+    background: var(--bg-glass-hover);
     color: var(--accent-brand);
   }
 
@@ -465,18 +487,21 @@ const navLinks = [
     width: 100%;
     padding: var(--sp-3);
     border-radius: var(--r-md);
-    background: var(--bg-elevated);
+    background: var(--bg-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     color: var(--text-primary);
     text-decoration: none;
     font-size: 14px;
     font-family: var(--font-sans);
     font-weight: 500;
-    border: 1px solid var(--border-subtle);
+    border: 1px solid var(--border-glass);
     transition: all var(--trans-fast);
   }
 
   .mobile-github-btn:hover {
-    background: var(--bg-subtle);
+    background: var(--bg-glass-hover);
+    border-color: var(--border-medium);
     color: var(--accent-brand);
   }
 

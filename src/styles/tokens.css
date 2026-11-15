@@ -28,6 +28,10 @@
   --border-medium: rgba(255, 255, 255, 0.18);
   --border-strong: rgba(255, 255, 255, 0.32);
   --border-glass: rgba(255, 255, 255, 0.14);
+  --bg-glass: rgba(255, 255, 255, 0.05);
+  --bg-glass-hover: rgba(255, 255, 255, 0.09);
+  --bg-glass-active: rgba(255, 97, 41, 0.16);
+  --shadow-glass: 0 4px 20px -2px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 
   /* Brand Accents (Exact Arounda Palette) */
   --accent-brand: #FF6129;
@@ -145,6 +149,10 @@
   --border-medium: rgba(255, 255, 255, 0.18);
   --border-strong: rgba(255, 255, 255, 0.32);
   --border-glass: rgba(255, 255, 255, 0.14);
+  --bg-glass: rgba(255, 255, 255, 0.05);
+  --bg-glass-hover: rgba(255, 255, 255, 0.09);
+  --bg-glass-active: rgba(255, 97, 41, 0.16);
+  --shadow-glass: 0 4px 20px -2px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 
   /* Exact Arounda Swatches */
   --accent-brand: #FF6129;
@@ -203,6 +211,10 @@
     --border-medium: rgba(255, 255, 255, 0.18);
     --border-strong: rgba(255, 255, 255, 0.32);
     --border-glass: rgba(255, 255, 255, 0.14);
+    --bg-glass: rgba(255, 255, 255, 0.05);
+    --bg-glass-hover: rgba(255, 255, 255, 0.09);
+    --bg-glass-active: rgba(255, 97, 41, 0.16);
+    --shadow-glass: 0 4px 20px -2px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 
     --accent-brand: #FF6129;
     --accent-brand-hover: #FC3B00;
